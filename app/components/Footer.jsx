@@ -1,7 +1,5 @@
 export default function Footer() {
   return (
-    <footer>
-      <div className="border-2 border-orange-200">Footer</div>
-    </footer>
+    <div className="py-4 border-2 border-gray-600">Footer</div>
   )
 }

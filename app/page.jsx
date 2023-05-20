@@ -1,9 +1,7 @@
-import Image from 'next/image'
-
-export default function Home() {
+export default function HomePage() {
   return (
-    <main className='text-center'>
-      <h1>dsadsad</h1>
-    </main>
+    <>
+      {/* put my projects here and type on the class flex-1 */}
+    </>
   )
 }

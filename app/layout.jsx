@@ -1,9 +1,15 @@
 import Footer from './components/Footer'
-import Navbar from './components/Navbar'
+import Header from './components/Header'
+import About from './components/About'
+import Blocks from './components/Blocks'
+import Status from './components/Status'
+import { Cairo } from 'next/font/google'
 import './globals.css'
-import { Inter } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+const cairo = Cairo({
+  weight: ['400', '700'],
+  subsets: ['latin']
+})
 
 export const metadata = {
   title: 'Create Next App',
@@ -12,13 +18,23 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className + 'flex w-7/12 m-auto min-h-screen flex-col items-baseline relative border-2 border-red-600'}>
-        <Navbar />
-        <div className='flex-1'>
+    <html lang="en" className='min-h-screen overflow-x-hidden antialiased'>
+      <body className={cairo.className}>
+        <main className='flex flex-col w-[50%]'>
+          <Header />
+          <About />
+          <ul className='flex flex-col items-baseline gap-2 pl-3 pt-5'>
+            <Status />
+          </ul>
+          <hr className='my-5 w-full border-0 h-[1px] bg-[var(--tertiary-background-color)]' />
+          <ul className='flex flex-row items-center py-2 gap-6'>
+            <Blocks />
+          </ul>
           {children}
-          <Footer />
-        </div>
+          <footer>
+            <Footer />
+          </footer>
+        </main>
       </body>
     </html>
   )

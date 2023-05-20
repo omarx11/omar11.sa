@@ -3,34 +3,51 @@
 @tailwind utilities;
 
 :root {
+  color-scheme: light;
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+
+  --background-color: #fdfdfd;
+  --main-text-color: rgb(14, 14, 14);
+  --secondary-text-color: #444444;
+  --tertiary-text-color: #666;
+  --secondary-color: #c2c2c2;
+  --tertiary-background-color: #ededed;
+  --tertiary-filter-background-color: #e2e2e2;
+  --tertiary-background-color-opacity: #e2e2e293;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
+    color-scheme: dark;
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
+
+    --background-color: #121212;
+    --main-text-color: 220 220 220;
+    --secondary-text-color: #a9a9a9;
+    --tertiary-text-color: ##adadad;
+    --secondary-color: #313131;
+    --tertiary-background-color: #1a1a1a;
+    --tertiary-filter-background-color: #272727;
+    --tertiary-background-color-opacity: #27272767;
   }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-    -webkit-transition: all 0.2s ease;
-    transition: all 0.2s ease;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    -webkit-box-align: baseline;
-    -ms-flex-align: baseline;
+  color: rgb(var(--main-text-color));
+  background-color: var(--background-color);
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  font-size: 1.1rem;
+  width: 100%;
+  min-height: 100vh;
+  border: 2px solid red;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
