@@ -28,7 +28,7 @@
     --background-color: #121212;
     --main-text-color: 220 220 220;
     --secondary-text-color: #a9a9a9;
-    --tertiary-text-color: ##adadad;
+    --tertiary-text-color: #adadad;
     --secondary-color: #313131;
     --tertiary-background-color: #1a1a1a;
     --tertiary-filter-background-color: #272727;
@@ -42,9 +42,9 @@ body {
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
   font-size: 1.1rem;
+  letter-spacing: 0.1rem;
   width: 100%;
   min-height: 100vh;
-  border: 2px solid red;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
