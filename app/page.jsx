@@ -2,11 +2,9 @@
 
 export default function HomePage() {
   return (
-    <div className="border-2 px-4 py-6 text-base">
+    <div className="px-4 py-6 text-base text-gray-400">
       <p>Here's a showcase of all the work I've done, this includes companies I've worked for, personal projects, open source projects that I've contributed.</p>
       <br />
-      <p>Be sure to checkout my GitHub page to view more of my technical work.</p>
-
       <div className="border-2">
 
       </div>

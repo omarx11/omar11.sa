@@ -3,20 +3,26 @@ import Image from 'next/image'
 
 export default function Blocks() {
 	return (<>
-		<li>
-			<Link href="/server" className='bg-[var(--tertiary-background-color)] p-[6px] rounded-[5px]'>my projects</Link>
-			<Image
-        src="/icons/project.svg"
-				className="inline-block"
-        width={20}
-        height={20}
-        alt="/" />
+		<li className="bg-[var(--tertiary-background-color)] rounded-[5px]">
+			<Link href="#" className="flex flex-row items-center gap-1 py-1 px-[6px]">
+				Projects
+				<Image
+					src="/icons/project.svg"
+					width={20}
+					height={20}
+					alt="project-icon" />
+			</Link>
 		</li>
-		<li>
-			<Link href="/client" className='hover:bg-[var(--tertiary-background-color)] p-[6px] rounded-[5px]'>GitHub</Link>
-		</li>
-		<li>
-			<Link href="#">test 123</Link>
+		
+		<li className="bg-[var(--tertiary-background-color)] rounded-[5px]">
+			<Link href="#" className="flex flex-row items-center gap-1 py-1 px-[6px]">
+				Minecraft
+				<Image
+					src="/icons/minecraft_94415.svg"
+					width={20}
+					height={20}
+					alt="minecraft-icon" />
+			</Link>
 		</li></>
 	)
 }

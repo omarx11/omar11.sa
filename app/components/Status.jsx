@@ -7,11 +7,11 @@ const Status = () => {
   <li>
     <div className='flex justify-center'>
       <Image
-        src="./icons/location.svg"
-        className='select-none drag-none'
+        src="/icons/location.svg"
         width={22}
         height={22}
-        alt="Location" />
+        className="select-none drag-none w-[22px] h-[22px]"
+        alt="location-icon" />
       <p className='text-[0.948rem]'>Not connected to the internet</p>
     </div>
   </li>
@@ -23,11 +23,11 @@ const Status = () => {
   <li>
     <div className='flex justify-center'>
       <Image
-        src="./icons/location.svg"
-        className='select-none drag-none'
+        src="/icons/location.svg"
         width={22}
         height={22}
-        alt="Location" />
+        className='select-none drag-none w-[22px] h-[22px]'
+        alt="location-icon" />
       <p className='text-[0.948rem]'>Saudi Arabia / Buraydah</p>
     </div>
   </li>
