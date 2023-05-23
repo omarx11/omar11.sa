@@ -14,11 +14,12 @@ const About = () => {
         <h1 className='text-2xl mb-[2px] font-bold'>
           Heyy selamlar, ben Sanctus
           <Image
-            src="/icons/1f44b.png"
-            className='inline ml-1 pb-2 select-none drag-none'
+            src="/icons/1f44b-1f3fb.svg"
+            className='animate-wave origin-[70%_70%] inline-block ml-2 pb-2 select-none drag-none'
             width={24}
-            height={24} />
-          </h1>
+            height={24}
+            alt="wave-icon" />
+        </h1>
         <p className='font-normal text-[1.1rem] leading-[1.4rem]'>
           Gerçek adım Eren ama internette insanlar beni Sanctus olarak bilir.
           3 yıldan uzun süredir discord botları geliştiriyorum.
