@@ -1,8 +1,7 @@
-import React from 'react'
 import Image from 'next/image'
 import Media from './Media'
 
-const Status = () => {
+export default function Status() {
   return (<>
   <li>
     <div className='flex justify-center'>
@@ -21,9 +20,9 @@ const Status = () => {
     </div>
   </li>
   <li>
-    <div className='flex justify-center'>
+    <div className='flex border-2'>
       <Image
-        src="/icons/location.svg"
+        src="/icons/location-pin.svg"
         width={22}
         height={22}
         className='select-none drag-none w-[22px] h-[22px]'
@@ -34,5 +33,3 @@ const Status = () => {
   <Media /></>
   )
 }
-
-export default Status
