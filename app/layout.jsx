@@ -1,7 +1,6 @@
 import './globals.css'
 import localFont from 'next/font/local'
 import Footer from './components/Footer'
-import Header from './components/Header'
 import About from './components/About'
 import Blocks from './components/Blocks'
 import Status from './components/Status'
@@ -20,17 +19,21 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className='min-h-screen overflow-x-hidden antialiased scroll-smooth'>
       <body className={sFFont.className}>
-        <main className='flex flex-col max-w-5xl'>
-          <Header />
-          <About />
+        <main className='flex flex-col max-w-5xl mx-3'>
+          <header className="h-36"></header>
+          <section className='flex flex-row items-start'>
+            <About />
+          </section>
           <ul className='flex flex-col items-baseline gap-2 pl-3 pt-5'>
             <Status />
           </ul>
           <hr className='my-5 w-full border-0 h-[1px] bg-[var(--tertiary-background-color)]' />
-          <ul className='flex flex-row items-center gap-6 text-[var(--secondary-text-color)]'>
+          <ul className='flex flex-wrap gap-6 text-[var(--secondary-text-color)]'>
             <Blocks />
           </ul>
-          {children}
+          <div className="mx-4 my-6 text-base text-gray-400 overflow-hidden border-2 border-gray-500">
+            {children}
+          </div>
           <footer className="flex flex-row items-center justify-between py-4 px-4 border-2 border-gray-800 text-sm">
             <Footer />
           </footer>

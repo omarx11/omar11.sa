@@ -1,35 +1,31 @@
-import React from 'react'
 import Image from 'next/image'
+import { rgbDataURL } from './Tools'
 
-const About = () => {
+export default function About() {
   return (
-    <section className='flex flex-row items-start'>
+    <>
       <Image
-        src="/avatar.jpg"
-        className='rounded-full object-cover bg-cover select-none drag-none'
+        src="/avatar.jpeg"
         width={128}
         height={128}
-        alt="/" />
-      <div className='flex flex-col relative left-6'>
-        <h1 className='text-2xl mb-[2px] font-bold'>
-          Heyy selamlar, ben Sanctus
+        placeholder="blur"
+        blurDataURL={rgbDataURL(237, 181, 6)}
+        className='w-32 h-32 rounded-full object-cover bg-cover select-none drag-none'
+        alt="my-avatar" />
+      <div className='flex flex-col gap-2 ml-6'>
+        <h1 className='items-center text-2xl font-bold'>
+          Hey there, this is a test
           <Image
             src="/icons/1f44b-1f3fb.svg"
-            className='animate-wave origin-[70%_70%] inline-block ml-2 pb-2 select-none drag-none'
             width={24}
             height={24}
+            className='absolute inline-block animate-wave origin-[70%_70%] ml-2 pt-[2px] select-none drag-none'
             alt="wave-icon" />
         </h1>
         <p className='font-normal text-[1.1rem] leading-[1.4rem]'>
-          Gerçek adım Eren ama internette insanlar beni Sanctus olarak bilir.
-          3 yıldan uzun süredir discord botları geliştiriyorum.
-          Kodlamanın mantığını ve yapısını seviyorum. Her zaman verimli ve
-          düzenli kod yazmaya çalışıyorum. Discord botlarının yanında web
-          geliştiriciliği de öğreniyorum. Ortak olabileceğim yeni projeler arıyorum.
-          Eğer bir projen varsa benimle iletişime geçmekten çekinme ._.</p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore vel odit itaque sunt quaerat aperiam fugiat dolor consequatur, unde mollitia.
+        </p>
       </div>
-    </section>
+    </>
   )
 }
-
-export default About

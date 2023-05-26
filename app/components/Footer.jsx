@@ -10,7 +10,7 @@ export default function Footer() {
       <p className="inline-block text-gray-400">&#160;- 2023 © Omar Abdulaziz</p>
     </div>
     <div>
-      {/* source link and rss */}
+      {/* source link and RSS feed */}
       <Link
         className="text-gray-200"
         href="https://github.com/omarx11/omar11.sa">src
