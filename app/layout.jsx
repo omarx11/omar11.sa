@@ -24,17 +24,17 @@ export default function RootLayout({ children }) {
           <section className='flex flex-row items-start'>
             <About />
           </section>
-          <ul className='flex flex-col items-baseline gap-2 pl-3 pt-5'>
+          <ul className='flex flex-col items-start gap-2 pl-3 pt-5 text-sm'>
             <Status />
           </ul>
           <hr className='my-5 w-full border-0 h-[1px] bg-[var(--tertiary-background-color)]' />
           <ul className='flex flex-wrap gap-6 text-[var(--secondary-text-color)]'>
             <Blocks />
           </ul>
-          <div className="mx-4 my-6 text-base text-gray-400 overflow-hidden border-2 border-gray-500">
+          <div className="flex-1 my-8 text-base overflow-hidden">
             {children}
           </div>
-          <footer className="flex flex-row items-center justify-between py-4 px-4 border-2 border-gray-800 text-sm">
+          <footer className="flex flex-row items-center justify-between pt-4 pb-12 text-sm">
             <Footer />
           </footer>
         </main>

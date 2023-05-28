@@ -4,7 +4,7 @@ import Image from 'next/image'
 export default function Blocks() {
 	return (
 		<>
-			<li className="bg-[var(--tertiary-background-color)] rounded-[5px]">
+			<li className="bg-[var(--tertiary-background-color)] rounded-[5px] group cursor-pointer border active:bg-blue-50 focus:bg-pink-300 focus:border-pink-500">
 				<Link href="./" className="flex flex-row items-center gap-1 py-1 px-[6px]">
 				Projects
 					<Image
@@ -54,7 +54,38 @@ export default function Blocks() {
 			
 			<li className="bg-[var(--tertiary-background-color)] rounded-[5px]">
 				<Link href="/about" className="flex flex-row items-center gap-1 py-1 px-[6px]">
-					About 💭</Link>
+					About
+					<Image
+						src="/icons/kindle.svg"
+						width={20}
+						height={20}
+						className="select-none drag-none"
+						alt="" />
+					</Link>
+			</li>
+
+			<li className="bg-[var(--tertiary-background-color)] rounded-[5px]">
+				<Link href="/anime" className="flex flex-row items-center gap-1 py-1 px-[6px]">
+				Anime
+					<Image
+						src="/icons/stars.svg"
+						width={21}
+						height={21}
+						className="select-none drag-none"
+						alt="" />
+				</Link>
+			</li>
+
+			<li className="bg-[var(--tertiary-background-color)] rounded-[5px]">
+				<Link href="/specs" className="flex flex-row items-center gap-1 py-1 px-[6px]">
+				Specs
+					<Image
+						src="/icons/linux.svg"
+						width={21}
+						height={21}
+						className="select-none drag-none"
+						alt="" />
+				</Link>
 			</li>
 		</>
 	)
