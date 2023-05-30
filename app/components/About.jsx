@@ -3,14 +3,14 @@ import { rgbDataURL } from './Tools'
 
 export default function About() {
   return (
-    <>
+    <section className='flex flex-row items-start'>
       <Image
         src="/avatar.jpeg"
         width={128}
         height={128}
         placeholder="blur"
         blurDataURL={rgbDataURL(237, 181, 6)}
-        className='w-32 h-32 rounded-full object-cover bg-cover select-none drag-none'
+        className='w-32 h-32 rounded-full bg-cover select-none drag-none'
         alt="my-avatar" />
       <div className='flex flex-col gap-2 ml-6'>
         <h1 className='items-center text-2xl font-bold'>
@@ -26,6 +26,6 @@ export default function About() {
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore vel odit itaque sunt quaerat aperiam fugiat dolor consequatur, unde mollitia.
         </p>
       </div>
-    </>
+    </section>
   )
 }

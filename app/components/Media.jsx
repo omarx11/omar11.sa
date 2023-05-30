@@ -46,7 +46,7 @@ export default function Media() {
           </Link>
         </li>
       </ul>
-      <Link href="#" className="mr-10">
+      <Link href="#" className="mr-2">
         <Image
           src="./icons/statuspages.svg"
           width={24}

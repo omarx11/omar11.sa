@@ -3,7 +3,7 @@ import Media from './Media'
 
 export default function Status() {
   return (
-    <>
+    <ul className='flex flex-col items-start gap-2 pl-3 pt-5 text-sm'>
       <li>
         <div className='flex items-start'>
           <Image
@@ -35,6 +35,6 @@ export default function Status() {
         </div>
       </li>
       <Media />
-    </>
+    </ul>
   )
 }
