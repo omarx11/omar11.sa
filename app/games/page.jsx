@@ -4,8 +4,9 @@ export default function GamesPage() {
       {/* with steam fetch api
           add in the bottom "show more.."
           show the games images like on my profile steamid.info
-          add more details on hover or find another way after finshing design */}
+          add more details on hover or find another way after finshing design
+          add # Minecraft useing iframe */}
       <h1>Games page, nothing here yet!</h1>
     </div>
-  )
+  );
 }

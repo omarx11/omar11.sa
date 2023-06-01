@@ -5,9 +5,8 @@ export default function Footer() {
   return (
     <footer className="flex flex-row flex-wrap items-center justify-between pt-4 pb-12 text-sm">
       <div className="flex flex-row items-center">
-        <Link href="https://omar11.sa" className="text-[var(--main-text-color)] hover:underline underline-offset-4">omar11.sa</Link>
         <p className="text-[var(--secondary-text-color)] text-[0.8rem]">
-          &#160;- 2023 © Omar Abdulaziz
+          {new Date().getFullYear()} © Omar Abdulaziz
         </p>
       </div>
       <div className="flex flex-row items-center gap-1">
