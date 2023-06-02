@@ -1,35 +1,16 @@
-import fetch from "node-fetch";
+// import fetch from "node-fetch";
 import Link from "next/link";
 import Image from "next/image";
-
-async function getRepository() {
-  try {
-    const filteredRepos = [386408964, 601036020];
-    const response = await fetch("https://api.github.com/users/omarx11/repos", {
-      headers: {
-        Accept: "application/vnd.github+json",
-        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-      },
-    });
-    const repos = await response.json();
-    // await new Promise((resolve) => setTimeout(resolve, 1000))
-    return repos
-      .filter((d) => !filteredRepos.includes(d.id))
-      .sort((a, b) => a.id - b.id);
-  } catch (error) {
-    console.log(error);
-  }
-}
+import { getRepository } from "./components/Repos";
 
 const reposInfo = {
-  imageMain: ["/steamid2.png", "/chatin1.png", "/next.svg"],
+  imageMain: ["/steamid.png", "/chatin.png", "/next.svg"],
   imageStyle: {
     position: "absolute",
     height: "100%",
     width: "100%",
     color: "transparent",
   },
-  imageLanguage: ["/icon/javascript.svg"],
 };
 
 function setRepoLanguageIcon(repo) {
@@ -63,7 +44,7 @@ export default async function HomePage() {
           repos.map((repo, index) => (
             <div
               key={repo.id}
-              className="flex flex-col rounded-md border-2 border-neutral-900 bg-neutral-900"
+              className="group flex flex-col rounded-md border-2 border-neutral-900 bg-neutral-900 hover:bg-neutral-800"
             >
               <Link href={repo.html_url} className="relative h-44 w-full">
                 <Image
@@ -71,12 +52,12 @@ export default async function HomePage() {
                   width={640}
                   height={480}
                   style={reposInfo.imageStyle}
-                  className="inset-0 w-full select-none rounded-md object-cover transition-transform drag-none hover:-translate-y-4"
+                  className="inset-0 w-full select-none rounded-md object-cover transition-transform drag-none group-hover:-translate-y-4"
                   alt="project-icon"
                 />
               </Link>
               <div className="m-3">
-                <h3 className="text-lg text-[var(--secondary-text-color)]">
+                <h3 className="text-lg text-stone-300">
                   <Link
                     href={repo.html_url}
                     target="_blank"
@@ -85,8 +66,8 @@ export default async function HomePage() {
                     {repo.name}
                   </Link>
                 </h3>
-                <div className="flex flex-row justify-between">
-                  <div className="flex items-center gap-[6px]">
+                <div className="flex flex-row justify-between text-stone-400">
+                  <div className="flex items-center gap-[6px] text-sm">
                     <Image
                       src={`${setRepoLanguageIcon(repo.language)}`}
                       width={16}
@@ -94,44 +75,42 @@ export default async function HomePage() {
                       className="select-none drag-none"
                       alt={`${repo.language}-icon`}
                     />
-                    <p className="text-sm text-[var(--tertiary-text-color)]">
-                      - {repo.language.toLowerCase()}
-                    </p>
+                    <p>- {repo.language.toLowerCase()}</p>
                   </div>
-                  <div className="pointer-events-none flex select-none flex-row items-center gap-1 text-center text-sm text-[var(--tertiary-text-color)]">
+                  <div className="pointer-events-none flex select-none flex-row items-center gap-1 text-center text-xs">
                     <span>
                       <Image
                         src="/icons/stargazers.svg"
-                        width={18}
-                        height={18}
+                        width={14}
+                        height={14}
                         className="select-none drag-none"
                         alt="stargazers-icon"
                       />
-                      <p>{repo.stargazers_count}</p>
+                      <p className="indent-[1px]">{repo.stargazers_count}</p>
                     </span>
                     <span>
                       <Image
                         src="/icons/fork.svg"
-                        width={18}
-                        height={18}
+                        width={14}
+                        height={14}
                         className="select-none drag-none"
                         alt="fork-icon"
                       />
-                      <p>{repo.forks_count}</p>
+                      <p className="indent-[1px]">{repo.forks_count}</p>
                     </span>
                     <span>
                       <Image
                         src="/icons/eye.svg"
-                        width={18}
-                        height={18}
+                        width={14}
+                        height={14}
                         className="select-none drag-none"
                         alt="eye-icon"
                       />
-                      <p>{repo.watchers_count}</p>
+                      <p className="indent-[1px]">{repo.watchers_count}</p>
                     </span>
                   </div>
                 </div>
-                <hr className="mb-3 mt-2 h-[1px] w-full border-0 bg-[var(--tertiary-filter-background-color)]" />
+                <hr className="mb-3 mt-2 h-[1px] w-full border-0 bg-stone-800" />
                 <p className="text-zinc-500">{repo.description}</p>
               </div>
             </div>

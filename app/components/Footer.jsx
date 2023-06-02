@@ -1,28 +1,42 @@
-import Link from 'next/link'
-import Image from 'next/image'
+import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="flex flex-row flex-wrap items-center justify-between pt-4 pb-12 text-sm">
+    <footer className="flex flex-row flex-wrap items-center justify-between pb-12 pt-4 text-sm">
       <div className="flex flex-row items-center">
-        <p className="text-[var(--secondary-text-color)] text-[0.8rem]">
+        <p className="text-[0.8rem] text-stone-500">
           {new Date().getFullYear()} © Omar Abdulaziz
         </p>
       </div>
-      <div className="flex flex-row items-center gap-1">
-        <Link href="https://github.com/omarx11/omar11.sa" className="text-[var(--main-text-color)] hover:underline underline-offset-4">source</Link>
-        <span className="text-[var(--secondary-text-color)]">•</span>
-        <Link href="https://github.com/omarx11/omar11.sa" className="text-[var(--main-text-color)] hover:underline underline-offset-4">RSS</Link>
-        <span className="text-[var(--secondary-text-color)]">•</span>
-        <Link href="https://omar11.sa" className="text-[var(--main-text-color)] hover:underline underline-offset-4">
+      <div className="flex flex-row items-center gap-1 text-stone-400">
+        <Link
+          href="https://github.com/omarx11/omar11.sa"
+          className="underline-offset-4 hover:underline"
+        >
+          source
+        </Link>
+        <span className="text-stone-500">•</span>
+        <Link
+          href="https://github.com/omarx11/omar11.sa"
+          className="underline-offset-4 hover:underline"
+        >
+          RSS
+        </Link>
+        <span className="text-stone-500">•</span>
+        <Link
+          href="https://omar11.sa"
+          className="underline-offset-4 hover:underline"
+        >
           <Image
             src="/icons/license.svg"
             width={16}
             height={16}
             className="select-none drag-none"
-            alt="license-icon" />
+            alt="license-icon"
+          />
         </Link>
       </div>
     </footer>
-  )
+  );
 }

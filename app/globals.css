@@ -6,12 +6,10 @@
 *::-webkit-scrollbar {
   width: 10px;
 }
-
 *::-webkit-scrollbar-track {
   background: var(--primary);
   border-radius: 5px;
 }
-
 *::-webkit-scrollbar-thumb {
   background-color: var(--secondary);
   border-radius: 15px;
@@ -22,14 +20,12 @@
   border-radius: 15px;
   border: 3px solid var(--primary);
 }
-
 :root {
   color-scheme: light;
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
-
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
@@ -40,21 +36,4 @@
 }
 * {
   box-sizing: border-box;
-}
-/* body {
-  height: 100%;
-} */
-
-body {
-  -webkit-transition: all 0.2s ease;
-  transition: all 0.2s ease;
-  font-size: 1.1rem;
-  letter-spacing: 0.1rem;
-  width: 100%;
-  min-height: 100vh;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
 }

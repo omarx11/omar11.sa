@@ -3,52 +3,53 @@ import Image from "next/image";
 
 const linksInfo = [
   {
+    id: 1,
     href: "/",
     name: "Projects",
-    src: "/icons/project.svg",
-    width: 20,
-    height: 20,
-    alt: "project-icon",
+    src: "/icons/album-2-fill.svg",
+    alt: "album-icon",
   },
   {
+    id: 2,
     href: "/skills",
     name: "Skills",
-    src: "/icons/skills.svg",
-    width: 20,
-    height: 20,
-    alt: "skills-icon",
+    src: "/icons/grid-fill.svg",
+    alt: "grid-icon",
   },
   {
+    id: 3,
     href: "/specs",
     name: "Specs",
-    src: "/icons/pc-display-horizontal.svg",
-    width: 16,
-    height: 16,
-    alt: "pc-icon",
+    src: "/icons/command-fill.svg",
+    alt: "command-icon",
   },
   {
+    id: 4,
     href: "/about",
     name: "About",
     src: "/icons/draw-pen.svg",
-    width: 22,
-    height: 22,
     alt: "pen-icon",
   },
   {
+    id: 5,
     href: "/anime",
     name: "Anime",
-    src: "/icons/alchemy-stars.svg",
-    width: 21,
-    height: 21,
+    src: "/icons/star-four-fill.svg",
     alt: "anime-icon",
   },
   {
+    id: 6,
     href: "/games",
     name: "Games",
-    src: "/icons/game-die.svg",
-    width: 20,
-    height: 20,
-    alt: "game-icon",
+    src: "/icons/grid-2-fill.svg",
+    alt: "grid-icon",
+  },
+  {
+    id: 7,
+    href: "/guestbook",
+    name: "Guestbook",
+    src: "/icons/comment-fill.svg",
+    alt: "comment-icon",
   },
 ];
 
@@ -57,7 +58,10 @@ export default function Blocks() {
   return (
     <ul className="flex flex-wrap gap-4 text-stone-300">
       {linksInfo.map((link) => (
-        <li className="rounded-md bg-stone-800">
+        <li
+          key={link.id}
+          className="rounded-md bg-stone-900 hover:bg-stone-800"
+        >
           <Link
             href={link.href}
             className="flex flex-row items-center gap-1 px-2 py-[2px]"
@@ -65,23 +69,14 @@ export default function Blocks() {
             <p>{link.name}</p>
             <Image
               src={link.src}
-              width={link.width}
-              height={link.height}
+              width={20}
+              height={20}
               className="select-none drag-none"
               alt={link.alt}
             />
           </Link>
         </li>
       ))}
-
-      {/* <li className="rounded-[5px] bg-[var(--tertiary-background-color)]">
-        <Link
-          href="/guestbook"
-          className="flex flex-row items-center gap-1 px-[6px] py-1"
-        >
-          Guestbook
-        </Link>
-      </li> */}
     </ul>
   );
 }

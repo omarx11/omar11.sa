@@ -7,7 +7,7 @@ export default function About() {
   return (
     <section className="mb-6 flex flex-col items-center md:mb-0 md:flex-row md:items-start">
       <Image
-        src="/avatar.jpeg"
+        src="/avatar.jpg"
         width={128}
         height={128}
         placeholder="blur"
@@ -29,7 +29,7 @@ export default function About() {
         </h1>
         <div className="text-[1rem] leading-[1.4rem] text-neutral-200">
           I'm a full-stack developer from Saudi Arabia, I'm currently{" "}
-          <p className="inline-block w-[118px] text-sm">
+          <p className="inline-block w-[114px] text-sm">
             <TimeAgo />
           </p>{" "}
           years old, studying in the last stage of College at TVTC, I love

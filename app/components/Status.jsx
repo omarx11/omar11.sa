@@ -4,7 +4,7 @@ import Discord from "./Discord";
 
 export default function Status() {
   return (
-    <ul className="flex flex-col items-start gap-2 pl-3 pt-5 text-stone-300">
+    <ul className="flex flex-col items-start gap-2 pl-0 pt-5 text-stone-300 md:pl-3">
       <li>
         <div className="flex h-auto items-center gap-2 text-base md:h-7">
           <Discord id={process.env.DISCORD_ID} />

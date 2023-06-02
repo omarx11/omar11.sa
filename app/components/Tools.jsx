@@ -13,7 +13,3 @@ export function rgbDataURL(r, g, b) {
     triplet(0, r, g) + triplet(b, 255, 255)
   }/yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`;
 }
-
-export function test(test) {
-  return <div>{test}</div>;
-}

@@ -30,17 +30,16 @@ text-sm text-neutral-300 opacity-0 transition-opacity group-hover:opacity-100"
 
 export default function Discord({ id }) {
   const data = useLanyardWS(id);
-  // console.log(data);
   if (data === undefined)
     return (
-      <p className="ml-6 text-sm text-emerald-300">Loading discord status...</p>
+      <p className="ml-3 text-sm text-emerald-300">Loading discord status...</p>
     );
 
   if (data) {
     const status =
       data.discord_status == "dnd" ? (
         <>
-          online. <span className="text-red-500">(do not disturb)</span>
+          online. <span className="text-sm text-red-500">(do not disturb)</span>
         </>
       ) : (
         data.discord_status + "."
