@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getRepository } from "./components/Repos";
-import { MotionTest } from "./components/Moition";
+import * as motion from "lib/Moition";
 
 const reposInfo = {
   imageMain: ["/steamid.png", "/chatin.png", "/omar11.jpg", "/pirateadv.png"],
@@ -19,7 +19,7 @@ const reposInfo = {
 const manualRepository = [
   {
     id: 1,
-    html_url: "",
+    homepage: "https://pirateadv.me",
     name: "my-old-website",
     language: "JavaScript",
     stargazers_count: "-",
@@ -47,25 +47,31 @@ export default async function HomePage() {
   repos.push(...manualRepository);
 
   return (
-    <>
-      <MotionTest />
+    <motion.div variants={motion.container} initial="hidden" animate="visible">
       <div className="flex flex-col gap-4">
-        <div className="flex items-center gap-2 text-4xl font-bold">
+        <motion.div
+          className="flex items-center gap-2 text-4xl font-bold"
+          variants={motion.item}
+        >
           <p className="text-emerald-500">#</p>
           <h2 className="text-stone-400">Projects</h2>
-        </div>
-        <p className="text-stone-400">
+        </motion.div>
+        <motion.p className="text-stone-400" variants={motion.item}>
           Here's some of my personal projects I've worked on recently.
-        </p>
+        </motion.p>
       </div>
       <div className="my-12 grid gap-5 md:grid-cols-3">
         {repos ? (
           repos.map((repo, index) => (
-            <div
+            <motion.div
               key={repo.id}
               className="group flex flex-col rounded-md bg-neutral-900 hover:bg-neutral-800"
+              variants={motion.item}
             >
-              <Link href={repo.html_url} className="relative h-44 w-full">
+              <Link
+                href={repo.homepage ? repo.homepage : "#"}
+                className="relative h-44 w-full"
+              >
                 <Image
                   src={reposInfo.imageMain[index]}
                   width={640}
@@ -78,7 +84,7 @@ export default async function HomePage() {
               <div className="m-3">
                 <h3 className="text-lg text-stone-300">
                   <Link
-                    href={repo.html_url}
+                    href={repo.homepage ? repo.homepage : "#"}
                     target="_blank"
                     className="pb-[2px] underline-offset-2 hover:underline"
                   >
@@ -132,7 +138,7 @@ export default async function HomePage() {
                 <hr className="mb-3 mt-2 h-[1px] w-full border-0 bg-stone-800" />
                 <p className="text-sm text-zinc-500">{repo.description}</p>
               </div>
-            </div>
+            </motion.div>
           ))
         ) : (
           <p className="text-red-700">Error: No Repository Available!</p>
@@ -147,6 +153,6 @@ export default async function HomePage() {
           Github!
         </Link>
       </div> */}
-    </>
+    </motion.div>
   );
 }

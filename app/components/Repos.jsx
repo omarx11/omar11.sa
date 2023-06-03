@@ -24,7 +24,7 @@
 //   return <div>{isLoading ? "Contant is Loading.." : data}</div>;
 // }
 
-export async function getRepository() {
+export const getRepository = async () => {
   try {
     const filteredRepos = [386408964, 601036020];
     const response = await fetch("https://api.github.com/users/omarx11/repos", {
@@ -34,11 +34,11 @@ export async function getRepository() {
       },
     });
     const repos = await response.json();
-    // await new Promise((resolve) => setTimeout(resolve, 1000))
+    await new Promise((resolve) => setTimeout(resolve, 3000));
     return repos
       .filter((d) => !filteredRepos.includes(d.id))
       .sort((a, b) => a.id - b.id);
   } catch (error) {
     console.log(error);
   }
-}
+};

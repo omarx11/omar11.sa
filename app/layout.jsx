@@ -3,7 +3,7 @@ import "./globals.css";
 import { Recursive } from "next/font/google";
 import Footer from "./components/Footer";
 import About from "./components/About";
-import Blocks from "./components/Blocks";
+import Navbar from "./components/Navbar";
 
 const recursive = Recursive({ subsets: ["latin"] });
 
@@ -30,8 +30,8 @@ export default function RootLayout({ children }) {
           <header className="h-12 md:h-24"></header>
           <About />
           <hr className="my-5 h-[1px] w-full border-0 bg-stone-800" />
-          <Blocks />
-          <div className="my-8 flex-1 overflow-hidden text-base">
+          <Navbar />
+          <div className="mb-8 mt-12 flex-1 overflow-visible text-base">
             {children}
           </div>
           <hr className="h-[1px] w-full border-0 bg-stone-800" />

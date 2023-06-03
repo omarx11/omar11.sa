@@ -15,7 +15,7 @@ function useYearsAgo() {
   useEffect(() => {
     const yearTimer = setInterval(() => setYears(getYearsAgo(date)), 10);
     () => clearInterval(yearTimer);
-  }, []);
+  }, [date]);
 
   return years.toFixed(9);
 }

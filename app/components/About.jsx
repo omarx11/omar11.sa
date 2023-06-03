@@ -35,8 +35,8 @@ export default function About() {
               <TimeAgo />
             </p>{" "}
             years old, studying in the last stage of College at TVTC, I love
-            developing with javascript language, and making websites just like
-            this one, you can check out more{" "}
+            developing with javascript language, making websites just like this
+            one, and you can check out more{" "}
             <Link
               href="/about"
               className="text-zinc-400 underline underline-offset-2 hover:no-underline"

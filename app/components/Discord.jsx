@@ -19,8 +19,8 @@ function Status({ status, activities, className }) {
   return (
     <div className={color}>
       <div
-        className="absolute left-1/2 w-max -translate-x-1/2 -translate-y-8 rounded-md bg-gray-800 px-1 
-text-sm text-neutral-300 opacity-0 transition-opacity group-hover:opacity-100"
+        className="pointer-events-none absolute left-1/2 w-max -translate-x-1/2 -translate-y-8 rounded-md bg-gray-800 
+px-1 text-sm text-neutral-300 opacity-0 transition-opacity group-hover:opacity-100"
       >
         {activitie}
       </div>
