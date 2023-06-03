@@ -56,7 +56,7 @@ const linksInfo = [
 // try to use map function
 export default function Blocks() {
   return (
-    <ul className="flex flex-wrap gap-4 text-stone-300">
+    <ul className="flex flex-wrap gap-4 font-bold text-stone-300">
       {linksInfo.map((link) => (
         <li
           key={link.id}

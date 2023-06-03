@@ -14,9 +14,9 @@ export default function Status() {
         <div className="flex items-start">
           <Image
             src="/icons/location.svg"
-            width={20}
-            height={20}
-            className="h-[20px] w-[20px] select-none drag-none"
+            width={19}
+            height={19}
+            className="h-[19px] w-[19px] select-none drag-none"
             alt="location-icon"
           />
           <p className="ml-1 text-sm">Saudi Arabia / Buraydah.</p>

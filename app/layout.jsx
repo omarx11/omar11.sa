@@ -1,16 +1,18 @@
 import "./globals.css";
-import localFont from "next/font/local";
+// import localFont from "next/font/local";
+import { Recursive } from "next/font/google";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import Blocks from "./components/Blocks";
-import Status from "./components/Status";
 
-const sFFont = localFont({
-  src: "./SFPRODISPLAYMEDIUM.otf",
-  weight: "500",
-});
+const recursive = Recursive({ subsets: ["latin"] });
 
-const bodyStyle = `${sFFont.className} flex justify-center min-h-screen tracking-widest`;
+// const sFFont = localFont({
+//   src: "./SFPRODISPLAYMEDIUM.otf",
+//   weight: "500",
+// });
+
+const bodyStyle = `${recursive.className} flex justify-center min-h-screen`;
 
 export const metadata = {
   title: "Create Next App",
@@ -21,13 +23,12 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className="min-h-screen overflow-x-hidden scroll-smooth text-emerald-400 antialiased"
+      className="tracking min-h-screen overflow-x-hidden scroll-smooth text-emerald-400 antialiased"
     >
       <body className={bodyStyle}>
         <main className="mx-3 flex max-w-5xl flex-col">
-          <header className="h-12 md:h-36"></header>
+          <header className="h-12 md:h-24"></header>
           <About />
-          <Status />
           <hr className="my-5 h-[1px] w-full border-0 bg-stone-800" />
           <Blocks />
           <div className="my-8 flex-1 overflow-hidden text-base">

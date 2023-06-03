@@ -2,16 +2,33 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getRepository } from "./components/Repos";
+import { MotionTest } from "./components/Moition";
 
 const reposInfo = {
-  imageMain: ["/steamid.png", "/chatin.png", "/next.svg"],
+  imageMain: ["/steamid.png", "/chatin.png", "/omar11.jpg", "/pirateadv.png"],
   imageStyle: {
     position: "absolute",
     height: "100%",
     width: "100%",
     color: "transparent",
+    padding: "12px",
+    borderRadius: "1rem",
   },
 };
+
+const manualRepository = [
+  {
+    id: 1,
+    html_url: "",
+    name: "my-old-website",
+    language: "JavaScript",
+    stargazers_count: "-",
+    forks_count: "-",
+    watchers_count: "-",
+    description:
+      "My old and first website, created for self-learning such as php, javascript, APIs, and more...",
+  },
+];
 
 function setRepoLanguageIcon(repo) {
   if (repo === "JavaScript") {
@@ -27,9 +44,11 @@ function setRepoLanguageIcon(repo) {
 
 export default async function HomePage() {
   const repos = await getRepository();
+  repos.push(...manualRepository);
 
   return (
     <>
+      <MotionTest />
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-2 text-4xl font-bold">
           <p className="text-emerald-500">#</p>
@@ -44,7 +63,7 @@ export default async function HomePage() {
           repos.map((repo, index) => (
             <div
               key={repo.id}
-              className="group flex flex-col rounded-md border-2 border-neutral-900 bg-neutral-900 hover:bg-neutral-800"
+              className="group flex flex-col rounded-md bg-neutral-900 hover:bg-neutral-800"
             >
               <Link href={repo.html_url} className="relative h-44 w-full">
                 <Image
@@ -86,7 +105,7 @@ export default async function HomePage() {
                         className="select-none drag-none"
                         alt="stargazers-icon"
                       />
-                      <p className="indent-[1px]">{repo.stargazers_count}</p>
+                      <p>{repo.stargazers_count}</p>
                     </span>
                     <span>
                       <Image
@@ -96,7 +115,7 @@ export default async function HomePage() {
                         className="select-none drag-none"
                         alt="fork-icon"
                       />
-                      <p className="indent-[1px]">{repo.forks_count}</p>
+                      <p>{repo.forks_count}</p>
                     </span>
                     <span>
                       <Image
@@ -106,12 +125,12 @@ export default async function HomePage() {
                         className="select-none drag-none"
                         alt="eye-icon"
                       />
-                      <p className="indent-[1px]">{repo.watchers_count}</p>
+                      <p>{repo.watchers_count}</p>
                     </span>
                   </div>
                 </div>
                 <hr className="mb-3 mt-2 h-[1px] w-full border-0 bg-stone-800" />
-                <p className="text-zinc-500">{repo.description}</p>
+                <p className="text-sm text-zinc-500">{repo.description}</p>
               </div>
             </div>
           ))
