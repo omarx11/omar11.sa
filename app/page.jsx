@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getRepository } from "./components/Repos";
-import * as motion from "lib/Moition";
+import * as motion from "@/lib/setMoition";
 
 const reposInfo = {
   imageMain: ["/steamid.png", "/chatin.png", "/omar11.jpg", "/pirateadv.png"],
@@ -45,28 +45,28 @@ function setRepoLanguageIcon(repo) {
 export default async function HomePage() {
   const repos = await getRepository();
   repos.push(...manualRepository);
-
   return (
-    <motion.div variants={motion.container} initial="hidden" animate="visible">
-      <div className="flex flex-col gap-4">
-        <motion.div
-          className="flex items-center gap-2 text-4xl font-bold"
-          variants={motion.item}
-        >
-          <p className="text-emerald-500">#</p>
-          <h2 className="text-stone-400">Projects</h2>
-        </motion.div>
-        <motion.p className="text-stone-400" variants={motion.item}>
-          Here's some of my personal projects I've worked on recently.
-        </motion.p>
-      </div>
+    <>
+      <h2 className="text-4xl font-bold text-stone-400">
+        <span className="text-emerald-500"># </span>
+        Projects
+      </h2>
+      <p className="mt-4 text-stone-400">
+        Here's some of my personal projects I've worked on recently.
+      </p>
       <div className="my-12 grid gap-5 md:grid-cols-3">
         {repos ? (
           repos.map((repo, index) => (
             <motion.div
               key={repo.id}
               className="group flex flex-col rounded-md bg-neutral-900 hover:bg-neutral-800"
-              variants={motion.item}
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ rotate: 360, scale: 1, opacity: 1 }}
+              transition={{
+                type: "spring",
+                stiffness: 160,
+                damping: 20,
+              }}
             >
               <Link
                 href={repo.homepage ? repo.homepage : "#"}
@@ -82,15 +82,13 @@ export default async function HomePage() {
                 />
               </Link>
               <div className="m-3">
-                <h3 className="text-lg text-stone-300">
-                  <Link
-                    href={repo.homepage ? repo.homepage : "#"}
-                    target="_blank"
-                    className="pb-[2px] underline-offset-2 hover:underline"
-                  >
-                    {repo.name}
-                  </Link>
-                </h3>
+                <Link
+                  href={repo.homepage ? repo.homepage : "#"}
+                  target="_blank"
+                  className="pb-[2px] text-lg text-stone-300 underline-offset-2 hover:underline"
+                >
+                  {repo.name}
+                </Link>
                 <div className="flex flex-row justify-between text-stone-400">
                   <div className="flex items-center gap-[6px] text-sm">
                     <Image
@@ -100,7 +98,7 @@ export default async function HomePage() {
                       className="select-none drag-none"
                       alt={`${repo.language}-icon`}
                     />
-                    <p>- {repo.language.toLowerCase()}</p>
+                    - {repo.language.toLowerCase()}
                   </div>
                   <div className="pointer-events-none flex select-none flex-row items-center gap-1 text-center text-xs">
                     <span>
@@ -111,7 +109,7 @@ export default async function HomePage() {
                         className="select-none drag-none"
                         alt="stargazers-icon"
                       />
-                      <p>{repo.stargazers_count}</p>
+                      {repo.stargazers_count}
                     </span>
                     <span>
                       <Image
@@ -121,7 +119,7 @@ export default async function HomePage() {
                         className="select-none drag-none"
                         alt="fork-icon"
                       />
-                      <p>{repo.forks_count}</p>
+                      {repo.forks_count}
                     </span>
                     <span>
                       <Image
@@ -131,7 +129,7 @@ export default async function HomePage() {
                         className="select-none drag-none"
                         alt="eye-icon"
                       />
-                      <p>{repo.watchers_count}</p>
+                      {repo.watchers_count}
                     </span>
                   </div>
                 </div>
@@ -144,15 +142,6 @@ export default async function HomePage() {
           <p className="text-red-700">Error: No Repository Available!</p>
         )}
       </div>
-      {/* <div className="flex items-center justify-center text-[var(--tertiary-text-color)]">
-        <p>check out more details on&#160;</p>
-        <Link
-          href="https://github.com/omarx11"
-          className="text-stone-500 underline underline-offset-1 hover:no-underline"
-        >
-          Github!
-        </Link>
-      </div> */}
-    </motion.div>
+    </>
   );
 }

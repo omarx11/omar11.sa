@@ -24,10 +24,7 @@ export default function Footer() {
           RSS
         </Link>
         <span className="text-stone-500">•</span>
-        <Link
-          href="https://omar11.sa"
-          className="underline-offset-4 hover:underline"
-        >
+        <Link href="/license" className="underline-offset-4 hover:underline">
           <Image
             src="/icons/license.svg"
             width={16}

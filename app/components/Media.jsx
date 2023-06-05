@@ -3,25 +3,21 @@ import Image from "next/image";
 
 const mediaInfo = [
   {
-    id: 1,
     href: "mailto:mail@omar11.sa",
     src: "/icons/email.svg",
     alt: "email-icon",
   },
   {
-    id: 2,
     href: "https://twitter.com/dis_x0",
     src: "/icons/twitter.svg",
     alt: "twitter-icon",
   },
   {
-    id: 3,
     href: "https://discordredirect.discordsafe.com/users/582305812903493663",
     src: "/icons/discord.svg",
     alt: "discord-icon",
   },
   {
-    id: 4,
     href: "https://github.com/omarx11",
     src: "/icons/github.svg",
     alt: "github-icon",
@@ -32,9 +28,9 @@ export default function Media() {
   return (
     <div className="flex w-full flex-row flex-wrap items-center justify-between">
       <ul className="flex flex-row gap-3">
-        {mediaInfo.map((media) => (
+        {mediaInfo.map((media, index) => (
           <li
-            key={media.id}
+            key={media.index}
             className="rounded-full bg-stone-900 p-[6px] hover:bg-stone-800"
           >
             <Link href={media.href}>

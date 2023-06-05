@@ -39,10 +39,10 @@ export default function About() {
             one, and you can check out more{" "}
             <Link
               href="/about"
-              className="text-zinc-400 underline underline-offset-2 hover:no-underline"
+              className="text-zinc-400 underline-offset-2 hover:underline"
             >
               About me
-            </Link>
+            </Link>{" "}
             .
           </div>
         </div>
