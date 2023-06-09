@@ -1,8 +1,8 @@
 import Image from "next/image";
-import Link from "next/link";
 import Status from "./Status";
 import { rgbDataURL } from "./Tools";
-import TimeAgo from "./TimeAgo";
+import TimeAgo from "@/app/lib/useTimeAgo";
+import AboutMe from "./links/AboutMe";
 
 export default function About() {
   return (
@@ -36,14 +36,7 @@ export default function About() {
             </p>{" "}
             years old, studying in the last stage of College at TVTC, I love
             developing with javascript language, making websites just like this
-            one, and you can check out more{" "}
-            <Link
-              href="/about"
-              className="text-zinc-400 underline-offset-2 hover:underline"
-            >
-              About me
-            </Link>{" "}
-            .
+            one, and you can check out more <AboutMe /> .
           </div>
         </div>
       </section>

@@ -34,7 +34,7 @@ export const getRepository = async () => {
       },
     });
     const repos = await response.json();
-    await new Promise((resolve) => setTimeout(resolve, 9000));
+    // await new Promise((resolve) => setTimeout(resolve, 9000));
     return repos
       .filter((d) => !filteredRepos.includes(d.id))
       .sort((a, b) => a.id - b.id);

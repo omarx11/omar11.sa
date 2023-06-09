@@ -1,8 +1,8 @@
 // import fetch from "node-fetch";
 import Link from "next/link";
 import Image from "next/image";
-import { getRepository } from "./components/Repos";
-import * as motion from "@/lib/setMoition";
+import { getRepository } from "@/app/lib/getRepos";
+import * as motion from "@/app/lib/useMoition";
 
 const reposInfo = {
   imageMain: ["/steamid.png", "/chatin.png", "/omar11.jpg", "/pirateadv.png"],

@@ -2,14 +2,13 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import useSessionStorage from "@/lib/setNavbar";
-import * as motion from "@/lib/setMoition";
+import { useSessionStorage } from "@/app/lib/setNavbar";
+import * as motion from "@/app/lib/useMoition";
 
 const colorOpacity = 0.3;
 
 const linksInfo = [
   {
-    id: 0,
     href: "/",
     name: "Projects",
     src: "/icons/album-2-fill.svg",
@@ -17,7 +16,6 @@ const linksInfo = [
     color: `rgba(139, 92, 246, ${colorOpacity})`,
   },
   {
-    id: 1,
     href: "/skills",
     name: "Skills",
     src: "/icons/grid-fill.svg",
@@ -25,7 +23,6 @@ const linksInfo = [
     color: `rgba(244, 63, 94, ${colorOpacity})`,
   },
   {
-    id: 2,
     href: "/specs",
     name: "Specs",
     src: "/icons/command-fill.svg",
@@ -33,7 +30,6 @@ const linksInfo = [
     color: `rgba(14, 165, 233, ${colorOpacity})`,
   },
   {
-    id: 3,
     href: "/about",
     name: "About",
     src: "/icons/draw-pen.svg",
@@ -41,7 +37,6 @@ const linksInfo = [
     color: `rgba(245 158 11, ${colorOpacity})`,
   },
   {
-    id: 4,
     href: "/anime",
     name: "Anime",
     src: "/icons/star-four-fill.svg",
@@ -49,7 +44,6 @@ const linksInfo = [
     color: `rgba(244, 114, 182, ${colorOpacity})`,
   },
   {
-    id: 5,
     href: "/games",
     name: "Games",
     src: "/icons/grid-2-fill.svg",
@@ -57,7 +51,6 @@ const linksInfo = [
     color: `rgba(34, 197, 94, ${colorOpacity})`,
   },
   {
-    id: 6,
     href: "/guestbook",
     name: "Guestbook",
     src: "/icons/comment-fill.svg",
@@ -66,25 +59,26 @@ const linksInfo = [
   },
 ];
 
-export default function Blocks() {
-  const [selectedLink, setSelectedLink, formerColor, setFormerColor] =
+export default function Navbar() {
+  const { selectedLink, setSelectedLink, formerColor, setFormerColor } =
     useSessionStorage();
   return (
     <ul className="flex flex-wrap gap-4 font-bold text-stone-300">
-      {linksInfo.map((link) => (
+      {linksInfo.map((link, index) => (
         <motion.li
-          key={link.id}
+          key={index}
           className="relative rounded-md"
           onTap={() => {
-            sessionStorage.setItem("pageId", link.id);
-            setSelectedLink(link.id);
+            window.sessionStorage.setItem("pageId", index);
+            setSelectedLink(index);
             setFormerColor(linksInfo[selectedLink].color);
           }}
         >
           <Link
             href={link.href}
+            prefetch={false}
             className={
-              link.id === selectedLink
+              index === selectedLink
                 ? "pointer-events-none flex flex-row items-center gap-1 bg-stone-900 px-2 py-[2px]"
                 : "flex flex-row items-center gap-1 bg-stone-900 px-2 py-[2px] hover:bg-stone-800"
             }
@@ -98,7 +92,7 @@ export default function Blocks() {
               alt={link.alt}
             />
           </Link>
-          {link.id === selectedLink && (
+          {index === selectedLink && (
             <motion.div
               className="absolute left-0 top-0 h-full w-full rounded-md"
               layoutId="selected"
