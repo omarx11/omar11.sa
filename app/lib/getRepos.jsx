@@ -1,28 +1,40 @@
-// "use client";
-// import { useQuery } from "@tanstack/react-query";
+export const reposInfo = {
+  imageMain: ["/steamid.png", "/chatin.png", "/omar11.jpg", "/pirateadv.png"],
+  imageStyle: {
+    position: "absolute",
+    height: "100%",
+    width: "100%",
+    color: "transparent",
+    padding: "12px",
+    borderRadius: "1rem",
+  },
+};
 
-// const useRepo = () => {
-//   const { data, isLoading, error } = useQuery({
-//     queryFn: async () => {
-//       const { data } = await fetch(
-//         `https://api.github.com/users/${process.env.GITHUB_USER}/repos`,
-//         {
-//           headers: {
-//             Accept: "application/vnd.github+json",
-//             Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-//           },
-//         }
-//       );
-//       return data;
-//     },
-//   });
-//   return { data, isLoading, error };
-// };
+export const manualRepository = [
+  {
+    id: 1,
+    homepage: "https://pirateadv.me",
+    name: "my-old-website",
+    language: "JavaScript",
+    stargazers_count: "-",
+    forks_count: "-",
+    watchers_count: "-",
+    description:
+      "My old and first website, created for self-learning such as php, javascript, APIs, and more...",
+  },
+];
 
-// export default function Repos() {
-//   const { data, isLoading } = useRepo();
-//   return <div>{isLoading ? "Contant is Loading.." : data}</div>;
-// }
+export function setRepoLanguageIcon(repo) {
+  if (repo === "JavaScript") {
+    return "/icons/javascript.svg";
+  } else if (repo === "HTML") {
+    return "/icons/html.svg";
+  } else if (repo === "CSS") {
+    return "/icons/css.svg";
+  } else {
+    return "null";
+  }
+}
 
 export const getRepository = async () => {
   try {

@@ -1,46 +1,12 @@
-// import fetch from "node-fetch";
 import Link from "next/link";
 import Image from "next/image";
-import { getRepository } from "@/app/lib/getRepos";
+import {
+  getRepository,
+  reposInfo,
+  manualRepository,
+  setRepoLanguageIcon,
+} from "@/app/lib/getRepos";
 import * as motion from "@/app/lib/useMoition";
-
-const reposInfo = {
-  imageMain: ["/steamid.png", "/chatin.png", "/omar11.jpg", "/pirateadv.png"],
-  imageStyle: {
-    position: "absolute",
-    height: "100%",
-    width: "100%",
-    color: "transparent",
-    padding: "12px",
-    borderRadius: "1rem",
-  },
-};
-
-const manualRepository = [
-  {
-    id: 1,
-    homepage: "https://pirateadv.me",
-    name: "my-old-website",
-    language: "JavaScript",
-    stargazers_count: "-",
-    forks_count: "-",
-    watchers_count: "-",
-    description:
-      "My old and first website, created for self-learning such as php, javascript, APIs, and more...",
-  },
-];
-
-function setRepoLanguageIcon(repo) {
-  if (repo === "JavaScript") {
-    return "/icons/javascript.svg";
-  } else if (repo === "HTML") {
-    return "/icons/html.svg";
-  } else if (repo === "CSS") {
-    return "/icons/css.svg";
-  } else {
-    return "null";
-  }
-}
 
 export default async function HomePage() {
   const repos = await getRepository();
@@ -134,7 +100,9 @@ export default async function HomePage() {
                   </div>
                 </div>
                 <hr className="mb-3 mt-2 h-[1px] w-full border-0 bg-stone-800" />
-                <p className="text-sm text-zinc-500">{repo.description}</p>
+                <p className="line-clamp-3 text-sm text-zinc-500">
+                  {repo.description}
+                </p>
               </div>
             </motion.div>
           ))

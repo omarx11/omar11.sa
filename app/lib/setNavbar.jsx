@@ -1,40 +1,29 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { linksInfo } from "@/app/data/navigation";
 
-export const useSessionStorage = () => {
+export const navigate = () => {
+  if (!window.sessionStorage.getItem("pageId"))
+    window.sessionStorage.setItem("pageId", 0);
   const session = JSON.parse(window.sessionStorage.getItem("pageId"));
-  const [selectedLink, setSelectedLink] = useState(session || 0);
-  const [formerColor, setFormerColor] = useState("");
-  console.log("storage: ", session);
-  // useEffect(() => {
-  //   setSelectedLink(session);
-  // }, [session]);
-  return { selectedLink, setSelectedLink, formerColor, setFormerColor };
+  const [page, setPage] = useState(session);
+  const [pageColor, setPageColor] = useState(linksInfo[session].color);
+
+  return { page, setPage, pageColor, setPageColor };
 };
 
-// export function humanStuff() {
-//   const [human, setHuman] = useState(1);
-//   const [first, setFirst] = useState(false);
+// const useSessionStorage = () => {
+//   if (!window.sessionStorage.getItem("pageId"))
+//     window.sessionStorage.setItem("pageId", 0);
 
-//   useEffect(() => {
-//     const storedState = sessionStorage.getItem("human");
-//     if (storedState) {
-//       setHuman(JSON.parse(storedState));
-//     }
-//     setFirst(true);
-//   }, []);
+//   // console.log(linksInfo.filter((e) => e.name == "About")[0]);
 
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setHuman((prevHuman) => ({ ...prevHuman, [name]: value }));
-//   };
+//   const session = JSON.parse(window.sessionStorage.getItem("pageId"));
+//   const [selectedLink, setSelectedLink] = useState(session || 0);
+//   const [formerColor, setFormerColor] = useState("");
+//   console.log("storage: ", session);
+//   return [selectedLink, setSelectedLink, formerColor, setFormerColor];
+// };
 
-//   useEffect(() => {
-//     if (first) {
-//       sessionStorage.setItem("human", JSON.stringify(human));
-//     }
-//   }, [human]);
-
-//   return { human, handleChange, setHuman };
-// }
+// export default useSessionStorage;

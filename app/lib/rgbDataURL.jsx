@@ -1,4 +1,4 @@
-export function rgbDataURL(r, g, b) {
+export default function rgbDataURL(r, g, b) {
   // Pixel GIF code adapted from https://stackoverflow.com/a/33919020/266535
   const keyStr =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";

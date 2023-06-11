@@ -1,6 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Status from "./Status";
-import { rgbDataURL } from "./Tools";
+import rgbDataURL from "@/app/lib/rgbDataURL";
 import TimeAgo from "@/app/lib/useTimeAgo";
 import AboutMe from "./links/AboutMe";
 
@@ -30,13 +32,13 @@ export default function About() {
             />
           </h1>
           <div className="text-[1rem] leading-[1.4rem] text-neutral-200">
-            I'm a full-stack developer from Saudi Arabia, I'm currently{" "}
+            a full-stack developer from Saudi Arabia, I'm currently{" "}
             <p className="inline-block w-[100px] text-sm">
               <TimeAgo />
             </p>{" "}
-            years old, studying in the last stage of College at TVTC, I love
-            developing with javascript language, making websites just like this
-            one, and you can check out more <AboutMe /> .
+            years old, studying in the final stage of College education at TVTC,
+            I love developing with javascript language, making websites just
+            like this one, and you can check out more <AboutMe /> .
           </div>
         </div>
       </section>

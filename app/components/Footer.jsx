@@ -18,13 +18,10 @@ export default function Footer() {
         </Link>
         <span className="text-stone-500">•</span>
         <Link
-          href="https://github.com/omarx11/omar11.sa"
+          href="/license"
+          prefetch={false}
           className="underline-offset-4 hover:underline"
         >
-          RSS
-        </Link>
-        <span className="text-stone-500">•</span>
-        <Link href="/license" className="underline-offset-4 hover:underline">
           <Image
             src="/icons/license.svg"
             width={16}
