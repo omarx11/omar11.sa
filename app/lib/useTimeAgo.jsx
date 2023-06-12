@@ -22,6 +22,6 @@ function useYearsAgo() {
 }
 
 export default dynamic(() => Promise.resolve(useYearsAgo), {
-  loading: () => "Loading...",
+  loading: () => "....................",
   ssr: false,
 });

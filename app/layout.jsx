@@ -1,16 +1,12 @@
-import "./globals.css";
-// import localFont from "next/font/local";
+import "./globals.scss";
 import { Recursive } from "next/font/google";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import Navbar from "./components/Navbar";
+import Transition from "./components/Transition";
+import { NavProvider } from "./Context/navigation";
 
 const recursive = Recursive({ subsets: ["latin"] });
-
-// const sFFont = localFont({
-//   src: "./SFPRODISPLAYMEDIUM.otf",
-//   weight: "500",
-// });
 
 const bodyStyle = `${recursive.className} flex justify-center min-h-screen`;
 
@@ -28,12 +24,12 @@ export default function RootLayout({ children }) {
       <body className={bodyStyle}>
         <main className="mx-3 flex max-w-5xl flex-col">
           <header className="h-12 md:h-24"></header>
-          <About />
-          <hr className="my-5 h-[1px] w-full border-0 bg-stone-800" />
-          <Navbar />
-          <div className="mb-8 mt-12 flex-1 overflow-visible text-base">
-            {children}
-          </div>
+          <NavProvider>
+            <About />
+            <hr className="my-5 h-[1px] w-full border-0 bg-stone-800" />
+            <Navbar />
+          </NavProvider>
+          <Transition>{children}</Transition>
           <hr className="h-[1px] w-full border-0 bg-stone-800" />
           <Footer />
         </main>

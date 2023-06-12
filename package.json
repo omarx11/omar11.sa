@@ -21,6 +21,7 @@
     "use-lanyard": "^1.4.3"
   },
   "devDependencies": {
-    "prettier-plugin-tailwindcss": "^0.3.0"
+    "prettier-plugin-tailwindcss": "^0.3.0",
+    "sass": "^1.63.3"
   }
 }

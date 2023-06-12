@@ -45,8 +45,10 @@ export const getRepository = async () => {
         Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
       },
     });
+    if (!response.ok) throw new Error("Failed to fetch data");
     const repos = await response.json();
-    // await new Promise((resolve) => setTimeout(resolve, 9000));
+    // added Promise await just for show cool loading animetion
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     return repos
       .filter((d) => !filteredRepos.includes(d.id))
       .sort((a, b) => a.id - b.id);

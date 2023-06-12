@@ -5,8 +5,7 @@ import {
   reposInfo,
   manualRepository,
   setRepoLanguageIcon,
-} from "@/app/lib/getRepos";
-import * as motion from "@/app/lib/useMoition";
+} from "./lib/getRepos";
 
 export default async function HomePage() {
   const repos = await getRepository();
@@ -23,16 +22,9 @@ export default async function HomePage() {
       <div className="my-12 grid gap-5 md:grid-cols-3">
         {repos ? (
           repos.map((repo, index) => (
-            <motion.div
+            <div
               key={repo.id}
-              className="group flex flex-col rounded-md bg-neutral-900 hover:bg-neutral-800"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ rotate: 360, scale: 1, opacity: 1 }}
-              transition={{
-                type: "spring",
-                stiffness: 160,
-                damping: 20,
-              }}
+              className="fade-in group flex flex-col rounded-md bg-neutral-900 hover:bg-neutral-800"
             >
               <Link
                 href={repo.homepage ? repo.homepage : "#"}
@@ -104,7 +96,7 @@ export default async function HomePage() {
                   {repo.description}
                 </p>
               </div>
-            </motion.div>
+            </div>
           ))
         ) : (
           <p className="text-red-700">Error: No Repository Available!</p>

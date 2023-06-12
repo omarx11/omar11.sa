@@ -1,10 +1,8 @@
-"use client";
-
 import Image from "next/image";
 import Status from "./Status";
-import rgbDataURL from "@/app/lib/rgbDataURL";
-import TimeAgo from "@/app/lib/useTimeAgo";
-import AboutMe from "./links/AboutMe";
+import rgbDataURL from "../lib/rgbDataURL";
+import TimeAgo from "../lib/useTimeAgo";
+import AboutMe from "./links/About";
 
 export default function About() {
   return (
