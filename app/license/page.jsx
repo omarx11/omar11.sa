@@ -31,7 +31,7 @@ export default function License() {
         </p>
       </div>
       <div className="mt-12 w-full border-l-4 border-emerald-900 pl-2 opacity-60 md:w-[60%]">
-        <p className="text-gray-300">
+        <p className="text-stone-500">
           Note: Anyone is free to take inspiration from this site as long as you
           make some changes to your version and give credit to the ordinal
           creator. Credits should include my full name (Omar Abdulaziz) and a

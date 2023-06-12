@@ -31,7 +31,7 @@ export default function About() {
           </h1>
           <div className="text-[1rem] leading-[1.4rem] text-neutral-200">
             a full-stack developer from Saudi Arabia, I'm currently{" "}
-            <p className="inline-block w-[100px] text-sm">
+            <p className="inline-block w-[98px] text-sm text-emerald-400">
               <TimeAgo />
             </p>{" "}
             years old, studying in the final stage of College education at TVTC,

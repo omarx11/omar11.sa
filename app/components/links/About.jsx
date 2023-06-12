@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { linksInfo } from "@/app/data/navigation";
 import { useRouter } from "next/navigation";
-import { useNavContext } from "../../Context/navigation";
+import { useNavContext } from "../../context/navigation";
 
 export default function AboutMe() {
   const router = useRouter();
@@ -17,14 +17,12 @@ export default function AboutMe() {
       className="text-zinc-400 underline-offset-2 hover:underline"
       onClick={(e) => {
         e.preventDefault();
-        if (window.sessionStorage.getItem("pageId"))
-          window.sessionStorage.setItem("pageId", aboutPage.id);
         setColor(aboutPage.color);
         setPage(aboutPage.id);
         router.replace(aboutPage.href);
       }}
     >
-      About me
+      about me
     </Link>
   );
 }

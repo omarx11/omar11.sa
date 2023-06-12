@@ -5,7 +5,7 @@ function Status({ status, activities, className }) {
   const activitie =
     activities === undefined ? "on desktop" : `On: ${activities}`;
 
-  let color;
+  let color = "";
   if (status == "online") {
     color = `bg-green-400 border-green-300 ${className}`;
   } else if (status == "idle") {
@@ -32,7 +32,7 @@ export default function Discord({ id }) {
   const data = useLanyardWS(id);
   if (data === undefined)
     return (
-      <p className="ml-1 text-sm text-emerald-300">Loading discord status...</p>
+      <p className="ml-1 text-sm text-emerald-300">getting online status...</p>
     );
 
   if (data) {

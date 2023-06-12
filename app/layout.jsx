@@ -4,7 +4,7 @@ import Footer from "./components/Footer";
 import About from "./components/About";
 import Navbar from "./components/Navbar";
 import Transition from "./components/Transition";
-import { NavProvider } from "./Context/navigation";
+import { NavProvider } from "./context/navigation";
 
 const recursive = Recursive({ subsets: ["latin"] });
 
