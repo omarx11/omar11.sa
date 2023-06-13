@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import rgbDataURL from "./lib/rgbDataURL";
+import fs from "node:fs/promises";
+import { getPlaiceholder } from "plaiceholder";
 import {
   getRepository,
   reposInfo,
@@ -11,99 +12,106 @@ import {
 export default async function HomePage() {
   const repos = await getRepository();
   repos.push(...manualRepository);
+
+  const placeholders = await Promise.all(
+    reposInfo.imageMain.map(async (url) => {
+      const imgs = await fs.readFile(`./public${url}`);
+      const { base64 } = await getPlaiceholder(imgs);
+      return base64;
+    })
+  );
+
   return (
     <>
       <h2 className="text-4xl font-bold text-stone-400">
         <span className="text-emerald-500"># </span>
         Projects
+        <p className="mt-2 text-base text-stone-400">
+          Here's some of my personal projects I've worked on recently.
+        </p>
       </h2>
-      <p className="mt-4 text-stone-400">
-        Here's some of my personal projects I've worked on recently.
-      </p>
-      <div className="my-12 grid gap-5 md:grid-cols-3">
-        {repos ? (
-          repos.map((repo, index) => (
-            <div
-              key={repo.id}
-              className="fade-in group flex flex-col rounded-md bg-neutral-900 hover:bg-neutral-800"
-            >
-              <Link
-                href={repo.homepage ? repo.homepage : "#"}
-                className="relative h-44 w-full"
+      <div className="my-10 grid gap-5 border-t-2 border-stone-800 md:grid-cols-3">
+        {repos
+          ? repos.map((repo, index) => (
+              <div
+                key={repo.id}
+                className="fade-in group flex flex-col rounded-md bg-neutral-900 hover:bg-neutral-800"
               >
-                <Image
-                  src={reposInfo.imageMain[index]}
-                  width={640}
-                  height={480}
-                  placeholder="blur"
-                  blurDataURL={rgbDataURL(237, 181, 6)}
-                  style={reposInfo.imageStyle}
-                  className="inset-0 w-full select-none rounded-md object-cover transition-transform drag-none group-hover:-translate-y-4"
-                  alt="project-icon"
-                />
-              </Link>
-              <div className="m-3">
                 <Link
                   href={repo.homepage ? repo.homepage : "#"}
-                  target="_blank"
-                  className="pb-[2px] text-lg text-stone-300 underline-offset-2 hover:underline"
+                  className="relative h-44 w-full"
                 >
-                  {repo.name}
+                  <Image
+                    src={reposInfo.imageMain[index]}
+                    width={640}
+                    height={480}
+                    blurDataURL={placeholders[index]}
+                    placeholder="blur"
+                    style={reposInfo.imageStyle}
+                    className="inset-0 select-none object-cover transition-transform drag-none group-hover:-translate-y-4"
+                    alt="project-icon"
+                  />
                 </Link>
-                <div className="flex flex-row justify-between text-stone-400">
-                  <div className="flex items-center gap-[6px] text-sm">
-                    <Image
-                      src={`${setRepoLanguageIcon(repo.language)}`}
-                      width={16}
-                      height={16}
-                      className="select-none drag-none"
-                      alt={`${repo.language}-icon`}
-                    />
-                    - {repo.language.toLowerCase()}
+                <div className="m-3">
+                  <Link
+                    href={repo.homepage ? repo.homepage : "#"}
+                    target="_blank"
+                    className="pb-[2px] text-lg text-stone-300 underline-offset-2 hover:underline"
+                  >
+                    {repo.name}
+                  </Link>
+                  <div className="flex flex-row justify-between text-stone-400">
+                    <div className="flex items-center gap-[6px] text-sm">
+                      <Image
+                        src={`${setRepoLanguageIcon(repo.language)}`}
+                        width={16}
+                        height={16}
+                        className="select-none drag-none"
+                        alt={`${repo.language}-icon`}
+                      />
+                      - {repo.language.toLowerCase()}
+                    </div>
+                    <div className="pointer-events-none flex select-none flex-row items-center gap-1 text-center text-xs">
+                      <span>
+                        <Image
+                          src="/icons/stargazers.svg"
+                          width={14}
+                          height={14}
+                          className="select-none drag-none"
+                          alt="stargazers-icon"
+                        />
+                        {repo.stargazers_count}
+                      </span>
+                      <span>
+                        <Image
+                          src="/icons/fork.svg"
+                          width={14}
+                          height={14}
+                          className="select-none drag-none"
+                          alt="fork-icon"
+                        />
+                        {repo.forks_count}
+                      </span>
+                      <span>
+                        <Image
+                          src="/icons/eye.svg"
+                          width={14}
+                          height={14}
+                          className="select-none drag-none"
+                          alt="eye-icon"
+                        />
+                        {repo.watchers_count}
+                      </span>
+                    </div>
                   </div>
-                  <div className="pointer-events-none flex select-none flex-row items-center gap-1 text-center text-xs">
-                    <span>
-                      <Image
-                        src="/icons/stargazers.svg"
-                        width={14}
-                        height={14}
-                        className="select-none drag-none"
-                        alt="stargazers-icon"
-                      />
-                      {repo.stargazers_count}
-                    </span>
-                    <span>
-                      <Image
-                        src="/icons/fork.svg"
-                        width={14}
-                        height={14}
-                        className="select-none drag-none"
-                        alt="fork-icon"
-                      />
-                      {repo.forks_count}
-                    </span>
-                    <span>
-                      <Image
-                        src="/icons/eye.svg"
-                        width={14}
-                        height={14}
-                        className="select-none drag-none"
-                        alt="eye-icon"
-                      />
-                      {repo.watchers_count}
-                    </span>
-                  </div>
+                  <hr className="mb-3 mt-2 h-[1px] w-full border-0 bg-stone-800" />
+                  <p className="line-clamp-3 text-sm text-zinc-500">
+                    {repo.description}
+                  </p>
                 </div>
-                <hr className="mb-3 mt-2 h-[1px] w-full border-0 bg-stone-800" />
-                <p className="line-clamp-3 text-sm text-zinc-500">
-                  {repo.description}
-                </p>
               </div>
-            </div>
-          ))
-        ) : (
-          <p className="text-red-700">Error: No Repository Available!</p>
-        )}
+            ))
+          : null}
       </div>
     </>
   );

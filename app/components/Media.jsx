@@ -4,7 +4,7 @@ import { mediaInfo } from "@/app/data/media";
 
 export default function Media() {
   return (
-    <div className="flex w-full flex-row flex-wrap items-center justify-between">
+    <div className="flex w-full flex-row flex-wrap items-center justify-between pl-0 pt-5 md:pl-3">
       <ul className="flex flex-row gap-3">
         {mediaInfo.map((media, index) => (
           <li

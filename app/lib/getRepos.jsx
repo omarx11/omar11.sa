@@ -1,12 +1,12 @@
 export const reposInfo = {
-  imageMain: ["/steamid.png", "/chatin.png", "/omar11.jpg", "/pirateadv.png"],
+  imageMain: ["/steamid.png", "/chatin.png", "/omar11.jpg", "/pirateadv.webp"],
   imageStyle: {
     position: "absolute",
     height: "100%",
     width: "100%",
     color: "transparent",
-    padding: "12px",
-    borderRadius: "1rem",
+    padding: "8px",
+    borderRadius: "0.8rem",
   },
 };
 
@@ -48,7 +48,7 @@ export const getRepository = async () => {
     if (!response.ok) throw new Error("Failed to fetch data");
     const repos = await response.json();
     // added Promise await just for show cool loading animetion
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // await new Promise((resolve) => setTimeout(resolve, 2000));
     return repos
       .filter((d) => !filteredRepos.includes(d.id))
       .sort((a, b) => a.id - b.id);

@@ -32,7 +32,7 @@ export default function Discord({ id }) {
   const data = useLanyardWS(id);
   if (data === undefined)
     return (
-      <div className="h-4 w-36 animate-pulse rounded-sm bg-stone-700"></div>
+      <span className="h-4 w-36 animate-pulse rounded-sm bg-stone-700"></span>
     );
 
   if (data) {

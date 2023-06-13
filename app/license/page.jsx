@@ -33,9 +33,9 @@ export default function License() {
       <div className="mt-12 w-full border-l-4 border-emerald-900 pl-2 opacity-60 md:w-[60%]">
         <p className="text-stone-500">
           Note: Anyone is free to take inspiration from this site as long as you
-          make some changes to your version and give credit to the ordinal
-          creator. Credits should include my full name (Omar Abdulaziz) and a
-          link to my site (omar11.sa). 👍
+          give credit to the ordinal creator, credits should include my full
+          name (Omar Abdulaziz) and a link to my site (omar11.sa).{" "}
+          <span className="text-rose-600">❤</span>
         </p>
       </div>
     </>

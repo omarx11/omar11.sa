@@ -1,10 +1,13 @@
 import Image from "next/image";
 import Status from "./Status";
-import rgbDataURL from "../lib/rgbDataURL";
+import fs from "node:fs/promises";
+import { getPlaiceholder } from "plaiceholder";
 import TimeAgo from "../lib/useTimeAgo";
 import AboutMe from "./links/About";
 
-export default function About() {
+export default async function About() {
+  const avatar = await fs.readFile("./public/avatar.jpg");
+  const { base64 } = await getPlaiceholder(avatar);
   return (
     <>
       <section className="mb-6 flex flex-col items-center md:mb-0 md:flex-row md:items-start">
@@ -13,7 +16,7 @@ export default function About() {
           width={128}
           height={128}
           placeholder="blur"
-          blurDataURL={rgbDataURL(237, 181, 6)}
+          blurDataURL={base64}
           className="h-32 w-32 select-none rounded-full bg-cover drag-none"
           alt="my-avatar"
         />
@@ -29,7 +32,7 @@ export default function About() {
               alt="wave-icon"
             />
           </h1>
-          <div className="text-[1rem] leading-[1.4rem] text-neutral-200">
+          <div className="text-justify text-[1rem] leading-[1.4rem] text-neutral-200">
             a full-stack developer from Saudi Arabia, I'm currently{" "}
             <p className="inline-block w-[98px] text-sm text-emerald-400">
               <TimeAgo />

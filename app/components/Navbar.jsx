@@ -61,7 +61,7 @@ export default function Navbar() {
           </motion.div>
         ))
       ) : (
-        <div className="min-h-[28px] w-full animate-pulse rounded-md bg-stone-900"></div>
+        <span className="min-h-[28px] w-full animate-pulse rounded-md bg-stone-900"></span>
       )}
     </nav>
   );
