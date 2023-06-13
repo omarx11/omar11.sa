@@ -32,7 +32,7 @@ export default function Discord({ id }) {
   const data = useLanyardWS(id);
   if (data === undefined)
     return (
-      <p className="ml-1 text-sm text-emerald-300">getting online status...</p>
+      <div className="h-4 w-36 animate-pulse rounded-sm bg-stone-700"></div>
     );
 
   if (data) {

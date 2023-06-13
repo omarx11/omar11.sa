@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import rgbDataURL from "./lib/rgbDataURL";
 import {
   getRepository,
   reposInfo,
@@ -34,6 +35,8 @@ export default async function HomePage() {
                   src={reposInfo.imageMain[index]}
                   width={640}
                   height={480}
+                  placeholder="blur"
+                  blurDataURL={rgbDataURL(237, 181, 6)}
                   style={reposInfo.imageStyle}
                   className="inset-0 w-full select-none rounded-md object-cover transition-transform drag-none group-hover:-translate-y-4"
                   alt="project-icon"
