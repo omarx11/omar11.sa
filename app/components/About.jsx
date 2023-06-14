@@ -1,9 +1,11 @@
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import Status from "./Status";
 import fs from "node:fs/promises";
 import { getPlaiceholder } from "plaiceholder";
 import TimeAgo from "../lib/useTimeAgo";
 import AboutMe from "./links/About";
+import { ContentImage } from "../components/content/ContentImage";
 
 export default async function About() {
   const avatar = await fs.readFile("./public/avatar.jpg");
@@ -11,14 +13,16 @@ export default async function About() {
   return (
     <>
       <section className="mb-6 flex flex-col items-center md:mb-0 md:flex-row md:items-start">
-        <Image
+        <ContentImage
           src="/avatar.jpg"
           width={128}
           height={128}
+          title={"omar face"}
           placeholder="blur"
           blurDataURL={base64}
-          className="h-32 w-32 select-none rounded-full bg-cover drag-none"
+          className="h-32 w-32 cursor-pointer select-none rounded-full bg-cover drag-none"
           alt="my-avatar"
+          priority
         />
         <div className="ml-0 mt-6 flex flex-col gap-2 md:ml-6 md:mt-0">
           <h1 className="items-center text-2xl font-bold">

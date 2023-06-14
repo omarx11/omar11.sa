@@ -12,12 +12,17 @@
   "dependencies": {
     "@tanstack/react-query": "^4.29.12",
     "autoprefixer": "10.4.14",
+    "clsx": "^1.2.1",
     "framer-motion": "^10.12.16",
     "next": "13.4.1",
     "plaiceholder": "^3.0.0",
     "postcss": "8.4.23",
     "react": "^18.2.0",
+    "react-18-image-lightbox": "^5.1.4",
+    "react-awesome-lightbox": "^1.8.1",
     "react-dom": "^18.2.0",
+    "react-photo-album": "^2.2.2",
+    "tailwind-merge": "^1.13.1",
     "tailwindcss": "3.3.2",
     "use-lanyard": "^1.4.4"
   },
