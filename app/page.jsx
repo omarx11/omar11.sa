@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import fs from "node:fs/promises";
 import { getPlaiceholder } from "plaiceholder";
+import ContentImage from "./components/content/ContentImage";
 import {
   getRepository,
   reposInfo,
@@ -37,21 +38,18 @@ export default async function HomePage() {
                 key={repo.id}
                 className="fade-in group flex flex-col rounded-md bg-neutral-900 hover:bg-neutral-800"
               >
-                <Link
-                  href={repo.homepage ? repo.homepage : "#"}
-                  className="relative h-44 w-full"
-                >
-                  <Image
+                <figure className="relative h-44 w-full">
+                  <ContentImage
                     src={reposInfo.imageMain[index]}
                     width={640}
                     height={480}
                     blurDataURL={placeholders[index]}
                     placeholder="blur"
                     style={reposInfo.imageStyle}
-                    className="inset-0 select-none object-cover transition-transform drag-none group-hover:-translate-y-4"
+                    className="inset-0 h-full w-full cursor-pointer rounded-2xl object-cover p-2 transition-transform drag-none group-hover:-translate-y-4"
                     alt="project-icon"
                   />
-                </Link>
+                </figure>
                 <div className="m-3">
                   <Link
                     href={repo.homepage ? repo.homepage : "#"}
@@ -74,7 +72,7 @@ export default async function HomePage() {
                     <div className="pointer-events-none flex select-none flex-row items-center gap-1 text-center text-xs">
                       <span>
                         <Image
-                          src="/icons/stargazers.svg"
+                          src="/static/icons/stargazers.svg"
                           width={14}
                           height={14}
                           className="select-none drag-none"
@@ -84,7 +82,7 @@ export default async function HomePage() {
                       </span>
                       <span>
                         <Image
-                          src="/icons/fork.svg"
+                          src="/static/icons/fork.svg"
                           width={14}
                           height={14}
                           className="select-none drag-none"
@@ -94,7 +92,7 @@ export default async function HomePage() {
                       </span>
                       <span>
                         <Image
-                          src="/icons/eye.svg"
+                          src="/static/icons/eye.svg"
                           width={14}
                           height={14}
                           className="select-none drag-none"

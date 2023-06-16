@@ -1,5 +1,6 @@
 "use client";
-import { useLanyardWS } from "use-lanyard";
+
+import { useLanyard } from "use-lanyard";
 
 function Status({ status, activities, className }) {
   const activitie =
@@ -29,7 +30,7 @@ px-1 text-sm text-neutral-300 opacity-0 transition-opacity group-hover:opacity-1
 }
 
 export default function Discord({ id }) {
-  const data = useLanyardWS(id);
+  const { data } = useLanyard(id);
   if (data === undefined)
     return (
       <span className="h-4 w-36 animate-pulse rounded-sm bg-stone-700"></span>

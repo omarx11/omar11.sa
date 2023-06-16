@@ -1,26 +1,26 @@
 import Image from "next/image";
-import dynamic from "next/dynamic";
 import Status from "./Status";
 import fs from "node:fs/promises";
 import { getPlaiceholder } from "plaiceholder";
 import TimeAgo from "../lib/useTimeAgo";
 import AboutMe from "./links/About";
-import { ContentImage } from "../components/content/ContentImage";
+import ContentImage from "../components/content/ContentImage";
 
 export default async function About() {
-  const avatar = await fs.readFile("./public/avatar.jpg");
+  const avatar = await fs.readFile("./public/static/images/avatar.jpg");
   const { base64 } = await getPlaiceholder(avatar);
   return (
     <>
       <section className="mb-6 flex flex-col items-center md:mb-0 md:flex-row md:items-start">
         <ContentImage
-          src="/avatar.jpg"
+          src="/static/images/avatar.jpg"
           width={128}
           height={128}
-          title={"omar face"}
+          title={"OMAR FACE (Random), It will be chenge later."}
           placeholder="blur"
           blurDataURL={base64}
-          className="h-32 w-32 cursor-pointer select-none rounded-full bg-cover drag-none"
+          quality={100}
+          className="h-32 w-32 cursor-pointer rounded-full bg-cover drag-none"
           alt="my-avatar"
           priority
         />
@@ -29,7 +29,7 @@ export default async function About() {
             {/* Hey, I'm Omar Abdulaziz */}
             Hi, I'm Omar Abdulaziz
             <Image
-              src="/icons/1f44b-1f3fb.svg"
+              src="/static/icons/1f44b-1f3fb.svg"
               width={24}
               height={24}
               className="absolute ml-2 inline-block origin-[70%_70%] animate-wave select-none pt-[2px] drag-none"

@@ -14,7 +14,7 @@ export default function Status() {
         <li>
           <div className="flex items-start">
             <Image
-              src="/icons/location.svg"
+              src="/static/icons/location.svg"
               width={19}
               height={19}
               className="h-[19px] w-[19px] select-none drag-none"

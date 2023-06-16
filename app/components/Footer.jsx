@@ -23,7 +23,7 @@ export default function Footer() {
           className="underline-offset-4 hover:underline"
         >
           <Image
-            src="/icons/license.svg"
+            src="/static/icons/license.svg"
             width={16}
             height={16}
             className="select-none drag-none"

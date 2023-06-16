@@ -5,28 +5,28 @@ import { mediaInfo } from "@/app/data/media";
 export default function Media() {
   return (
     <div className="flex w-full flex-row flex-wrap items-center justify-between pl-0 pt-5 md:pl-3">
-      <ul className="flex flex-row gap-3">
+      <div className="flex flex-row gap-3">
         {mediaInfo.map((media, index) => (
-          <li
+          <Link
             key={index}
+            href={media.href}
+            target="_blank"
             className="rounded-full bg-stone-900 p-[6px] hover:bg-stone-800"
           >
-            <Link href={media.href}>
-              <Image
-                src={media.src}
-                width={20}
-                height={20}
-                className="select-none drag-none"
-                alt={media.alt}
-              />
-            </Link>
-          </li>
+            <Image
+              src={media.src}
+              width={18}
+              height={18}
+              className="select-none drag-none"
+              alt={media.alt}
+            />
+          </Link>
         ))}
-      </ul>
+      </div>
       <div className="mr-2 flex flex-row items-center gap-2">
-        <Link href="#">
+        <Link href="#" target="_blank">
           <Image
-            src="./icons/statuspages.svg"
+            src="./static/icons/statuspages.svg"
             width={24}
             height={24}
             className="select-none drag-none"
@@ -35,7 +35,7 @@ export default function Media() {
         </Link>
         <div>
           <Image
-            src="./icons/settings.svg"
+            src="./static/icons/settings.svg"
             width={24}
             height={24}
             className="select-none drag-none"

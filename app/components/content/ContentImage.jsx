@@ -3,10 +3,14 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Lightbox from "react-18-image-lightbox";
+import useMediaQuery from "@/app/lib/useMediaQuery";
+import dynamic from "next/dynamic";
 import "react-18-image-lightbox/style.css";
 
-export const ContentImage = ({ src, alt, ...props }) => {
+const ContentImage = ({ src, alt, ...props }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const isMatch = useMediaQuery("(min-width: 768px)");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -39,6 +43,7 @@ export const ContentImage = ({ src, alt, ...props }) => {
           imageTitle={props.title}
           onCloseRequest={() => setIsOpen(false)}
           animationDuration={150}
+          imagePadding={isMatch ? 200 : 10}
           reactModalStyle={{
             maxWidth: "500px",
           }}
@@ -47,3 +52,5 @@ export const ContentImage = ({ src, alt, ...props }) => {
     </>
   );
 };
+
+export default dynamic(() => Promise.resolve(ContentImage));

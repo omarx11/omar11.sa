@@ -1,13 +1,10 @@
 export const reposInfo = {
-  imageMain: ["/steamid.png", "/chatin.png", "/omar11.jpg", "/pirateadv.webp"],
-  imageStyle: {
-    position: "absolute",
-    height: "100%",
-    width: "100%",
-    color: "transparent",
-    padding: "8px",
-    borderRadius: "0.8rem",
-  },
+  imageMain: [
+    "/static/images/steamid.png",
+    "/static/images/chatin.png",
+    "/static/images/omar11.jpg",
+    "/static/images/pirateadv.png",
+  ],
 };
 
 export const manualRepository = [
@@ -26,14 +23,12 @@ export const manualRepository = [
 
 export function setRepoLanguageIcon(repo) {
   if (repo === "JavaScript") {
-    return "/icons/javascript.svg";
+    return "/static/icons/javascript.svg";
   } else if (repo === "HTML") {
-    return "/icons/html.svg";
+    return "/static/icons/html.svg";
   } else if (repo === "CSS") {
-    return "/icons/css.svg";
-  } else {
-    return "null";
-  }
+    return "/static/icons/css.svg";
+  } else return "";
 }
 
 export const getRepository = async () => {
