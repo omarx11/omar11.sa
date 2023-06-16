@@ -1,0 +1,38 @@
+{
+  "theme_color": "#171717",
+  "background_color": "#b6d2ff",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "author": "Omar Abdulaziz",
+  "name": "omar11.sa",
+  "app_name": "omar11.sa",
+  "short_name": "Omar",
+  "description": "Personal Website, Online Portfolio, Built On Top Of NEXT.js, An Online Space For Omar To Share His Knowledge And Experience.",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
