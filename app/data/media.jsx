@@ -1,21 +1,23 @@
+import config from "@/app/data/config";
+
 export const mediaInfo = [
   {
-    href: "mailto:mail@omar11.sa",
+    href: `mailto:${config.email}`,
     src: "/static/icons/email.svg",
     alt: "email-icon",
   },
   {
-    href: "https://twitter.com/dis_x0",
+    href: config.twitter,
     src: "/static/icons/twitter.svg",
     alt: "twitter-icon",
   },
   {
-    href: "https://discordredirect.discordsafe.com/users/582305812903493663",
+    href: `https://discordredirect.discordsafe.com/users/${config.discordId}`,
     src: "/static/icons/discord.svg",
     alt: "discord-icon",
   },
   {
-    href: "https://github.com/omarx11",
+    href: config.github,
     src: "/static/icons/github.svg",
     alt: "github-icon",
   },

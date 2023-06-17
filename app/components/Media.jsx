@@ -24,24 +24,13 @@ export default function Media() {
         ))}
       </div>
       <div className="mr-2 flex flex-row items-center gap-2">
-        <Link href="#" target="_blank">
-          <Image
-            src="./static/icons/statuspages.svg"
-            width={24}
-            height={24}
-            className="select-none drag-none"
-            alt="status-icon"
-          />
-        </Link>
-        <div>
-          <Image
-            src="./static/icons/settings.svg"
-            width={24}
-            height={24}
-            className="select-none drag-none"
-            alt="settings-icon"
-          />
-        </div>
+        <Image
+          src="./static/icons/settings.svg"
+          width={24}
+          height={24}
+          className="select-none drag-none"
+          alt="settings-icon"
+        />
       </div>
     </div>
   );

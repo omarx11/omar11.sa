@@ -2,24 +2,6 @@
 @tailwind components;
 @tailwind utilities;
  
-/* Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
-  width: 0px;
-}
-*::-webkit-scrollbar-track {
-  background: var(--primary);
-  border-radius: 5px;
-}
-*::-webkit-scrollbar-thumb {
-  background-color: var(--secondary);
-  border-radius: 15px;
-  border: 3px solid var(--primary);
-}
-*::-webkit-scrollbar-thumb:hover {
-  background-color: var(--hoverSecondary);
-  border-radius: 15px;
-  border: 3px solid var(--primary);
-}
 :root {
   color-scheme: light;
   --foreground-rgb: 0, 0, 0;
@@ -34,8 +16,18 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+
 * {
   box-sizing: border-box;
+}
+
+*::-webkit-scrollbar {
+  width: 0px;
+}
+
+::selection {
+  background-color: rgb(4 120 87);
+  color: white;
 }
 
 .fade-out {
@@ -44,7 +36,6 @@
   animation-fill-mode: both;
   animation-timing-function: cubic-bezier(0.17, 0.64, 0.59, 0.96);
 }
-
 .fade-in > * {
   animation-name: fade-in;
   animation-duration: 0.3s;
@@ -68,7 +59,6 @@
     transform: translateY(0.5rem);
   }
 }
-
 @keyframes fade-in {
   from {
     opacity: 0;

@@ -1,3 +1,22 @@
+import config from "@/app/data/config";
+
+export const metadata = {
+  title: "License",
+  description: `License for ${config.authorFull} personal website`,
+  keywords: [`${config.authorFull} License`],
+  openGraph: {
+    title: "License",
+    description: config.description,
+    url: `${config.siteUrl}/license`,
+    images: [
+      {
+        url: config.ogImage,
+      },
+    ],
+    type: "website",
+  },
+};
+
 export default function License() {
   return (
     <>
@@ -8,7 +27,7 @@ export default function License() {
       <div className="w-full bg-neutral-900 p-3 md:w-5/6">
         <p className="text-stone-300">
           MIT License <br />
-          <br /> Copyright (c) {new Date().getFullYear()} Omar Abdulaziz
+          <br /> Copyright (c) {new Date().getFullYear()} {config.authorFull}
           <br />
           <br /> Permission is hereby granted, free of charge, to any person
           obtaining a copy of this software and associated documentation files
@@ -34,7 +53,7 @@ export default function License() {
         <p className="text-stone-500">
           Note: Anyone is free to take inspiration from this site as long as you
           give credit to the ordinal creator, credits should include my full
-          name (Omar Abdulaziz) and a link to my site (omar11.sa).{" "}
+          name ({config.authorFull}) and a link to my site ({config.siteName}).{" "}
           <span className="text-rose-600">❤</span>
         </p>
       </div>

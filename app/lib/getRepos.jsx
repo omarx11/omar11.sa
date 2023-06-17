@@ -42,7 +42,7 @@ export const getRepository = async () => {
     });
     if (!response.ok) throw new Error("Failed to fetch data");
     const repos = await response.json();
-    // added Promise await just for show cool loading animetion
+    // Promise await just for show cool loading animetion
     // await new Promise((resolve) => setTimeout(resolve, 2000));
     return repos
       .filter((d) => !filteredRepos.includes(d.id))
