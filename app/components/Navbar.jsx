@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useNavContext } from "@/app/context/Navigation";
+import { useNavContext } from "@/app/components/context/navigation";
 import { linksInfo } from "../data/navigation";
 import * as motion from "../lib/useMoition";
 import { useEffect, useState } from "react";
