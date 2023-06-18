@@ -4,11 +4,27 @@ import fs from "node:fs/promises";
 import { getPlaiceholder } from "plaiceholder";
 import ContentImage from "./components/content/ContentImage";
 import {
-  getRepository,
   reposInfo,
   manualRepository,
   setRepoLanguageIcon,
 } from "./lib/getRepos";
+
+const getRepository = async () => {
+  const filteredRepos = [386408964, 601036020];
+  const response = await fetch("https://api.github.com/users/omarx11/repos", {
+    headers: {
+      Accept: "application/vnd.github+json",
+      Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+    },
+  });
+  if (!response.ok) throw new Error("Failed to fetch data");
+  const repos = await response.json();
+  // Promise await just for show cool loading animetion
+  // await new Promise((resolve) => setTimeout(resolve, 2000));
+  return repos
+    .filter((d) => !filteredRepos.includes(d.id))
+    .sort((a, b) => a.id - b.id);
+};
 
 export default async function HomePage() {
   const repos = await getRepository();
