@@ -10,6 +10,7 @@ import config from "@/app/data/config";
 const recursive = Recursive({ subsets: ["latin"] });
 
 export const metadata = {
+  metadataBase: new URL(config.siteUrl),
   title: {
     default: config.authorFull,
     template: `%s - ${config.authorFull}`,
