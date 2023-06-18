@@ -12,7 +12,6 @@ import {
 
 export default async function HomePage() {
   const repos = await getRepository();
-  repos.push(...manualRepository);
 
   const placeholders = await Promise.all(
     reposInfo.imageMain.map(async (url) => {
@@ -21,6 +20,7 @@ export default async function HomePage() {
       return base64;
     })
   );
+  repos.push(...manualRepository);
 
   return (
     <>

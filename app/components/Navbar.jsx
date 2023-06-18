@@ -2,22 +2,23 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useNavContext } from "@/app/components/context/navigation";
+import { useNavContext } from "@/app/components/context/Navigation";
 import { linksInfo } from "../data/navigation";
-import * as motion from "../lib/useMoition";
+import { motion } from "framer-motion";
+// import * as motion from "../lib/useMoition";
 import { useEffect, useState } from "react";
 
 export default function Navbar() {
-  const [readyComponent, setReadyComponent] = useState(false);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    setReadyComponent(true);
+    setReady(true);
   }, []);
 
   const { page, setPage, color, setColor } = useNavContext();
   return (
     <nav className="flex min-h-[28px] select-none flex-wrap gap-4 font-bold text-stone-300">
-      {readyComponent ? (
+      {ready ? (
         linksInfo.map((link, index) => (
           <motion.div
             key={index}

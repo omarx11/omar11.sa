@@ -5,16 +5,16 @@ import { linksInfo } from "@/app/data/navigation";
 
 const NavContext = createContext();
 
-const NavProvider = ({ children }) => {
+export const NavProvider = ({ children }) => {
   const session =
     typeof window !== "undefined"
-      ? JSON.parse(window.sessionStorage.getItem("page")) ?? 0
+      ? JSON.parse(sessionStorage.getItem("page")) ?? 0
       : 0;
   const [page, setPage] = useState(session);
   const [color, setColor] = useState(linksInfo[session].color);
 
   useEffect(() => {
-    window.sessionStorage.setItem("page", page);
+    sessionStorage.setItem("page", page);
   }, [page]);
 
   return (
@@ -23,7 +23,5 @@ const NavProvider = ({ children }) => {
     </NavContext.Provider>
   );
 };
-
-export default NavProvider;
 
 export const useNavContext = () => useContext(NavContext);
