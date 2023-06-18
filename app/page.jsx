@@ -38,13 +38,14 @@ export default async function HomePage() {
                 key={repo.id}
                 className="fade-in group flex flex-col rounded-md bg-neutral-900 hover:bg-neutral-800"
               >
-                <figure className="relative h-44 w-full">
+                <figure className="relative h-44">
                   <ContentImage
                     src={reposInfo.imageMain[index]}
-                    width={640}
+                    width={858}
                     height={480}
-                    blurDataURL={placeholders[index]}
                     placeholder="blur"
+                    blurDataURL={placeholders[index]}
+                    quality={100}
                     style={reposInfo.imageStyle}
                     className="inset-0 h-full w-full cursor-pointer rounded-2xl object-cover p-2 transition-transform drag-none group-hover:-translate-y-4"
                     alt="project-icon"

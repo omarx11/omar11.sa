@@ -15,9 +15,9 @@ export default async function About() {
       <section className="mb-6 flex flex-col items-center md:mb-0 md:flex-row md:items-start">
         <ContentImage
           src="/static/images/avatar.png"
-          width={1025}
+          width={767}
           height={767}
-          title={"Guts face from Anime called (Berserk)."}
+          title={"Guts Face, from Anime called (Berserk)."}
           placeholder="blur"
           blurDataURL={base64}
           quality={100}

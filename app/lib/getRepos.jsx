@@ -1,9 +1,9 @@
 export const reposInfo = {
   imageMain: [
-    "/static/images/steamid.png",
-    "/static/images/chatin.png",
-    "/static/images/omar11.jpg",
-    "/static/images/pirateadv.png",
+    "/static/images/steamid.webp",
+    "/static/images/chatin.webp",
+    "/static/images/omar11.webp",
+    "/static/images/pirateadv.webp",
   ],
 };
 
