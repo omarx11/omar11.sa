@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, createContext, useState, useContext } from "react";
-import { linksInfo } from "../data/navigation";
+import { linksInfo } from "@/app/data/navigation";
 
 const NavContext = createContext();
 

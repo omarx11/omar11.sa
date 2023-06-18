@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { linksInfo } from "@/app/data/navigation";
 import { useRouter } from "next/navigation";
-import { useNavContext } from "../../context/navigation";
+import { useNavContext } from "@/app/context/navigation";
 
 export default function AboutMe() {
   const router = useRouter();
