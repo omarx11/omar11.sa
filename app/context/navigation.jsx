@@ -5,7 +5,7 @@ import { linksInfo } from "@/app/data/navigation";
 
 const NavContext = createContext();
 
-export const NavProvider = ({ children }) => {
+const NavProvider = ({ children }) => {
   const session =
     typeof window !== "undefined"
       ? JSON.parse(sessionStorage.getItem("page")) ?? 0
@@ -23,5 +23,7 @@ export const NavProvider = ({ children }) => {
     </NavContext.Provider>
   );
 };
+
+export default NavProvider;
 
 export const useNavContext = () => useContext(NavContext);

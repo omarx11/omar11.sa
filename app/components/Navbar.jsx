@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useNavContext } from "@/app/components/context/Navigation";
+import { useNavContext } from "@/app/context/navigation";
 import { linksInfo } from "../data/navigation";
 import { motion } from "framer-motion";
 // import * as motion from "../lib/useMoition";
