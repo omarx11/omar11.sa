@@ -6,10 +6,9 @@ import TimeAgo from "../lib/useTimeAgo";
 import AboutMe from "./links/About";
 import ContentImage from "../components/content/ContentImage";
 import config from "@/app/data/config";
-import myAvatar from "@/public/static/images/avatar.png";
 
 export default async function About() {
-  const avatar = await fs.readFile(myAvatar);
+  const avatar = await fs.readFile("./public/static/images/avatar.png");
   const { base64 } = await getPlaiceholder(avatar);
   return (
     <>
