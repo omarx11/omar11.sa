@@ -1,9 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // experimental: {
+  //   serverActions: true,
+  // },
   // i18n: { locales: ["en-US"], defaultLocale: "en-US" },
-  images: {
-    domains: ['']
-  }
-}
+  // images: {
+  //   domains: [""],
+  // },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

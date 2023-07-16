@@ -1,32 +1,25 @@
 "use client";
 
 import { useLanyard } from "use-lanyard";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@radix-ui/react-hover-card";
 
-function Status({ status, activities, className }) {
-  const activitie =
-    activities === undefined ? "on desktop" : `On: ${activities}`;
-
+function Colors({ status, className }) {
   let color = "";
   if (status == "online") {
-    color = `bg-green-400 border-green-300 ${className}`;
+    color = `bg-[#1db954] animate-online border-green-300 ${className}`;
   } else if (status == "idle") {
     color = `bg-yellow-400 border-yellow-300 ${className}`;
   } else if (status == "offline") {
-    color = `bg-gray-400 border-gray-300 ${className}`;
+    color = `bg-transparent border-[3px] border-stone-300 ${className}`;
   } else if (status == "dnd") {
     color = `bg-rose-400 border-rose-300 ${className}`;
   }
 
-  return (
-    <div className={color}>
-      <div
-        className="pointer-events-none absolute left-1/2 w-max -translate-x-1/2 -translate-y-8 rounded-md bg-gray-800 
-px-1 text-sm text-neutral-300 opacity-0 transition-opacity group-hover:opacity-100"
-      >
-        {activitie}
-      </div>
-    </div>
-  );
+  return <span className={color}></span>;
 }
 
 export default function Discord({ id }) {
@@ -46,14 +39,41 @@ export default function Discord({ id }) {
         data.discord_status + "."
       );
 
+    let activitie = data.activities[0]?.name;
+    const playing =
+      activitie === undefined ? "on desktop" : `Playing: ${activitie}`;
+
     return (
       <>
-        <Status
-          status={data.discord_status}
-          activities={data.activities[0]?.name}
-          className="group relative ml-1 flex h-3 w-3 cursor-pointer justify-center rounded-full border-2 ring-4 ring-slate-500/50"
-        ></Status>
-        <p>currently {status}</p>
+        <HoverCard openDelay={0} closeDelay={0}>
+          <HoverCardTrigger
+            href="/"
+            className="flex select-none items-center gap-2"
+          >
+            <Colors
+              status={data.discord_status}
+              className="relative mx-[2px] h-3 w-3 rounded-full border-2"
+            />
+            <p>currently {status}</p>
+          </HoverCardTrigger>
+          <HoverCardContent
+            sideOffset={0}
+            align="start"
+            className="w-60 rounded-md bg-stone-700 p-2"
+          >
+            <div className="space-y-1 text-sm">
+              <h4 className="font-semibold">Omar#0135</h4>
+              {data.discord_status !== "offline" ? (
+                <>
+                  <p>{playing}</p>
+                  <div className="pt-2 text-xs">for 21 minutes</div>
+                </>
+              ) : (
+                <p>Maybe he's sleeping 💤 or outside his room 🚪</p>
+              )}
+            </div>
+          </HoverCardContent>
+        </HoverCard>
       </>
     );
   } else return <></>;

@@ -19,8 +19,8 @@ export default function Transition({ children }) {
     <div
       className={
         currentChild !== children
-          ? "fade-out mb-8 mt-12 flex-1 overflow-visible text-base"
-          : "fade-in mb-8 mt-12 flex-1 overflow-visible text-base"
+          ? "fade-out my-9 flex-1 overflow-visible"
+          : "fade-in my-9 flex-1 overflow-visible"
       }
     >
       {currentChild}

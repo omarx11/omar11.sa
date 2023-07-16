@@ -1,3 +1,5 @@
+// rename this to master
+
 const config = {
   author: "Omar",
   authorFull: "Omar Abdulaziz",

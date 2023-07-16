@@ -10,17 +10,19 @@ export default function AboutMe() {
   const aboutPage = linksInfo.filter((e) => e.name == "About")[0];
   const { setPage, setColor } = useNavContext();
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    setColor(aboutPage.color);
+    setPage(aboutPage.id);
+    router.replace(aboutPage.href);
+  };
+
   return (
     <Link
       href="/about"
       prefetch={false}
       className="text-zinc-400 underline-offset-2 hover:underline"
-      onClick={(e) => {
-        e.preventDefault();
-        setColor(aboutPage.color);
-        setPage(aboutPage.id);
-        router.replace(aboutPage.href);
-      }}
+      onClick={handleClick}
     >
       about me
     </Link>

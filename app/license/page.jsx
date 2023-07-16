@@ -1,4 +1,5 @@
 import config from "@/app/data/config";
+import Heading from "../components/content/Heading";
 
 export const metadata = {
   title: "License",
@@ -20,12 +21,20 @@ export const metadata = {
 export default function License() {
   return (
     <>
-      <h1 className="mb-6 text-4xl font-bold text-stone-400">
-        <span className="text-emerald-500"># </span>
-        License 📜
-      </h1>
-      <div className="w-full bg-neutral-900 p-3 md:w-5/6">
-        <p className="text-stone-300">
+      <Heading name="License 📜" id="#license" />
+      <div className="my-6 w-full border-l-4 border-emerald-900 bg-gradient-to-r from-stone-900 pl-4 opacity-60 md:w-[60%]">
+        <p className="text-stone-400">
+          Note: Anyone is free to take inspiration from this site as long as you
+          give credit to the ordinal creator, credits should include my full
+          name ({config.authorFull}) and a link to my site ({config.siteName}).{" "}
+          <span className="text-rose-600">❤</span>
+        </p>
+      </div>
+      <div
+        className="w-full border-2 border-neutral-800 bg-neutral-900 p-4 md:w-5/6"
+        id="license"
+      >
+        <p className="text-justify text-stone-400">
           MIT License <br />
           <br /> Copyright (c) {new Date().getFullYear()} {config.authorFull}
           <br />
@@ -47,14 +56,6 @@ export default function License() {
           CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
           TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
           SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-        </p>
-      </div>
-      <div className="mt-12 w-full border-l-4 border-emerald-900 pl-2 opacity-60 md:w-[60%]">
-        <p className="text-stone-500">
-          Note: Anyone is free to take inspiration from this site as long as you
-          give credit to the ordinal creator, credits should include my full
-          name ({config.authorFull}) and a link to my site ({config.siteName}).{" "}
-          <span className="text-rose-600">❤</span>
         </p>
       </div>
     </>

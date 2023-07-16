@@ -10,19 +10,19 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "autoprefixer": "10.4.14",
+    "@fancyapps/ui": "^5.0.20",
+    "@radix-ui/react-hover-card": "^1.0.6",
+    "autoprefixer": "^10.4.14",
     "framer-motion": "^10.12.16",
-    "next": "13.4.1",
-    "plaiceholder": "^3.0.0",
-    "postcss": "8.4.23",
+    "next": "^13.4.10",
+    "postcss": "^8.4.24",
     "react": "^18.2.0",
-    "react-18-image-lightbox": "^5.1.4",
     "react-dom": "^18.2.0",
-    "tailwindcss": "3.3.2",
+    "tailwindcss": "^3.3.2",
     "use-lanyard": "^1.4.4"
   },
   "devDependencies": {
-    "prettier-plugin-tailwindcss": "^0.3.0",
-    "sass": "^1.63.3"
+    "prettier-plugin-tailwindcss": "^0.4.1",
+    "sass": "^1.63.6"
   }
 }
