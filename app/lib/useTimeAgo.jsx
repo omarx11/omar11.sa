@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import config from "@/app/data/config";
+import { config } from "@/app/data/config";
 
 const getYearsAgo = (date) => {
   let timestamp = new Date().getTime() - date.getTime();

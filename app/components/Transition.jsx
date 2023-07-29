@@ -9,10 +9,10 @@ export default function Transition({ children }) {
     if (currentChild === children) return;
     setCurrentChild(children);
 
-    // const id = setTimeout(() => {
-    //   setCurrentChild(children);
-    // }, 200);
-    // return () => clearTimeout(id);
+    const id = setTimeout(() => {
+      setCurrentChild(children);
+    }, 200);
+    return () => clearTimeout(id);
   }, [children]);
 
   return (

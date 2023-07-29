@@ -10,19 +10,24 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/supabase-adapter": "^0.1.2",
     "@fancyapps/ui": "^5.0.20",
     "@radix-ui/react-hover-card": "^1.0.6",
+    "@supabase/supabase-js": "^2.31.0",
+    "@tanstack/react-query": "^4.32.0",
     "autoprefixer": "^10.4.14",
-    "framer-motion": "^10.12.16",
-    "next": "^13.4.10",
-    "postcss": "^8.4.24",
+    "axios": "^1.4.0",
+    "framer-motion": "^10.15.0",
+    "next": "^13.4.12",
+    "next-auth": "^4.22.3",
+    "postcss": "^8.4.27",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tailwindcss": "^3.3.2",
+    "tailwindcss": "^3.3.3",
     "use-lanyard": "^1.4.4"
   },
   "devDependencies": {
     "prettier-plugin-tailwindcss": "^0.4.1",
-    "sass": "^1.63.6"
+    "sass": "^1.64.1"
   }
 }

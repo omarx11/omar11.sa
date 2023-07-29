@@ -1,11 +1,10 @@
 "use client";
-
-import { useEffect, createContext, useState, useContext } from "react";
+import { useEffect, createContext, useState } from "react";
 import { linksInfo } from "@/app/data/navigation";
 
-const NavContext = createContext();
+export const StatementContext = createContext();
 
-const Provider = ({ children }) => {
+export const StatementProvider = ({ children }) => {
   const session =
     typeof window !== "undefined"
       ? JSON.parse(sessionStorage.getItem("page")) ?? 0
@@ -19,14 +18,10 @@ const Provider = ({ children }) => {
   }, [page]);
 
   return (
-    <NavContext.Provider
+    <StatementContext.Provider
       value={{ page, setPage, color, setColor, comments, setComments }}
     >
       {children}
-    </NavContext.Provider>
+    </StatementContext.Provider>
   );
 };
-
-export default Provider;
-
-export const useNavContext = () => useContext(NavContext);

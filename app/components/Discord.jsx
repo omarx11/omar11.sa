@@ -48,11 +48,11 @@ export default function Discord({ id }) {
         <HoverCard openDelay={0} closeDelay={0}>
           <HoverCardTrigger
             href="/"
-            className="flex select-none items-center gap-2"
+            className="flex select-none items-center gap-2 pl-[1px]"
           >
             <Colors
               status={data.discord_status}
-              className="relative mx-[2px] h-3 w-3 rounded-full border-2"
+              className="relative mx-[2px] h-3 w-3 rounded-full"
             />
             <p>currently {status}</p>
           </HoverCardTrigger>

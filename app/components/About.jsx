@@ -1,12 +1,12 @@
 import Image from "next/image";
+import Link from "next/link";
 import Status from "./Status";
 import TimeAgo from "../lib/useTimeAgo";
 import AboutMe from "./links/About";
 import FancyImage from "./content/FancyImage";
-import config from "@/app/data/config";
-import Link from "next/link";
+import { config } from "@/app/data/config";
 
-export default async function About() {
+export default function About() {
   return (
     <>
       <section className="mb-6 flex flex-col items-center md:mb-0 md:flex-row md:items-start">
@@ -16,7 +16,7 @@ export default async function About() {
           height={767}
           quality={100}
           className="h-32 w-32 cursor-pointer rounded-full border-4 border-emerald-600/75 bg-cover drag-none"
-          caption={"Guts Face, from anime (Berserk)."}
+          caption={"Guts Face, from (Berserk)."}
           alt="avatar"
           priority
         />
@@ -32,11 +32,11 @@ export default async function About() {
             />
           </h1>
           <div className="w-full text-justify text-[1rem] leading-[1.4rem] text-neutral-200">
-            a full-stack developer from Saudi Arabia, I'm currently{" "}
+            A self-taught web developer from Saudi Arabia, I'm currently{" "}
             <p className="inline-block w-[98px] text-sm text-emerald-400">
               <TimeAgo />
             </p>{" "}
-            year old, studying in the final stage of College education at{" "}
+            years old, Studying in the final stage of College education at{" "}
             <Link
               href="https://tvtc.gov.sa/en/Pages/default.aspx"
               target="_blank"
@@ -44,8 +44,8 @@ export default async function About() {
             >
               TVTC
             </Link>
-            , I love developing with javascript language, making websites just
-            like this one, and you can check out more <AboutMe /> .
+            . I love developing with javascript and making websites just like
+            this one. you can check out more <AboutMe /> ✒️
           </div>
         </div>
       </section>

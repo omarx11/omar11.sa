@@ -1,13 +1,13 @@
 "use client";
-
 import Link from "next/link";
 import Image from "next/image";
-import { useNavContext } from "@/app/context/navigation";
-import { linksInfo } from "../data/navigation";
+import { StatementContext } from "@/app/context/statement";
+import { useContext } from "react";
 import { motion } from "framer-motion";
+import { linksInfo } from "../data/navigation";
 
 export default function Navbar() {
-  const { page, setPage, color, setColor } = useNavContext();
+  const { page, setPage, color, setColor } = useContext(StatementContext);
   return (
     <nav className="fade-in flex min-h-[28px] select-none flex-wrap gap-4 font-bold text-stone-300">
       {linksInfo.map((link, index) => (

@@ -1,4 +1,4 @@
-import config from "@/app/data/config";
+import { config } from "@/app/data/config";
 
 export const mediaInfo = [
   {

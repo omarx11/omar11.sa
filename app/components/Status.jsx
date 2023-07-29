@@ -1,6 +1,6 @@
 import Media from "./Media";
 import Discord from "./Discord";
-import config from "@/app/data/config";
+import { config } from "@/app/data/config";
 
 export default function Status() {
   return (

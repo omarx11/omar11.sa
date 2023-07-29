@@ -4,8 +4,8 @@ import dynamic from "next/dynamic";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import Transition from "./components/Transition";
-import NavProvider from "@/app/context/navigation";
-import config from "@/app/data/config";
+import Providers from "./components/Providers";
+import { config } from "@/app/data/config";
 
 const Navbar = dynamic(() => import("./components/Navbar"), {
   loading: () => (
@@ -23,7 +23,13 @@ export const metadata = {
     template: `%s - ${config.authorFull}`,
   },
   description: config.descriptionFull,
-  keywords: config.keywords,
+  keywords: [
+    "Omar Abdulaziz",
+    "Omar Website",
+    "Omar Portfolio",
+    "omar11",
+    "omar11.sa",
+  ],
   authors: { name: config.author },
   creator: config.authorFull,
   icons: {
@@ -56,8 +62,8 @@ export default function RootLayout({ children }) {
       <body
         className={`${recursive.className} flex min-h-screen justify-center`}
       >
-        <NavProvider>
-          <main className="mx-3 flex max-w-5xl flex-col">
+        <main className="mx-3 flex max-w-5xl flex-col">
+          <Providers>
             <header className="h-12 md:h-24"></header>
             <About />
             <hr className="my-4 border-t-8 border-neutral-900" />
@@ -65,8 +71,8 @@ export default function RootLayout({ children }) {
             <Transition>{children}</Transition>
             <hr className="h-[1px] w-full border-0 bg-stone-800" />
             <Footer />
-          </main>
-        </NavProvider>
+          </Providers>
+        </main>
       </body>
     </html>
   );

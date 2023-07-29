@@ -1,4 +1,4 @@
-import config from "@/app/data/config";
+import { config } from "@/app/data/config";
 import Heading from "../components/content/Heading";
 
 export const metadata = {
@@ -18,18 +18,16 @@ export const metadata = {
   },
 };
 
-export default function License() {
+export default function LicensePage() {
   return (
     <>
-      <Heading name="License 📜" id="#license" />
-      <div className="my-6 w-full border-l-4 border-emerald-900 bg-gradient-to-r from-stone-900 pl-4 opacity-60 md:w-[60%]">
-        <p className="text-stone-400">
-          Note: Anyone is free to take inspiration from this site as long as you
-          give credit to the ordinal creator, credits should include my full
-          name ({config.authorFull}) and a link to my site ({config.siteName}).{" "}
-          <span className="text-rose-600">❤</span>
-        </p>
-      </div>
+      <Heading name="License" emoji="📜" target="#license" />
+      <h3 className="my-6 w-full border-l-4 border-emerald-900 bg-gradient-to-r from-stone-900 pl-4 text-stone-400 opacity-60 md:w-[60%]">
+        Note: Anyone is free to take inspiration from this site as long as you
+        give credit to the ordinal creator, credits should include my full name
+        ({config.authorFull}) and a link to my site ({config.siteName}).{" "}
+        <span className="text-rose-600">❤</span>
+      </h3>
       <div
         className="w-full border-2 border-neutral-800 bg-neutral-900 p-4 md:w-5/6"
         id="license"

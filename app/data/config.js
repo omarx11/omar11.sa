@@ -1,6 +1,6 @@
 // rename this to master
 
-const config = {
+export const config = {
   author: "Omar",
   authorFull: "Omar Abdulaziz",
   age: "10/12/1999",
@@ -14,14 +14,5 @@ const config = {
   description: "Omar personal website",
   descriptionFull:
     "Personal Website, Online Portfolio, Built On Top Of NEXT.js, An Online Space For Omar To Share His Knowledge And Experience.",
-  keywords: [
-    "Omar Abdulaziz",
-    "Omar Website",
-    "Omar Portfolio",
-    "omar11",
-    "omar11.sa",
-  ],
   ogImage: "https://avatars.githubusercontent.com/u/87499333?s=240&v=4",
 };
-
-export default config;
