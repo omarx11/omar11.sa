@@ -1,28 +1,21 @@
 import "./globals.scss";
 import { Recursive } from "next/font/google";
-import dynamic from "next/dynamic";
+import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import Transition from "./components/Transition";
 import Providers from "./components/Providers";
-import { config } from "@/app/data/config";
-
-const Navbar = dynamic(() => import("./components/Navbar"), {
-  loading: () => (
-    <span className="min-h-[28px] w-full animate-pulse rounded-md bg-stone-900"></span>
-  ),
-  ssr: false,
-});
+import { author } from "@/app/config/meta";
 
 const recursive = Recursive({ subsets: ["latin"] });
 
 export const metadata = {
-  metadataBase: new URL(config.siteUrl),
+  metadataBase: new URL(author.siteUrl),
   title: {
-    default: config.authorFull,
-    template: `%s - ${config.authorFull}`,
+    default: author.fullName,
+    template: `%s - ${author.fullName}`,
   },
-  description: config.descriptionFull,
+  description: author.descriptionFull,
   keywords: [
     "Omar Abdulaziz",
     "Omar Website",
@@ -30,8 +23,8 @@ export const metadata = {
     "omar11",
     "omar11.sa",
   ],
-  authors: { name: config.author },
-  creator: config.authorFull,
+  authors: { name: author.name },
+  creator: author.fullName,
   icons: {
     icon: ["/favicon.ico"],
   },
@@ -41,11 +34,11 @@ export const metadata = {
   ],
   openGraph: {
     title: "Home",
-    description: config.description,
-    url: config.siteUrl,
+    description: author.description,
+    url: author.siteUrl,
     images: [
       {
-        url: config.ogImage,
+        url: author.ogImage,
       },
     ],
     type: "website",
@@ -55,12 +48,9 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      className="tracking min-h-screen overflow-x-hidden scroll-smooth antialiased"
-    >
+    <html lang="en" className="scroll-smooth">
       <body
-        className={`${recursive.className} flex min-h-screen justify-center`}
+        className={`${recursive.className} flex min-h-screen justify-center overflow-x-hidden antialiased`}
       >
         <main className="mx-3 flex max-w-5xl flex-col">
           <Providers>

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Heading from "../components/content/Heading";
-import { anime } from "../data/anime";
+import { anime } from "../config/anime";
 
 export default function AnimePage() {
   return (
@@ -14,7 +14,7 @@ export default function AnimePage() {
       <div className="fade-in mt-10 max-w-[768px]" id="anime">
         {anime.map(({ name, description, image, url }, i) => (
           <Link
-            key={name}
+            key={i}
             href={url}
             target="_blank"
             className="group relative mb-4 flex h-40 items-center justify-items-start overflow-hidden rounded-lg px-4 before:absolute before:inset-0 before:z-10 before:bg-black before:opacity-0 before:transition before:duration-150 hover:before:opacity-50 sm:px-8"

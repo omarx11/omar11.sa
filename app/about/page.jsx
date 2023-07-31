@@ -1,16 +1,16 @@
-import { config } from "@/app/data/config";
+import { author } from "@/app/config/meta";
 
 export const metadata = {
   title: "About",
-  description: `About ${config.authorFull}`,
-  keywords: [`About ${config.authorFull}`],
+  description: `About ${author.fullName}`,
+  keywords: [`About ${author.fullName}`],
   openGraph: {
     title: "About",
-    description: config.description,
-    url: `${config.siteUrl}/about`,
+    description: author.description,
+    url: `${author.siteUrl}/about`,
     images: [
       {
-        url: config.ogImage,
+        url: author.ogImage,
       },
     ],
     type: "website",

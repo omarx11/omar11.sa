@@ -1,30 +1,32 @@
 "use client";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { StatementContext } from "@/app/context/statement";
 import { useContext } from "react";
-import { linksInfo } from "@/app/data/navigation";
+import { links } from "@/app/config/navigation";
 
-export default function AboutMe() {
+function ActiveLink({ href, title }) {
   const router = useRouter();
-  const aboutPage = linksInfo.filter((e) => e.name == "About")[0];
+  const page = links.filter((e) => e.href == href)[0];
   const { setPage, setColor } = useContext(StatementContext);
 
   const handleClick = (e) => {
     e.preventDefault();
-    setColor(aboutPage.color);
-    setPage(aboutPage.id);
-    router.replace(aboutPage.href);
+    setColor(page.color);
+    setPage(page.id);
+    router.replace(page.href);
   };
 
   return (
     <Link
-      href="/about"
+      href={href}
       prefetch={false}
       className="text-neutral-400 underline-offset-2 hover:underline"
       onClick={handleClick}
     >
-      about me
+      {title ? title : "go back"}
     </Link>
   );
 }
+
+export default ActiveLink;

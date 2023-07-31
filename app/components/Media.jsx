@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { mediaInfo } from "@/app/data/media";
+import { mediaInfo } from "@/app/config/media";
 
 export default function Media() {
   return (

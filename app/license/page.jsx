@@ -1,17 +1,17 @@
-import { config } from "@/app/data/config";
+import { author } from "@/app/config/meta";
 import Heading from "../components/content/Heading";
 
 export const metadata = {
   title: "License",
-  description: `License for ${config.authorFull} personal website`,
-  keywords: [`${config.authorFull} License`],
+  description: `License for ${author.fullName} personal website`,
+  keywords: [`${author.fullName} License`],
   openGraph: {
     title: "License",
-    description: config.description,
-    url: `${config.siteUrl}/license`,
+    description: author.description,
+    url: `${author.siteUrl}/license`,
     images: [
       {
-        url: config.ogImage,
+        url: author.ogImage,
       },
     ],
     type: "website",
@@ -25,7 +25,7 @@ export default function LicensePage() {
       <h3 className="my-6 w-full border-l-4 border-emerald-900 bg-gradient-to-r from-stone-900 pl-4 text-stone-400 opacity-60 md:w-[60%]">
         Note: Anyone is free to take inspiration from this site as long as you
         give credit to the ordinal creator, credits should include my full name
-        ({config.authorFull}) and a link to my site ({config.siteName}).{" "}
+        ({author.fullName}) and a link to my site ({author.siteName}).{" "}
         <span className="text-rose-600">❤</span>
       </h3>
       <div
@@ -34,7 +34,7 @@ export default function LicensePage() {
       >
         <p className="text-justify text-stone-400">
           MIT License <br />
-          <br /> Copyright (c) {new Date().getFullYear()} {config.authorFull}
+          <br /> Copyright (c) {new Date().getFullYear()} {author.fullName}
           <br />
           <br /> Permission is hereby granted, free of charge, to any person
           obtaining a copy of this software and associated documentation files

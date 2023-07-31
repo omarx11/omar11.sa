@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import Status from "./Status";
-import TimeAgo from "../lib/useTimeAgo";
-import AboutMe from "./links/About";
+import TimeAgo from "../hooks/useTimeAgo";
+import ActiveLink from "../components/content/ActiveLink";
 import FancyImage from "./content/FancyImage";
-import { config } from "@/app/data/config";
+import { author } from "@/app/config/meta";
 
 export default function About() {
   return (
@@ -22,7 +22,7 @@ export default function About() {
         />
         <div className="ml-0 mt-6 flex flex-col gap-2 md:ml-6 md:mt-0">
           <h1 className="items-center text-2xl font-bold text-emerald-400">
-            Hey, I'm {config.authorFull}
+            Hey, I'm {author.fullName}
             <Image
               src="/static/icons/1f44b-1f3fb.svg"
               width={24}
@@ -45,7 +45,8 @@ export default function About() {
               TVTC
             </Link>
             . I love developing with javascript and making websites just like
-            this one. you can check out more <AboutMe /> ✒️
+            this one. you can check out more{" "}
+            <ActiveLink href="/about" title="about me" /> ✒️
           </div>
         </div>
       </section>

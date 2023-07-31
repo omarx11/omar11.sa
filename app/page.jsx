@@ -1,24 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
-import { headers } from "next/headers";
 import Heading from "./components/content/Heading";
-import { reposImages, manualRepository, reposLanguages } from "./data/repos";
-
-async function getRepository(host) {
-  const res = await fetch(`http://${host}/api/repos`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const data = await res.json();
-  return data;
-}
+import { reposImages, manualRepository, reposLanguages } from "./config/repos";
+import FancyImage from "./components/content/FancyImage";
+import { getRepository } from "./lib/fetchRequest";
 
 export default async function HomePage() {
-  const host = headers().get("host");
-  const repos = await getRepository(host);
+  const repos = await getRepository();
   repos.push(...manualRepository);
+
   return (
     <>
       <Heading name="Projects" emoji="🖥️" target="#projects" />
@@ -38,18 +28,18 @@ export default async function HomePage() {
                   stargazers_count,
                   forks_count,
                 },
-                index
+                index,
               ) => (
                 <div
                   key={id}
-                  className="group flex flex-col rounded-md bg-gradient-to-b from-neutral-900 hover:bg-gradient-to-t"
+                  className="group flex flex-col rounded-md bg-gradient-to-b from-stone-900 hover:bg-gradient-to-t"
                 >
                   <figure className="relative h-44 p-2">
-                    <Image
+                    <FancyImage
                       src={reposImages[index]}
                       width={858}
                       height={480}
-                      className="inset-0 h-full w-full cursor-pointer rounded-xl border-4 border-neutral-800 object-cover transition-transform drag-none group-hover:-translate-y-4"
+                      className="inset-0 h-full w-full cursor-pointer rounded-xl border-4 border-neutral-900 object-cover transition-transform drag-none group-hover:-translate-y-4"
                       alt="project-icon"
                     />
                   </figure>
@@ -64,8 +54,9 @@ export default async function HomePage() {
                     <div className="flex flex-row justify-between text-stone-400">
                       <div className="flex items-center gap-[6px] text-sm">
                         {reposLanguages &&
-                          reposLanguages[index].map((icon) => (
+                          reposLanguages[index].map((icon, i) => (
                             <Image
+                              key={i}
                               src={`/static/icons/tech/${icon}`}
                               width={16}
                               height={16}
@@ -113,7 +104,7 @@ export default async function HomePage() {
                     </p>
                   </div>
                 </div>
-              )
+              ),
             )
           : null}
       </div>

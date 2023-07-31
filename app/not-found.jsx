@@ -1,8 +1,16 @@
+import ActiveLink from "@/app/components/content/ActiveLink";
+
 export default function NotFound() {
   return (
-    <div>
+    <>
       <h2>Not Found</h2>
-      <p>Could not find requested resource</p>
-    </div>
+      <div title="404" className="page404 ml-2 py-4 text-7xl">
+        404
+      </div>
+      <p>
+        Could not find requested resource{" "}
+        <ActiveLink pageName="Home" href="/" title="go back" />
+      </p>
+    </>
   );
 }

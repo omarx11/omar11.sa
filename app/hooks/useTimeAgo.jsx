@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { config } from "@/app/data/config";
+import { author } from "@/app/config/meta";
 
 const getYearsAgo = (date) => {
   let timestamp = new Date().getTime() - date.getTime();
@@ -11,7 +11,7 @@ const getYearsAgo = (date) => {
 };
 
 const useYearsAgo = () => {
-  const date = new Date(config.age);
+  const date = new Date(author.age);
   const [years, setYears] = useState(getYearsAgo(date));
 
   useEffect(() => {

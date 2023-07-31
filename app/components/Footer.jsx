@@ -1,12 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
-import { config } from "@/app/data/config";
+import { author } from "@/app/config/meta";
 
 export default function Footer() {
   return (
     <footer className="flex flex-row flex-wrap items-center justify-between pb-12 pt-4 text-sm">
       <p className="text-[0.8rem] text-stone-500">
-        {new Date().getFullYear()} © {config.authorFull} • Made with{" "}
+        {new Date().getFullYear()} © {author.fullName} • Made with{" "}
         <Link
           href="https://nextjs.org/"
           target="_blank"
@@ -17,7 +17,7 @@ export default function Footer() {
       </p>
       <div className="flex flex-row items-center gap-1 text-stone-400">
         <Link
-          href={`${config.github}/omar11.sa`}
+          href={`${author.github}/omar11.sa`}
           target="_blank"
           className="underline-offset-4 hover:underline"
         >

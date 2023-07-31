@@ -1,6 +1,6 @@
 const colorOpacity = 0.3;
 
-export const linksInfo = [
+export const links = [
   {
     id: 0,
     href: "/",

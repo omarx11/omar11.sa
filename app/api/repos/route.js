@@ -13,13 +13,8 @@ export async function GET() {
     );
     if (!res.ok) throw new Error("Failed to fetch data");
     const repos = await res.json();
-    // Promise await just for show cool loading animetion
-    // await new Promise((resolve) => setTimeout(resolve, 2000));
     return new Response(
-      JSON.stringify(
-        repos.filter((d) => !filteredRepos.includes(d.id))
-        // .sort((a, b) => a.id - b.id)
-      )
+      JSON.stringify(repos.filter((d) => !filteredRepos.includes(d.id)))
     );
   } catch (err) {
     console.log(err);

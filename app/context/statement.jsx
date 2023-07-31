@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, createContext, useState } from "react";
-import { linksInfo } from "@/app/data/navigation";
+import { links } from "@/app/config/navigation";
 
 export const StatementContext = createContext();
 
@@ -10,7 +10,7 @@ export const StatementProvider = ({ children }) => {
       ? JSON.parse(sessionStorage.getItem("page")) ?? 0
       : 0;
   const [page, setPage] = useState(session);
-  const [color, setColor] = useState(linksInfo[session].color);
+  const [color, setColor] = useState(links[session].color);
   const [comments, setComments] = useState(null);
 
   useEffect(() => {

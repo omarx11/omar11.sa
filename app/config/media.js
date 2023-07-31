@@ -1,23 +1,23 @@
-import { config } from "@/app/data/config";
+import { author } from "@/app/config/meta";
 
 export const mediaInfo = [
   {
-    href: `mailto:${config.email}`,
+    href: `mailto:${author.email}`,
     src: "/static/icons/email.svg",
     alt: "email-icon",
   },
   {
-    href: config.twitter,
+    href: author.twitter,
     src: "/static/icons/twitter.svg",
     alt: "twitter-icon",
   },
   {
-    href: `https://discordredirect.discordsafe.com/users/${config.discordId}`,
+    href: `https://discordredirect.discordsafe.com/users/${author.discordId}`,
     src: "/static/icons/discord.svg",
     alt: "discord-icon",
   },
   {
-    href: config.github,
+    href: author.github,
     src: "/static/icons/github.svg",
     alt: "github-icon",
   },

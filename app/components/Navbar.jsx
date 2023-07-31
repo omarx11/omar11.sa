@@ -1,23 +1,24 @@
 "use client";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
 import { StatementContext } from "@/app/context/statement";
 import { useContext } from "react";
 import { motion } from "framer-motion";
-import { linksInfo } from "../data/navigation";
+import { links } from "../config/navigation";
 
-export default function Navbar() {
+function Navbar() {
   const { page, setPage, color, setColor } = useContext(StatementContext);
   return (
     <nav className="fade-in flex min-h-[28px] select-none flex-wrap gap-4 font-bold text-stone-300">
-      {linksInfo.map((link, index) => (
+      {links.map((link, index) => (
         <motion.div
           key={index}
           className={
             index === page ? "pointer-events-none relative z-10" : "relative"
           }
           onTap={() => {
-            setColor(linksInfo[page].color);
+            setColor(links[page].color);
             setPage(index);
           }}
         >
@@ -53,3 +54,10 @@ export default function Navbar() {
     </nav>
   );
 }
+
+export default dynamic(() => Promise.resolve(Navbar), {
+  loading: () => (
+    <span className="min-h-[28px] w-full animate-pulse rounded-md bg-stone-900"></span>
+  ),
+  ssr: false,
+});

@@ -1,12 +1,12 @@
-// rename this to master
+import { PATHNAME_URL } from "./sitePath";
 
-export const config = {
-  author: "Omar",
-  authorFull: "Omar Abdulaziz",
+export const author = {
+  name: "Omar",
+  fullName: "Omar Abdulaziz",
   age: "10/12/1999",
   location: "Saudi Arabia / Buraydah",
   siteName: "omar11.sa",
-  siteUrl: "https://omar11.sa",
+  siteUrl: PATHNAME_URL,
   github: "https://github.com/omarx11",
   twitter: "https://twitter.com/@dis_x0",
   email: "mail@omar11.sa",
