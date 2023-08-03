@@ -1,23 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
-import Heading from "../components/content/Heading";
+import { Heading } from "../components/content/Heading";
 import { anime } from "../config/anime";
 
 export default function AnimePage() {
   return (
     <>
-      <Heading name="Anime" emoji="✨" target="#anime" />
+      <Heading name="Anime" emoji="🌟" target="#anime" />
       <h3 className="text-stone-400">
         Top <span className="underline underline-offset-2">10</span> best anime
-        I've watched.
+        I've watched. 😄
       </h3>
-      <div className="fade-in mt-10 max-w-[768px]" id="anime">
+      <div className="fade-in mt-10 max-w-[896px]" id="anime">
         {anime.map(({ name, description, image, url }, i) => (
           <Link
             key={i}
             href={url}
             target="_blank"
-            className="group relative mb-4 flex h-40 items-center justify-items-start overflow-hidden rounded-lg px-4 before:absolute before:inset-0 before:z-10 before:bg-black before:opacity-0 before:transition before:duration-150 hover:before:opacity-50 sm:px-8"
+            className="group relative mb-4 flex h-48 items-center justify-items-start overflow-hidden rounded-lg px-4 before:absolute before:inset-0 before:z-10 before:bg-black before:opacity-0 before:transition before:duration-150 hover:before:opacity-50 sm:px-8"
           >
             <Image
               src={image}
@@ -31,7 +31,7 @@ export default function AnimePage() {
                 <span className="text-stone-300">{i + 1} </span>
                 {name}
               </h3>
-              <p className="text-lg text-stone-200">{description}</p>
+              <p className="text-lg text-stone-200"># {description}</p>
             </div>
           </Link>
         ))}

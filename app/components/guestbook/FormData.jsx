@@ -30,8 +30,9 @@ export default function FormData() {
   }, [text]);
 
   if (status === "loading")
+    // if (status)
     return (
-      <span className="h-24 w-96 animate-pulse rounded-md bg-neutral-800"></span>
+      <div className="m-auto my-10 h-24 w-96 animate-pulse rounded-md bg-neutral-800"></div>
     );
 
   return status === "authenticated" ? (
@@ -41,10 +42,10 @@ export default function FormData() {
           src={session.user.image}
           width={26}
           height={26}
-          className="mb-2 rounded-full ring-4 drag-none"
+          className="drag-none mb-2 rounded-full"
           alt="user-avatar"
         />
-        <p className="text-sm text-gray-500">type as {session.user.name}</p>
+        <p className="text-sm text-neutral-500">type as {session.user.name}</p>
       </div>
       <textarea
         name="text"
@@ -55,8 +56,8 @@ export default function FormData() {
         spellCheck={false}
         className={
           wordLimit
-            ? "highlight-white/5 scrollbar h-36 w-full resize-none rounded-md bg-gray-800 p-2 text-sm caret-rose-500 shadow-sm ring-0 ring-gray-900/10 placeholder:italic focus:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-500"
-            : "highlight-white/5 scrollbar h-36 w-full resize-none rounded-md bg-gray-800 p-2 text-sm caret-violet-500 shadow-sm ring-0 ring-gray-900/10 placeholder:italic focus:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-violet-500"
+            ? "highlight-white/5 scrollbar h-36 w-full resize-none rounded-md bg-neutral-800 p-2 text-sm caret-rose-500 shadow-sm ring-0 placeholder:italic focus:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-500"
+            : "highlight-white/5 scrollbar h-36 w-full resize-none rounded-md bg-neutral-800 p-2 text-sm caret-violet-500 shadow-sm ring-0 placeholder:italic focus:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-violet-500"
         }
       />
       <div className="flex flex-wrap justify-between">
@@ -64,7 +65,7 @@ export default function FormData() {
           className={
             wordLimit
               ? "select-none text-sm text-rose-500"
-              : "select-none text-sm text-gray-500"
+              : "select-none text-sm text-neutral-500"
           }
         >
           {text.length} / 2000

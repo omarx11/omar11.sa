@@ -18,7 +18,7 @@ export default function GuestbookMessages() {
 
   return (
     <ul
-      className="fade-in mt-4 w-full border-t-[16px] border-double border-neutral-900 px-0 pt-2 md:px-2"
+      className="fade-in w-full border-t-[16px] border-double border-neutral-900 px-0 pt-8 md:px-2"
       id="guestbook"
     >
       {comments ? (
@@ -26,7 +26,7 @@ export default function GuestbookMessages() {
           ({ name, profile, comment, avatar, created_at }, index) => (
             <li
               key={index}
-              className="flex flex-row items-start gap-3 rounded-lg px-0 py-4 duration-100 hover:bg-neutral-800 hover:drop-shadow-md md:px-2"
+              className="flex flex-row items-start gap-3 rounded-lg px-1 py-4 duration-100 hover:bg-neutral-800 hover:drop-shadow-md md:px-2"
             >
               {profile ? (
                 <Link href={profile} target="_blank">
@@ -34,7 +34,7 @@ export default function GuestbookMessages() {
                     src={avatar}
                     width={42}
                     height={42}
-                    className="min-w-[42px] select-none rounded-full bg-neutral-500 ring-violet-600 duration-150 drag-none hover:ring-4"
+                    className="drag-none min-w-[42px] select-none rounded-full bg-neutral-500 ring-violet-600 duration-150 hover:ring-4"
                     alt={name + " avatar"}
                   />
                 </Link>
@@ -43,16 +43,16 @@ export default function GuestbookMessages() {
                   src={avatar}
                   width={42}
                   height={42}
-                  className="select-none rounded-full bg-neutral-500 drag-none"
+                  className="drag-none select-none rounded-full bg-neutral-500"
                   alt={name + " avatar"}
                 />
               )}
               <div className="overflow-hidden">
                 <p className="whitespace-pre-wrap text-stone-200">{comment}</p>
-                <div className="flex select-none flex-wrap items-center">
-                  <p className="text-gray-400">{name}</p>
-                  <span className="mx-1 text-gray-700">/</span>
-                  <div className="flex text-sm text-gray-500">
+                <div className="flex select-none flex-wrap items-center text-sm md:text-base">
+                  <p className="text-neutral-400">{name}</p>
+                  <span className="mx-1 text-neutral-700">/</span>
+                  <div className="flex text-sm text-neutral-500">
                     {dateStyle(created_at)}
                   </div>
                 </div>

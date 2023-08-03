@@ -12,10 +12,10 @@ export default function About() {
       <section className="mb-6 flex flex-col items-center md:mb-0 md:flex-row md:items-start">
         <FancyImage
           src="/static/images/avatar.png"
-          width={767}
-          height={767}
+          width={128}
+          height={128}
           quality={100}
-          className="h-32 w-32 cursor-pointer rounded-full border-4 border-emerald-600/75 bg-cover drag-none"
+          className="drag-none min-w-[128px] cursor-pointer rounded-full bg-cover ring-8 ring-emerald-900/50 duration-300 hover:ring-emerald-900"
           caption={"Guts Face, from (Berserk)."}
           alt="avatar"
           priority
@@ -27,7 +27,7 @@ export default function About() {
               src="/static/icons/1f44b-1f3fb.svg"
               width={24}
               height={24}
-              className="absolute ml-2 inline-block origin-[70%_70%] animate-wave select-none pt-[2px] drag-none"
+              className="drag-none absolute ml-2 inline-block origin-[70%_70%] animate-wave select-none pt-[2px]"
               alt="wave-icon"
             />
           </h1>
@@ -36,7 +36,7 @@ export default function About() {
             <p className="inline-block w-[98px] text-sm text-emerald-400">
               <TimeAgo />
             </p>{" "}
-            years old, Studying in the final stage of College education at{" "}
+            years old, Studying in the final stage of College education 👨‍💼 at{" "}
             <Link
               href="https://tvtc.gov.sa/en/Pages/default.aspx"
               target="_blank"

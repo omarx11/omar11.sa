@@ -1,4 +1,4 @@
-import { PATHNAME_URL } from "./sitePath";
+import { PATHNAME_URL } from "../lib/sitePath";
 
 export const author = {
   name: "Omar",

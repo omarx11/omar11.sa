@@ -1,24 +1,24 @@
 import Link from "next/link";
 import Image from "next/image";
-import { mediaInfo } from "@/app/config/media";
+import { media } from "@/app/config/media";
 
 export default function Media() {
   return (
     <div className="flex w-full flex-row flex-wrap items-center justify-between pl-0 pt-5 md:pl-3">
       <div className="flex flex-row gap-3">
-        {mediaInfo.map((media, index) => (
+        {media.map(({ url, icon, alt }, i) => (
           <Link
-            key={index}
-            href={media.href}
+            key={i}
+            href={url}
             target="_blank"
             className="rounded-full bg-stone-900 p-[6px] hover:bg-stone-800"
           >
             <Image
-              src={media.src}
+              src={icon}
               width={18}
               height={18}
               className="select-none drag-none"
-              alt={media.alt}
+              alt={alt}
             />
           </Link>
         ))}

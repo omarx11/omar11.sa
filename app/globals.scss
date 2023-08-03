@@ -22,6 +22,13 @@
 }
 
 @layer utilities {
+  .drag-none {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+  }
   .fade-out {
     animation-name: fade-out;
     animation-duration: 0.2s;

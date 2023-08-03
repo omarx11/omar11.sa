@@ -1,20 +1,29 @@
 import axios from "axios";
-import { PATHNAME_URL } from "@/app/config/sitePath";
+import { PATHNAME_URL } from "@/app/lib/sitePath";
 
 /**
  * GET my repository from github
- * @param message The user message.
- * @returns An array of messages.
+ * @returns An array of repos.
  */
 export async function getRepository() {
-  const res = await fetch(`${PATHNAME_URL}/api/repos`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const data = await res.json();
-  return data;
+  try {
+    const filteredRepos = [624386055, 386408964, 601036020];
+    const res = await fetch(
+      "https://api.github.com/users/omarx11/repos?sort=omarx11/chatin",
+      {
+        headers: {
+          Accept: "application/vnd.github+json",
+          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+          "X-GitHub-Api-Version": "2022-11-28",
+        },
+      },
+    );
+    if (!res.ok) throw new Error("Failed to fetch data");
+    const repos = await res.json();
+    return repos.filter((d) => !filteredRepos.includes(d.id));
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 /**

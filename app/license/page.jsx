@@ -1,5 +1,5 @@
 import { author } from "@/app/config/meta";
-import Heading from "../components/content/Heading";
+import { Heading } from "../components/content/Heading";
 
 export const metadata = {
   title: "License",

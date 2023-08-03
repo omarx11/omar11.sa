@@ -1,24 +1,24 @@
 import { author } from "@/app/config/meta";
 
-export const mediaInfo = [
+export const media = [
   {
-    href: `mailto:${author.email}`,
-    src: "/static/icons/email.svg",
+    url: `mailto:${author.email}`,
+    icon: "/static/icons/email.svg",
     alt: "email-icon",
   },
   {
-    href: author.twitter,
-    src: "/static/icons/twitter.svg",
-    alt: "twitter-icon",
+    url: author.twitter,
+    icon: "/static/icons/twitter-x.svg",
+    alt: "twitter-x-icon",
   },
   {
-    href: `https://discordredirect.discordsafe.com/users/${author.discordId}`,
-    src: "/static/icons/discord.svg",
+    url: `https://discordredirect.discordsafe.com/users/${author.discordId}`,
+    icon: "/static/icons/discord.svg",
     alt: "discord-icon",
   },
   {
-    href: author.github,
-    src: "/static/icons/github.svg",
+    url: author.github,
+    icon: "/static/icons/github.svg",
     alt: "github-icon",
   },
 ];
