@@ -9,7 +9,7 @@ export default function NotFound() {
       </div>
       <p>
         Could not find requested resource{" "}
-        <ActiveLink pageName="Home" href="/" title="go back" />
+        <ActiveLink href="/" title="go back" />
       </p>
     </>
   );

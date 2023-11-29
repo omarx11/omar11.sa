@@ -1,6 +1,6 @@
 "use client";
-
 import { useState, useEffect } from "react";
+import { cn } from "../lib/utils";
 
 export default function Transition({ children }) {
   const [currentChild, setCurrentChild] = useState(children);
@@ -17,11 +17,10 @@ export default function Transition({ children }) {
 
   return (
     <div
-      className={
-        currentChild !== children
-          ? "fade-out my-9 flex-1 overflow-visible"
-          : "fade-in my-9 flex-1 overflow-visible"
-      }
+      className={cn("my-9 flex-1 overflow-visible", {
+        "fade-out": currentChild !== children,
+        "fade-in": currentChild === children,
+      })}
     >
       {currentChild}
     </div>

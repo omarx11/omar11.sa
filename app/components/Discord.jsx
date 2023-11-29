@@ -1,32 +1,18 @@
 "use client";
-
 import { useLanyard } from "use-lanyard";
+import { relativeTime } from "@/app/lib/relativeTime";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "@radix-ui/react-hover-card";
-
-function Colors({ status, className }) {
-  let color = "";
-  if (status == "online") {
-    color = `bg-[#1db954] animate-online border-green-300 ${className}`;
-  } else if (status == "idle") {
-    color = `bg-yellow-400 border-yellow-300 ${className}`;
-  } else if (status == "offline") {
-    color = `bg-transparent border-[3px] border-stone-300 ${className}`;
-  } else if (status == "dnd") {
-    color = `bg-rose-400 border-rose-300 ${className}`;
-  }
-
-  return <span className={color}></span>;
-}
+import { cn } from "../lib/utils";
 
 export default function Discord({ id }) {
   const { data } = useLanyard(id);
   if (data === undefined)
     return (
-      <span className="h-4 w-36 animate-pulse rounded-sm bg-stone-700"></span>
+      <span className="my-1 h-4 w-40 animate-pulse rounded-sm bg-neutral-800/75"></span>
     );
 
   if (data) {
@@ -41,40 +27,51 @@ export default function Discord({ id }) {
 
     let activitie = data.activities[0]?.name;
     const playing =
-      activitie === undefined ? "on desktop" : `Playing: ${activitie}`;
+      activitie === undefined
+        ? "On desktop. not doing anything! 📡🛰️"
+        : `Playing: ${activitie}`;
 
     return (
-      <>
-        <HoverCard openDelay={0} closeDelay={0}>
-          <HoverCardTrigger
-            href="/"
-            className="flex select-none items-center gap-2 pl-[1px]"
-          >
-            <Colors
-              status={data.discord_status}
-              className="relative mx-[2px] h-3 w-3 rounded-full"
-            />
-            <p>currently {status}</p>
-          </HoverCardTrigger>
-          <HoverCardContent
-            sideOffset={0}
-            align="start"
-            className="w-60 rounded-md bg-stone-700 p-2"
-          >
-            <div className="space-y-1 text-sm">
-              <h4 className="font-semibold">Omar#0135</h4>
-              {data.discord_status !== "offline" ? (
-                <>
-                  <p>{playing}</p>
-                  <div className="pt-2 text-xs">for 21 minutes</div>
-                </>
-              ) : (
-                <p>Maybe he's sleeping 💤 or outside his room 🚪</p>
-              )}
-            </div>
-          </HoverCardContent>
-        </HoverCard>
-      </>
+      <HoverCard openDelay={0} closeDelay={0}>
+        <HoverCardTrigger
+          href="/"
+          className="flex select-none items-center gap-2 pl-[1px]"
+        >
+          <span
+            className={cn("online relative mx-[2px] h-3 w-3 rounded-full", {
+              "border-red-300 bg-[#1db954]": data.discord_status == "online",
+              "border-yellow-300 bg-yellow-400": data.discord_status == "idle",
+              "border-[3px] border-neutral-300 bg-transparent":
+                data.discord_status == "offline",
+              "border-rose-300 bg-rose-400": data.discord_status == "dnd",
+            })}
+          ></span>
+          <p>currently {status}</p>
+        </HoverCardTrigger>
+        <HoverCardContent
+          sideOffset={0}
+          align="start"
+          className="w-60 rounded-md border-4 border-dashed border-emerald-600/40 bg-zinc-800 p-2"
+        >
+          <div className="space-y-1 text-sm">
+            <h4 className="font-semibold">Id: Omar#0135</h4>
+            {data.discord_status !== "offline" ? (
+              <>
+                <p>{playing}</p>
+                {data.activities.length !== 0 && (
+                  <p className="pt-2 text-xs text-neutral-400">
+                    {relativeTime(
+                      new Date(data.activities[0]?.timestamps?.start),
+                    )}
+                  </p>
+                )}
+              </>
+            ) : (
+              <p>Maybe he's sleeping 💤 or outside his room 🚪</p>
+            )}
+          </div>
+        </HoverCardContent>
+      </HoverCard>
     );
   } else return <></>;
 }

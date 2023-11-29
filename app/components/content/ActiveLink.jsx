@@ -3,28 +3,31 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { StatementContext } from "@/app/context/statement";
 import { useContext } from "react";
-import { links } from "@/app/config/navigation";
+import { links } from "@/app/configs/navigation";
+import { cn } from "@/app/lib/utils";
 
-function ActiveLink({ href, title }) {
+function ActiveLink({ href, title, className }) {
   const router = useRouter();
-  const page = links.filter((e) => e.href == href)[0];
+  const page = links.find((a) => a.href === href);
   const { setPage, setColor } = useContext(StatementContext);
 
   const handleClick = (e) => {
     e.preventDefault();
-    setColor(page.color);
-    setPage(page.id);
-    router.replace(page.href);
+    setColor(page?.color);
+    setPage(page?.id);
+    router.replace(href);
   };
 
   return (
     <Link
       href={href}
-      prefetch={false}
-      className="text-neutral-400 underline-offset-2 hover:underline"
+      className={cn(
+        "text-neutral-400 underline-offset-2 hover:underline",
+        className,
+      )}
       onClick={handleClick}
     >
-      {title ? title : "go back"}
+      {title && title}
     </Link>
   );
 }
