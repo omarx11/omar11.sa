@@ -9,13 +9,13 @@ import { cn } from "@/app/lib/utils";
 function ActiveLink({ href, title, className }) {
   const router = useRouter();
   const page = links.find((a) => a.href === href);
-  const { setPage, setColor } = useContext(StatementContext);
+  const { setPageNo, setPageColor } = useContext(StatementContext);
 
   const handleClick = (e) => {
     e.preventDefault();
-    setColor(page?.color);
-    setPage(page?.id);
-    router.replace(href);
+    setPageColor(page?.color);
+    setPageNo(page?.id);
+    router.push(href);
   };
 
   return (

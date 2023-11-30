@@ -10,9 +10,7 @@
     color-scheme: dark;
   }
 }
-* {
-  box-sizing: border-box;
-}
+
 *::-webkit-scrollbar {
   width: 0;
 }
@@ -34,12 +32,6 @@
     user-drag: none;
   }
 
-  .fade-out {
-    animation-name: fade-out;
-    animation-duration: 0.2s;
-    animation-fill-mode: both;
-    animation-timing-function: cubic-bezier(0.17, 0.64, 0.59, 0.96);
-  }
   .fade-in > * {
     animation-name: fade-in;
     animation-duration: 0.3s;
@@ -49,16 +41,6 @@
   @for $i from 1 through 24 {
     .fade-in > :nth-child(#{$i}) {
       animation-delay: #{$i / 20}s;
-    }
-  }
-  @keyframes fade-out {
-    from {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    to {
-      opacity: 0;
-      transform: translateY(0.5rem);
     }
   }
   @keyframes fade-in {

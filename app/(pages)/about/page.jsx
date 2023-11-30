@@ -23,8 +23,8 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="fade-in grid grid-cols-1 gap-y-6 md:grid-cols-2 md:grid-rows-[auto_1fr] md:gap-y-20">
-      <div className="mx-auto mt-0 md:mx-0 md:mt-10 md:pr-6 lg:pr-12">
+    <div className="grid grid-cols-1 gap-y-6 md:grid-cols-2 md:grid-rows-[auto_1fr] md:gap-y-20">
+      <div className="mx-auto mt-0 md:mx-0 md:mt-8 md:pr-6 lg:pr-12">
         <Image
           src="/static/images/profile.jpeg"
           width={384}
@@ -35,7 +35,7 @@ export default function AboutPage() {
           alt="profile image"
         />
       </div>
-      <div className="fade-in max-w-3xl md:order-first md:row-span-2">
+      <div className="max-w-3xl md:order-first md:row-span-2">
         <div className="mt-6 space-y-7 text-base text-neutral-400">
           <p>
             <span className="mb-2 block text-xl font-bold md:text-2xl">

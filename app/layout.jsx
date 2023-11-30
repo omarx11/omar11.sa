@@ -3,7 +3,6 @@ import { Recursive } from "next/font/google";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import Transition from "./components/Transition";
 import Providers from "./components/Providers";
 import { author } from "@/app/configs/meta";
 
@@ -55,11 +54,13 @@ export default function RootLayout({ children }) {
       <body
         className={`${recursive.className} flex min-h-screen justify-center overflow-x-hidden bg-neutral-950 antialiased`}
       >
-        <main className="mx-3 flex max-w-5xl flex-col">
+        <main className="fade-in mx-3 flex max-w-5xl flex-col">
           <Providers>
             <Header />
             <Navbar />
-            <Transition>{children}</Transition>
+            <div className="fade-in my-9 flex-1 overflow-visible">
+              {children}
+            </div>
             <Footer />
           </Providers>
         </main>

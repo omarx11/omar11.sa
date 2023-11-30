@@ -24,7 +24,7 @@ export default function AIBotAssist() {
         </svg>
       </Popover.Trigger>
       <Popover.Content
-        className="z-50 flex h-[30rem] w-96 flex-col overflow-y-auto rounded-md bg-neutral-900 p-2 ring-4 ring-neutral-800"
+        className="flex h-[30rem] w-96 flex-col overflow-y-auto rounded-md bg-neutral-900 p-2 ring-4 ring-neutral-800"
         side="bottom"
         align="end"
         sideOffset={8}

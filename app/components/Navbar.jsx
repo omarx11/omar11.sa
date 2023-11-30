@@ -11,33 +11,30 @@ import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const pathname = usePathname();
-  const { page, setPage, color, setColor } = useContext(StatementContext);
+  const { pageNo, setPageNo, pageColor } = useContext(StatementContext);
 
   useEffect(() => {
     const linkPathname = links.find((a) => a.href === pathname);
-    setPage(linkPathname?.id);
+    setPageNo(linkPathname?.id);
   }, []);
 
   return (
     <nav className="fade-in mt-4 flex min-h-[28px] select-none flex-wrap gap-4 border-t-8 border-neutral-900 pt-4 font-bold text-neutral-300">
       {links.slice(0, 7).map((link, index) => (
         <motion.div
-          key={index}
+          key={link.name}
           className={cn("relative", {
-            "pointer-events-none relative z-10": index === page,
+            "pointer-events-none relative z-10": index === pageNo,
           })}
-          onTap={() => {
-            setColor(links[page]?.color);
-            setPage(index);
-          }}
+          onTap={() => setPageNo(index)}
         >
           <Link
             href={link.href}
             className={cn(
               "flex flex-row items-center gap-1 rounded-md bg-neutral-900 px-2 py-[2px]",
               {
-                "pointer-events-none": index === page,
-                "hover:bg-neutral-800": index !== page,
+                "pointer-events-none": index === pageNo,
+                "hover:bg-neutral-800": index !== pageNo,
               },
             )}
           >
@@ -47,14 +44,14 @@ const Navbar = () => {
               width={20}
               height={20}
               className="drag-none select-none"
-              alt={link.alt}
+              alt=""
             />
           </Link>
-          {index === page && (
+          {index === pageNo && (
             <motion.div
               className="absolute left-0 top-0 z-10 h-full w-full rounded-md"
               layoutId="page"
-              initial={{ backgroundColor: color }}
+              initial={{ backgroundColor: pageColor }}
               animate={{ backgroundColor: link.color }}
               transition={{ type: "spring", duration: 0.4 }}
             />

@@ -75,50 +75,52 @@ export default function Header() {
           </div>
         </div>
       </header>
-      <div className="flex flex-row items-center justify-between pl-0 pt-5 text-neutral-300 md:pl-1">
-        <div className="flex flex-col gap-2">
-          <Discord id={author.discordId} />
-          <div className="flex items-start">
+      <div className="z-10">
+        <div className="flex flex-row items-center justify-between pl-0 pt-5 text-neutral-300 md:pl-1">
+          <div className="flex flex-col gap-2">
+            <Discord id={author.discordId} />
+            <div className="flex">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 48 48"
+                className="mr-2"
+              >
+                <path
+                  fill="currentColor"
+                  d="M39.014 28.98A16.925 16.925 0 0 0 41 21c0-9.389-7.611-17-17-17S7 11.611 7 21a16.922 16.922 0 0 0 4 10.955l.02.025c.007.006.013.014.018.02H11l10.088 10.71a4 4 0 0 0 5.823 0L37 32h-.038l.016-.019l.002-.002c.072-.086.144-.172.215-.26a17.038 17.038 0 0 0 1.82-2.74Zm-15.01-1.48a6 6 0 1 1 0-12a6 6 0 0 1 0 12Z"
+                />
+              </svg>
+              <p className="text-sm">{author.location}.</p>
+            </div>
+          </div>
+          <AIBotAssist />
+        </div>
+        <div className="flex flex-row flex-wrap items-center justify-between pt-5">
+          <Media />
+          <Link
+            href="https://status.omar11.sa/"
+            target="_blank"
+            className="text-sm text-emerald-400/90 duration-150 hover:opacity-70"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
-              viewBox="0 0 48 48"
-              className="mr-2"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="mr-2 inline text-emerald-400/90"
             >
-              <path
-                fill="currentColor"
-                d="M39.014 28.98A16.925 16.925 0 0 0 41 21c0-9.389-7.611-17-17-17S7 11.611 7 21a16.922 16.922 0 0 0 4 10.955l.02.025c.007.006.013.014.018.02H11l10.088 10.71a4 4 0 0 0 5.823 0L37 32h-.038l.016-.019l.002-.002c.072-.086.144-.172.215-.26a17.038 17.038 0 0 0 1.82-2.74Zm-15.01-1.48a6 6 0 1 1 0-12a6 6 0 0 1 0 12Z"
-              />
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
             </svg>
-            <p className="text-sm">{author.location}.</p>
-          </div>
+            Status
+          </Link>
         </div>
-        <AIBotAssist />
-      </div>
-      <div className="flex flex-row flex-wrap items-center justify-between pt-5">
-        <Media />
-        <Link
-          href="https://status.omar11.sa/"
-          target="_blank"
-          className="text-sm text-emerald-400/90 duration-150 hover:opacity-70"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="mr-2 inline text-emerald-400/90"
-          >
-            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-          </svg>
-          Status
-        </Link>
       </div>
     </>
   );

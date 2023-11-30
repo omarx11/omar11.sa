@@ -14,8 +14,8 @@ const ChatBotDefaultValue = [
 export const StatementContext = createContext();
 
 export const StatementProvider = ({ children }) => {
-  const [page, setPage] = useState(0);
-  const [color, setColor] = useState(links[page]?.color);
+  const [pageNo, setPageNo] = useState(0);
+  const [pageColor, setPageColor] = useState(links[pageNo]?.color);
   const [comments, setComments] = useState(null);
   const [botMessages, setBotMessages] = useState(ChatBotDefaultValue);
   const [isBotMsgUpdating, setIsBotMsgUpdating] = useState(false);
@@ -43,14 +43,14 @@ export const StatementProvider = ({ children }) => {
   return (
     <StatementContext.Provider
       value={{
-        page,
-        color,
+        pageNo,
+        pageColor,
         comments,
         botMessages,
         isBotMsgUpdating,
         userChatBotId,
-        setPage,
-        setColor,
+        setPageNo,
+        setPageColor,
         setComments,
         setIsBotMsgUpdating,
         addBotMessage,
