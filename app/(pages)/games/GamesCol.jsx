@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Pagination from "./Pagination";
 import Image from "next/image";
 import {
@@ -8,8 +8,11 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/app/components/ui/Tooltip";
+import { StatementContext } from "@/app/context/statement";
 
-export default function GameCol(data) {
+export default function GamesCol(data) {
+  const { isLoadingGame, setIsLoadingGame, setGameAppId } =
+    useContext(StatementContext);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 21; // Adjust this based on your needs
   const targetIds = [
@@ -41,7 +44,7 @@ export default function GameCol(data) {
       <div className="mb-4 mt-8 flex items-center justify-between">
         <h2 className="text-xl font-bold text-neutral-300">
           <span className="text-emerald-500">#</span> Full Games Collection{" "}
-          {data ? (
+          {data && !isLoadingGame ? (
             "🕹️"
           ) : (
             <svg
@@ -98,9 +101,15 @@ export default function GameCol(data) {
       </div>
       <TooltipProvider delayDuration={0}>
         <div className="flex flex-row flex-wrap gap-3">
-          {currentItems.map((game, i) => (
-            <Tooltip key={i}>
-              <TooltipTrigger className="rounded-sm">
+          {currentItems.map((game) => (
+            <Tooltip key={game.appid}>
+              <TooltipTrigger
+                className="rounded-sm"
+                onClick={(e) => {
+                  setIsLoadingGame(true);
+                  setGameAppId(game.appid);
+                }}
+              >
                 <Image
                   src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/header.jpg`}
                   width={256}
@@ -120,6 +129,9 @@ export default function GameCol(data) {
                   {Math.floor((game.playtime_forever / 60) * 10) / 10} hours
                   total
                 </span>
+                <p className="mt-1 text-xs text-neutral-400">
+                  Click to show more!
+                </p>
               </TooltipContent>
             </Tooltip>
           ))}
@@ -128,6 +140,7 @@ export default function GameCol(data) {
           pages={totalPages}
           state={{ page: currentPage, window: 5 }}
           onPageChange={handlePageChange}
+          note={true}
         />
       </TooltipProvider>
     </>

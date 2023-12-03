@@ -2,7 +2,7 @@
 import { cn } from "@/app/lib/utils";
 import { useEffect, useState } from "react";
 
-function Pagination({ pages, state, onPageChange }) {
+function Pagination({ pages, state, onPageChange, className, note }) {
   const [buttons, setButtons] = useState([]);
 
   useEffect(() => {
@@ -98,11 +98,18 @@ function Pagination({ pages, state, onPageChange }) {
   };
 
   return (
-    <div className="mt-6 flex flex-wrap-reverse items-center justify-between gap-4 text-neutral-100 md:gap-0">
-      <p className="text-xs text-neutral-400">
-        All data comes from Steams API's. If any of those services are down,
-        data with not be shown.
-      </p>
+    <div
+      className={cn(
+        "mt-6 flex flex-wrap-reverse items-center justify-between gap-4 text-neutral-100 md:gap-0",
+        className,
+      )}
+    >
+      {note && (
+        <p className="text-xs text-neutral-400">
+          All data comes from Steams API's. If any of those services are down,
+          data with not be shown.
+        </p>
+      )}
       <div className="flex select-none gap-1 text-sm">{buttons}</div>
     </div>
   );

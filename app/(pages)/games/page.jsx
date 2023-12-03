@@ -1,7 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import GameCol from "./GameCol";
+import GamesCol from "./GamesCol";
 import { author } from "@/app/configs/meta";
+import dynamic from "next/dynamic";
+import { getAllGames } from "@/app/lib/getStatsPerGame";
+
+const GameDetails = dynamic(() => import("./GameDetails"));
 
 export const metadata = {
   title: "Games Page",
@@ -21,14 +25,7 @@ export const metadata = {
 };
 
 export default async function GamesPage() {
-  const data = await Promise.all([
-    fetch(
-      "https://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v1/?key=94AEDF4E76A9FA48E0087C4DE2A4EB4F&steamid=76561198965877925",
-    ).then((res) => res.json()),
-    fetch(
-      "https://api.steampowered.com/IPlayerService/GetOwnedGames/v1?key=94AEDF4E76A9FA48E0087C4DE2A4EB4F&include_played_free_games=true&include_appinfo=true&format=json&steamid=76561198965877925",
-    ).then((res) => res.json()),
-  ]);
+  const data = await getAllGames();
 
   const recentGames = data[0].response;
   const allGames = data[1].response;
@@ -60,7 +57,7 @@ export default async function GamesPage() {
         )}
       </h2>
       <div className="line-clamp-1 flex flex-row flex-wrap gap-4 overflow-visible">
-        {recentGames.total_count != 0 &&
+        {recentGames.total_count !== 0 &&
           recentGames.games.slice(0, 5).map((game, i) => (
             <div className="flex flex-col text-sm" key={i}>
               <p className="text-emerald-500">
@@ -87,7 +84,8 @@ export default async function GamesPage() {
             </div>
           ))}
       </div>
-      <GameCol data={allGames} />
+      <GamesCol data={allGames} />
+      <GameDetails />
     </>
   );
 }

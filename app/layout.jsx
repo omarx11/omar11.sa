@@ -54,7 +54,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${recursive.className} flex min-h-screen justify-center overflow-x-hidden bg-neutral-950 antialiased`}
       >
-        <main className="fade-in mx-3 flex max-w-5xl flex-col">
+        <main className="mx-3 flex max-w-5xl flex-col">
           <Providers>
             <Header />
             <Navbar />

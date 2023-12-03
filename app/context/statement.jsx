@@ -20,6 +20,8 @@ export const StatementProvider = ({ children }) => {
   const [botMessages, setBotMessages] = useState(ChatBotDefaultValue);
   const [isBotMsgUpdating, setIsBotMsgUpdating] = useState(false);
   const [userChatBotId, _] = useState(nanoid());
+  const [gameAppId, setGameAppId] = useState(null);
+  const [isLoadingGame, setIsLoadingGame] = useState(false);
 
   const addBotMessage = (message) => {
     setBotMessages((prev) => [...prev, message]);
@@ -49,6 +51,8 @@ export const StatementProvider = ({ children }) => {
         botMessages,
         isBotMsgUpdating,
         userChatBotId,
+        gameAppId,
+        isLoadingGame,
         setPageNo,
         setPageColor,
         setComments,
@@ -56,6 +60,8 @@ export const StatementProvider = ({ children }) => {
         addBotMessage,
         removeBotMessage,
         updateBotMessage,
+        setGameAppId,
+        setIsLoadingGame,
       }}
     >
       {children}

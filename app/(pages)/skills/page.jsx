@@ -41,6 +41,8 @@ function SkillsArray({ data }) {
           src={icon}
           width={48}
           height={48}
+          placeholder="blur"
+          blurDataURL="/static/icons/blur.svg"
           className="min-w-[48px] bg-neutral-800 duration-150 group-hover:opacity-60"
           alt={name}
         />

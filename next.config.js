@@ -14,6 +14,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "cdn.cloudflare.steamstatic.com",
       },
+      {
+        protocol: "https",
+        hostname: "steamcdn-a.akamaihd.net",
+      },
     ],
   },
 };

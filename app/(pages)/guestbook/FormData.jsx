@@ -51,7 +51,7 @@ export default function FormData() {
           src={session.user.image}
           width={26}
           height={26}
-          className="drag-none rounded-full"
+          className="drag-none rounded-full bg-neutral-800"
           alt="user-avatar"
         />
         <p className="text-sm text-neutral-500">
