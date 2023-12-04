@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { cn } from "@/app/lib/utils";
 import ChatBotInput from "./ChatBotInput";
 
-export default function AIBotAssist() {
+export default function AIBotAssistant() {
   const { botMessages, userChatBotId } = useContext(StatementContext);
   const inverseMessages = [...botMessages].reverse();
 

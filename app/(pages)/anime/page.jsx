@@ -24,7 +24,7 @@ export const metadata = {
 export default function AnimePage() {
   return (
     <>
-      <Heading name="Anime" emoji="🌟" target="#anime" />
+      <Heading name="Anime" emoji="🌟" scrollTo="#anime" />
       <h3 className="text-neutral-400">
         Top <span className="underline underline-offset-2">10</span> of my
         favorite anime I've watched. 😄{" "}

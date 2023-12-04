@@ -8,7 +8,7 @@ import Media from "./Media";
 import { author } from "@/app/configs/meta";
 import dynamic from "next/dynamic";
 
-const AIBotAssist = dynamic(() => import("./chatbot/AIBotAssist"));
+const AIBotAssistant = dynamic(() => import("./chatbot/AIBotAssistant"));
 
 export default function Header() {
   return (
@@ -75,7 +75,7 @@ export default function Header() {
           </div>
         </div>
       </header>
-      <div className="z-10">
+      <div className="z-20">
         <div className="flex flex-row items-center justify-between pl-0 pt-5 text-neutral-300 md:pl-1">
           <div className="flex flex-col gap-2">
             <Discord id={author.discordId} />
@@ -95,7 +95,7 @@ export default function Header() {
               <p className="text-sm">{author.location}.</p>
             </div>
           </div>
-          <AIBotAssist />
+          <AIBotAssistant />
         </div>
         <div className="flex flex-row flex-wrap items-center justify-between pt-5">
           <Media />

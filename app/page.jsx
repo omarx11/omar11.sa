@@ -32,7 +32,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <Heading name="Projects" emoji="🖥️" target="#projects" />
+      <Heading name="Projects" emoji="🖥️" scrollTo="#projects" />
       <h3 className="group relative max-w-max text-neutral-400">
         Here's all of my personal projects that I've worked on. You can support
         me by starring! ⭐

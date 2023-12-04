@@ -23,7 +23,7 @@ export const metadata = {
 export default function GuestbookPage() {
   return (
     <>
-      <Heading name="Guestbook" emoji="🕮" target="#guestbook" />
+      <Heading name="Guestbook" emoji="🕮" scrollTo="#guestbook" />
       <h2 className="text-neutral-400">
         Hey There!, please sign in and say hi. and Thanks for visiting my
         website 💚

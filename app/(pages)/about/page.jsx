@@ -45,7 +45,7 @@ export default function AboutPage() {
             I started opening an account on Facebook after my cousin told me
             that there was a game called{" "}
             <Link
-              href="https://www.facebook.com/FamilyFarmCommunity/photos"
+              href="https://www.facebook.com/FamilyFarmCommunity/about_details"
               target="_blank"
               className="underline underline-offset-2 hover:no-underline"
             >

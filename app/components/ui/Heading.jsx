@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 
-export function Heading({ name, emoji, target }) {
+export function Heading({ name, emoji, scrollTo }) {
   const handleScroll = (e) => {
     // prevent the default behavior
     e.preventDefault();
@@ -18,7 +18,7 @@ export function Heading({ name, emoji, target }) {
   return (
     <div className="mb-4 w-fit font-bold text-neutral-300">
       <Link
-        href={target}
+        href={scrollTo}
         scroll={false}
         className="group"
         onClick={handleScroll}

@@ -24,7 +24,7 @@ export const metadata = {
 export default function SpecsPage() {
   return (
     <>
-      <Heading name="Specs" emoji="🗃️" target="#specs" />
+      <Heading name="Specs" emoji="🗃️" scrollTo="#specs" />
       <h3 className="group relative max-w-max text-neutral-400">
         Equipment I currently use for gaming, programming, learning, and every
         day. 🧐
