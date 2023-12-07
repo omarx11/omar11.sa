@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Providers from "./components/Providers";
-import { author } from "@/app/configs/meta";
+import { author } from "@/app/config/meta";
 
 const recursive = Recursive({ subsets: ["latin"] });
 

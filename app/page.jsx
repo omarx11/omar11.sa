@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Heading } from "./components/ui/Heading";
 import GithubCal from "./components/content/GithubCal";
-import { reposInfo, manualRepository } from "./configs/repos";
+import { reposInfo, manualRepository } from "./config/repos";
 import { cn } from "./lib/utils";
 import {
   Tooltip,

@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Heading } from "@/app/components/ui/Heading";
-import { anime } from "@/app/configs/anime";
-import { author } from "@/app/configs/meta";
+import { anime } from "@/app/config/anime";
+import { author } from "@/app/config/meta";
 
 export const metadata = {
   title: "Anime Page",

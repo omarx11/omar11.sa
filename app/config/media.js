@@ -1,4 +1,4 @@
-import { author } from "@/app/configs/meta";
+import { author } from "@/app/config/meta";
 
 export const media = [
   {

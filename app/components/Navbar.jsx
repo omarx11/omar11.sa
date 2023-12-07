@@ -5,7 +5,7 @@ import Image from "next/image";
 import { StatementContext } from "@/app/context/statement";
 import { useContext, useEffect } from "react";
 import { motion } from "framer-motion";
-import { links } from "../configs/navigation";
+import { links } from "../config/navigation";
 import { cn } from "../lib/utils";
 import { usePathname } from "next/navigation";
 

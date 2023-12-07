@@ -1,4 +1,4 @@
-import { chatbotPrompt } from "@/app/configs/chatbot-prompt";
+import { chatbotPrompt } from "@/app/config/chatbot-prompt";
 import { OpenAIStream } from "@/app/lib/openai-stream";
 import { MessageArraySchema } from "@/app/lib/validators/message";
 

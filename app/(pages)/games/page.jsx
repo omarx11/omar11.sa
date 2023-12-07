@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import GamesCol from "./GamesCol";
-import { author } from "@/app/configs/meta";
+import { author } from "@/app/config/meta";
 import dynamic from "next/dynamic";
 import { getAllGames } from "@/app/lib/getStatsPerGame";
 

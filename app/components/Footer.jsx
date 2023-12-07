@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { author } from "@/app/configs/meta";
+import { author } from "@/app/config/meta";
 import ActiveLink from "./content/ActiveLink";
 
 export default function Footer() {

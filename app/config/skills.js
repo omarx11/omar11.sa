@@ -137,6 +137,13 @@ export const services = [
     description:
       "GCP (Google Cloud Platform) is a suite of cloud computing services offered by Google, providing a range of tools and solutions for storage, computing, data analytics, machine learning, and more.",
   },
+  {
+    name: "Oracle Cloud",
+    icon: "/static/icons/skills/oracle.svg",
+    url: "https://www.oracle.com/sa/cloud/",
+    description:
+      "Oracle's robust cloud platform for scalable computing, storage, and enterprise solutions.",
+  },
 ];
 
 export const systems = [
@@ -163,7 +170,7 @@ export const systems = [
   },
 ];
 
-export const editor = [
+export const editors = [
   {
     name: "VSCode",
     icon: "/static/icons/skills/VSCode-Dark.svg",

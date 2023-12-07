@@ -6,10 +6,10 @@ import {
   databases,
   services,
   systems,
-  editor,
-} from "@/app/configs/skills";
+  editors,
+} from "@/app/config/skills";
 import Accordion from "./Accordion";
-import { author } from "@/app/configs/meta";
+import { author } from "@/app/config/meta";
 import { SkillsArray } from "./SkillsArray";
 
 export const metadata = {
@@ -61,8 +61,8 @@ export default function SkillsPage() {
           <SkillsArray data={systems} />
         </Accordion>
 
-        <Accordion id="seven" name="Text Editor">
-          <SkillsArray data={editor} />
+        <Accordion id="seven" name="Code Editor">
+          <SkillsArray data={editors} />
         </Accordion>
       </div>
     </>

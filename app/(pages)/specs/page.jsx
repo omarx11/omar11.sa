@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Heading } from "@/app/components/ui/Heading";
-import * as s from "@/app/configs/specs";
-import { author } from "@/app/configs/meta";
+import * as s from "@/app/config/specs";
+import { author } from "@/app/config/meta";
 
 export const metadata = {
   title: "Specs Page",
@@ -79,7 +79,7 @@ export default function SpecsPage() {
                     <Link
                       href={link ? link : "#"}
                       target={link ? "_blank" : "_self"}
-                      className="decoration-emerald-600 hover:underline"
+                      className="decoration-emerald-600 decoration-wavy hover:underline"
                     >
                       {name}
                     </Link>
@@ -97,7 +97,7 @@ export default function SpecsPage() {
                     <Link
                       href={link ? link : "#"}
                       target={link ? "_blank" : "_self"}
-                      className="decoration-emerald-600 hover:underline"
+                      className="decoration-emerald-600 decoration-wavy hover:underline"
                     >
                       {name}
                     </Link>
@@ -117,7 +117,7 @@ export default function SpecsPage() {
                     <Link
                       href={link ? link : "#"}
                       target={link ? "_blank" : "_self"}
-                      className="decoration-emerald-600 hover:underline"
+                      className="decoration-emerald-600 decoration-wavy hover:underline"
                     >
                       {name}
                     </Link>
@@ -135,7 +135,7 @@ export default function SpecsPage() {
                     <Link
                       href={link ? link : "#"}
                       target={link ? "_blank" : "_self"}
-                      className="decoration-emerald-600 hover:underline"
+                      className="decoration-emerald-600 decoration-wavy hover:underline"
                     >
                       {name}
                     </Link>

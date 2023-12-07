@@ -5,7 +5,7 @@ import ActiveLink from "./content/ActiveLink";
 import PlayAudio from "./content/PlayAudio";
 import Discord from "./Discord";
 import Media from "./Media";
-import { author } from "@/app/configs/meta";
+import { author } from "@/app/config/meta";
 import dynamic from "next/dynamic";
 
 const AIBotAssistant = dynamic(() => import("./chatbot/AIBotAssistant"));

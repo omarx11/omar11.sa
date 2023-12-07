@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { media } from "@/app/configs/media";
+import { media } from "@/app/config/media";
 import {
   Tooltip,
   TooltipContent,

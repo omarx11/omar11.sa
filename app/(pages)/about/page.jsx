@@ -1,4 +1,4 @@
-import { author } from "@/app/configs/meta";
+import { author } from "@/app/config/meta";
 import Image from "next/image";
 import Education from "./Education";
 import Achievement from "./Achievement";
@@ -95,9 +95,9 @@ export default function AboutPage() {
             , since I loved the game, and in the first line I wrote in the data
             pack file and how it affected the game, here I began to love
             programming and began my career in it. After that, I entered into
-            self-learning types of programming, including Java, Python,
-            JavaScript, and PHP. The thing I loved most was web development, and
-            I continued to do that from 2018 until now.
+            self-learning types of programming, including Java, Python, PHP, and
+            JavaScript. The thing I loved most was web development, and I
+            continued to do that from 2018 until now.
           </p>
           <p>
             <span className="mb-2 block text-xl font-bold md:text-2xl">
@@ -114,21 +114,19 @@ export default function AboutPage() {
               alt=""
             />
             It was time for me to begin my entry into the College of Technology
-            in 2019 as a web programmer. After entering for a short time, I
-            contracted a chronic disease called{" "}
+            in 2019 as a web programmer. Soon after, I was diagnosed with{" "}
             <Link
               href="https://en.wikipedia.org/wiki/Crohn%27s_disease"
               target="_blank"
               className="underline underline-offset-2 hover:no-underline"
             >
               Crohn’s disease
-            </Link>
-            , by God Almighty’s will. After that, I was admitted to the hospital
-            to undergo part of my colon resection. At that time, I was not sad
-            at all. On the contrary, my mother, relatives, and friends were
-            always visiting me, and I didn't feel tired or exhausted. I was
-            discharged from the hospital after a short period. After that, I
-            continued my path in life as if nothing had happened to me before!
+            </Link>{" "}
+            by God’s will. And underwent a partial colon resection. Despite the
+            challenges, the constant support from my loved ones kept me upbeat
+            during my hospital stay. After a short recovery, I was discharged
+            from the hospital and Continued my path in life as if nothing had
+            happened before!
           </p>
           <p>
             <span className="mb-2 block text-xl font-bold md:text-2xl">
@@ -139,11 +137,12 @@ export default function AboutPage() {
             graduation project. This was after our teacher divided us into
             teams, and each team had three people working on a project. At the
             end of the semester, our team worked hard and we were the first in
-            the idea, shape, and design of the project. You can take a look at{" "}
+            the idea, shape, and design of the project. 🌟 You can take a look
+            at{" "}
             <Link
               href="/static/files/graduation_project_ar.pdf"
               target="_blank"
-              className="text-sky-600 underline underline-offset-2 hover:no-underline"
+              className="text-sky-600 underline-offset-2 hover:underline"
             >
               guardion project.pdf
             </Link>

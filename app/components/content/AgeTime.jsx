@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { author } from "@/app/configs/meta";
+import { author } from "@/app/config/meta";
 
 const getYearsAgo = (date) => {
   let timestamp = new Date().getTime() - date.getTime();

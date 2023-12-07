@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { StatementContext } from "@/app/context/statement";
 import { useContext } from "react";
-import { links } from "@/app/configs/navigation";
+import { links } from "@/app/config/navigation";
 import { cn } from "@/app/lib/utils";
 
 function ActiveLink({ href, title, className }) {

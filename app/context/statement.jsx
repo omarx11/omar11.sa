@@ -1,6 +1,6 @@
 "use client";
 import { createContext, useState } from "react";
-import { links } from "@/app/configs/navigation";
+import { links } from "@/app/config/navigation";
 import { nanoid } from "nanoid";
 
 const ChatBotDefaultValue = [
@@ -22,6 +22,7 @@ export const StatementProvider = ({ children }) => {
   const [userChatBotId, _] = useState(nanoid());
   const [gameAppId, setGameAppId] = useState(null);
   const [isLoadingGame, setIsLoadingGame] = useState(false);
+  const [totalPlayTime, setTotalPlayTime] = useState(0);
 
   const addBotMessage = (message) => {
     setBotMessages((prev) => [...prev, message]);
@@ -53,6 +54,7 @@ export const StatementProvider = ({ children }) => {
         userChatBotId,
         gameAppId,
         isLoadingGame,
+        totalPlayTime,
         setPageNo,
         setPageColor,
         setComments,
@@ -62,6 +64,7 @@ export const StatementProvider = ({ children }) => {
         updateBotMessage,
         setGameAppId,
         setIsLoadingGame,
+        setTotalPlayTime,
       }}
     >
       {children}

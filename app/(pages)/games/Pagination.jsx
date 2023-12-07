@@ -1,4 +1,3 @@
-"use client";
 import { cn } from "@/app/lib/utils";
 import { useEffect, useState } from "react";
 
@@ -35,7 +34,7 @@ function Pagination({ pages, state, onPageChange, className, note }) {
           className={cn(
             "rounded-sm px-2 py-0.5 underline hover:no-underline",
             {
-              "bg-emerald-700": state.page === page,
+              "bg-emerald-700 no-underline": state.page === page,
             },
             {
               "hover:bg-neutral-800": state.page !== page,
