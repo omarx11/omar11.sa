@@ -11,17 +11,16 @@ export const websiteData = `{
     twitter: "https://twitter.com/@dis_x0",
     linkedIn: "https://www.linkedin.com/in/omar-abdulaziz-sa/",
     email: "mail@omar11.sa",
-    discordUserName: "omarx11",
+    discordUsername: "omarx11",
     description:
       "Recent graduate and a passionate web developer with experience in HTML, CSS, and JavaScript. he works with frameworks like React.js and NEXT.js. During his college studies, he developed several projects showcasing his skills. Additionally, proficient in Microsoft Office programs. Always seeking ways to enhance the performance and optimization of his projects.",
     cvLink: "http://localhost:3000/static/files/omar_abdulaziz_cv_en.pdf",
     education: "Technical and Vocational Training Corporation",
-    subJob: "Uber Driver",
-    job: "Nothing, looking for a job.",
+    job: "Works for Uber as a freelancer in his free time, but is currently seeking a full-time position in a great job.",
     games:
-      "Overwatch is his favorite game. He owns 130+ games and has played for 2300+ hours.",
+      "Overwatch is his favorite game. He owns 130+ games. He has played for 5000+ hours.",
     skills:
-      "JavaScript, HTML, CSS, Node.js, PHP, jQuery, Next.js, React.js, TailwindCSS, Bootstrap, MongoDB, MySQL, Supabase, Github, AWS, Cloudflare, Vercel, GCP, Linux, Kali Linux, RaspberryPi, VSCode, Sublime Text, Notepad++.",
+      "JavaScript, HTML, CSS, Node.js, PHP, jQuery, Next.js, React.js, TailwindCSS, Bootstrap, MongoDB, MySQL, Supabase, Github, AWS, Cloudflare, Vercel, GCP, Linux, Kali Linux, RaspberryPi, VSCode, Sublime Text, Notepad++",
   },
   aboutOmar: [
     {
@@ -34,18 +33,17 @@ export const websiteData = `{
     },
     {
       title: "A programming journey",
-      desc: "In 2016, I started learning to program data packs in the game Minecraft, since I loved the game, and in the first line I wrote in the data pack file and how it affected the game, here I began to love programming and began my career in it. After that, I entered into self-learning types of programming, including Java, Python, JavaScript, and PHP. The thing I loved most was web development, and I continued to do that from 2018 until now.",
+      desc: "In 2016, I started learning to program data packs in the game Minecraft, since I loved the game. And in the first line I wrote the code and how it affected the game.. Here I started to love programming and began my career in it. After that, I entered into self-learning types of programming, including Java, Python, PHP, and JavaScript. The thing I loved most was web development, and I continued to do that from 2018 until now.",
     },
     {
       title: "A beginning of Crohn’s",
-      desc: "It was time for me to begin my entry into the College of Technology in 2019 as a web programmer. After entering for a short time, I contracted a chronic disease called Crohn’s disease, by God Almighty’s will. After that, I was admitted to the hospital to undergo part of my colon resection. At that time, I was not sad at all. On the contrary, my mother, relatives, and friends were always visiting me, and I didn't feel tired or exhausted. I was discharged from the hospital after a short period. After that, I continued my path in life as if nothing had happened to me before!",
+      desc: "It was time for me to begin my entry into the College of Technology in 2019 as a web programmer. Soon after, I was diagnosed with Crohn’s disease by God’s will. And underwent a partial colon resection. Despite the challenges, the constant support from my loved ones kept me upbeat during my hospital stay. After a short recovery, I was discharged from the hospital and Continued my path in life as if nothing had happened before!",
     },
     {
       title: "A graduation project",
-      desc: "At the beginning of 2022, I worked on my first project, which was a graduation project. This was after our teacher divided us into teams, and each team had three people working on a project. At the end of the semester, our team worked hard and we were the first in the idea, shape, and design of the project. You can take a look at http://localhost:3000/static/files/graduation_project_ar.pdf We also used techniques Such as JavaScript, NodeJS, and MongoDB database.",
+      desc: "At the beginning of 2022, I worked on my first project, which was a graduation project. This was after our teacher divided us into teams, and each team had three people working on a project. At the end of the semester, our team worked hard and we were the first in the idea, shape, and design of the project. You can take a look at guardion project.pdf, we also used techniques Such as JavaScript, NodeJS, and MongoDB database.",
     },
   ],
-  websiteInfo: "hosted and ",
   projectsInfo: {
     description: "Here's all of his personal projects that he has worked on.",
     list: {
@@ -54,6 +52,7 @@ export const websiteData = `{
         desc: "Omar's online portfolio, built using NEXT.js! hosted and deployed in Vercel, and it's the perfect spot to explore the 7 pages of his projects, favorite animes, games, skills, and more, all with his unique UI design touch.",
         usedTech: "nextjs, tailwindcss, sass, supabase, nextauth",
         link: "https://omar11.sa/",
+        GitHubRepo: "https://github.com/omarx11/omar11.sa",
         license: "MIT License",
         licenseNote:
           "Anyone is free to take inspiration from this site as long as you give credit to the ordinal creator, credits should include my full name (Omar Abdulaziz) and a link to my site (omar11.sa).",

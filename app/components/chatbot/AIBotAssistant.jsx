@@ -2,13 +2,24 @@
 import { StatementContext } from "@/app/context/statement";
 import * as Popover from "@radix-ui/react-popover";
 import MarkdownLite from "./MarkdownLite";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { cn } from "@/app/lib/utils";
 import ChatBotInput from "./ChatBotInput";
 
 export default function AIBotAssistant() {
   const { botMessages, userChatBotId } = useContext(StatementContext);
   const inverseMessages = [...botMessages].reverse();
+
+  useEffect(() => {
+    const chatBoxEl = document.getElementById("chatBox");
+    if (chatBoxEl) {
+      if (
+        chatBoxEl.scrollTop + chatBoxEl.clientHeight >=
+        chatBoxEl.scrollHeight - 50
+      )
+        chatBoxEl.scrollTop = chatBoxEl.scrollHeight;
+    }
+  }, [botMessages]);
 
   return (
     <Popover.Root>
@@ -24,6 +35,7 @@ export default function AIBotAssistant() {
         </svg>
       </Popover.Trigger>
       <Popover.Content
+        id="chatBox"
         className="flex h-[30rem] w-96 flex-col overflow-y-auto rounded-md bg-neutral-900 p-2 ring-4 ring-neutral-800"
         side="bottom"
         align="end"

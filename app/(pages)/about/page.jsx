@@ -67,7 +67,7 @@ export default function AboutPage() {
               height={277}
               placeholder="blur"
               blurDataURL="/static/icons/blur.svg"
-              className="drag-none float-right mb-4 ml-4 hidden h-60 w-60 -rotate-3 select-none rounded-md border-4 border-emerald-600/50 bg-neutral-800 md:block"
+              className="drag-none float-right mb-4 ml-4 hidden h-60 w-60 select-none rounded-md border-4 border-emerald-600/50 bg-neutral-800 md:block"
               alt=""
             />
             In the beginning, I had a goal of becoming a hacker and hacking into
@@ -86,18 +86,18 @@ export default function AboutPage() {
             </span>
             In 2016, I started learning to program data packs in the game{" "}
             <Link
-              href="https://minecraft.net/"
+              href="https://www.minecraft.net/en-us/about-minecraft"
               target="_blank"
               className="underline underline-offset-2 hover:no-underline"
             >
               Minecraft
             </Link>
-            , since I loved the game, and in the first line I wrote in the data
-            pack file and how it affected the game, here I began to love
-            programming and began my career in it. After that, I entered into
-            self-learning types of programming, including Java, Python, PHP, and
-            JavaScript. The thing I loved most was web development, and I
-            continued to do that from 2018 until now.
+            , since I loved the game. And in the first line I wrote the code and
+            how it affected the game.. Here I started to love programming and
+            began my career in it. After that, I entered into self-learning
+            types of programming, including Java, Python, PHP, and JavaScript.
+            The thing I loved most was web development, and I continued to do
+            that from 2018 until now.
           </p>
           <p>
             <span className="mb-2 block text-xl font-bold md:text-2xl">

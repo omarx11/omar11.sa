@@ -142,10 +142,10 @@ export default function GamesCol(data) {
                   <Image
                     src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/header.jpg`}
                     width={256}
-                    height={119}
+                    height={120}
                     placeholder="blur"
                     blurDataURL="/static/icons/blur.svg"
-                    className="drag-none w-[160.6px] select-none rounded-sm bg-neutral-900 transition-transform duration-200"
+                    className="drag-none h-[75.27px] w-[160.6px] select-none rounded-sm bg-neutral-900 transition-transform duration-200"
                     alt=""
                   />
                 </TooltipTrigger>
