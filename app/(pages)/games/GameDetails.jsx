@@ -19,10 +19,12 @@ export default function GameDetails() {
       : 11;
 
   useEffect(() => {
-    if (gameAppId)
+    if (gameAppId) {
       (async () => {
         const data = await getStatsPerGame(gameAppId);
         setGameStats(data);
+
+        if (achievementPage !== 1) setAchievementPage(1);
 
         if (isLoadingGame) {
           setTimeout(() => {
@@ -30,10 +32,11 @@ export default function GameDetails() {
               behavior: "smooth",
               block: "start",
             });
-          }, 100);
+          }, 50);
           setIsLoadingGame(false);
         }
       })();
+    }
   }, [gameAppId]);
 
   if (gameStats) {
@@ -66,7 +69,7 @@ export default function GameDetails() {
 
     const handlePageChange = (page) => setAchievementPage(page);
 
-    const currentAchievementPage = achievements?.slice(
+    let currentAchievementPage = achievements?.slice(
       (achievementPage - 1) * achievementPerPage,
       achievementPage * achievementPerPage,
     );
@@ -76,125 +79,38 @@ export default function GameDetails() {
         className="mt-10 flex flex-wrap gap-2 border-t-8 border-neutral-900 pt-6 sm:flex-nowrap"
         id="gameStats"
       >
-        <div className="w-full sm:w-[76.3%]">
-          <div className="mb-4 flex items-center gap-4">
-            <p className="max-w-max rounded-sm bg-emerald-700 px-1 text-xl font-bold text-neutral-100">
-              My Game Stats
-            </p>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="26"
-              height="26"
-              viewBox="0 0 512 512"
-            >
-              <rect
-                width="48"
-                height="160"
-                x="64"
-                y="320"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="32"
-                rx="8"
-                ry="8"
-              />
-              <rect
-                width="48"
-                height="256"
-                x="288"
-                y="224"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="32"
-                rx="8"
-                ry="8"
-              />
-              <rect
-                width="48"
-                height="368"
-                x="400"
-                y="112"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="32"
-                rx="8"
-                ry="8"
-              />
-              <rect
-                width="48"
-                height="448"
-                x="176"
-                y="32"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="32"
-                rx="8"
-                ry="8"
-              />
-            </svg>
-          </div>
-          <table className="w-full border-separate overflow-hidden border-2 border-neutral-800 text-neutral-200">
-            <thead>
-              <tr className="bg-neutral-900">
-                <th className="border border-neutral-700">Name</th>
-                <th className="border border-neutral-700">Value</th>
-              </tr>
-            </thead>
-            <tbody>
-              {gameDetails && gameDetails.length !== 0 ? (
-                gameDetails.map((value) => (
-                  <tr
-                    key={value.name}
-                    className="hover:bg-neutral-900 hover:text-neutral-50"
-                  >
-                    <td className="line-clamp-1 py-0.5">
-                      {value.name.replace(/_/g, " ")}
-                    </td>
-                    <td className="w-auto pl-1 font-bold text-emerald-500 sm:min-w-[112px] sm:max-w-[112px]">
-                      <CnoUp isCounting end={value.value} duration={3.2} />
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td className="p-2 text-sm text-red-300">
-                    There is No Stats For The Game..
+        <table className="h-max w-full border-separate overflow-hidden border-2 border-neutral-800 text-neutral-200 sm:w-[76.3%]">
+          <thead>
+            <tr className="bg-neutral-900">
+              <th className="border border-neutral-700">Name</th>
+              <th className="border border-neutral-700">Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            {gameDetails && gameDetails.length !== 0 ? (
+              gameDetails.map((value) => (
+                <tr
+                  key={value.name}
+                  className="hover:bg-neutral-900 hover:text-neutral-50"
+                >
+                  <td className="line-clamp-1 py-0.5">
+                    {value.name.replace(/_/g, " ")}
+                  </td>
+                  <td className="w-auto pl-1 font-bold text-emerald-500 sm:min-w-[112px] sm:max-w-[112px]">
+                    <CnoUp isCounting end={value.value} duration={3.2} />
                   </td>
                 </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+              ))
+            ) : (
+              <tr>
+                <td className="p-2 text-sm text-red-300">
+                  There is No Stats For The Game..
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
         <div className="w-full">
-          <div className="mb-4 flex flex-wrap items-end justify-between">
-            <div className="flex items-center gap-4">
-              <p className="max-w-max rounded-sm bg-emerald-700 px-1 text-xl font-bold text-neutral-100">
-                Game Achievements Owned
-              </p>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="26"
-                height="26"
-                viewBox="0 0 256 256"
-              >
-                <path
-                  fill="currentColor"
-                  d="M220 96a92 92 0 1 0-152 69.69V240a12 12 0 0 0 17.37 10.73L128 229.42l42.64 21.31A12 12 0 0 0 188 240v-74.31A91.86 91.86 0 0 0 220 96ZM60 96a68 68 0 1 1 68 68a68.07 68.07 0 0 1-68-68Zm104 124.59l-30.64-15.32a12 12 0 0 0-10.74 0L92 220.58v-39.92a92 92 0 0 0 72 0ZM128 148a52 52 0 1 0-52-52a52.06 52.06 0 0 0 52 52Zm0-80a28 28 0 1 1-28 28a28 28 0 0 1 28-28Z"
-                />
-              </svg>
-            </div>
-            <p className="text-sm text-neutral-400">
-              {achievementsLength} item
-            </p>
-          </div>
           {achievements && achievementsLength !== 0 ? (
             <div className="flex flex-col gap-2">
               {currentAchievementPage.map((app) => (
@@ -223,7 +139,7 @@ export default function GameDetails() {
                 pages={totalAchievementsPages}
                 state={{ page: achievementPage, window: 4 }}
                 onPageChange={handlePageChange}
-                className="justify-end"
+                className="mt-2 justify-end"
                 note={false}
               />
             </div>

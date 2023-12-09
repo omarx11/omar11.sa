@@ -34,7 +34,7 @@ function Pagination({ pages, state, onPageChange, className, note }) {
           className={cn(
             "rounded-sm px-2 py-0.5 underline hover:no-underline",
             {
-              "bg-emerald-700 no-underline": state.page === page,
+              "cursor-default bg-emerald-700 no-underline": state.page === page,
             },
             {
               "hover:bg-neutral-800": state.page !== page,

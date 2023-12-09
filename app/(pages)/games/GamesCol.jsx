@@ -9,12 +9,14 @@ import {
   TooltipTrigger,
 } from "@/app/components/ui/Tooltip";
 import { StatementContext } from "@/app/context/statement";
+import { cn } from "@/app/lib/utils";
 
 export default function GamesCol(data) {
   const {
     isLoadingGame,
     setIsLoadingGame,
     setGameAppId,
+    gameAppId,
     totalPlayTime,
     setTotalPlayTime,
   } = useContext(StatementContext);
@@ -133,7 +135,14 @@ export default function GamesCol(data) {
             {currentItems.map((game) => (
               <Tooltip key={game.appid}>
                 <TooltipTrigger
-                  className="rounded-sm"
+                  className={cn(
+                    "rounded-sm transition-transform duration-150",
+                    {
+                      "pointer-events-none opacity-50": isLoadingGame,
+                      "scale-95 opacity-100 ring-2 ring-neutral-200":
+                        game.appid === gameAppId,
+                    },
+                  )}
                   onClick={(e) => {
                     setIsLoadingGame(true);
                     setGameAppId(game.appid);
@@ -145,7 +154,7 @@ export default function GamesCol(data) {
                     height={120}
                     placeholder="blur"
                     blurDataURL="/static/icons/blur.svg"
-                    className="drag-none h-[75.27px] w-[160.6px] select-none rounded-sm bg-neutral-900 transition-transform duration-200"
+                    className="drag-none h-[75.27px] w-[160.6px] select-none rounded-sm bg-neutral-900"
                     alt=""
                   />
                 </TooltipTrigger>
