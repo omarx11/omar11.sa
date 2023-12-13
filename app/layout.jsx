@@ -6,7 +6,7 @@ import Header from "./components/Header";
 import Providers from "./components/Providers";
 import { author } from "@/app/config/meta";
 
-const recursive = Recursive({ subsets: ["latin"] });
+const recursive = Recursive({ subsets: ["latin"], display: "swap" });
 
 export const metadata = {
   metadataBase: new URL(author.siteUrl),
