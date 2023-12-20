@@ -57,10 +57,10 @@ Follows all web standards, a **100** score on Lighthouse metrics!
    ![Skills page](<public/static/images/readme/Screenshot 2023-12-20 003136.png>)
 
 3. Specs Page
-   ![Specs page](<public/static/images/readme/Screenshot 2023-12-20 003136.png>)
+   ![Specs page](<public/static/images/readme/Screenshot 2023-12-20 003222.png>)
 
 4. About Page
-   ![About page](<public/static/images/readme/Screenshot 2023-12-20 003222.png>)
+   ![About page](<public/static/images/readme/Screenshot 2023-12-20 003305.png>)
 
 5. Anime Page
    ![Anime page](<public/static/images/readme/Screenshot 2023-12-20 003351.png>)
