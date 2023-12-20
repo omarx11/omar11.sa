@@ -1,5 +1,4 @@
 export const relativeTime = (time) => {
-  // configure timestemp to relative time
   const relativeTimePeriods = [
     [31536000, "year"],
     [2419200, "month"],
@@ -10,6 +9,7 @@ export const relativeTime = (time) => {
     [1, "second"],
   ];
 
+  // configure timestemp to relative time
   function relativeTime(date, isUtc = true) {
     if (!(date instanceof Date)) date = new Date(date * 1000);
     const seconds = (new Date() - date) / 1000;

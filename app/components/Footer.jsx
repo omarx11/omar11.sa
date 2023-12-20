@@ -4,7 +4,7 @@ import ActiveLink from "./content/ActiveLink";
 
 export default function Footer() {
   return (
-    <footer className="flex flex-row flex-wrap items-center justify-between border-t-[1px] border-neutral-800 pb-12 pt-4 text-sm">
+    <footer className="flex flex-row flex-wrap items-center justify-between border-t-[1px] border-neutral-800 pb-6 pt-4 text-sm sm:pb-12">
       <p className="text-[0.8rem] text-neutral-500">
         {new Date().getFullYear()} © {author.fullName} • Made with..{" "}
         <Link
@@ -15,7 +15,7 @@ export default function Footer() {
           NEXT.js
         </Link>
       </p>
-      <div className="flex flex-row items-center gap-1 text-neutral-400">
+      <div className="flex flex-row items-center gap-1 text-neutral-500">
         <Link
           href={`${author.github}/omar11.sa`}
           target="_blank"
@@ -25,6 +25,7 @@ export default function Footer() {
         </Link>
         <span className="text-neutral-500">•</span>
         <ActiveLink
+          label="Read more about license"
           href="/license"
           title={
             <svg

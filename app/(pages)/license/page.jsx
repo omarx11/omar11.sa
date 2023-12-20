@@ -22,7 +22,7 @@ export default function LicensePage() {
   return (
     <>
       <Heading name="License" emoji="📜" scrollTo="#license" />
-      <h2 className="my-6 w-full border-l-4 border-emerald-900 bg-gradient-to-r from-stone-900 pl-4 text-neutral-400 opacity-60 md:w-[60%]">
+      <h2 className="my-6 w-full border-l-4 border-emerald-900 bg-gradient-to-r from-stone-900 pl-4 text-neutral-400 opacity-60 md:w-[56%]">
         Note: Anyone is free to take inspiration from this site as long as you
         give credit to the ordinal creator, credits should include my full name
         ({author.fullName}) and a link to my site ({author.siteName}).{" "}

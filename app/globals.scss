@@ -11,16 +11,32 @@
   }
 }
 
-*::-webkit-scrollbar {
+body::-webkit-scrollbar,
+textarea::-webkit-scrollbar,
+#chatBox::-webkit-scrollbar {
   width: 0;
 }
+
 ::selection {
   background-color: rgb(4 120 87);
   color: white;
 }
 
 .react-activity-calendar__calendar {
-  width: 100%;
+  width: 270%;
+  max-width: max-content;
+}
+.react-activity-calendar__scroll-container::-webkit-scrollbar {
+  width: 20;
+}
+
+@media (min-width: 1024px) {
+  .react-activity-calendar__calendar {
+    width: 101.9%;
+  }
+  .react-activity-calendar__scroll-container::-webkit-scrollbar {
+    width: 0;
+  }
 }
 
 @layer utilities {
@@ -107,12 +123,30 @@
   }
   @keyframes scale-in {
     from {
-      opacity: 0;
       transform: scale(0);
+      opacity: 0;
     }
     to {
-      opacity: 1;
       transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .fade-opacity {
+    animation: fade-opacity 1.6s ease-in;
+  }
+  @keyframes fade-opacity {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    80% {
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      rotate: 6deg;
+      opacity: 1;
     }
   }
 

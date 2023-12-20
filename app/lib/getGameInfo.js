@@ -4,6 +4,10 @@ import { author } from "../config/meta";
 const steamAPIKey = process.env.STEAM_API_KEY;
 const cacheTime = 43200; // 12 hours
 
+/**
+ * GET Owned Steam Games
+ * @returns An array of Games.
+ */
 export const getAllGames = async () => {
   const data = await Promise.all([
     fetch(
@@ -18,6 +22,10 @@ export const getAllGames = async () => {
   return data;
 };
 
+/**
+ * GET Owned Stats Per Game
+ * @returns An array of Game Stats.
+ */
 export const getStatsPerGame = async (appId) => {
   const data = await Promise.all([
     fetch(

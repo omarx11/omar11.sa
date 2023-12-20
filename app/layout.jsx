@@ -52,7 +52,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${recursive.className} flex min-h-screen justify-center overflow-x-hidden bg-neutral-950 antialiased`}
+        className={`${recursive.className} flex min-h-screen justify-center overflow-x-hidden bg-black antialiased`}
       >
         <main className="mx-3 flex max-w-5xl flex-col">
           <Providers>

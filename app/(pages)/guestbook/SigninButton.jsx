@@ -6,7 +6,7 @@ export default function SigninButton() {
   const [isLoading, setIsLoading] = useState("");
 
   return (
-    <div className="m-auto flex max-w-xl flex-row flex-wrap items-center justify-center gap-4 rounded-md bg-neutral-900 py-8 text-center text-neutral-50">
+    <div className="my-14 flex max-w-xl flex-row flex-wrap items-center justify-center gap-4 rounded-md bg-neutral-900 py-8 text-center text-neutral-50">
       <p>Sign In with:</p>
       <div className="flex gap-3">
         <button

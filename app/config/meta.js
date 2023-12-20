@@ -7,7 +7,7 @@ export const author = {
   location: "Saudi Arabia / Buraydah",
   siteName: "omar11.sa",
   siteUrl: PATHNAME_URL,
-  description: "Omar Online Portfolio",
+  description: "Omar's Portfolio & Personal Website",
   github: "https://github.com/omarx11",
   twitter: "https://twitter.com/@dis_x0",
   linkedIn: "https://www.linkedin.com/in/omar-abdulaziz-sa/",

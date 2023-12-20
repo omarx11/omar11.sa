@@ -16,7 +16,7 @@ export function Heading({ name, emoji, scrollTo }) {
   };
 
   return (
-    <div className="mb-4 w-fit font-bold text-neutral-300">
+    <div className="mb-4 font-bold text-neutral-300">
       <Link
         href={scrollTo}
         scroll={false}

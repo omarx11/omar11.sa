@@ -7,9 +7,11 @@ import {
   HoverCardTrigger,
 } from "@radix-ui/react-hover-card";
 import { cn } from "../lib/utils";
+import { author } from "../config/meta";
 
-export default function Discord({ id }) {
-  const { data } = useLanyard(id);
+export default function Discord() {
+  const { data } = useLanyard(author.discordId);
+
   if (data === undefined)
     return (
       <span className="my-1 h-4 w-40 animate-pulse rounded-sm bg-neutral-800/75"></span>
@@ -26,10 +28,25 @@ export default function Discord({ id }) {
       );
 
     let activitie = data.activities[0]?.name;
+
     const playing =
       activitie === undefined
-        ? "On desktop. not doing anything! 📡🛰️"
+        ? "On his desktop. not doing anything! 📡🛰️"
         : `Playing: ${activitie}`;
+
+    const playingFor = relativeTime(
+      new Date(data.activities[0]?.timestamps?.start),
+    );
+
+    const onlineState =
+      `${author.name} is currently ${status} and ${playing} ${playingFor}`.replace(
+        /[.:]/g,
+        "",
+      );
+
+    // save my online state to browser cookie for later use
+    if (typeof window !== "undefined")
+      window.document.cookie = `onlineState=${onlineState}`;
 
     return (
       <HoverCard openDelay={0} closeDelay={0}>
@@ -51,25 +68,19 @@ export default function Discord({ id }) {
         <HoverCardContent
           sideOffset={0}
           align="start"
-          className="w-60 rounded-md border-4 border-dashed border-emerald-600/40 bg-zinc-800 p-2"
+          className="w-60 space-y-1 rounded-md border-4 border-dashed border-emerald-600/40 bg-zinc-800 p-2 text-sm"
         >
-          <div className="space-y-1 text-sm">
-            <h4 className="font-semibold">Id: Omar#0135</h4>
-            {data.discord_status !== "offline" ? (
-              <>
-                <p>{playing}</p>
-                {data.activities.length !== 0 && (
-                  <p className="pt-2 text-xs text-neutral-400">
-                    {relativeTime(
-                      new Date(data.activities[0]?.timestamps?.start),
-                    )}
-                  </p>
-                )}
-              </>
-            ) : (
-              <p>Maybe he's sleeping 💤 or outside his room 🚪</p>
-            )}
-          </div>
+          <h4 className="font-semibold">Id: Omar#0135</h4>
+          {data.discord_status !== "offline" ? (
+            <>
+              <p>{playing}</p>
+              {data.activities.length !== 0 && (
+                <p className="pt-2 text-xs text-neutral-400">{playingFor}</p>
+              )}
+            </>
+          ) : (
+            <p>Maybe he's sleeping 💤 or outside his room 🚪</p>
+          )}
         </HoverCardContent>
       </HoverCard>
     );

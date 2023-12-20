@@ -78,7 +78,7 @@ export default function Header() {
       <div className="z-20">
         <div className="flex flex-row items-center justify-between pl-0 pt-5 text-neutral-300 md:pl-1">
           <div className="flex flex-col gap-2">
-            <Discord id={author.discordId} />
+            <Discord />
             <div className="flex">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -95,14 +95,19 @@ export default function Header() {
               <p className="text-sm">{author.location}.</p>
             </div>
           </div>
-          <AIBotAssistant />
+          <div className="flex flex-row-reverse items-start gap-2">
+            <AIBotAssistant />
+            <p className="fade-opacity -z-10 -mt-1 hidden rotate-6 select-none rounded-sm bg-neutral-900 px-2 py-1 text-[0.6rem] text-neutral-500 xs:block sm:text-xs">
+              {"AI Assistant ->"}
+            </p>
+          </div>
         </div>
         <div className="flex flex-row flex-wrap items-center justify-between pt-5">
           <Media />
           <Link
             href="https://status.omar11.sa/"
             target="_blank"
-            className="text-sm text-emerald-400/90 duration-150 hover:opacity-70"
+            className="text-sm text-emerald-500 duration-100 hover:opacity-80"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -114,7 +119,7 @@ export default function Header() {
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="mr-2 inline text-emerald-400/90"
+              className="mr-2 inline text-emerald-500"
             >
               <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
             </svg>

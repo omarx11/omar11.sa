@@ -1,75 +1,68 @@
 "use client";
 import Image from "next/image";
+import { useState, useEffect, useContext } from "react";
 import { StatementContext } from "@/app/context/statement";
 import { signOut, useSession } from "next-auth/react";
-import { useState, useEffect, useContext } from "react";
+import { postComment } from "@/app/lib/fetchRequests";
 import SigninButton from "./SigninButton";
 import { cn } from "@/app/lib/utils";
 
 export default function FormData() {
   const { data: session, status } = useSession();
-  const [comment, setComment] = useState("");
+  const [textComment, setTextComment] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [wordLimit, setWordLimit] = useState(false);
   const [isLoading, setIsLoading] = useState("");
-  const { setComments } = useContext(StatementContext);
+  const { setComments, setIsCommentLoading } = useContext(StatementContext);
 
   const handleSubmit = async () => {
-    setComment("");
+    setIsCommentLoading(true);
+    setTextComment("");
     setIsLoading("SEND");
     if (session && session.user) {
-      const data = await fetch("/api/guestbook", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ comment: comment }),
-      });
-      const content = await data.json();
-
+      const content = await postComment(textComment);
       setComments((prev) => [content, ...prev]);
     }
     setIsLoading("");
+    setIsCommentLoading(false);
   };
 
   useEffect(() => {
-    comment.length >= 2000 ? setWordLimit(true) : setWordLimit(false);
-    comment === "" ? setIsTyping(true) : setIsTyping(false);
-  }, [comment]);
+    textComment.length >= 2000 ? setWordLimit(true) : setWordLimit(false);
+    textComment === "" ? setIsTyping(true) : setIsTyping(false);
+  }, [textComment]);
 
   if (status === "loading")
-    // if (status)
     return (
-      <div className="m-auto my-10 h-24 w-96 animate-pulse rounded-md bg-neutral-900"></div>
+      <div className="my-[4.4rem] h-[116px] w-full animate-pulse rounded-md bg-neutral-900 sm:w-[28rem]"></div>
     );
 
   return status === "authenticated" ? (
-    <div className="m-auto max-w-xl">
+    <div className="my-8 w-full max-w-xl">
       <div className="mb-2 flex select-none items-end gap-2">
         <Image
           src={session.user.image}
-          width={26}
-          height={26}
-          className="drag-none rounded-full bg-neutral-800"
+          width={32}
+          height={32}
+          className="drag-none h-[26px] w-[26px] rounded-full bg-neutral-800"
           alt="user-avatar"
         />
         <p className="text-sm text-neutral-500">
-          Type as - {session.user.name}
+          Type as {">"} {session.user.name}
         </p>
       </div>
       <textarea
-        name="comment"
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
+        name="textComment"
+        value={textComment}
+        onChange={(e) => setTextComment(e.target.value)}
         maxLength={2000}
-        placeholder="Leave a message.."
+        placeholder="Leave a comment.."
         spellCheck={false}
         className={cn(
-          "h-36 w-full resize-none rounded-md border-4 border-neutral-700 bg-neutral-900 p-2 text-lg text-neutral-50 shadow-sm outline-0 ring-4 ring-neutral-700 duration-300 placeholder:text-sm placeholder:italic focus:bg-neutral-950",
+          "h-40 w-full resize-none rounded-md border-[6px] border-neutral-800 bg-neutral-900 p-2 text-lg text-neutral-50 shadow-sm outline-0 ring-4 ring-neutral-700 duration-300 placeholder:text-sm placeholder:italic focus:bg-neutral-950",
           {
             "caret-rose-500 focus:ring-rose-800": wordLimit,
-            "caret-emerald-500 focus:ring-emerald-600": !wordLimit,
+            "caret-emerald-500 focus:ring-neutral-600": !wordLimit,
           },
         )}
       />
@@ -80,14 +73,14 @@ export default function FormData() {
             "text-neutral-500": !wordLimit,
           })}
         >
-          {comment.length} / 2000
+          {textComment.length} / 2000
         </span>
-        <div className="mt-0.5 flex gap-4 text-neutral-50">
+        <div className="mt-0.5 flex gap-2 text-neutral-50">
           <button
-            aria-label="Post Comment"
+            aria-label="Send Comment"
             disabled={isTyping}
             onClick={handleSubmit}
-            className="flex items-center gap-1 rounded-md bg-sky-800 px-2 py-1 text-base duration-100 hover:bg-sky-900 disabled:cursor-default disabled:select-none disabled:opacity-60"
+            className="flex items-center gap-1 rounded-md bg-sky-800 px-2 py-1 text-base duration-100 hover:bg-sky-900 disabled:cursor-not-allowed disabled:select-none disabled:bg-sky-800 disabled:opacity-60"
           >
             SEND
             {isLoading === "SEND" && (
@@ -111,14 +104,14 @@ export default function FormData() {
             )}
           </button>
           <button
-            aria-label="Sign out"
+            aria-label="Sign-Out"
             onClick={() => {
               signOut();
               setIsLoading("SignOut");
             }}
             className="flex items-center gap-1 rounded-md bg-rose-800 px-2 py-1 text-base duration-100 hover:bg-rose-900"
           >
-            Sign Out
+            Sign-Out
             {isLoading === "SignOut" && (
               <svg
                 xmlns="http://www.w3.org/2000/svg"

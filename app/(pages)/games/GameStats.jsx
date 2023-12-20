@@ -3,10 +3,10 @@ import { CnoUp } from "@/app/hooks/useCountUp";
 import Image from "next/image";
 import Pagination from "./Pagination";
 import { useContext, useEffect, useState } from "react";
-import { getStatsPerGame } from "../../lib/getStatsPerGame";
+import { getStatsPerGame } from "../../lib/getGameInfo";
 import { StatementContext } from "@/app/context/statement";
 
-export default function GameDetails() {
+export default function GameStats() {
   const { gameAppId, setIsLoadingGame, isLoadingGame } =
     useContext(StatementContext);
   const [achievementPage, setAchievementPage] = useState(1);
@@ -42,7 +42,7 @@ export default function GameDetails() {
   if (gameStats) {
     const achievements =
       gameStats[1].game.availableGameStats?.achievements?.filter((app1) =>
-        gameStats[0].playerstats.achievements.some(
+        gameStats[0].playerstats.achievements?.some(
           (app2) => app2.achieved !== 0 && app1.name === app2.apiname,
         ),
       );
@@ -76,7 +76,7 @@ export default function GameDetails() {
 
     return (
       <div
-        className="mt-10 flex flex-wrap gap-2 border-t-8 border-neutral-900 pt-6 sm:flex-nowrap"
+        className="mt-10 flex flex-wrap-reverse gap-10 border-t-8 border-neutral-900 pt-6 sm:flex-nowrap sm:gap-2"
         id="gameStats"
       >
         <table className="h-max w-full border-separate overflow-hidden border-2 border-neutral-800 text-neutral-200 sm:w-[76.3%]">
@@ -104,7 +104,7 @@ export default function GameDetails() {
             ) : (
               <tr>
                 <td className="p-2 text-sm text-red-300">
-                  There is No Stats For The Game..
+                  No Stats For The Game..
                 </td>
               </tr>
             )}
@@ -116,7 +116,7 @@ export default function GameDetails() {
               {currentAchievementPage.map((app) => (
                 <div
                   key={app.name}
-                  className="flex gap-3 rounded-md bg-neutral-900 p-1 duration-150 hover:scale-105 hover:bg-neutral-800"
+                  className="flex gap-3 rounded-md bg-neutral-900 p-1 duration-100 hover:scale-105 hover:bg-neutral-800"
                 >
                   <Image
                     src={app.icon}
@@ -124,12 +124,12 @@ export default function GameDetails() {
                     height={48}
                     placeholder="blur"
                     blurDataURL="/static/icons/blur.svg"
-                    className="drag-none h-12 w-12 select-none rounded-sm bg-neutral-800"
+                    className="drag-none h-10 w-10 select-none rounded-sm bg-neutral-800 sm:h-12 sm:w-12"
                     alt=""
                   />
                   <div className="flex flex-col justify-between text-sm">
-                    <p className="mt-1">{app.displayName}</p>
-                    <p className="line-clamp-1 text-neutral-400">
+                    <p className="mt-1 text-neutral-100">{app.displayName}</p>
+                    <p className="line-clamp-1 text-xs text-neutral-400 sm:text-sm">
                       {app.description}
                     </p>
                   </div>
@@ -144,9 +144,7 @@ export default function GameDetails() {
               />
             </div>
           ) : (
-            <p className="p-2 text-red-300">
-              There is No Achievements For The Game..
-            </p>
+            <p className="p-2 text-red-300">No Achievements For The Game..</p>
           )}
         </div>
       </div>

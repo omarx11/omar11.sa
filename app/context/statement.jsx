@@ -17,12 +17,17 @@ export const StatementProvider = ({ children }) => {
   const [pageNo, setPageNo] = useState(0);
   const [pageColor, setPageColor] = useState(links[pageNo]?.color);
   const [comments, setComments] = useState(null);
+  const [isCommentLoading, setIsCommentLoading] = useState(false);
   const [botMessages, setBotMessages] = useState(ChatBotDefaultValue);
   const [isBotMsgUpdating, setIsBotMsgUpdating] = useState(false);
   const [userChatBotId, _] = useState(nanoid());
   const [gameAppId, setGameAppId] = useState(null);
   const [isLoadingGame, setIsLoadingGame] = useState(false);
   const [totalPlayTime, setTotalPlayTime] = useState(0);
+
+  const removeComment = (cid) => {
+    setComments((prev) => prev.filter((comment) => comment.cid !== cid));
+  };
 
   const addBotMessage = (message) => {
     setBotMessages((prev) => [...prev, message]);
@@ -49,6 +54,7 @@ export const StatementProvider = ({ children }) => {
         pageNo,
         pageColor,
         comments,
+        isCommentLoading,
         botMessages,
         isBotMsgUpdating,
         userChatBotId,
@@ -58,6 +64,8 @@ export const StatementProvider = ({ children }) => {
         setPageNo,
         setPageColor,
         setComments,
+        removeComment,
+        setIsCommentLoading,
         setIsBotMsgUpdating,
         addBotMessage,
         removeBotMessage,

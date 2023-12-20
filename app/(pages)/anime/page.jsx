@@ -36,18 +36,18 @@ export default function AnimePage() {
             key={i}
             href={url}
             target="_blank"
-            className="group relative mb-4 flex h-36 items-center justify-items-start overflow-hidden rounded-lg px-4 before:absolute before:inset-0 before:z-10 before:bg-black before:opacity-0 before:transition before:duration-150 hover:before:opacity-50 sm:px-8"
+            className="group relative mb-4 flex h-36 items-center justify-items-start overflow-hidden rounded-lg px-4 duration-300 before:absolute before:inset-0 before:z-10 before:bg-black before:opacity-0 before:transition before:duration-150 hover:h-48 hover:before:opacity-50 sm:px-8"
           >
             <Image
               src={image}
               width={1080}
-              height={140}
+              height={227}
               placeholder="blur"
               blurDataURL="/static/icons/blur.svg"
-              className="absolute left-0 top-0 h-full w-full rounded-lg bg-neutral-800 object-cover transition duration-150 group-hover:scale-[1.02] group-hover:-scale-y-100"
+              className="absolute left-0 top-0 h-full w-full rounded-lg bg-neutral-800 object-cover duration-150 group-hover:scale-[1.02] sm:h-auto sm:w-auto"
               alt={name}
             />
-            <div className="z-20 w-full scale-95 space-y-1 opacity-0 transition duration-300 group-hover:scale-100 group-hover:opacity-100">
+            <div className="z-20 w-full scale-95 space-y-1 opacity-0 duration-300 group-hover:scale-100 group-hover:opacity-100">
               <p className="text-3xl font-bold text-neutral-50">
                 <span className="text-neutral-300">{i + 1} </span>
                 {name}

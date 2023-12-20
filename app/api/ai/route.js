@@ -4,6 +4,7 @@ import { MessageArraySchema } from "@/app/lib/validators/message";
 
 export async function POST(req) {
   const { botMessages } = await req.json();
+  const prompt = await chatbotPrompt();
 
   const parsedMessages = MessageArraySchema.parse(botMessages);
 
@@ -16,7 +17,7 @@ export async function POST(req) {
 
   outboundMessages.unshift({
     role: "system",
-    content: chatbotPrompt,
+    content: prompt,
   });
 
   const payload = {

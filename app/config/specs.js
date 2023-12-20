@@ -69,12 +69,12 @@ export const network_info = [
     name: "DNS address: 1.1.1.1, 1.0.0.1.",
   },
   {
-    name: "Download speed Mbps: 808.17.",
-    link: "https://www.speedtest.net/result/15386942140",
+    name: "Download speed Mbps: 844.83.",
+    link: "https://www.speedtest.net/result/15608696529",
   },
   {
-    name: "Upload speed Mbps: 34.66.",
-    link: "https://www.speedtest.net/result/15386942140",
+    name: "Upload speed Mbps: 28.02.",
+    link: "https://www.speedtest.net/result/15608696529",
   },
   {
     name: "Ethernet switch: Linksys Lgs105 5-Port Lgs105-Me-Rtl",

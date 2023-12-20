@@ -11,7 +11,7 @@ import {
 import { StatementContext } from "@/app/context/statement";
 import { cn } from "@/app/lib/utils";
 
-export default function GamesCol(data) {
+export default function GamesCollection({ data }) {
   const {
     isLoadingGame,
     setIsLoadingGame,
@@ -28,7 +28,7 @@ export default function GamesCol(data) {
   ]; // filter multiple games by there ids.
 
   // Sorting by playtime + filtered games that i don't want to show.
-  const gamesArray = data.data.games
+  const gamesArray = data.games
     .sort((a, b) => b.playtime_forever - a.playtime_forever)
     .filter((item) => !targetIds.includes(item.appid));
 
@@ -100,8 +100,8 @@ export default function GamesCol(data) {
           {data && (
             <TooltipProvider delayDuration={0}>
               <Tooltip>
-                <TooltipTrigger>
-                  <p className="text-sm text-neutral-400">
+                <TooltipTrigger asChild>
+                  <p className="text-xs text-neutral-400 sm:text-sm">
                     <span className="text-neutral-300">{totalItems}</span> game
                     found
                     <svg
@@ -109,7 +109,7 @@ export default function GamesCol(data) {
                       width="16"
                       height="16"
                       viewBox="0 0 16 16"
-                      className="ml-1.5 inline"
+                      className="ml-1.5 hidden sm:inline"
                     >
                       <path
                         fill="currentColor"
@@ -118,7 +118,7 @@ export default function GamesCol(data) {
                     </svg>
                   </p>
                 </TooltipTrigger>
-                <TooltipContent className="rounded-sm bg-emerald-900">
+                <TooltipContent className="rounded-sm bg-emerald-900 ring-2 ring-emerald-950">
                   <p>
                     Total play time \{" "}
                     <span className="text-neutral-300">
@@ -135,12 +135,15 @@ export default function GamesCol(data) {
             {currentItems.map((game) => (
               <Tooltip key={game.appid}>
                 <TooltipTrigger
+                  aria-label={game.name}
                   className={cn(
-                    "rounded-sm transition-transform duration-150",
+                    "rounded-sm transition-transform duration-100",
                     {
                       "pointer-events-none opacity-50": isLoadingGame,
-                      "scale-95 opacity-100 ring-2 ring-neutral-200":
+                      "pointer-events-none scale-95 opacity-100 ring-4 ring-emerald-400":
                         game.appid === gameAppId,
+                      "ring-neutral-200 hover:ring-2 focus:ring-2":
+                        game.appid !== gameAppId,
                     },
                   )}
                   onClick={(e) => {
@@ -160,12 +163,12 @@ export default function GamesCol(data) {
                 </TooltipTrigger>
                 <TooltipContent
                   align="start"
-                  className="rounded-sm bg-emerald-900"
+                  className="rounded-sm bg-neutral-800"
                 >
                   <p className="underline decoration-neutral-300">
                     {game.name}
                   </p>
-                  <span className="block text-xs text-neutral-300">
+                  <span className="block text-xs text-emerald-300">
                     {Math.floor((game.playtime_forever / 60) * 10) / 10} hours
                     total
                   </span>

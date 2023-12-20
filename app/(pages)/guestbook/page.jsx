@@ -28,7 +28,7 @@ export default function GuestbookPage() {
         Hey There!, please sign in and say hi. and Thanks for visiting my
         website 💚
       </h2>
-      <div className="w-full py-16">
+      <div className="flex w-full items-center justify-center">
         <FormData />
       </div>
       <GuestbookMessages />

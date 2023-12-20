@@ -21,6 +21,7 @@ export default function PlayAudio() {
   return (
     <div className="hidden sm:block">
       <button
+        aria-label="Play Audio"
         className="absolute -top-[38px] right-0 rounded-full bg-neutral-900 p-1.5 hover:bg-neutral-700/75"
         onClick={(e) => {
           e.preventDefault();

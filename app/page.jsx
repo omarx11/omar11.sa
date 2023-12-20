@@ -10,22 +10,12 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./components/ui/Tooltip";
+import { getGithubRepos } from "./lib/fetchRequests";
 
 export default async function HomePage() {
   const filteredRepos = [624386055, 601036020, 386408964]; // filter repos by there ids.
 
-  const res = await fetch(
-    "https://api.github.com/users/omarx11/repos?direction=desc",
-    {
-      headers: {
-        Accept: "application/vnd.github+json",
-        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
-    },
-  );
-  if (!res.ok) throw new Error("Failed to fetch data");
-  const repos = await res.json();
+  const repos = await getGithubRepos();
 
   const reposArray = repos.filter((repo) => !filteredRepos.includes(repo.id));
   reposArray.push(...manualRepository);
@@ -107,7 +97,7 @@ export default async function HomePage() {
                     {reposInfo[repo.name].lang.map((icon, i) => (
                       <Image
                         key={i}
-                        src={`/static/icons/tech/${icon}`}
+                        src={icon}
                         width={16}
                         height={16}
                         className="drag-none opacity-60 hover:opacity-100"

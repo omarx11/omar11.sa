@@ -1,4 +1,5 @@
 import { StatementContext } from "@/app/context/statement";
+import { getBotMessage, saveBotMessage } from "@/app/lib/fetchRequests";
 import { useMutation } from "@tanstack/react-query";
 import { nanoid } from "nanoid";
 import { useContext, useEffect, useRef, useState } from "react";
@@ -20,16 +21,9 @@ const ChatBotInput = () => {
 
   const { mutate: sendMessage } = useMutation({
     mutationKey: ["sendMessage"],
-    // include message to later use it in onMutate
+    // include message to later use with onMutate
     mutationFn: async (_message) => {
-      const response = await fetch("/api/ai", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ botMessages }),
-      });
-
+      const response = await getBotMessage({ botMessages });
       return response.body;
     },
     onMutate(message) {
@@ -77,18 +71,12 @@ const ChatBotInput = () => {
   });
 
   useEffect(() => {
-    if (isBotMsgUpdating === true && botMessages.length > 1) {
-      fetch("/api/database", {
-        method: "POST",
-        body: JSON.stringify({
-          data: {
-            botMessages,
-            uuid: userChatBotId,
-          },
-        }),
-      });
-      setIsBotMsgUpdating(false);
-    }
+    (async () => {
+      if (isBotMsgUpdating === true && botMessages.length > 1) {
+        await saveBotMessage({ botMessages }, userChatBotId);
+        setIsBotMsgUpdating(false);
+      }
+    })();
   }, [isBotMsgUpdating]);
 
   return (
@@ -143,7 +131,7 @@ const ChatBotInput = () => {
               height="22"
               viewBox="0 0 24 24"
             >
-              <g fill="#d4d4d4" fillRule="evenodd" clipRule="evenodd">
+              <g fill="#c4c4c4" fillRule="evenodd" clipRule="evenodd">
                 <path d="M3 14a1 1 0 0 1 1-1h12a3 3 0 0 0 3-3V6a1 1 0 1 1 2 0v4a5 5 0 0 1-5 5H4a1 1 0 0 1-1-1z" />
                 <path d="M3.293 14.707a1 1 0 0 1 0-1.414l4-4a1 1 0 0 1 1.414 1.414L5.414 14l3.293 3.293a1 1 0 1 1-1.414 1.414l-4-4z" />
               </g>

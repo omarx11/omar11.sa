@@ -1,7 +1,7 @@
 import { cn } from "@/app/lib/utils";
 import { useEffect, useState } from "react";
 
-function Pagination({ pages, state, onPageChange, className, note }) {
+const Pagination = ({ pages, state, onPageChange, className, note }) => {
   const [buttons, setButtons] = useState([]);
 
   useEffect(() => {
@@ -112,6 +112,6 @@ function Pagination({ pages, state, onPageChange, className, note }) {
       <div className="flex select-none gap-1 text-sm">{buttons}</div>
     </div>
   );
-}
+};
 
 export default Pagination;

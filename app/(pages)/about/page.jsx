@@ -1,7 +1,7 @@
 import { author } from "@/app/config/meta";
 import Image from "next/image";
 import Education from "./Education";
-import Achievement from "./Achievement";
+import Certifications from "./Certifications";
 import Link from "next/link";
 
 export const metadata = {
@@ -36,11 +36,12 @@ export default function AboutPage() {
         />
       </div>
       <div className="max-w-3xl md:order-first md:row-span-2">
-        <div className="mt-6 space-y-7 text-base text-neutral-400">
-          <p>
-            <span className="mb-2 block text-xl font-bold md:text-2xl">
-              # <span className="text-emerald-500">A</span> kid adventure 👨🏻‍🚀
-            </span>
+        <div className="mt-6 space-y-7">
+          <p className="text-neutral-400">
+            <strong className="mb-2 block text-xl font-bold text-neutral-300 md:text-2xl">
+              <span className="text-neutral-400">#</span>{" "}
+              <span className="text-emerald-500">A</span> kid adventure 👨🏻‍🚀
+            </strong>
             I started using my family computer in 2011 when I was 11 years old.
             I started opening an account on Facebook after my cousin told me
             that there was a game called{" "}
@@ -57,10 +58,11 @@ export default function AboutPage() {
             always thought since I was young, how do these games and websites
             work?
           </p>
-          <p>
-            <span className="mb-2 block text-xl font-bold md:text-2xl">
-              # <span className="text-emerald-500">A</span> hacker goal ☠️
-            </span>
+          <p className="text-neutral-400">
+            <strong className="mb-2 block text-xl font-bold text-neutral-300 md:text-2xl">
+              <span className="text-neutral-400">#</span>{" "}
+              <span className="text-emerald-500">A</span> hacker goal ☠️
+            </strong>
             <Image
               src="/static/images/IMG_20171004_190924.jpg"
               width={240}
@@ -79,11 +81,11 @@ export default function AboutPage() {
             index to the front page of the website, I remember at that time I
             did not leave anyone in school without telling him that. 😅
           </p>
-          <p>
-            <span className="mb-2 block text-xl font-bold md:text-2xl">
-              # <span className="text-emerald-500">A</span> programming journey
-              👨🏻‍💻
-            </span>
+          <p className="text-neutral-400">
+            <strong className="mb-2 block text-xl font-bold text-neutral-300 md:text-2xl">
+              <span className="text-neutral-400">#</span>{" "}
+              <span className="text-emerald-500">A</span> programming journey 👨🏻‍💻
+            </strong>
             In 2016, I started learning to program data packs in the game{" "}
             <Link
               href="https://www.minecraft.net/en-us/about-minecraft"
@@ -99,11 +101,12 @@ export default function AboutPage() {
             The thing I loved most was web development, and I continued to do
             that from 2018 until now.
           </p>
-          <p>
-            <span className="mb-2 block text-xl font-bold md:text-2xl">
-              # <span className="text-emerald-500">A</span> beginning of Crohn’s
+          <p className="text-neutral-400">
+            <strong className="mb-2 block text-xl font-bold text-neutral-300 md:text-2xl">
+              <span className="text-neutral-400">#</span>{" "}
+              <span className="text-emerald-500">A</span> beginning of Crohn’s
               💉
-            </span>
+            </strong>
             <Image
               src="/static/images/IMG_20230129_124409.jpg"
               width={240}
@@ -128,11 +131,11 @@ export default function AboutPage() {
             from the hospital and Continued my path in life as if nothing had
             happened before!
           </p>
-          <p>
-            <span className="mb-2 block text-xl font-bold md:text-2xl">
-              # <span className="text-emerald-500">A</span> graduation project
-              📝
-            </span>
+          <p className="text-neutral-400">
+            <strong className="mb-2 block text-xl font-bold text-neutral-300 md:text-2xl">
+              <span className="text-neutral-400">#</span>{" "}
+              <span className="text-emerald-500">A</span> graduation project 👨🏻‍🎓
+            </strong>
             At the beginning of 2022, I worked on my first project, which was a
             graduation project. This was after our teacher divided us into
             teams, and each team had three people working on a project. At the
@@ -142,7 +145,7 @@ export default function AboutPage() {
             <Link
               href="/static/files/graduation_project_ar.pdf"
               target="_blank"
-              className="text-sky-600 underline-offset-2 hover:underline"
+              className="text-sky-600 underline underline-offset-2 hover:no-underline"
             >
               guardion project.pdf
             </Link>
@@ -153,7 +156,7 @@ export default function AboutPage() {
       </div>
       <div className="mt-6 md:m-auto md:mt-0 md:pl-14 lg:pl-32">
         <Education />
-        <Achievement />
+        <Certifications />
       </div>
     </div>
   );
