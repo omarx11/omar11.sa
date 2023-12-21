@@ -19,7 +19,7 @@ After all, every programmer’s dream is to have a personal portfolio that shows
 
 ### How's the performance?
 
-From the beginning, my main focus was on speed and enhancing performance. This involved measures such as minimizing code size, optimizing images & using NEXT.js which has huge improvements overall. Like caching data requests & server-side rendering. This makes it faster in loading pages, and excellent for the user experience, in addition to a beautiful user interface & smooth fade-in animation.
+From the beginning, my main focus was on speed and enhancing performance. This involved measures such as minimizing code size, optimizing images & using NEXT.js which has huge improvements overall. Like caching data requests & server-side rendering. This makes it faster in loading pages, and excellent for the user experience, in addition to a beautiful user interface & smooth animations.
 
 > I'm very proud of this project. I've learned a lot while developing it.
 
