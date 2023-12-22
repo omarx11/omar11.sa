@@ -118,8 +118,6 @@ Whether you're helping me fix bugs, improve the site, or spread the word, I'd lo
 
 - Asking a question: [Open a new topic](https://github.com/omarx11/omar11.sa/discussions) on GitHub Discussions explaining what you want to achieve / your question. I'll try to get back to you shortly.
 
-- Reporting a bug: [Open an issue](https://github.com/omarx11/omar11.sa/issues/new?assignees=&labels=bug&title=) explaining your application's setup and the bug you're encountering.
-
 - Suggesting an improvement: [Open an issue](https://github.com/omarx11/omar11.sa/issues/new?assignees=&labels=enhancement&title=) explaining your improvement or feature so we can discuss and learn more.
 
 ## License
