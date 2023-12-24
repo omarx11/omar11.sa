@@ -60,7 +60,7 @@ export default function RecentGames({ data }) {
                   placeholder="blur"
                   blurDataURL="/static/icons/blur.svg"
                   className={cn(
-                    "drag-none w-40 select-none rounded-md bg-neutral-800 ring-emerald-800 duration-150 group-hover:scale-105",
+                    "drag-none w-40 select-none rounded-md bg-neutral-900 duration-150 group-hover:scale-105",
                     {
                       "opacity-50": isLoadingGame,
                       "scale-95 opacity-100 ring-4 ring-emerald-400 duration-100":

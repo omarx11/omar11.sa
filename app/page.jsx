@@ -45,7 +45,7 @@ export default async function HomePage() {
                     height={292}
                     placeholder="blur"
                     blurDataURL="/static/icons/blur.svg"
-                    className="drag-none h-full w-full rounded-sm bg-neutral-800 object-cover transition-transform group-hover:shadow-lg group-hover:shadow-emerald-800/20"
+                    className="drag-none h-full w-full rounded-sm object-cover transition-transform group-hover:shadow-lg group-hover:shadow-emerald-800/20"
                     alt="project image"
                   />
                 </Link>

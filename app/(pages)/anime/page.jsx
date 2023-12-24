@@ -44,7 +44,7 @@ export default function AnimePage() {
               height={227}
               placeholder="blur"
               blurDataURL="/static/icons/blur.svg"
-              className="absolute left-0 top-0 h-full w-full rounded-lg object-cover duration-150 group-hover:scale-[1.02] sm:h-auto sm:w-auto"
+              className="absolute left-0 top-0 h-full w-full rounded-lg bg-neutral-900 object-cover duration-150 group-hover:scale-[1.02] sm:h-auto sm:w-auto"
               alt={name}
             />
             <div className="z-20 w-full scale-95 space-y-1 opacity-0 duration-300 group-hover:scale-100 group-hover:opacity-100">

@@ -21,7 +21,7 @@ export default function Header() {
           quality={100}
           placeholder="blur"
           blurDataURL="/static/icons/blur.svg"
-          className="drag-none h-32 w-32 cursor-pointer rounded-full border-4 border-transparent bg-cover ring-4 ring-emerald-700/70 duration-300 hover:ring-8 hover:ring-emerald-700/50 focus:ring-8 active:ring-8"
+          className="drag-none h-32 w-32 cursor-pointer rounded-full border-4 border-transparent bg-neutral-900 bg-cover ring-4 ring-emerald-700/70 duration-300 hover:ring-8 hover:ring-emerald-700/50 focus:ring-8 active:ring-8"
           alt="avatar"
         />
         <div className="ml-0 mt-6 flex flex-col md:ml-6 md:mt-0">
