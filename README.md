@@ -19,7 +19,7 @@ After all, every programmer’s dream is to have a personal portfolio that shows
 
 ### How's the performance?
 
-From the beginning, my main focus was on speed and enhancing performance. This involved measures such as minimizing code size, optimizing images & using NEXT.js which has huge improvements overall. Like caching data requests & server-side rendering. This makes it faster in loading pages, and excellent for the user experience, in addition to a beautiful user interface & smooth fade-in animation.
+From the beginning, my main focus was on speed and enhancing performance. This involved measures such as minimizing code size, optimizing images & using NEXT.js which has huge improvements overall. Like caching data requests & server-side rendering. This makes it faster in loading pages, and excellent for the user experience, in addition to a beautiful user interface & smooth animations.
 
 > I'm very proud of this project. I've learned a lot while developing it.
 
@@ -57,10 +57,10 @@ Follows all web standards, a **100** score on Lighthouse metrics!
    ![Skills page](<public/static/images/readme/Screenshot 2023-12-20 003136.png>)
 
 3. Specs Page
-   ![Specs page](<public/static/images/readme/Screenshot 2023-12-20 003136.png>)
+   ![Specs page](<public/static/images/readme/Screenshot 2023-12-20 003222.png>)
 
 4. About Page
-   ![About page](<public/static/images/readme/Screenshot 2023-12-20 003222.png>)
+   ![About page](<public/static/images/readme/Screenshot 2023-12-20 003305.png>)
 
 5. Anime Page
    ![Anime page](<public/static/images/readme/Screenshot 2023-12-20 003351.png>)
@@ -117,8 +117,6 @@ Read the [license note](#license-note) before cloning this website.
 Whether you're helping me fix bugs, improve the site, or spread the word, I'd love to have you as a contributor! 🤝
 
 - Asking a question: [Open a new topic](https://github.com/omarx11/omar11.sa/discussions) on GitHub Discussions explaining what you want to achieve / your question. I'll try to get back to you shortly.
-
-- Reporting a bug: [Open an issue](https://github.com/omarx11/omar11.sa/issues/new?assignees=&labels=bug&title=) explaining your application's setup and the bug you're encountering.
 
 - Suggesting an improvement: [Open an issue](https://github.com/omarx11/omar11.sa/issues/new?assignees=&labels=enhancement&title=) explaining your improvement or feature so we can discuss and learn more.
 
