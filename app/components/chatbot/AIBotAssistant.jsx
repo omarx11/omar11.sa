@@ -38,7 +38,7 @@ export default function AIBotAssistant() {
       </Popover.Trigger>
       <Popover.Content
         id="chatBox"
-        className="mb-4 flex h-[30rem] w-full flex-col overflow-y-auto rounded-md bg-neutral-900 p-2 ring-4 ring-neutral-800 sm:mb-0 sm:w-96"
+        className="mb-4 flex h-[30rem] w-full flex-col overflow-y-auto rounded-sm bg-neutral-900 px-1 pb-1 pt-2 ring-4 ring-neutral-800 sm:mb-0 sm:w-96"
         side="left"
         align="start"
         sideOffset={8}
@@ -48,7 +48,7 @@ export default function AIBotAssistant() {
           {inverseMessages.map((message) => {
             return (
               <div
-                key={`${message.id}-${message.id}`}
+                key={message.id}
                 className={cn("flex items-end", {
                   "justify-end": message.isUserMessage,
                 })}
@@ -63,9 +63,9 @@ export default function AIBotAssistant() {
                   )}
                 >
                   <p
-                    className={cn("rounded-md px-3 py-1.5", {
-                      "bg-cyan-600 text-white": message.isUserMessage,
-                      "bg-neutral-100 text-neutral-900": !message.isUserMessage,
+                    className={cn("rounded-md px-2 py-1.5", {
+                      "bg-sky-600 text-white": message.isUserMessage,
+                      "bg-neutral-100 text-black": !message.isUserMessage,
                     })}
                   >
                     <MarkdownLite text={message.text} />

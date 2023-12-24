@@ -47,7 +47,7 @@ export default function Education() {
                 Uber captain
               </dd>
               <dt className="sr-only">Role</dt>
-              <dd className="text-xs text-neutral-400">Qassim area</dd>
+              <dd className="text-xs text-neutral-400">Freelancer</dd>
               <dt className="sr-only">Date</dt>
               <dd
                 className="ml-auto text-xs text-neutral-500"

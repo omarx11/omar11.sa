@@ -81,7 +81,7 @@ const ChatBotInput = () => {
 
   return (
     <div>
-      <div className="relative mt-4 flex-1 overflow-hidden rounded-sm border-none outline-none ring-2 ring-neutral-700">
+      <div className="relative mt-4 flex-1 overflow-hidden rounded-md border-none outline-none">
         <TextareaAutosize
           ref={textareaRef}
           onKeyDown={(e) => {
@@ -105,7 +105,7 @@ const ChatBotInput = () => {
           placeholder="Write a message..."
           className="block w-full resize-none bg-neutral-800 py-2 pl-2 pr-12 text-lg leading-5 text-neutral-50 caret-neutral-200 outline-none placeholder:text-sm placeholder:italic placeholder:text-neutral-500 disabled:opacity-50"
         />
-        <kbd className="absolute inset-y-0 right-0 inline-flex select-none items-center pr-3">
+        <kbd className="absolute inset-y-0 right-0 inline-flex select-none items-center bg-neutral-700 px-3">
           {isLoading ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"

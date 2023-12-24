@@ -1,5 +1,6 @@
 import "./globals.scss";
 import { Recursive } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -64,6 +65,7 @@ export default function RootLayout({ children }) {
             <Footer />
           </Providers>
         </main>
+        <Analytics />
       </body>
     </html>
   );
