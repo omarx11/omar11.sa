@@ -51,11 +51,11 @@ export default function Education() {
               <dt className="sr-only">Date</dt>
               <dd
                 className="ml-auto text-xs text-neutral-500"
-                aria-label="2021 until 2021"
+                aria-label="2023 until 2024"
               >
-                <time dateTime="2021">2023</time>{" "}
+                <time dateTime="2023">2023</time>{" "}
                 <span aria-hidden="true">—</span>{" "}
-                <time dateTime="2021">now</time>
+                <time dateTime="2024">now</time>
               </dd>
             </dl>
           </li>
@@ -92,7 +92,6 @@ export default function Education() {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="lucide lucide-graduation-cap"
           >
             <path
               d="M22 10v6M2 10l10-5 10 5-10 5z"
@@ -255,15 +254,15 @@ export default function Education() {
                 Technical and Vocational Training Corporation
               </dd>
               <dt className="sr-only">Degree</dt>
-              <dd className="text-xs text-neutral-400">Qassim, buraydah</dd>
+              <dd className="text-xs text-neutral-400">Diploma</dd>
               <dt className="sr-only">Date</dt>
               <dd
                 className="ml-auto text-xs text-neutral-500"
                 aria-label="2019 until 2023"
               >
-                <time dateTime="2024">2019</time>{" "}
+                <time dateTime="2019">2019</time>{" "}
                 <span aria-hidden="true">—</span>{" "}
-                <time dateTime="2026">2023</time>
+                <time dateTime="2023">2023</time>
               </dd>
             </dl>
           </li>
