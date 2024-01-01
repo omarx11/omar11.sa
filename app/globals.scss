@@ -3,12 +3,7 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-  }
+  color-scheme: dark;
 }
 
 body::-webkit-scrollbar,
@@ -22,6 +17,7 @@ textarea::-webkit-scrollbar,
   color: white;
 }
 
+// for the GitHubCalendar component
 .react-activity-calendar__calendar {
   width: 270%;
   max-width: max-content;
@@ -54,11 +50,6 @@ textarea::-webkit-scrollbar,
     animation-fill-mode: both;
     animation-timing-function: cubic-bezier(0.14, 0.64, 0.51, 0.94);
   }
-  @for $i from 1 through 24 {
-    .fade-in > :nth-child(#{$i}) {
-      animation-delay: #{$i / 20}s;
-    }
-  }
   @keyframes fade-in {
     from {
       opacity: 0;
@@ -67,6 +58,48 @@ textarea::-webkit-scrollbar,
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  .fade-in-up > * {
+    animation-name: fade-in-up;
+    animation-duration: 250ms;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.14, 0.64, 0.51, 0.94);
+  }
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(-0.5rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fade-in-left > * {
+    animation-name: fade-in-left;
+    animation-duration: 250ms;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.14, 0.64, 0.51, 0.94);
+  }
+  @keyframes fade-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(-0.5rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @for $i from 1 through 24 {
+    .fade-in > :nth-child(#{$i}),
+    .fade-in-up > :nth-child(#{$i}),
+    .fade-in-left > :nth-child(#{$i}) {
+      animation-delay: #{$i / 20}s;
     }
   }
 

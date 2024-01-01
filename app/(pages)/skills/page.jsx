@@ -36,7 +36,7 @@ export default function SkillsPage() {
       <h2 className="text-neutral-400">
         Skills and technologies that I use to build things. 😊
       </h2>
-      <div className="hs-accordion-group fade-in mt-10" id="skills">
+      <div className="fade-in-left hs-accordion-group mt-10" id="skills">
         <Accordion id="one" name="Programming Languages">
           <SkillsArray data={langs} />
         </Accordion>

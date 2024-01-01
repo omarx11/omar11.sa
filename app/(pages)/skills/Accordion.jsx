@@ -6,7 +6,7 @@ function Accordion({ children, id, name }) {
   return (
     <>
       <div
-        className="hs-accordion mt-2 border-b-2 border-neutral-700 hs-accordion-active:border-emerald-600/50 hs-accordion-active:pb-2"
+        className="hs-accordion mt-2 border-b-2 border-neutral-800 hs-accordion-active:border-b-4 hs-accordion-active:border-emerald-900 hs-accordion-active:pb-2"
         id={`hs-basic-heading-${id}`}
       >
         <button

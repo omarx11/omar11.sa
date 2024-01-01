@@ -105,7 +105,7 @@ const ChatBotInput = () => {
           placeholder="Write a message..."
           className="block w-full resize-none bg-neutral-800 py-2 pl-2 pr-12 text-lg leading-5 text-neutral-50 caret-neutral-200 outline-none placeholder:text-sm placeholder:italic placeholder:text-neutral-500 disabled:opacity-50"
         />
-        <kbd className="absolute inset-y-0 right-0 inline-flex select-none items-center bg-neutral-700 px-3">
+        <kbd className="absolute inset-y-0 right-0 inline-flex select-none items-center bg-neutral-700/50 px-3">
           {isLoading ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -28,10 +28,12 @@ export default function GuestbookPage() {
         Hey There!, please sign in and say hi. and Thanks for visiting my
         website 💚
       </h2>
-      <div className="flex w-full items-center justify-center">
-        <FormData />
+      <div className="fade-in">
+        <div className="flex w-full items-center justify-center">
+          <FormData />
+        </div>
+        <GuestbookMessages />
       </div>
-      <GuestbookMessages />
     </>
   );
 }

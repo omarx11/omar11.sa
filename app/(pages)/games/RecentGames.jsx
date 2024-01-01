@@ -34,12 +34,11 @@ export default function RecentGames({ data }) {
           </svg>
         )}
       </h2>
-      <div className="line-clamp-1 flex flex-row flex-wrap gap-4 overflow-visible">
+      <div className="fade-in-up line-clamp-1 flex flex-row flex-wrap gap-4 overflow-visible">
         {data.total_count !== 0 &&
-          data.games.slice(0, 5).map((game) => (
+          data.games.slice(0, 5).map((game, i) => (
             <button
               key={game.appid}
-              // className="flex flex-col text-xs sm:text-sm"
               className={cn("group flex flex-col text-xs sm:text-sm", {
                 "pointer-events-none": isLoadingGame,
                 "pointer-events-none": game.appid === gameAppId,

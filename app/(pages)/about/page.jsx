@@ -25,18 +25,21 @@ export default function AboutPage() {
   return (
     <div className="grid grid-cols-1 gap-y-6 md:grid-cols-2 md:grid-rows-[auto_1fr] md:gap-y-20">
       <div className="mx-auto mt-0 md:mx-0 md:mt-8 md:pr-6 lg:pr-12">
-        <Image
-          src="/static/images/profile.jpeg"
-          width={384}
-          height={433}
-          placeholder="blur"
-          blurDataURL="/static/icons/blur.svg"
-          className="drag-none float-right aspect-square w-72 select-none rounded-lg border-8 border-dashed border-neutral-700 bg-neutral-800 object-cover shadow-lg shadow-neutral-800"
-          alt="profile image"
-        />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="128"
+          height="128"
+          viewBox="0 0 24 24"
+          className="float-right h-72 w-72 rounded-lg border-8 border-dashed border-neutral-800 bg-neutral-900 fill-neutral-800 px-12"
+        >
+          <g fillRule="evenodd" clipRule="evenodd">
+            <path d="M16 9a4 4 0 1 1-8 0a4 4 0 0 1 8 0m-2 0a2 2 0 1 1-4 0a2 2 0 0 1 4 0" />
+            <path d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11s11-4.925 11-11S18.075 1 12 1M3 12c0 2.09.713 4.014 1.908 5.542A8.986 8.986 0 0 1 12.065 14a8.984 8.984 0 0 1 7.092 3.458A9 9 0 1 0 3 12m9 9a8.963 8.963 0 0 1-5.672-2.012A6.992 6.992 0 0 1 12.065 16a6.991 6.991 0 0 1 5.689 2.92A8.964 8.964 0 0 1 12 21" />
+          </g>
+        </svg>
       </div>
       <div className="max-w-3xl md:order-first md:row-span-2">
-        <div className="mt-6 space-y-7">
+        <div className="fade-in mt-6 space-y-7">
           <p className="text-neutral-400">
             <strong className="mb-2 block text-xl font-bold text-neutral-300 md:text-2xl">
               <span className="text-neutral-400">#</span>{" "}

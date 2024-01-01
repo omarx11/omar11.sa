@@ -62,21 +62,21 @@ export default function GuestbookMessages() {
         </p>
         <div
           className={cn(
-            "flex select-none gap-2 rounded-md border border-neutral-700 bg-neutral-900 p-1 text-sm",
+            "flex select-none gap-2 rounded-md border border-neutral-700/80 bg-neutral-900 p-1 text-sm",
             {
               "pointer-events-none opacity-70": !comments,
             },
           )}
         >
           <button
-            className="rounded-md px-2 py-1 hover:bg-neutral-800 disabled:bg-neutral-700 disabled:text-emerald-300"
+            className="rounded-md px-1.5 py-0.5 hover:bg-neutral-800 disabled:bg-neutral-700 disabled:text-emerald-300"
             disabled={isNewest}
             onClick={(e) => setIsNewest(true)}
           >
             Newest
           </button>
           <button
-            className="rounded-md px-2 py-1 hover:bg-neutral-800 disabled:bg-neutral-700 disabled:text-emerald-300"
+            className="rounded-md px-1.5 py-0.5 hover:bg-neutral-800 disabled:bg-neutral-700 disabled:text-emerald-300"
             disabled={!isNewest}
             onClick={(e) => setIsNewest(false)}
           >

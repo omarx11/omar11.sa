@@ -21,6 +21,7 @@ export default function GamesCollection({ data }) {
     setTotalPlayTime,
   } = useContext(StatementContext);
   const [currentPage, setCurrentPage] = useState(1);
+  const [startAnimate, setStartAnimate] = useState(true);
   const itemsPerPage = 21; // Adjust this based on your needs
   const targetIds = [
     12120, 12250, 407530, 596350, 747350, 755790, 700580, 878760, 640590,
@@ -63,11 +64,18 @@ export default function GamesCollection({ data }) {
         playedTime += gamesArray[i].playtime_forever;
       }
 
-      // added + games hours from outside steam like Genshin Impact, etc.
-      // 382 total hours multiplied by 60
+      // added 382 hours from games outside steam like: Genshin Impact, etc.
+      // total hours multiplied by 60
       setTotalPlayTime(playedTime + 22920);
     }
   }, []);
+
+  useEffect(() => {
+    if (startAnimate)
+      setTimeout(() => {
+        setStartAnimate(false);
+      }, itemsPerPage * 60);
+  }, [startAnimate]);
 
   return (
     totalPlayTime !== 0 && (
@@ -131,7 +139,11 @@ export default function GamesCollection({ data }) {
           )}
         </div>
         <TooltipProvider delayDuration={0}>
-          <div className="flex flex-row flex-wrap gap-3">
+          <div
+            className={cn("flex flex-row flex-wrap gap-3", {
+              "fade-in pointer-events-none": startAnimate,
+            })}
+          >
             {currentItems.map((game) => (
               <Tooltip key={game.appid}>
                 <TooltipTrigger
@@ -180,6 +192,7 @@ export default function GamesCollection({ data }) {
             pages={totalPages}
             state={{ page: currentPage, window: 5 }}
             onPageChange={handlePageChange}
+            isAnimate={startAnimate}
             note={true}
           />
         </TooltipProvider>

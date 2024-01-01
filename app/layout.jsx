@@ -59,9 +59,7 @@ export default function RootLayout({ children }) {
           <Providers>
             <Header />
             <Navbar />
-            <div className="fade-in my-9 flex-1 overflow-visible">
-              {children}
-            </div>
+            <div className="my-9 flex-1 overflow-visible">{children}</div>
             <Footer />
           </Providers>
         </main>

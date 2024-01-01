@@ -29,44 +29,16 @@ export default function SpecsPage() {
         Equipment I currently use for gaming, programming, learning, and every
         day. 🧐
       </h3>
-      <div className="my-8 flex flex-col items-center gap-8 text-neutral-300 md:flex-col-reverse">
-        <div className="flex flex-col gap-3 md:flex-row md:gap-8">
-          <div>
-            <Image
-              src="/static/images/042857.png"
-              width={640}
-              height={360}
-              placeholder="blur"
-              blurDataURL="/static/icons/blur.svg"
-              className="drag-none min-w-full rotate-0 select-none rounded-lg border-4 border-dashed border-neutral-800 bg-neutral-900 object-cover md:rotate-3 md:rounded-3xl md:border-8"
-              alt=""
-            />
-          </div>
-          <div className="flex w-auto flex-row gap-1 md:w-[324px] md:flex-col md:gap-4">
-            <div>
-              <Image
-                src="/static/images/1615052384300.jpg"
-                width={384}
-                height={216}
-                placeholder="blur"
-                blurDataURL="/static/icons/blur.svg"
-                className="drag-none min-w-full select-none rounded-lg border-4 border-dashed border-neutral-800 bg-neutral-900 object-cover md:rounded-2xl md:border-[6px]"
-                alt=""
-              />
-            </div>
-            <div>
-              <Image
-                src="/static/images/orange-pi-5.jpg"
-                width={384}
-                height={216}
-                placeholder="blur"
-                blurDataURL="/static/icons/blur.svg"
-                className="drag-none min-w-full select-none rounded-lg border-4 border-dashed border-neutral-800 bg-neutral-900 object-cover md:rounded-2xl md:border-[6px]"
-                alt=""
-              />
-            </div>
-          </div>
-        </div>
+      <div className="fade-in my-8 flex flex-col items-center gap-8 text-neutral-300 md:flex-col-reverse">
+        <Image
+          src="/static/images/042859.png"
+          width={1024}
+          height={768}
+          placeholder="blur"
+          blurDataURL="/static/icons/blur.svg"
+          className="drag-none min-w-full rotate-0 select-none rounded-lg border-4 border-dashed border-neutral-700 bg-neutral-900 object-cover md:!rotate-2 md:rounded-3xl md:border-8"
+          alt=""
+        />
         <div className="flex w-full flex-col justify-center gap-4 md:flex-row">
           <div className="space-y-4">
             <div className="w-full rounded-md bg-neutral-800/50 p-2">

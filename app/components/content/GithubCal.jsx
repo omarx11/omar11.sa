@@ -12,7 +12,7 @@ const GithubCal = () => {
       loading={false}
       colorScheme="dark"
       style={{
-        marginTop: "4rem",
+        marginTop: "3rem",
         color: "rgb(163 163 163)",
         width: "100%",
       }}

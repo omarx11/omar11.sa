@@ -30,7 +30,7 @@ export default function AnimePage() {
         favorite anime I've watched. 😄{" "}
         <span className="text-neutral-500">I don't watch movies.. sorry</span>
       </h3>
-      <div className="fade-in mt-10 max-w-[896px]" id="anime">
+      <div className="fade-in-left mt-10 max-w-[896px]" id="anime">
         {anime.map(({ name, description, image, url }, i) => (
           <Link
             key={i}

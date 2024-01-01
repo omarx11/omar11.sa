@@ -20,7 +20,7 @@ export default function Certifications() {
   ];
 
   return (
-    <div className="mt-8 pt-10">
+    <div className="mt-8 pt-4 md:pt-10">
       <div className="mb-4 flex items-end justify-center gap-2 md:justify-start">
         <p className="text-lg font-bold text-neutral-300 md:text-xl">
           Certifications <span className="text-base">\</span>
