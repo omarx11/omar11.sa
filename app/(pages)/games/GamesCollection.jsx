@@ -21,7 +21,6 @@ export default function GamesCollection({ data }) {
     setTotalPlayTime,
   } = useContext(StatementContext);
   const [currentPage, setCurrentPage] = useState(1);
-  const [startAnimate, setStartAnimate] = useState(true);
   const itemsPerPage = 21; // Adjust this based on your needs
   const targetIds = [
     12120, 12250, 407530, 596350, 747350, 755790, 700580, 878760, 640590,
@@ -69,13 +68,6 @@ export default function GamesCollection({ data }) {
       setTotalPlayTime(playedTime + 22920);
     }
   }, []);
-
-  useEffect(() => {
-    if (startAnimate)
-      setTimeout(() => {
-        setStartAnimate(false);
-      }, itemsPerPage * 60);
-  }, [startAnimate]);
 
   return (
     totalPlayTime !== 0 && (
@@ -138,64 +130,61 @@ export default function GamesCollection({ data }) {
             </TooltipProvider>
           )}
         </div>
-        <TooltipProvider delayDuration={0}>
-          <div
-            className={cn("flex flex-row flex-wrap gap-3", {
-              "fade-in pointer-events-none": startAnimate,
-            })}
-          >
-            {currentItems.map((game) => (
-              <Tooltip key={game.appid}>
-                <TooltipTrigger
-                  aria-label={game.name}
-                  className={cn(
-                    "rounded-sm transition-transform duration-100",
-                    {
-                      "pointer-events-none opacity-50": isLoadingGame,
-                      "pointer-events-none scale-95 opacity-100 ring-4 ring-emerald-400":
-                        game.appid === gameAppId,
-                      "ring-neutral-200 hover:ring-2 focus:ring-2":
-                        game.appid !== gameAppId,
-                    },
-                  )}
-                  onClick={(e) => {
-                    setIsLoadingGame(true);
-                    setGameAppId(game.appid);
-                  }}
-                >
-                  <Image
-                    src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/header.jpg`}
-                    width={256}
-                    height={120}
-                    placeholder="blur"
-                    blurDataURL="/static/icons/blur.svg"
-                    className="drag-none h-[75.27px] w-[160.6px] select-none rounded-sm bg-neutral-900"
-                    alt=""
-                  />
-                </TooltipTrigger>
-                <TooltipContent
-                  align="start"
-                  className="rounded-sm bg-neutral-800"
-                >
-                  <p className="underline decoration-neutral-300">
-                    {game.name}
-                  </p>
-                  <span className="block text-xs text-emerald-300">
-                    {Math.floor((game.playtime_forever / 60) * 10) / 10} hours
-                    total
-                  </span>
-                </TooltipContent>
-              </Tooltip>
-            ))}
-          </div>
-          <Pagination
-            pages={totalPages}
-            state={{ page: currentPage, window: 5 }}
-            onPageChange={handlePageChange}
-            isAnimate={startAnimate}
-            note={true}
-          />
-        </TooltipProvider>
+        <div className="fade-in">
+          <TooltipProvider delayDuration={0}>
+            <div className="flex flex-row flex-wrap gap-3">
+              {currentItems.map((game) => (
+                <Tooltip key={game.appid}>
+                  <TooltipTrigger
+                    aria-label={game.name}
+                    className={cn(
+                      "rounded-sm transition-transform duration-100",
+                      {
+                        "pointer-events-none opacity-50": isLoadingGame,
+                        "pointer-events-none scale-95 opacity-100 ring-4 ring-emerald-400":
+                          game.appid === gameAppId,
+                        "ring-neutral-200 hover:ring-2 focus:ring-2":
+                          game.appid !== gameAppId,
+                      },
+                    )}
+                    onClick={(e) => {
+                      setIsLoadingGame(true);
+                      setGameAppId(game.appid);
+                    }}
+                  >
+                    <Image
+                      src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/header.jpg`}
+                      width={256}
+                      height={120}
+                      placeholder="blur"
+                      blurDataURL="/static/icons/blur.svg"
+                      className="drag-none h-[75.27px] w-[160.6px] select-none rounded-sm bg-neutral-900"
+                      alt=""
+                    />
+                  </TooltipTrigger>
+                  <TooltipContent
+                    align="start"
+                    className="rounded-sm bg-neutral-800"
+                  >
+                    <p className="underline decoration-neutral-300">
+                      {game.name}
+                    </p>
+                    <span className="block text-xs text-emerald-300">
+                      {Math.floor((game.playtime_forever / 60) * 10) / 10} hours
+                      total
+                    </span>
+                  </TooltipContent>
+                </Tooltip>
+              ))}
+            </div>
+            <Pagination
+              pages={totalPages}
+              state={{ page: currentPage, window: 5 }}
+              onPageChange={handlePageChange}
+              note={true}
+            />
+          </TooltipProvider>
+        </div>
       </>
     )
   );

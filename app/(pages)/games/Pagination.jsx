@@ -1,14 +1,7 @@
 import { cn } from "@/app/lib/utils";
 import { useEffect, useState } from "react";
 
-const Pagination = ({
-  pages,
-  state,
-  onPageChange,
-  className,
-  isAnimate,
-  note,
-}) => {
+const Pagination = ({ pages, state, onPageChange, className, note }) => {
   const [buttons, setButtons] = useState([]);
 
   useEffect(() => {
@@ -116,13 +109,7 @@ const Pagination = ({
           data with not be shown.
         </p>
       )}
-      <div
-        className={cn("flex select-none gap-1 text-sm", {
-          "pointer-events-none opacity-80": isAnimate,
-        })}
-      >
-        {buttons}
-      </div>
+      <div className="flex select-none gap-1 text-sm">{buttons}</div>
     </div>
   );
 };
