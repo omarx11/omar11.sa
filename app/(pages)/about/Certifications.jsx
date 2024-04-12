@@ -43,6 +43,7 @@ export default function Certifications() {
       <Swiper
         effect={"cards"}
         grabCursor={true}
+        initialSlide={images.length / 2}
         modules={[EffectCards]}
         className="max-w-[360px] opacity-90 md:float-left"
       >

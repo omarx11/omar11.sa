@@ -13,12 +13,12 @@ import {
 import { getGithubRepos } from "./lib/fetchRequests";
 
 export default async function HomePage() {
-  const filteredRepos = [624386055, 601036020, 386408964]; // filter repos by there ids.
-
   const repos = await getGithubRepos();
 
-  const reposArray = repos.filter((repo) => !filteredRepos.includes(repo.id));
-  reposArray.push(...manualRepository);
+  const reposArray = [
+    ...repos.filter((repo) => reposInfo[repo.name]),
+    ...manualRepository,
+  ];
 
   return (
     <>
@@ -29,7 +29,7 @@ export default async function HomePage() {
       </h3>
       <div className="fade-in mt-10 grid gap-5 md:grid-cols-3" id="projects">
         {reposArray
-          ? reposArray.slice(0, 6).map((repo) => (
+          ? reposArray.map((repo) => (
               <div
                 key={repo.id}
                 className="group flex flex-col gap-3 rounded-md border-4 border-neutral-800 bg-gradient-to-b from-neutral-900 px-3 py-2 hover:z-10 hover:border-neutral-700 hover:bg-gradient-to-t"
@@ -40,7 +40,7 @@ export default async function HomePage() {
                   className="h-24"
                 >
                   <Image
-                    src={reposInfo[repo.name].image}
+                    src={reposInfo[repo.name]?.image}
                     width={512}
                     height={292}
                     placeholder="blur"
@@ -67,9 +67,9 @@ export default async function HomePage() {
                             "cursor-default rounded-sm px-2 py-0.5 text-xs text-neutral-300 ring-4 ring-neutral-800",
                             {
                               "group-hover:ring-emerald-950":
-                                reposInfo[repo.name].isUnderDev == false,
+                                reposInfo[repo.name]?.isUnderDev === false,
                               "group-hover:ring-orange-950":
-                                reposInfo[repo.name].isUnderDev == true,
+                                reposInfo[repo.name]?.isUnderDev === true,
                             },
                           )}
                         >
@@ -80,12 +80,12 @@ export default async function HomePage() {
                         sideOffset="1"
                         className={cn({
                           "bg-emerald-800":
-                            reposInfo[repo.name].isUnderDev == false,
+                            reposInfo[repo.name]?.isUnderDev === false,
                           "bg-orange-800":
-                            reposInfo[repo.name].isUnderDev == true,
+                            reposInfo[repo.name]?.isUnderDev === true,
                         })}
                       >
-                        {reposInfo[repo.name].isUnderDev != true
+                        {reposInfo[repo.name].isUnderDev !== true
                           ? "Complete"
                           : "In progress"}
                       </TooltipContent>
@@ -94,7 +94,7 @@ export default async function HomePage() {
                 </div>
                 <div className="flex flex-row justify-between text-neutral-400">
                   <div className="flex items-center gap-[6px] text-sm">
-                    {reposInfo[repo.name].lang.map((icon, i) => (
+                    {reposInfo[repo.name]?.lang.map((icon, i) => (
                       <Image
                         key={i}
                         src={icon}
@@ -157,6 +157,32 @@ export default async function HomePage() {
               </div>
             ))
           : null}
+      </div>
+      <div className="mt-6 flex justify-center">
+        <button className="group rounded-md bg-neutral-800 ring-emerald-800">
+          <Link
+            href="https://github.com/omarx11?tab=repositories"
+            target="_blank"
+            className="inline-flex w-full items-center justify-center gap-1 px-6 py-2 text-neutral-200 group-hover:underline"
+          >
+            view all projects{" "}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1.2rem"
+              height="1.2rem"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M18.365 5.636h-7.071m7.07 0v7.071m0-7.07L5.638 18.363"
+              />
+            </svg>
+          </Link>
+        </button>
       </div>
       <GithubCal />
     </>

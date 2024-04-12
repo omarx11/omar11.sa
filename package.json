@@ -1,7 +1,7 @@
 {
   "name": "omar11.sa",
   "private": true,
-  "version": "2.1.7",
+  "version": "2.1.8",
   "description": "A personal website to share code and thoughts",
   "repository": "https://github.com/omarx11/omar11.sa.git",
   "homepage": "https://omar11.sa",
@@ -34,18 +34,18 @@
     "react-textarea-autosize": "^8.5.3",
     "swiper": "^11.0.5",
     "tailwind-merge": "^2.2.0",
-    "tailwindcss": "^3.4.0",
     "use-count-up": "^3.0.1",
     "use-lanyard": "^1.5.2",
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.16",
+    "autoprefixer": "^10.4.19",
     "cssnano": "^6.0.2",
     "encoding": "^0.1.13",
-    "postcss": "^8.4.32",
+    "postcss": "^8.4.38",
     "prettier": "^3.1.1",
     "prettier-plugin-tailwindcss": "^0.5.9",
-    "sass": "^1.69.5"
+    "sass": "^1.69.5",
+    "tailwindcss": "^3.4.3"
   }
 }

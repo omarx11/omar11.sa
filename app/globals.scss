@@ -6,11 +6,11 @@
   color-scheme: dark;
 }
 
-body::-webkit-scrollbar,
-textarea::-webkit-scrollbar,
-#chatBox::-webkit-scrollbar {
-  width: 0;
-}
+// body::-webkit-scrollbar,
+// textarea::-webkit-scrollbar,
+// #chatBox::-webkit-scrollbar {
+//   width: 0;
+// }
 
 ::selection {
   background-color: rgb(4 120 87);
