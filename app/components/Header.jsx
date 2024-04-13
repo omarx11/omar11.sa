@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import AgeTime from "./content/AgeTime";
@@ -5,8 +7,8 @@ import ActiveLink from "./content/ActiveLink";
 import PlayAudio from "./content/PlayAudio";
 import Discord from "./Discord";
 import Media from "./Media";
-import { author } from "@/app/config/meta";
 import dynamic from "next/dynamic";
+import { author } from "@/app/config/meta";
 
 const AIBotAssistant = dynamic(() => import("./chatbot/AIBotAssistant"));
 
@@ -19,6 +21,7 @@ export default function Header() {
           width={256}
           height={256}
           quality={100}
+          onClick={() => window.location.reload()}
           placeholder="blur"
           blurDataURL="/static/icons/blur.svg"
           className="drag-none h-32 w-32 cursor-pointer rounded-full border-4 border-transparent bg-neutral-900 bg-cover ring-4 ring-emerald-700/70 duration-300 hover:ring-8 hover:ring-emerald-700/50 focus:ring-8 active:ring-8"

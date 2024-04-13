@@ -171,6 +171,7 @@ export default async function HomePage() {
               width="1.2rem"
               height="1.2rem"
               viewBox="0 0 24 24"
+              className="text-neutral-400"
             >
               <path
                 fill="none"
