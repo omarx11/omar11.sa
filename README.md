@@ -9,7 +9,7 @@
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Stars](https://img.shields.io/github/stars/omarx11/omar11.sa?style=flat&logo=github)
 
-> ~ Hello everyone! This is the complete source code for the omar11.sa website.
+> ~ This is the complete source code for the <ins>omar11.sa</ins> website.
 
 ### Why did you build this website?
 
@@ -20,8 +20,6 @@ After all, every programmer’s dream is to have a personal portfolio that shows
 ### How's the performance?
 
 From the beginning, my main focus was on speed and enhancing performance. This involved measures such as minimizing code size, optimizing images & using NEXT.js which has huge improvements overall. Like caching data requests & server-side rendering. This makes it faster in loading pages, and excellent for the user experience, in addition to a beautiful user interface & smooth animations.
-
-> I'm very proud of this project. I've learned a lot while developing it.
 
 ## Features
 
@@ -60,7 +58,7 @@ Follows all web standards, a **100** score on Lighthouse metrics!
    ![Specs page](<public/static/images/readme/Screenshot 2023-12-20 003222.png>)
 
 4. About Page
-   ![About page](<public/static/images/readme/Screenshot 2023-12-20 003305.png>)
+   ![About page](<public/static/images/readme/Screenshot 2024-04-20 235928.png>)
 
 5. Anime Page
    ![Anime page](<public/static/images/readme/Screenshot 2023-12-20 003351.png>)
@@ -134,8 +132,8 @@ Refer [License file](https://github.com/omarx11/omar11.sa/blob/main/LICENSE) for
 - Linkedin - [@omar-abdulaziz-sa](https://www.linkedin.com/in/omar-abdulaziz-sa/)
 - Twitter X - [@dis_x0](https://twitter.com/@dis_x0)
 
-Give a ⭐️ if this project helped you! 💚
+Give a ⭐️ if this project helped you! Thank you.. 💚
 
 ##
 
-[Back To The Top](#top) ↑
+<a href="#top" target="_self" style="float:right;">Back To The Top ↑</a>
