@@ -42,10 +42,10 @@ export const anime = [
     url: "https://anilist.co/anime/101336/Karakuri-Circus/",
   },
   {
-    name: "Asobi Asobase",
-    description: "three girls and their unconventional club activities",
-    image: "/static/images/animes/asobi.jpg",
-    url: "https://anilist.co/anime/101001/Asobi-Asobase/",
+    name: "Monster",
+    description: "A doctor’s decision sparks a deadly mystery",
+    image: "/static/images/animes/monster.jpg",
+    url: "https://anilist.co/anime/19/MONSTER/",
   },
   {
     name: "Hunter x Hunter",

@@ -1,7 +1,9 @@
 import { author } from "@/app/config/meta";
-import FormData from "./FormData";
-import GuestbookMessages from "./GuestbookMessages";
+import OAuthButtons from "./login/OAuthButtons";
+import FormData from "./components/FormData";
+import { GuestbookMessages } from "./components/GuestbookMessages";
 import { Heading } from "@/app/components/ui/Heading";
+import { createClient } from "@/app/lib/supabase/server";
 
 export const metadata = {
   title: "Guestbook Page",
@@ -20,7 +22,13 @@ export const metadata = {
   },
 };
 
-export default function GuestbookPage() {
+export default async function GuestbookPage() {
+  const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
     <>
       <Heading name="Guestbook" emoji="🕮" scrollTo="#guestbook" />
@@ -30,7 +38,7 @@ export default function GuestbookPage() {
       </h2>
       <div className="fade-in">
         <div className="flex w-full items-center justify-center">
-          <FormData />
+          {user ? <FormData user={user} /> : <OAuthButtons />}
         </div>
         <GuestbookMessages />
       </div>

@@ -1,4 +1,5 @@
 "use server";
+
 import { author } from "../config/meta";
 
 const steamAPIKey = process.env.STEAM_API_KEY;

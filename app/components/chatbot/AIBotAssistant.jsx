@@ -1,13 +1,15 @@
 "use client";
+
 import { StatementContext } from "@/app/context/statement";
 import * as Popover from "@radix-ui/react-popover";
 import MarkdownLite from "./MarkdownLite";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { cn } from "@/app/lib/utils";
 import ChatBotInput from "./ChatBotInput";
 
 export default function AIBotAssistant() {
-  const { botMessages, userChatBotId } = useContext(StatementContext);
+  const [hovored, setHovored] = useState(false);
+  const { botMessages, chatbot_id } = useContext(StatementContext);
   const inverseMessages = [...botMessages].reverse();
 
   useEffect(() => {
@@ -22,9 +24,17 @@ export default function AIBotAssistant() {
   }, [botMessages]);
 
   return (
-    <Popover.Root>
+    <Popover.Root
+      open={!!hovored}
+      onOpenChange={(open) => !open && setHovored(false)}
+    >
       <Popover.Trigger asChild>
-        <button aria-label="AI Assistant">
+        <button
+          aria-label="AI Assistant"
+          onMouseEnter={() => setHovored(true)}
+          onClick={() => setHovored(true)}
+          className="border-0"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="40"
@@ -38,7 +48,7 @@ export default function AIBotAssistant() {
       </Popover.Trigger>
       <Popover.Content
         id="chatBox"
-        className="mb-4 flex h-[30rem] w-full flex-col overflow-y-auto rounded-sm bg-neutral-900 px-1 pb-1 pt-2 ring-4 ring-neutral-800 sm:mb-0 sm:w-96"
+        className="mb-4 flex h-[30rem] w-full flex-col overflow-y-auto rounded-sm bg-neutral-900 px-1 pb-1 pt-2 outline-0 ring-4 ring-neutral-800 sm:mb-0 sm:w-96"
         side="left"
         align="start"
         sideOffset={8}
@@ -75,7 +85,7 @@ export default function AIBotAssistant() {
             );
           })}
           <p className="border-b-2 border-neutral-800 pb-1 text-center text-sm text-neutral-400 duration-300">
-            Id: {userChatBotId ?? "anonymous"}
+            Id: {chatbot_id ?? "000110111"}
           </p>
           <Popover.Close className="absolute right-2 top-1 inline-flex items-center justify-center rounded-full p-1 outline-none hover:bg-neutral-800">
             <svg

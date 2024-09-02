@@ -17,7 +17,7 @@ To demonstrate my programming skills, a place to showcase my work, and where peo
 
 After all, every programmer’s dream is to have a personal portfolio that shows his achievements, work, etc. 😊
 
-### How's the performance?
+### Website Performance Optimization
 
 From the beginning, my main focus was on speed and enhancing performance. This involved measures such as minimizing code size, optimizing images & using NEXT.js which has huge improvements overall. Like caching data requests & server-side rendering. This makes it faster in loading pages, and excellent for the user experience, in addition to a beautiful user interface & smooth animations.
 
@@ -32,15 +32,15 @@ From the beginning, my main focus was on speed and enhancing performance. This i
 
 ## Built with
 
-| Name           | Link                                            |
-| -------------- | ----------------------------------------------- |
-| Framework      | [Next 14 (App Router)](https://nextjs.org/)     |
-| Database       | [Supabase](https://supabase.com/)               |
-| Deployment     | [Vercel](https://vercel.com/)                   |
-| Styling        | [TailwindCSS](https://tailwindcss.com/)         |
-| Authentication | [next-auth](https://authjs.dev/)                |
-| Animations     | [framer-motion](https://www.framer.com/motion/) |
-| Favicon        | [Iconify](https://icon-sets.iconify.design/)    |
+| Name           | Link                                                  |
+| -------------- | ----------------------------------------------------- |
+| Framework      | [Next 14 (App Router)](https://nextjs.org/)           |
+| Database       | [Supabase](https://supabase.com/)                     |
+| Deployment     | [Vercel](https://vercel.com/)                         |
+| Styling        | [TailwindCSS](https://tailwindcss.com/)               |
+| Authentication | [SupabaseAuth](https://supabase.com/docs/guides/auth) |
+| Animations     | [framer-motion](https://www.framer.com/motion/)       |
+| Favicon        | [Iconify](https://icon-sets.iconify.design/)          |
 
 Follows all web standards, a **100** score on Lighthouse metrics!
 
@@ -130,7 +130,7 @@ Refer [License file](https://github.com/omarx11/omar11.sa/blob/main/LICENSE) for
 
 - Discord - [omarx11](https://discordredirect.discordsafe.com/users/582305812903493663)
 - Linkedin - [@omar-abdulaziz-sa](https://www.linkedin.com/in/omar-abdulaziz-sa/)
-- Twitter X - [@dis_x0](https://twitter.com/@dis_x0)
+- X - [@dis_x0](https://twitter.com/@dis_x0)
 
 Give a ⭐️ if this project helped you! Thank you.. 💚
 

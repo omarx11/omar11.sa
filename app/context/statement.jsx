@@ -1,4 +1,5 @@
 "use client";
+
 import { createContext, useState } from "react";
 import { links } from "@/app/config/navigation";
 import { nanoid } from "nanoid";
@@ -20,13 +21,14 @@ export const StatementProvider = ({ children }) => {
   const [isCommentLoading, setIsCommentLoading] = useState(false);
   const [botMessages, setBotMessages] = useState(ChatBotDefaultValue);
   const [isBotMsgUpdating, setIsBotMsgUpdating] = useState(false);
-  const [userChatBotId, _] = useState(nanoid());
+  const [chatbot_id, _] = useState(nanoid());
   const [gameAppId, setGameAppId] = useState(null);
   const [isLoadingGame, setIsLoadingGame] = useState(false);
   const [totalPlayTime, setTotalPlayTime] = useState(0);
 
   const removeComment = (cid) => {
     setComments((prev) => prev.filter((comment) => comment.cid !== cid));
+    setIsCommentLoading(false);
   };
 
   const addBotMessage = (message) => {
@@ -57,7 +59,7 @@ export const StatementProvider = ({ children }) => {
         isCommentLoading,
         botMessages,
         isBotMsgUpdating,
-        userChatBotId,
+        chatbot_id,
         gameAppId,
         isLoadingGame,
         totalPlayTime,

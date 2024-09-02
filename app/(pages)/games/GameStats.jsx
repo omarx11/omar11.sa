@@ -1,9 +1,10 @@
 "use client";
+
 import { CnoUp } from "@/app/hooks/useCountUp";
 import Image from "next/image";
 import Pagination from "./Pagination";
 import { useContext, useEffect, useState } from "react";
-import { getStatsPerGame } from "../../lib/getGameInfo";
+import { getStatsPerGame } from "@/app/lib/getGameInfo";
 import { StatementContext } from "@/app/context/statement";
 
 export default function GameStats() {

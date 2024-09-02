@@ -52,26 +52,27 @@ export default function Header() {
               </g>
             </svg>
           </h1>
-          <div className="group relative mt-1 w-full border-t-4 border-neutral-900 pt-1 text-justify text-[1rem] leading-[1.4rem] text-neutral-200">
-            <PlayAudio />A self-taught web developer who's{" "}
+          <div className="group relative mt-1 w-full border-t-4 border-neutral-900 pt-1 text-[1rem] leading-[1.4rem] text-neutral-200 sm:text-justify">
+            <PlayAudio />
+            I’m a self-taught web developer who's{" "}
             <p className="inline-block w-[98px] text-sm font-bold text-emerald-400">
               <AgeTime />
             </p>{" "}
-            y.o & passionate about website programming. I soaked up tons of
-            knowledge on my own while studying at the{" "}
+            years-old with a passion for website programming. I gained extensive
+            knowledge independently while in{" "}
             <Link
               href="https://tvtc.gov.sa/en/Pages/default.aspx"
               target="_blank"
               className="underline-offset-2 hover:underline"
             >
-              College
-            </Link>
-            , and I've had a blast working on some awesome projects on my own.
-            Now that I'm a recent graduate, I'm on the lookout for a job. Want
-            to know more about me? Feel free to{" "}
+              college
+            </Link>{" "}
+            and have completed several exciting projects. Having recently
+            graduated, I’m excited to start my professional journey. Curious to
+            learn more? Feel free to explore my{" "}
             <ActiveLink
-              href="/about"
-              title="dive in.."
+              href="/"
+              title="works.."
               className="underline underline-offset-4 hover:no-underline"
             />{" "}
             ✒️

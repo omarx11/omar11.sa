@@ -1,4 +1,5 @@
 "use client";
+
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
@@ -9,7 +10,7 @@ import { links } from "../config/navigation";
 import { cn } from "../lib/utils";
 import { usePathname } from "next/navigation";
 
-const Navbar = () => {
+const NavPages = () => {
   const pathname = usePathname();
   const { pageNo, setPageNo, pageColor } = useContext(StatementContext);
 
@@ -19,7 +20,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="fade-in mt-4 flex min-h-[28px] select-none flex-wrap gap-4 border-t-8 border-neutral-900 pt-4 font-bold text-neutral-300">
+    <nav className="fade-in flex flex-wrap gap-4 font-bold text-neutral-300">
       {links.slice(0, 7).map((link, index) => (
         <motion.div
           key={link.name}
@@ -59,6 +60,32 @@ const Navbar = () => {
         </motion.div>
       ))}
     </nav>
+  );
+};
+
+const Navbar = () => {
+  return (
+    <div className="mt-4 flex min-h-[28px] select-none items-center justify-between border-t-8 border-neutral-900 pt-4 sm:items-end">
+      <NavPages />
+      <div className="flex items-center gap-1.5 text-neutral-500">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="1.8rem"
+          height="1.8rem"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.5"
+            d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
+          />
+        </svg>
+        <p>Select Pages</p>
+      </div>
+    </div>
   );
 };
 

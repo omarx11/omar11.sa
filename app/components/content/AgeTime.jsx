@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { author } from "@/app/config/meta";

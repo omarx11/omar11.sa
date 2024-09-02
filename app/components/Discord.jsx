@@ -1,4 +1,5 @@
 "use client";
+
 import { useLanyard } from "use-lanyard";
 import { relativeTime } from "@/app/lib/relativeTime";
 import {
@@ -27,7 +28,7 @@ export default function Discord() {
         data.discord_status + "."
       );
 
-    let activitie = data.activities[0]?.name;
+    let activitie = data.activities[data.activities.length - 1]?.name;
 
     const playing =
       activitie === undefined
@@ -35,7 +36,7 @@ export default function Discord() {
         : `Playing: ${activitie}`;
 
     const playingFor = relativeTime(
-      new Date(data.activities[0]?.timestamps?.start),
+      new Date(data.activities[data.activities.length - 1]?.timestamps?.start),
     );
 
     const onlineState =
@@ -70,7 +71,7 @@ export default function Discord() {
           align="start"
           className="w-60 space-y-1 rounded-md border-4 border-dashed border-emerald-600/40 bg-zinc-800 p-2 text-sm"
         >
-          <h4 className="font-semibold">Id: Omar#0135</h4>
+          <h4 className="font-semibold">Id: omarx11</h4>
           {data.discord_status !== "offline" ? (
             <>
               <p>{playing}</p>

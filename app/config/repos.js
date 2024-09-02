@@ -3,9 +3,9 @@ export const manualRepository = [
     id: 1,
     homepage: "https://old.omar11.sa/",
     name: "my-old-website",
-    stargazers_count: "−",
-    forks_count: "−",
-    watchers_count: "−",
+    stargazers_count: "0",
+    forks_count: "0",
+    watchers_count: "0",
     description:
       "My old website, created for self-learning such as HTML, CSS, JavasSript, PHP, API's, and more..",
   },

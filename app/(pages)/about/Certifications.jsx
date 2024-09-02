@@ -1,4 +1,5 @@
 "use client";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCards } from "swiper/modules";
 import Image from "next/image";

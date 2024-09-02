@@ -1,4 +1,5 @@
 "use client";
+
 import { useContext, useEffect, useState } from "react";
 import Pagination from "./Pagination";
 import Image from "next/image";

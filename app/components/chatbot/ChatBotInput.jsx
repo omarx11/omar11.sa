@@ -1,5 +1,5 @@
 import { StatementContext } from "@/app/context/statement";
-import { getBotMessage, saveBotMessage } from "@/app/lib/fetchRequests";
+import { getBotMessage, saveBotMessage } from "@/app/lib/actions";
 import { useMutation } from "@tanstack/react-query";
 import { nanoid } from "nanoid";
 import { useContext, useEffect, useRef, useState } from "react";
@@ -16,7 +16,7 @@ const ChatBotInput = () => {
     updateBotMessage,
     setIsBotMsgUpdating,
     isBotMsgUpdating,
-    userChatBotId,
+    chatbot_id,
   } = useContext(StatementContext);
 
   const { mutate: sendMessage } = useMutation({
@@ -73,46 +73,49 @@ const ChatBotInput = () => {
   useEffect(() => {
     (async () => {
       if (isBotMsgUpdating === true && botMessages.length > 1) {
-        await saveBotMessage({ botMessages }, userChatBotId);
+        await saveBotMessage({ botMessages }, chatbot_id);
         setIsBotMsgUpdating(false);
       }
     })();
   }, [isBotMsgUpdating]);
+
+  const handleSubmit = (e) => {
+    if (input !== "") {
+      if ((e.key === "Enter" && !e.shiftKey) || e.type === "click") {
+        e.preventDefault();
+        const message = {
+          id: nanoid(),
+          isUserMessage: true,
+          text: input,
+        };
+        sendMessage(message);
+      }
+    }
+  };
 
   return (
     <div>
       <div className="relative mt-4 flex-1 overflow-hidden rounded-md border-none outline-none">
         <TextareaAutosize
           ref={textareaRef}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-              e.preventDefault();
-
-              const message = {
-                id: nanoid(),
-                isUserMessage: true,
-                text: input,
-              };
-              sendMessage(message);
-            }
-          }}
+          onKeyDown={handleSubmit}
           rows={1}
           maxRows={3}
           value={input}
           autoFocus
           disabled={isLoading}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => setInput(e.target.value.replace(/^\s+/, ""))}
           placeholder="Write a message..."
           className="block w-full resize-none bg-neutral-800 py-2 pl-2 pr-12 text-lg leading-5 text-neutral-50 caret-neutral-200 outline-none placeholder:text-sm placeholder:italic placeholder:text-neutral-500 disabled:opacity-50"
         />
-        <kbd className="absolute inset-y-0 right-0 inline-flex select-none items-center bg-neutral-700/50 px-3">
+        <kbd className="absolute inset-y-0 right-0 inline-flex select-none items-center bg-neutral-700/50">
           {isLoading ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="22"
               height="22"
               viewBox="0 0 24 24"
-              className="animate-spin"
+              className="mx-3 animate-spin"
             >
               <g fill="#d4d4d4">
                 <path
@@ -125,17 +128,22 @@ const ChatBotInput = () => {
               </g>
             </svg>
           ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
+            <button
+              onClick={handleSubmit}
+              className="w-full border-0 px-3 outline-0"
             >
-              <g fill="#c4c4c4" fillRule="evenodd" clipRule="evenodd">
-                <path d="M3 14a1 1 0 0 1 1-1h12a3 3 0 0 0 3-3V6a1 1 0 1 1 2 0v4a5 5 0 0 1-5 5H4a1 1 0 0 1-1-1z" />
-                <path d="M3.293 14.707a1 1 0 0 1 0-1.414l4-4a1 1 0 0 1 1.414 1.414L5.414 14l3.293 3.293a1 1 0 1 1-1.414 1.414l-4-4z" />
-              </g>
-            </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+              >
+                <g fill="#c4c4c4" fillRule="evenodd" clipRule="evenodd">
+                  <path d="M3 14a1 1 0 0 1 1-1h12a3 3 0 0 0 3-3V6a1 1 0 1 1 2 0v4a5 5 0 0 1-5 5H4a1 1 0 0 1-1-1z" />
+                  <path d="M3.293 14.707a1 1 0 0 1 0-1.414l4-4a1 1 0 0 1 1.414 1.414L5.414 14l3.293 3.293a1 1 0 1 1-1.414 1.414l-4-4z" />
+                </g>
+              </svg>
+            </button>
           )}
         </kbd>
       </div>
