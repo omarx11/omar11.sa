@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { Provider } from "@supabase/supabase-js";
 import { oAuthSignIn } from "./actions";
-import { Github } from "../../../components/icons/Github";
-import { Google } from "../../../components/icons/Google";
+import { Github } from "@/app/components/icons/Github";
+import { Google } from "@/app/components/icons/Google";
 import { Loading } from "@/app/components/icons/Loading";
 import { cn } from "@/app/lib/utils";
 

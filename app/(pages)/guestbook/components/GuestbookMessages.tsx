@@ -5,7 +5,7 @@ import { useEffect, useContext, useState, useCallback } from "react";
 import { StatementContext } from "@/app/context/statement";
 import { deleteComment, getAllComments } from "../action";
 import { dateStyle } from "@/app/lib/helpers";
-import { LoadingDots } from "../../../components/icons/LoadingDots";
+import { LoadingDots } from "@/app/components/icons/LoadingDots";
 import { User } from "@supabase/supabase-js";
 import { Guestbook } from "@/app/lib/supabase/types/custom";
 import { cn } from "@/app/lib/utils";

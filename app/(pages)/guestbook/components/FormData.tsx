@@ -14,7 +14,6 @@ import { cn } from "@/app/lib/utils";
 
 const FormData = ({ userData }: { userData: User }) => {
   const [textComment, setTextComment] = useState<string>("");
-  const [isTyping, setIsTyping] = useState<boolean>(false);
   const [wordLimit, setWordLimit] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<string>("");
   const { addComment, setIsCommentLoading } = useContext(StatementContext);
@@ -30,7 +29,7 @@ const FormData = ({ userData }: { userData: User }) => {
   };
 
   const handleSubmit = async () => {
-    if (!userData) return;
+    if (!userData || !textComment.trim()) return;
     setIsCommentLoading(true);
     setTextComment("");
     setIsLoading("send");
@@ -47,8 +46,9 @@ const FormData = ({ userData }: { userData: User }) => {
   };
 
   useEffect(() => {
-    setWordLimit(textComment.length >= 2000);
-    setIsTyping(textComment === "");
+    if (userData) {
+      setWordLimit(textComment.length >= 2000);
+    }
   }, [textComment]);
 
   return (
@@ -72,31 +72,30 @@ const FormData = ({ userData }: { userData: User }) => {
       <textarea
         name="textComment"
         value={textComment}
-        onChange={(e) => setTextComment(e.target.value.replace(/^\s+/, ""))}
+        onChange={(e) => setTextComment(e.target.value.trimStart())}
         maxLength={2000}
         placeholder="Leave a comment.."
         spellCheck={false}
         className={cn(
           "h-40 w-full rounded-md border-[6px] border-neutral-800 bg-neutral-900 p-2 text-lg text-neutral-50 shadow-sm outline-0 ring-4 ring-neutral-700 duration-300 placeholder:text-sm placeholder:italic focus:bg-neutral-950",
-          {
-            "caret-rose-500 focus:ring-rose-800": wordLimit,
-            "caret-emerald-500 focus:ring-neutral-600": !wordLimit,
-          }
+          wordLimit
+            ? "caret-rose-500 focus:ring-rose-800"
+            : "caret-emerald-500 focus:ring-neutral-600"
         )}
       />
       <div className="flex flex-wrap justify-between">
         <span
-          className={cn("select-none text-sm", {
-            "font-bold text-rose-600": wordLimit,
-            "text-neutral-500": !wordLimit,
-          })}
+          className={cn(
+            "select-none text-sm",
+            wordLimit ? "font-bold text-rose-600" : "text-neutral-500"
+          )}
         >
           {textComment.length} / 2000
         </span>
         <div className="mt-0.5 flex gap-2 text-neutral-50">
           <button
             aria-label="Send Comment"
-            disabled={isTyping || !userData}
+            disabled={!textComment.trim() || !userData}
             onClick={handleSubmit}
             className="flex items-center gap-1 rounded-md bg-sky-800 px-2 py-1 text-base duration-100 hover:bg-sky-900 disabled:cursor-not-allowed disabled:select-none disabled:bg-sky-800 disabled:opacity-60"
           >
@@ -109,7 +108,7 @@ const FormData = ({ userData }: { userData: User }) => {
               onClick={() => setIsLoading("signout")}
               className="flex items-center gap-1 rounded-md bg-rose-800 px-2 py-1 text-base duration-100 hover:bg-rose-900"
             >
-              Sign_Out
+              Sign Out
               {isLoading === "signout" && <Loading className="animate-spin" />}
             </button>
           </form>
