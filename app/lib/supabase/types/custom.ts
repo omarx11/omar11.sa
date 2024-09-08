@@ -1,4 +1,4 @@
-import { Database } from "./supabase";
+import { Tables } from "./supabase";
 
-export type Guestbook = Database["public"]["Tables"]["gbook_omar11"]["Row"];
-export type Profiles = Database["public"]["Tables"]["profiles"]["Row"];
+export type Guestbook = Tables<"gbook_omar11">;
+export type Profiles = Tables<"profiles">;

@@ -6,18 +6,12 @@
   color-scheme: dark;
 }
 
-// body::-webkit-scrollbar,
-// textarea::-webkit-scrollbar,
-// #chatBox::-webkit-scrollbar {
-//   width: 0;
-// }
-
 ::selection {
   background-color: rgb(4 120 87);
   color: white;
 }
 
-// for the GitHubCalendar component
+// GitHubCalendar component
 .react-activity-calendar__calendar {
   width: 270%;
   max-width: max-content;
@@ -152,7 +146,7 @@
   }
 
   .scale-in {
-    animation: scale-in 80ms ease-out;
+    animation: scale-in 120ms ease-out;
   }
   @keyframes scale-in {
     from {

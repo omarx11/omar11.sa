@@ -5,40 +5,46 @@ import { createClient } from "@/app/lib/supabase/server";
 
 export async function getAllComments() {
   const supabase = createClient();
+
   const { data: data, error } = await supabase
     .from("gbook_omar11")
     .select("*")
     .order("inserted_at", { ascending: false });
 
   if (error) {
-    console.log(error);
+    throw new Error(`Error fetching comments: ${error}`);
   }
 
   return data;
 }
 
-export async function addComment(comment: string) {
+export async function saveComment(comment: string) {
   const supabase = createClient();
   const {
     data: { user },
+    error: authError,
   } = await supabase.auth.getUser();
 
-  const body = {
-    name: user.user_metadata.name,
-    user_id: user.id,
+  if (authError) {
+    throw new Error(`Authentication error: ${authError}`);
+  }
+
+  const newComment = {
+    user_id: user!.id,
     cid: nanoid(),
-    comment: comment,
-    avatar: user.user_metadata.avatar_url,
+    name: user!.user_metadata.name,
+    comment,
+    avatar: user!.user_metadata.avatar_url,
   };
 
   const { data, error } = await supabase
     .from("gbook_omar11")
-    .insert(body)
+    .insert(newComment)
     .select()
     .single();
 
   if (error) {
-    console.log(error);
+    throw new Error(`Error saving comment: ${error}`);
   }
 
   return data;
@@ -48,14 +54,19 @@ export async function deleteComment(cid: string) {
   const supabase = createClient();
   const {
     data: { user },
+    error: authError,
   } = await supabase.auth.getUser();
 
+  if (authError) {
+    throw new Error(`Authentication error: ${authError}`);
+  }
+
   const { error } = await supabase.from("gbook_omar11").delete().match({
-    user_id: user.id,
+    user_id: user!.id,
     cid: cid,
   });
 
   if (error) {
-    console.log(error);
+    throw new Error(`Error deleting comment: ${error}`);
   }
 }

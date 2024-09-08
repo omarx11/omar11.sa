@@ -21,3 +21,38 @@ export const getURL = (path: string = "") => {
   // Concatenate the URL and the path.
   return path ? `${url}/${path}` : url;
 };
+
+export const relativeTime = (time: Date | number): string => {
+  const relativeTimePeriods: [number, string][] = [
+    [31536000, "year"],
+    [2419200, "month"],
+    [604800, "week"],
+    [86400, "day"],
+    [3600, "hour"],
+    [60, "minute"],
+    [1, "second"],
+  ];
+
+  // Configure timestamp to relative time
+  function relativeTime(date: Date | number, isUtc: boolean = true): string {
+    if (!(date instanceof Date)) date = new Date(date * 1000);
+    const seconds = (new Date().getTime() - date.getTime()) / 1000;
+    for (let [secondsPer, name] of relativeTimePeriods) {
+      if (seconds >= secondsPer) {
+        const amount = Math.floor(seconds / secondsPer);
+        return `for ${amount} ${name}${amount > 1 ? "s" : ""}`;
+      }
+    }
+    return "Just now";
+  }
+
+  return relativeTime(time);
+};
+
+export const dateStyle = (data: Date | number | string): string => {
+  const f = new Intl.DateTimeFormat("en-US", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  });
+  return f.format(new Date(data));
+};

@@ -4,182 +4,182 @@ export type Json =
   | boolean
   | null
   | { [key: string]: Json | undefined }
-  | Json[]
+  | Json[];
 
 export type Database = {
   public: {
     Tables: {
       chatbot_omar11: {
         Row: {
-          chat_id: string | null
-          chatbox: string | null
-          created_at: string
-          id: number
-        }
+          chat_id: string | null;
+          chatbox: string | null;
+          created_at: string;
+          id: number;
+        };
         Insert: {
-          chat_id?: string | null
-          chatbox?: string | null
-          created_at?: string
-          id?: number
-        }
+          chat_id?: string | null;
+          chatbox?: string | null;
+          created_at?: string;
+          id?: number;
+        };
         Update: {
-          chat_id?: string | null
-          chatbox?: string | null
-          created_at?: string
-          id?: number
-        }
-        Relationships: []
-      }
+          chat_id?: string | null;
+          chatbox?: string | null;
+          created_at?: string;
+          id?: number;
+        };
+        Relationships: [];
+      };
       chatin: {
         Row: {
-          chat: string | null
-          created_at: string
-          id: number
-          updated_at: string | null
-          user_uuid: string | null
-        }
+          chat: string | null;
+          created_at: string;
+          id: number;
+          updated_at: string | null;
+          user_uuid: string | null;
+        };
         Insert: {
-          chat?: string | null
-          created_at?: string
-          id?: number
-          updated_at?: string | null
-          user_uuid?: string | null
-        }
+          chat?: string | null;
+          created_at?: string;
+          id?: number;
+          updated_at?: string | null;
+          user_uuid?: string | null;
+        };
         Update: {
-          chat?: string | null
-          created_at?: string
-          id?: number
-          updated_at?: string | null
-          user_uuid?: string | null
-        }
-        Relationships: []
-      }
+          chat?: string | null;
+          created_at?: string;
+          id?: number;
+          updated_at?: string | null;
+          user_uuid?: string | null;
+        };
+        Relationships: [];
+      };
       gbook_omar11: {
         Row: {
-          avatar: string | null
-          cid: string | null
-          comment: string | null
-          id: number
-          inserted_at: string | null
-          name: string | null
-          user_id: string
-        }
+          avatar: string | null;
+          cid: string | null;
+          comment: string | null;
+          id: number;
+          inserted_at: string | null;
+          name: string | null;
+          user_id: string;
+        };
         Insert: {
-          avatar?: string | null
-          cid?: string | null
-          comment?: string | null
-          id?: number
-          inserted_at?: string | null
-          name?: string | null
-          user_id: string
-        }
+          avatar?: string | null;
+          cid?: string | null;
+          comment?: string | null;
+          id?: number;
+          inserted_at?: string | null;
+          name?: string | null;
+          user_id: string;
+        };
         Update: {
-          avatar?: string | null
-          cid?: string | null
-          comment?: string | null
-          id?: number
-          inserted_at?: string | null
-          name?: string | null
-          user_id?: string
-        }
+          avatar?: string | null;
+          cid?: string | null;
+          comment?: string | null;
+          id?: number;
+          inserted_at?: string | null;
+          name?: string | null;
+          user_id?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "gbook_omar11_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
+            foreignKeyName: "gbook_omar11_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
           },
-        ]
-      }
+        ];
+      };
       guestbook_demo: {
         Row: {
-          avatar: string | null
-          cid: string | null
-          comment: string | null
-          created_at: string | null
-          id: number
-          name: string | null
-          profile: string | null
-          uid: string | null
-        }
+          avatar: string | null;
+          cid: string | null;
+          comment: string | null;
+          created_at: string | null;
+          id: number;
+          name: string | null;
+          profile: string | null;
+          uid: string | null;
+        };
         Insert: {
-          avatar?: string | null
-          cid?: string | null
-          comment?: string | null
-          created_at?: string | null
-          id?: number
-          name?: string | null
-          profile?: string | null
-          uid?: string | null
-        }
+          avatar?: string | null;
+          cid?: string | null;
+          comment?: string | null;
+          created_at?: string | null;
+          id?: number;
+          name?: string | null;
+          profile?: string | null;
+          uid?: string | null;
+        };
         Update: {
-          avatar?: string | null
-          cid?: string | null
-          comment?: string | null
-          created_at?: string | null
-          id?: number
-          name?: string | null
-          profile?: string | null
-          uid?: string | null
-        }
-        Relationships: []
-      }
+          avatar?: string | null;
+          cid?: string | null;
+          comment?: string | null;
+          created_at?: string | null;
+          id?: number;
+          name?: string | null;
+          profile?: string | null;
+          uid?: string | null;
+        };
+        Relationships: [];
+      };
       profiles: {
         Row: {
-          created_at: string
-          email: string
-          full_name: string | null
-          id: string
-          last_sign_in_at: string | null
-          provider_avatar: string | null
-          sign_in_provider: string | null
-        }
+          created_at: string;
+          email: string;
+          full_name: string | null;
+          id: string;
+          last_sign_in_at: string | null;
+          provider_avatar: string | null;
+          sign_in_provider: string | null;
+        };
         Insert: {
-          created_at?: string
-          email: string
-          full_name?: string | null
-          id: string
-          last_sign_in_at?: string | null
-          provider_avatar?: string | null
-          sign_in_provider?: string | null
-        }
+          created_at?: string;
+          email: string;
+          full_name?: string | null;
+          id: string;
+          last_sign_in_at?: string | null;
+          provider_avatar?: string | null;
+          sign_in_provider?: string | null;
+        };
         Update: {
-          created_at?: string
-          email?: string
-          full_name?: string | null
-          id?: string
-          last_sign_in_at?: string | null
-          provider_avatar?: string | null
-          sign_in_provider?: string | null
-        }
+          created_at?: string;
+          email?: string;
+          full_name?: string | null;
+          id?: string;
+          last_sign_in_at?: string | null;
+          provider_avatar?: string | null;
+          sign_in_provider?: string | null;
+        };
         Relationships: [
           {
-            foreignKeyName: "profiles_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "users"
-            referencedColumns: ["id"]
+            foreignKeyName: "profiles_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
           },
-        ]
-      }
-    }
+        ];
+      };
+    };
     Views: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     Functions: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     Enums: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     CompositeTypes: {
-      [_ in never]: never
-    }
-  }
-}
+      [_ in never]: never;
+    };
+  };
+};
 
-type PublicSchema = Database[Extract<keyof Database, "public">]
+type PublicSchema = Database[Extract<keyof Database, "public">];
 
 export type Tables<
   PublicTableNameOrOptions extends
@@ -192,7 +192,7 @@ export type Tables<
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
       Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
-      Row: infer R
+      Row: infer R;
     }
     ? R
     : never
@@ -200,11 +200,11 @@ export type Tables<
         PublicSchema["Views"])
     ? (PublicSchema["Tables"] &
         PublicSchema["Views"])[PublicTableNameOrOptions] extends {
-        Row: infer R
+        Row: infer R;
       }
       ? R
       : never
-    : never
+    : never;
 
 export type TablesInsert<
   PublicTableNameOrOptions extends
@@ -215,17 +215,17 @@ export type TablesInsert<
     : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Insert: infer I
+      Insert: infer I;
     }
     ? I
     : never
   : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
     ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
-        Insert: infer I
+        Insert: infer I;
       }
       ? I
       : never
-    : never
+    : never;
 
 export type TablesUpdate<
   PublicTableNameOrOptions extends
@@ -236,17 +236,17 @@ export type TablesUpdate<
     : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Update: infer U
+      Update: infer U;
     }
     ? U
     : never
   : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
     ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
-        Update: infer U
+        Update: infer U;
       }
       ? U
       : never
-    : never
+    : never;
 
 export type Enums<
   PublicEnumNameOrOptions extends
@@ -259,4 +259,4 @@ export type Enums<
   ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"]
     ? PublicSchema["Enums"][PublicEnumNameOrOptions]
-    : never
+    : never;

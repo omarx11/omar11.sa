@@ -1,12 +1,11 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useState } from "react";
 import { Provider } from "@supabase/supabase-js";
 import { oAuthSignIn } from "./actions";
-import { Github } from "./icons/Github";
-import { Google } from "./icons/Google";
-import { Loading } from "./icons/Loading";
+import { Github } from "../../../components/icons/Github";
+import { Google } from "../../../components/icons/Google";
+import { Loading } from "@/app/components/icons/Loading";
 import { cn } from "@/app/lib/utils";
 
 type OAuthProvider = {
@@ -49,7 +48,7 @@ const OAuthButtons = () => {
                 "bg-[#2f3338] hover:bg-[#2f3338]/80":
                   provider.name === "github",
                 "bg-blue-600 hover:bg-blue-700": provider.name === "google",
-              },
+              }
             )}
           >
             {provider.icon}
@@ -79,9 +78,4 @@ const OAuthButtons = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(OAuthButtons), {
-  loading: () => (
-    <div className="my-[4.4rem] h-[116px] w-full animate-pulse rounded-md bg-neutral-900 sm:w-[28rem]"></div>
-  ),
-  ssr: false,
-});
+export default OAuthButtons;
