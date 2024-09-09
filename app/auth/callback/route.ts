@@ -19,7 +19,7 @@ export async function GET(request: Request) {
         return NextResponse.redirect(`${origin}${next}/guestbook`);
       } else if (forwardedHost) {
         return NextResponse.redirect(
-          `https://${forwardedHost}${next}/guestbook`,
+          `https://${forwardedHost}${next}/guestbook`
         );
       } else {
         return NextResponse.redirect(`${origin}${next}/guestbook`);
