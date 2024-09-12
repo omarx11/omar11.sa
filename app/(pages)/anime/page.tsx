@@ -9,11 +9,11 @@ import { Skeleton } from "@/app/components/ui/Skeleton";
 
 export const metadata: Metadata = {
   title: "Anime Page",
-  description: `${author.name}'s top fav animes`,
+  description: `${author.name}'s top favorite anime`,
   keywords: [`${author.fullName} Anime Page`],
   openGraph: {
     title: "Anime Page",
-    description: `${author.name}'s top fav animes`,
+    description: `${author.name}'s top favorite anime`,
     url: `${author.siteUrl}/anime`,
     images: [
       {
@@ -29,9 +29,9 @@ function AnimePage() {
     <>
       <Heading name="Anime" emoji="🌟" sId="#anime" />
       <p className="mt-4 text-neutral-400">
-        Top <span className="underline underline-offset-2">10</span> of my
-        favorite anime I've watched. 😄{" "}
-        <span className="text-neutral-500">I don't watch movies.. sorry</span>
+        Top <span className="underline underline-offset-2">10</span> favorite
+        anime {`I've`} watched. 😄{" "}
+        <span className="text-neutral-500">I {`don't`} watch movies..</span>
       </p>
       <div className="fade-in-left mt-10 max-w-[896px]" id="anime">
         {anime.map(({ rank, name, description, image, url }) => (
@@ -69,7 +69,7 @@ function AnimePage() {
 const AnimePageSkeleton = () => {
   return (
     <ul className="fade-in-left mt-[7.4rem] max-w-[896px]">
-      {[...Array(anime.length)].map((_, i) => (
+      {Array.from({ length: anime.length }).map((_, i) => (
         <li key={i}>
           <Skeleton className="mb-4 flex h-36 items-center justify-items-start overflow-hidden rounded-lg px-4 sm:px-8" />
         </li>

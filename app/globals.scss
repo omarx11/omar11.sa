@@ -35,7 +35,6 @@
     -khtml-user-drag: none;
     -moz-user-drag: none;
     -o-user-drag: none;
-    user-drag: none;
   }
 
   .fade-in > * {
@@ -127,21 +126,72 @@
     }
   }
 
-  .online {
-    animation: online 2s infinite;
+  .ping-online {
+    animation: ping-online 1.8s infinite;
   }
-  @keyframes online {
+  @keyframes ping-online {
     0% {
       transform: scale(0.95);
-      box-shadow: 0 0 0 0 rgba(29, 185, 84, 0.7);
+      box-shadow: 0 0 0 0 rgba(29 185 84 / 0.7);
     }
     70% {
       transform: scale(1);
-      box-shadow: 0 0 0 8px rgba(29, 185, 84, 0);
+      box-shadow: 0 0 0 8px rgba(29 185 84 / 0);
     }
     100% {
       transform: scale(0.95);
-      box-shadow: 0 0 0 0 rgba(29, 185, 84, 0);
+      box-shadow: 0 0 0 0 rgba(29 185 84 / 0);
+    }
+  }
+  .ping-idle {
+    animation: ping-idle 1.8s infinite;
+  }
+  @keyframes ping-idle {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgb(250 204 21 / 0.7);
+    }
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 8px rgb(250 204 21 / 0);
+    }
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgb(250 204 21 / 0);
+    }
+  }
+  .ping-dnd {
+    animation: ping-dnd 1.8s infinite;
+  }
+  @keyframes ping-dnd {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgb(251 113 133 / 0.7);
+    }
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 8px rgb(251 113 133 / 0);
+    }
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgb(251 113 133 / 0);
+    }
+  }
+  .ping-offline {
+    animation: ping-offline 1.8s infinite;
+  }
+  @keyframes ping-offline {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgb(212 212 212 / 0.7);
+    }
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 8px rgb(212 212 212 / 0);
+    }
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgb(212 212 212 / 0);
     }
   }
 

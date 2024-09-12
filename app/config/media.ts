@@ -1,35 +1,35 @@
 import { author } from "@/app/config/meta";
 
-type MediaItem = {
+type MediaItemProps = {
   url: string;
   icon: string;
   name: string;
-};
+}[];
 
-export const media: MediaItem[] = [
+export const media: MediaItemProps = [
   {
-    url: `mailto:${author.email}`,
-    icon: "/static/icons/socials/email.svg",
     name: "Email",
+    icon: "/static/icons/socials/email.svg",
+    url: `mailto:${author.email}`,
   },
   {
-    url: author.twitter,
-    icon: "/static/icons/socials/twitter-x.svg",
     name: "Twitter X",
+    icon: "/static/icons/socials/twitter-x.svg",
+    url: author.twitter,
   },
   {
-    url: `https://discordredirect.discordsafe.com/users/${author.discordId}`,
-    icon: "/static/icons/socials/discord.svg",
     name: "Discord",
+    icon: "/static/icons/socials/discord.svg",
+    url: `https://discordredirect.discordsafe.com/users/${author.discordId}`,
   },
   {
-    url: author.linkedIn,
-    icon: "/static/icons/socials/linkedin.svg",
     name: "LinkedIn",
+    icon: "/static/icons/socials/linkedin.svg",
+    url: author.linkedIn,
   },
   {
-    url: author.github,
-    icon: "/static/icons/socials/github.svg",
     name: "Github",
+    icon: "/static/icons/socials/github.svg",
+    url: author.github,
   },
 ];

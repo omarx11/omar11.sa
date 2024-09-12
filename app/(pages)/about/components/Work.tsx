@@ -47,9 +47,9 @@ export default function Work() {
               className="ml-auto text-xs text-neutral-500"
               aria-label="March 31 2024 until now"
             >
-              <time dateTime="2024">March 2024</time>{" "}
+              <time dateTime="2024">Mar 2024</time>{" "}
               <span aria-hidden="true">—</span>{" "}
-              <time dateTime="2024">June 2024</time>
+              <time dateTime="2024">Jun 2024</time>
             </dd>
           </dl>
         </li>

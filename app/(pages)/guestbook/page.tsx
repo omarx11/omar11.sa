@@ -9,7 +9,7 @@ import { author } from "@/app/config/meta";
 export const metadata: Metadata = {
   title: "Guestbook Page",
   description: `${author.name}'s Guestbook Comments`,
-  keywords: [`${author.fullName} Guestbook`],
+  keywords: ["Guestbook", "Comments", "Sign Guestbook", author.fullName],
   openGraph: {
     title: "Guestbook Page",
     description: `${author.name}'s Guestbook Comments`,
@@ -36,7 +36,7 @@ export default async function GuestbookPage() {
         name="Guestbook"
         emoji="🖋️"
         sId="#guestbook"
-        title="Hey There!, please sign in and say hi. and Thanks for visiting my website 💚"
+        title="Hey there! Please sign in to say hi. Thanks for visiting my website 💚"
       />
       <div className="flex w-full items-center justify-center">
         {user ? <FormData userData={user} /> : <OAuthButtons />}

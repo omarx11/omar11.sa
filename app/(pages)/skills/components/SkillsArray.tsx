@@ -1,8 +1,8 @@
+import type { SkillsArrayProps } from "@/app/config/skills";
 import Image from "next/image";
 import Link from "next/link";
-import type { SkillsArray } from "@/app/config/skills";
 
-export function SkillsArray({ data }: { data: SkillsArray[] }) {
+export function SkillsArray({ data }: { data: SkillsArrayProps[] }) {
   return data.map(({ name, icon, url, description }) => (
     <div
       key={name}

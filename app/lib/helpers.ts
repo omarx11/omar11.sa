@@ -33,20 +33,21 @@ export const relativeTime = (time: Date | number): string => {
     [1, "second"],
   ];
 
-  // Configure timestamp to relative time
-  function relativeTime(date: Date | number, isUtc: boolean = true): string {
-    if (!(date instanceof Date)) date = new Date(date * 1000);
-    const seconds = (new Date().getTime() - date.getTime()) / 1000;
-    for (let [secondsPer, name] of relativeTimePeriods) {
+  // Helper function to calculate relative time
+  const getRelativeTime = (seconds: number): string => {
+    for (const [secondsPer, name] of relativeTimePeriods) {
       if (seconds >= secondsPer) {
         const amount = Math.floor(seconds / secondsPer);
         return `for ${amount} ${name}${amount > 1 ? "s" : ""}`;
       }
     }
     return "Just now";
-  }
+  };
 
-  return relativeTime(time);
+  const date = typeof time === "number" ? new Date(time * 1000) : time;
+  const seconds = (new Date().getTime() - date.getTime()) / 1000;
+
+  return getRelativeTime(seconds);
 };
 
 export const dateStyle = (data: Date | number | string): string => {

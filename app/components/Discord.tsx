@@ -16,7 +16,7 @@ const discordId = author.discordId as `${bigint}`;
 export default function Discord() {
   const { data, error, isLoading } = useLanyard(discordId);
 
-  if (error) console.log("Error loading discord status");
+  if (error) console.error("Error loading discord status");
 
   // Fallback for loading state
   if (!data || isLoading) {
@@ -58,12 +58,15 @@ export default function Discord() {
           className="flex select-none items-center gap-2 pl-[1px]"
         >
           <span
-            className={cn("online relative mx-[2px] h-3 w-3 rounded-full", {
-              "border-red-300 bg-[#1db954]": data.discord_status === "online",
-              "border-yellow-300 bg-yellow-400": data.discord_status === "idle",
-              "border-[3px] border-neutral-300 bg-transparent":
+            className={cn("relative mx-[2px] h-3 w-3 rounded-full", {
+              "ping-online border-red-300 bg-[#1db954]":
+                data.discord_status === "online",
+              "ping-idle border-yellow-300 bg-yellow-400":
+                data.discord_status === "idle",
+              "ping-offline border-[3px] border-neutral-300 bg-transparent":
                 data.discord_status === "offline",
-              "border-rose-300 bg-rose-400": data.discord_status === "dnd",
+              "ping-dnd border-rose-300 bg-rose-400":
+                data.discord_status === "dnd",
             })}
           ></span>
           <p>currently {statusText}</p>
@@ -82,7 +85,7 @@ export default function Discord() {
               )}
             </>
           ) : (
-            <p>Maybe he's sleeping 💤 or outside his room 🚪</p>
+            <p>Maybe {`he's`} sleeping 💤 or outside his room 🚪</p>
           )}
         </HoverCardContent>
       </HoverCard>

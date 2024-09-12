@@ -17,16 +17,14 @@ const NavPages = () => {
 
   useEffect(() => {
     const linkPathname = links.find((a) => a.href === pathname);
-    if (linkPathname) {
-      setPageNo(linkPathname.id);
-    } else {
-      // Fallback to first page if pathname doesn't match
-      setPageNo(0);
-    }
+    setPageNo(linkPathname ? linkPathname.id : 0);
   }, [pathname, setPageNo]);
 
   return (
-    <nav className="fade-in flex flex-wrap gap-4 font-bold text-neutral-300">
+    <nav
+      className="fade-in flex flex-wrap gap-4 font-bold text-neutral-300"
+      role="navigation"
+    >
       {links.slice(0, 7).map((link) => (
         <motion.div
           key={link.name}

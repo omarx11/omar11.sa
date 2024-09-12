@@ -28,12 +28,13 @@ export default function Header() {
           onClick={() => window.location.reload()}
           placeholder="blur"
           blurDataURL="/static/icons/blur.svg"
-          className="drag-none h-32 w-32 cursor-pointer rounded-full border-4 border-transparent bg-neutral-900 bg-cover ring-4 ring-emerald-700/70 duration-300 hover:ring-8 hover:ring-emerald-700/50 focus:ring-8 active:ring-8"
+          className="drag-none h-[120px] w-[120px] cursor-pointer rounded-full bg-neutral-900 bg-cover ring ring-emerald-700 ring-offset-4 ring-offset-black transition-shadow hover:ring-yellow-700 hover:ring-offset-8 hover:ring-offset-black md:ml-1"
           alt="avatar"
         />
-        <div className="ml-0 mt-6 flex flex-col md:ml-6 md:mt-0">
+        <div className="ml-0 mt-6 flex flex-col md:ml-7 md:mt-0">
           <h1 className="items-center text-2xl font-bold text-neutral-50">
-            Hey, I'm <span className="text-emerald-400">{author.fullName}</span>
+            Hey, {`I'm`}{" "}
+            <span className="text-emerald-400">{author.fullName}</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -58,7 +59,7 @@ export default function Header() {
           </h1>
           <div className="group relative mt-1 w-full border-t-4 border-neutral-900 pt-1 text-[1rem] leading-[1.4rem] text-neutral-200 sm:text-justify">
             <PlayAudio />
-            I’m a self-taught web developer who's{" "}
+            I’m a self-taught web developer {`who's `}
             <span className="inline-block w-[98px] text-sm font-bold text-emerald-400">
               {years}
             </span>{" "}

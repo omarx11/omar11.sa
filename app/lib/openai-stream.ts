@@ -38,13 +38,20 @@ export async function OpenAIStream(payload: OpenAIStreamPayload) {
     body: JSON.stringify(payload),
   });
 
+  // Check if the response status is not OK (e.g., 4xx or 5xx errors)
+  if (!res.ok) {
+    const errorBody = await res.text();
+    throw new Error(
+      `OpenAI API returned an error: ${res.status} - ${errorBody}`
+    );
+  }
+
   const stream = new ReadableStream({
     async start(controller) {
-      // callback
+      // Callback function to handle parsed SSE events
       function onParse(event: ParsedEvent | ReconnectInterval) {
         if (event.type === "event") {
           const data = event.data;
-          // https://beta.openai.com/docs/api-reference/completions/create#completions/create-stream
           if (data === "[DONE]") {
             controller.close();
             return;
@@ -52,26 +59,33 @@ export async function OpenAIStream(payload: OpenAIStreamPayload) {
           try {
             const json = JSON.parse(data);
             const text = json.choices[0].delta?.content || "";
+            // Ignore prefix characters like "\n\n"
             if (counter < 2 && (text.match(/\n/) || []).length) {
-              // this is a prefix character (i.e., "\n\n"), do nothing
               return;
             }
             const queue = encoder.encode(text);
             controller.enqueue(queue);
             counter++;
           } catch (e) {
-            // maybe parse error
-            controller.error(e);
+            controller.error(e); // Handle JSON parse errors
           }
         }
       }
 
+      const parser = createParser(onParse);
+
       // stream response (SSE) from OpenAI may be fragmented into multiple chunks
       // this ensures we properly read chunks and invoke an event for each SSE event stream
-      const parser = createParser(onParse);
       // https://web.dev/streams/#asynchronous-iteration
-      for await (const chunk of res.body as any) {
-        parser.feed(decoder.decode(chunk));
+      if (res.body) {
+        const reader = res.body.getReader();
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          parser.feed(decoder.decode(value));
+        }
+      } else {
+        controller.error(new Error("Response body is null"));
       }
     },
   });

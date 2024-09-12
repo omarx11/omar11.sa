@@ -1,12 +1,12 @@
-type Anime = {
+type AnimeProps = {
   rank: number;
   name: string;
   description: string;
   image: string;
   url: string;
-};
+}[];
 
-export const anime: Anime[] = [
+export const anime: AnimeProps = [
   {
     rank: 1,
     name: "Berserk",

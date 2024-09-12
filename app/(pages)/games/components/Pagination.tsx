@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { cn } from "@/app/lib/utils";
 
 const Pagination = ({
@@ -8,16 +8,10 @@ const Pagination = ({
   className,
   note,
 }: PaginationProps) => {
-  const [buttons, setButtons] = useState<JSX.Element[]>([]);
+  const { page, window } = state;
 
-  useEffect(() => {
-    generatePaginateButtons();
-  }, [pages, state.page]);
-
-  const generatePaginateButtons = () => {
+  const paginateButtons = useMemo(() => {
     const buttonsArray: JSX.Element[] = [];
-    const { page, window } = state;
-
     let maxLeft = page - Math.floor(window / 2);
     let maxRight = page + Math.floor(window / 2);
 
@@ -48,6 +42,7 @@ const Pagination = ({
       );
     }
 
+    // Add Previous and Next buttons
     buttonsArray.unshift(
       <button
         key="prev"
@@ -82,23 +77,23 @@ const Pagination = ({
       </button>
     );
 
-    setButtons(buttonsArray);
-  };
+    return buttonsArray;
+  }, [page, window, pages, onPageChange]);
 
   return (
     <div
       className={cn(
-        "mt-6 flex flex-wrap-reverse items-center justify-between gap-4 text-neutral-100 md:gap-0",
+        "flex w-full flex-wrap-reverse items-center justify-between gap-4 text-neutral-100 sm:flex-nowrap md:gap-0",
         className
       )}
     >
       {note && (
         <p className="text-xs text-neutral-400">
-          All data comes from Steam's API. If any of those services are down,
-          data will not be shown.
+          All data comes from {`Steam's`} API. If any of those services are
+          down, data will not be shown.
         </p>
       )}
-      <div className="flex select-none gap-1 text-sm">{buttons}</div>
+      <div className="flex select-none gap-1 text-sm">{paginateButtons}</div>
     </div>
   );
 };

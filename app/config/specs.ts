@@ -1,9 +1,9 @@
-type SpecsTypes = {
+type SpecsProps = {
   name: string;
   link?: string;
 };
 
-export const pc_parts: SpecsTypes[] = [
+export const pc_parts: SpecsProps[] = [
   {
     name: "Cooler Master MasterCase H500 ARGB ATX Mid Tower Case.",
     link: "https://pcpartpicker.com/product/VczFf7/cooler-master-mastercase-h500-argb-atx-mid-tower-case-mcm-h500-ignn-s01",
@@ -42,7 +42,7 @@ export const pc_parts: SpecsTypes[] = [
   },
 ];
 
-export const virtual_machines: SpecsTypes[] = [
+export const virtual_machines: SpecsProps[] = [
   {
     name: "Windows 10 Pro 22H2 desktop 64-bit.",
     link: "https://www.microsoft.com/en-gb/software-download/windows10",
@@ -57,7 +57,7 @@ export const virtual_machines: SpecsTypes[] = [
   },
 ];
 
-export const network_info: SpecsTypes[] = [
+export const network_info: SpecsProps[] = [
   {
     name: "Iniversion: H122-373-CUST 10.0.3.1(C375).",
     link: "https://eshop.sa.zain.com/en/product/5g-home-premium/",
@@ -87,7 +87,7 @@ export const network_info: SpecsTypes[] = [
   },
 ];
 
-export const other_devices: SpecsTypes[] = [
+export const other_devices: SpecsProps[] = [
   {
     name: "Orange Pi 5 16GB Rockchip RK3588S 8 Core 64 Bit Single Board Computer.",
     link: "http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-5.html",

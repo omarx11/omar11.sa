@@ -8,8 +8,8 @@ export default function HomePage() {
     <>
       <Heading name="Projects" emoji="🖥️" sId="#projects" />
       <p className="group relative mt-4 max-w-max text-neutral-400">
-        Here's all of my personal projects that I've worked on. You can support
-        me by starring! ⭐
+        {`Here's`} all of my personal projects that {`I've`} worked on. You can
+        support me by starring! ⭐
       </p>
       <Projects />
       <div className="mt-6 flex justify-center">

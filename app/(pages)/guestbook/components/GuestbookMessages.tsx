@@ -26,17 +26,22 @@ export function GuestbookMessages({ userData }: { userData: User | null }) {
 
   useEffect(() => {
     (async () => {
-      try {
-        const data: Guestbook[] = (await getAllComments()) ?? [];
-        setComments(data);
-      } catch (error) {
-        console.error("Error fetching comments:", error);
+      if (!comments) {
+        try {
+          const data: Guestbook[] = (await getAllComments()) ?? [];
+          setComments(data);
+        } catch (error) {
+          console.error("Error fetching comments:", error);
+        }
       }
     })();
-  }, []);
+  }, [comments, setComments]);
 
   const handleDeleteComment = useCallback(
     async (cid: string) => {
+      if (!window.confirm("Are you sure you want to delete this comment?")) {
+        return;
+      }
       try {
         setDeletingCommentId(cid);
         setIsCommentLoading(true);

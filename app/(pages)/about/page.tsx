@@ -69,9 +69,10 @@ export default function AboutPage() {
               Family Farm
             </Link>{" "}
             on it. I started playing and became addicted for two years—until I
-            destroyed my dad's computer with viruses, of course. This marked the
-            beginning of my adventures in the vast sea of the Internet. Since
-            then, I've always wondered how these games and websites work.
+            destroyed my {`dad's`} computer with viruses, of course. This marked
+            the beginning of my adventures in the vast sea of the Internet.
+            Since then, {`I've`} always wondered how these games and websites
+            work.
           </p>
           <p className="text-neutral-400">
             <strong className="mb-2 block text-xl font-bold text-neutral-300 md:text-2xl">

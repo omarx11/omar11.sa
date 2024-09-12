@@ -56,35 +56,33 @@ export default function AIBotAssistant() {
       >
         <div className="flex flex-1 flex-col-reverse gap-3">
           <div className="flex-1 flex-grow" />
-          {inverseMessages.map((message) => {
-            return (
+          {inverseMessages.map((message) => (
+            <div
+              key={message.id}
+              className={cn("flex items-end", {
+                "justify-end": message.isUserMessage,
+              })}
+            >
               <div
-                key={message.id}
-                className={cn("flex items-end", {
-                  "justify-end": message.isUserMessage,
-                })}
+                className={cn(
+                  "flex max-w-xs flex-col space-y-1 overflow-x-hidden text-sm",
+                  {
+                    "order-1 items-end": message.isUserMessage,
+                    "order-2 items-start": !message.isUserMessage,
+                  }
+                )}
               >
-                <div
-                  className={cn(
-                    "flex max-w-xs flex-col space-y-1 overflow-x-hidden text-sm",
-                    {
-                      "order-1 items-end": message.isUserMessage,
-                      "order-2 items-start": !message.isUserMessage,
-                    }
-                  )}
+                <p
+                  className={cn("rounded-md px-2 py-1.5", {
+                    "bg-sky-600 text-white": message.isUserMessage,
+                    "bg-neutral-100 text-black": !message.isUserMessage,
+                  })}
                 >
-                  <p
-                    className={cn("rounded-md px-2 py-1.5", {
-                      "bg-sky-600 text-white": message.isUserMessage,
-                      "bg-neutral-100 text-black": !message.isUserMessage,
-                    })}
-                  >
-                    <MarkdownLite text={message.text} />
-                  </p>
-                </div>
+                  <MarkdownLite text={message.text} />
+                </p>
               </div>
-            );
-          })}
+            </div>
+          ))}
           <p className="border-b-2 border-neutral-800 pb-1 text-center text-sm text-neutral-400 duration-300">
             Id: {chatbot_id ?? "000110111"}
           </p>

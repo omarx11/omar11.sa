@@ -15,7 +15,7 @@ const ChatBotDefaultValue: BotMessage[] = [
 export const StatementContext = createContext<{
   pageNo: number;
   gameAppId: number | null;
-  totalPlayTime: number | null;
+  gameAppName: string | null;
   pageColor: string;
   botMessages: BotMessage[];
   chatbot_id: string;
@@ -25,8 +25,8 @@ export const StatementContext = createContext<{
   setComments: (comments: Guestbook[] | null) => void;
   setPageColor: (color: string) => void;
   setPageNo: (pageNo: number) => void;
-  setTotalPlayTime: (time: number) => void;
   setGameAppId: (appId: number | null) => void;
+  setGameAppName: (appId: string | null) => void;
   addBotMessage: (message: BotMessage) => void;
   removeBotMessage: (id: string) => void;
   removeComment: (cid: string) => void;
@@ -39,8 +39,8 @@ export const StatementContext = createContext<{
   setIsLoadingGame: (isUpdating: boolean) => void;
 }>({
   pageNo: 0,
-  totalPlayTime: 0,
   gameAppId: null,
+  gameAppName: null,
   pageColor: "",
   botMessages: [],
   chatbot_id: nanoid(),
@@ -50,8 +50,8 @@ export const StatementContext = createContext<{
   setComments: () => {},
   setPageColor: () => {},
   setPageNo: () => {},
-  setTotalPlayTime: () => {},
   setGameAppId: () => {},
+  setGameAppName: () => {},
   addBotMessage: () => {},
   removeBotMessage: () => {},
   removeComment: () => {},
@@ -69,8 +69,8 @@ export function StatementProvider({ children }: { children: React.ReactNode }) {
   const [botMessages, setBotMessages] = useState(ChatBotDefaultValue);
   const [chatbot_id] = useState<string>(nanoid());
   const [gameAppId, setGameAppId] = useState<number | null>(null);
+  const [gameAppName, setGameAppName] = useState<string | null>(null);
   const [isLoadingGame, setIsLoadingGame] = useState<boolean>(false);
-  const [totalPlayTime, setTotalPlayTime] = useState<number | null>(null);
 
   const addComment = (newComment: Guestbook) => {
     setComments((prev) => (prev ? [newComment, ...prev] : [newComment]));
@@ -114,8 +114,8 @@ export function StatementProvider({ children }: { children: React.ReactNode }) {
         botMessages,
         chatbot_id,
         gameAppId,
+        gameAppName,
         isLoadingGame,
-        totalPlayTime,
         setPageNo,
         setPageColor,
         setComments,
@@ -126,8 +126,8 @@ export function StatementProvider({ children }: { children: React.ReactNode }) {
         removeBotMessage,
         updateBotMessage,
         setGameAppId,
+        setGameAppName,
         setIsLoadingGame,
-        setTotalPlayTime,
       }}
     >
       {children}

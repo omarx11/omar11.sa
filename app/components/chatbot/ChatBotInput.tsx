@@ -1,10 +1,17 @@
+import type { BotMessage } from "@/app/lib/validators/bot-message";
 import { StatementContext } from "@/app/context/statement";
-import { useContext, useEffect, useRef, useState } from "react";
+import {
+  KeyboardEvent,
+  MouseEvent,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useMutation } from "@tanstack/react-query";
 import { getBotMessage } from "./actions";
 import { saveBotMessage } from "@/app/lib/server-actions";
 import TextareaAutosize from "react-textarea-autosize";
-import type { BotMessage } from "@/app/lib/validators/bot-message";
 import { nanoid } from "nanoid";
 import { Loading } from "../icons/Loading";
 
@@ -21,12 +28,11 @@ const ChatBotInput = () => {
 
   const { mutate: sendMessage, isPending } = useMutation({
     mutationKey: ["sendMessage"],
-    // include message to later use with onMutate
-    mutationFn: async (_message: BotMessage) => {
+    mutationFn: async () => {
       const response = await getBotMessage({ botMessages });
       return response.body;
     },
-    onMutate(message) {
+    onMutate(message: BotMessage) {
       addBotMessage(message);
     },
     onSuccess: async (stream) => {
@@ -54,7 +60,6 @@ const ChatBotInput = () => {
         updateBotMessage(id, (prev) => prev + chunkValue);
       }
 
-      // clean up
       setInput("");
 
       setTimeout(() => {
@@ -73,16 +78,23 @@ const ChatBotInput = () => {
         await saveBotMessage({ botMessages }, chatbot_id);
       }
     })();
-  }, [isPending]);
+  }, [botMessages, chatbot_id, isPending]);
 
-  const handleSubmit = (e: any) => {
-    if (input !== "") {
-      if (e.type === "click" || (e.key === "Enter" && !e.shiftKey)) {
+  const handleSubmit = (
+    e: KeyboardEvent<HTMLTextAreaElement> | MouseEvent<HTMLButtonElement>
+  ) => {
+    if (input.trim() !== "") {
+      if (
+        e.type === "click" ||
+        (e.type === "keydown" &&
+          (e as KeyboardEvent).key === "Enter" &&
+          !(e as KeyboardEvent).shiftKey)
+      ) {
         e.preventDefault();
         const message = {
           id: nanoid(),
           isUserMessage: true,
-          text: input,
+          text: input.trim(),
         };
         sendMessage(message);
       }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { author } from "@/app/config/meta";
 
 const getYearsAgo = (date: Date): number => {
@@ -10,13 +10,13 @@ const getYearsAgo = (date: Date): number => {
 };
 
 export const useYearsAgo = (): string => {
-  const date = new Date(author.age);
+  const date = useMemo(() => new Date(author.age), []);
   const [years, setYears] = useState<string>("00.000000000");
 
   useEffect(() => {
     const yearTimer = setInterval(
       () => setYears(getYearsAgo(date).toFixed(9)),
-      100,
+      100
     );
     return () => clearInterval(yearTimer); // Cleanup function
   }, [date]);

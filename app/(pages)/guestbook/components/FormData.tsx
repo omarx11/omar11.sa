@@ -18,7 +18,7 @@ const FormData = ({ userData }: { userData: User }) => {
   const [isLoading, setIsLoading] = useState<string>("");
   const { addComment, setIsCommentLoading } = useContext(StatementContext);
 
-  const defaultGuestbook = {
+  const defaultGuestbook: Guestbook = {
     id: 0,
     user_id: "",
     cid: "",
@@ -38,7 +38,7 @@ const FormData = ({ userData }: { userData: User }) => {
         (await saveComment(textComment)) ?? defaultGuestbook;
       addComment(content);
     } catch (error) {
-      console.error("Error adding comment", error);
+      console.error("Error adding comment:", error);
     } finally {
       setIsLoading("");
       setIsCommentLoading(false);
@@ -46,9 +46,7 @@ const FormData = ({ userData }: { userData: User }) => {
   };
 
   useEffect(() => {
-    if (userData) {
-      setWordLimit(textComment.length >= 2000);
-    }
+    setWordLimit(textComment.length >= 2000);
   }, [textComment]);
 
   return (
@@ -64,7 +62,7 @@ const FormData = ({ userData }: { userData: User }) => {
               alt="user-avatar"
             />
             <p className="text-sm text-neutral-500">
-              Type as {">"} {userData.user_metadata.name}
+              Typing as {"->"} {userData.user_metadata.name}
             </p>
           </>
         )}

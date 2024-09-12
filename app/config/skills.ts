@@ -1,11 +1,11 @@
-export type SkillsArray = {
+export type SkillsArrayProps = {
   name: string;
   icon: string;
   url: string;
   description: string;
 };
 
-export const langs: SkillsArray[] = [
+export const langs: SkillsArrayProps[] = [
   {
     name: "JavaScript",
     icon: "/static/icons/skills/javascript.svg",
@@ -50,7 +50,7 @@ export const langs: SkillsArray[] = [
   },
 ];
 
-export const frameworks: SkillsArray[] = [
+export const frameworks: SkillsArrayProps[] = [
   {
     name: "Next.js",
     icon: "/static/icons/skills/nextjs-dark.svg",
@@ -67,7 +67,7 @@ export const frameworks: SkillsArray[] = [
   },
 ];
 
-export const styles: SkillsArray[] = [
+export const styles: SkillsArrayProps[] = [
   {
     name: "TailwindCSS",
     icon: "/static/icons/skills/TailwindCSS-Dark.svg",
@@ -84,7 +84,7 @@ export const styles: SkillsArray[] = [
   },
 ];
 
-export const databases: SkillsArray[] = [
+export const databases: SkillsArrayProps[] = [
   {
     name: "MongoDB",
     icon: "/static/icons/skills/mongodb.svg",
@@ -108,7 +108,7 @@ export const databases: SkillsArray[] = [
   },
 ];
 
-export const services: SkillsArray[] = [
+export const services: SkillsArrayProps[] = [
   {
     name: "Github",
     icon: "/static/icons/skills/Github-Dark.svg",
@@ -153,7 +153,7 @@ export const services: SkillsArray[] = [
   },
 ];
 
-export const systems: SkillsArray[] = [
+export const systems: SkillsArrayProps[] = [
   {
     name: "Linux",
     icon: "/static/icons/skills/Linux-Dark.svg",
@@ -177,7 +177,7 @@ export const systems: SkillsArray[] = [
   },
 ];
 
-export const editors: SkillsArray[] = [
+export const editors: SkillsArrayProps[] = [
   {
     name: "VSCode",
     icon: "/static/icons/skills/VSCode-Dark.svg",
