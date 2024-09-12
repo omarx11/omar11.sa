@@ -79,10 +79,13 @@ export async function OpenAIStream(payload: OpenAIStreamPayload) {
       // https://web.dev/streams/#asynchronous-iteration
       if (res.body) {
         const reader = res.body.getReader();
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-          parser.feed(decoder.decode(value));
+        let done = false;
+        while (!done) {
+          const { done: readDone, value } = await reader.read();
+          done = readDone;
+          if (!done) {
+            parser.feed(decoder.decode(value));
+          }
         }
       } else {
         controller.error(new Error("Response body is null"));
