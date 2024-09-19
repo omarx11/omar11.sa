@@ -119,18 +119,30 @@ export default function Header() {
             className="group text-sm text-emerald-500 hover:text-opacity-80"
           >
             <svg
+              viewBox="0 0 100 50"
               xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="mr-2 inline hover:text-opacity-80"
+              width="36"
+              className="-mr-2.5 inline stroke-emerald-500 group-hover:stroke-emerald-500/80"
             >
-              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+              <path
+                d="M8,25 H13 L23,10 L33,40 L43,25 H50"
+                strokeWidth="4"
+                fill="none"
+                strokeDasharray="110"
+                strokeDashoffset="110"
+              >
+                <animate
+                  attributeName="stroke-dashoffset"
+                  from="220"
+                  to="0"
+                  dur="3s"
+                  repeatCount="indefinite"
+                  keyTimes="0; 0.33; 1"
+                  values="220; 0; 0"
+                  keySplines="0.42 0 0.58 1; 0 0 1 1"
+                  calcMode="spline"
+                />
+              </path>
             </svg>
             Status
           </Link>

@@ -72,13 +72,13 @@ const Navbar = () => {
   return (
     <div className="mt-4 flex min-h-[28px] select-none items-center justify-between border-t-8 border-neutral-900 pt-4">
       <NavPages />
-      <div className="flex items-center gap-1.5 text-neutral-500">
+      <div className="fade-in-up flex items-center text-neutral-500 sm:gap-1.5">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="1.8rem"
           height="1.8rem"
           viewBox="0 0 24 24"
-          aria-label="Back arrow"
+          aria-label="point arrow"
         >
           <path
             fill="none"
@@ -89,7 +89,7 @@ const Navbar = () => {
             d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
           />
         </svg>
-        <p className="sm:w-max">Select Pages</p>
+        <p className="text-right sm:w-max">Select Pages</p>
       </div>
     </div>
   );

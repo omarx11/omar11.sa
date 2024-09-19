@@ -18,24 +18,13 @@ const FormData = ({ userData }: { userData: User }) => {
   const [isLoading, setIsLoading] = useState<string>("");
   const { addComment, setIsCommentLoading } = useContext(StatementContext);
 
-  const defaultGuestbook: Guestbook = {
-    id: 0,
-    user_id: "",
-    cid: "",
-    name: null,
-    comment: "ERROR",
-    avatar: null,
-    inserted_at: null,
-  };
-
   const handleSubmit = async () => {
     if (!userData || !textComment.trim()) return;
     setIsCommentLoading(true);
     setTextComment("");
     setIsLoading("send");
     try {
-      const content: Guestbook =
-        (await saveComment(textComment)) ?? defaultGuestbook;
+      const content: Guestbook = await saveComment(textComment);
       addComment(content);
     } catch (error) {
       console.error("Error adding comment:", error);

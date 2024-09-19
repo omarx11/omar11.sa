@@ -1,7 +1,7 @@
 "use server";
 
-import { nanoid } from "nanoid";
 import { createClient } from "@/app/lib/supabase/server";
+import { nanoid } from "nanoid";
 
 export async function getAllComments() {
   const supabase = createClient();
