@@ -9,8 +9,8 @@ import {
   useState,
 } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { getBotMessage } from "./actions";
-import { saveBotMessage } from "@/app/lib/server-actions";
+import { getBotMessage } from "@/app/lib/chatbot/actions";
+import { saveBotMessage } from "@/app/lib/chatbot/actions";
 import TextareaAutosize from "react-textarea-autosize";
 import { nanoid } from "nanoid";
 import { Loading } from "../icons/Loading";
