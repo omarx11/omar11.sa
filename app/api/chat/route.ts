@@ -1,6 +1,6 @@
 import type { NextRequest } from "next/server";
 import { BotMessageArraySchema } from "@/app/lib/validators/bot-message";
-import { chatbotPrompt } from "@/app/config/chatbot-prompt";
+import { chatbotPrompt } from "@/app/config/chatbot/chatbot-prompt";
 import {
   OpenAIStream,
   type ChatGPTMessage,

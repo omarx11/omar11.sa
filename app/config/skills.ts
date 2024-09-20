@@ -1,11 +1,18 @@
 export type SkillsArrayProps = {
   name: string;
   icon: string;
-  url: string;
+  url?: string | null;
   description: string;
 };
 
 export const langs: SkillsArrayProps[] = [
+  {
+    name: "TypeScript",
+    icon: "/static/icons/skills/TypeScript.svg",
+    url: "https://www.typescriptlang.org/",
+    description:
+      "TypeScript is a statically typed superset of JavaScript that enhances code quality and maintainability 📈, enabling developers to catch errors early 🚫 and leverage modern JavaScript features with confidence 💪.",
+  },
   {
     name: "JavaScript",
     icon: "/static/icons/skills/javascript.svg",

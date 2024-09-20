@@ -8,7 +8,7 @@ export function SkillsArray({ data }: { data: SkillsArrayProps[] }) {
       key={name}
       className="group flex min-h-[64px] w-full flex-row items-center gap-2 rounded-lg bg-neutral-900 px-0 py-1 duration-300 hover:bg-neutral-800 md:px-2"
     >
-      <Link href={url} target="_blank" className="relative p-1">
+      <Link href={url || "#"} target="_blank" className="relative p-1">
         <Image
           src={icon}
           width={48}
