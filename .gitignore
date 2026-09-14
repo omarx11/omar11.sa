@@ -37,3 +37,5 @@ next-env.d.ts
 
 # files
 /backup
+/test
+/docs/promot.txt
