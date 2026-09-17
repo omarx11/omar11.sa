@@ -26,7 +26,7 @@
     "eventsource-parser": "^2.0.1",
     "framer-motion": "^12.43.0",
     "nanoid": "^5.0.7",
-    "next": "16.3.5",
+    "next": "^16.3.5",
     "preline": "^2.4.1",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
