@@ -2,6 +2,7 @@
 
 import type { Provider } from "@supabase/supabase-js";
 import { redirect } from "next/navigation";
+
 import { getURL } from "@/app/lib/helpers";
 import { createClient } from "@/app/lib/supabase/server";
 

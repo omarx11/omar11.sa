@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+
 import { Heading } from "@/app/components/ui/Heading";
 import { author } from "@/app/config/meta";
 import { createClient } from "@/app/lib/supabase/server";
+
 import FormData from "./components/FormData";
 import { GuestbookMessages } from "./components/GuestbookMessages";
 import OAuthButtons from "./login/OAuthButtons";
@@ -33,8 +35,8 @@ export default async function GuestbookPage() {
   return (
     <>
       <Heading
-        name="Guestbook"
         emoji="🖋️"
+        name="Guestbook"
         sId="#guestbook"
         title="Hey there! Please sign in to say hi. Thanks for visiting my website 💚"
       />

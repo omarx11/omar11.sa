@@ -24,15 +24,15 @@ export default function Certifications() {
   return (
     <div className="pt-8">
       <div className="mb-4 flex items-end justify-center gap-2 md:justify-start">
-        <p className="text-lg font-bold text-neutral-300 md:text-xl">
+        <p className="font-bold text-lg text-neutral-300 md:text-xl">
           Certifications <span className="text-base">\</span>
         </p>
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="26"
+          className="fill-amber-600/90"
           height="26"
           viewBox="0 0 256 256"
-          className="fill-amber-600/90"
+          width="26"
+          xmlns="http://www.w3.org/2000/svg"
         >
           <path
             d="M224 56v36.23a48 48 0 1 0-64 71.57V192H40a8 8 0 0 1-8-8V56a8 8 0 0 1 8-8h176a8 8 0 0 1 8 8"
@@ -42,22 +42,22 @@ export default function Certifications() {
         </svg>
       </div>
       <Swiper
+        className="max-w-[320px] opacity-100 md:max-w-[360px]"
         effect={"cards"}
         grabCursor={true}
         initialSlide={Math.floor(images.length / 2)}
         modules={[EffectCards]}
-        className="max-w-[320px] opacity-100 md:max-w-[360px]"
       >
         {images.map((image, i) => (
           <SwiperSlide className="rounded-lg" key={i}>
             <Image
-              src={image}
-              width={640}
-              height={453}
-              placeholder="blur"
+              alt={`Certificate ${i + 1}`}
               blurDataURL="/static/icons/blur.svg"
               className="max-w-[320px] select-none rounded-lg bg-neutral-800 md:max-w-[340px] lg:max-w-[360px]"
-              alt={`Certificate ${i + 1}`}
+              height={453}
+              placeholder="blur"
+              src={image}
+              width={640}
             />
           </SwiperSlide>
         ))}

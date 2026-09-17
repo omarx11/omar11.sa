@@ -19,11 +19,11 @@ const MarkdownLite = ({ text }: { text: string }) => {
 
     parts.push(
       <Link
-        target="_blank"
-        rel="noopener noreferrer"
         className="break-words text-blue-600 underline underline-offset-2"
-        key={linkUrl}
         href={linkUrl}
+        key={linkUrl}
+        rel="noopener noreferrer"
+        target="_blank"
       >
         {linkText}
       </Link>,

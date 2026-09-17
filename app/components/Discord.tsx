@@ -6,7 +6,9 @@ import {
   HoverCardTrigger,
 } from "@radix-ui/react-hover-card";
 import { useLanyard } from "use-lanyard";
+
 import { relativeTime } from "@/app/lib/helpers";
+
 import { author } from "../config/meta";
 import { cn } from "../lib/utils";
 import { Skeleton } from "./ui/Skeleton";
@@ -51,10 +53,10 @@ export default function Discord() {
     }
 
     return (
-      <HoverCard openDelay={0} closeDelay={0}>
+      <HoverCard closeDelay={0} openDelay={0}>
         <HoverCardTrigger
-          href="/"
           className="flex select-none items-center gap-2 pl-[1px]"
+          href="/"
         >
           <span
             className={cn("relative mx-[2px] h-3 w-3 rounded-full", {
@@ -71,16 +73,16 @@ export default function Discord() {
           <p>currently {statusText}</p>
         </HoverCardTrigger>
         <HoverCardContent
-          sideOffset={0}
           align="start"
-          className="w-60 space-y-1 rounded-md border-4 border-dashed border-emerald-600/40 bg-zinc-800 p-2 text-sm"
+          className="w-60 space-y-1 rounded-md border-4 border-emerald-600/40 border-dashed bg-zinc-800 p-2 text-sm"
+          sideOffset={0}
         >
           <h4 className="font-semibold">Id: omarx11</h4>
           {data.discord_status !== "offline" ? (
             <>
               <p>{playing}</p>
               {startTime && (
-                <p className="pt-2 text-xs text-neutral-400">{playingFor}</p>
+                <p className="pt-2 text-neutral-400 text-xs">{playingFor}</p>
               )}
             </>
           ) : (

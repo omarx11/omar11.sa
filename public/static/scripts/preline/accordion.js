@@ -1,15 +1,15 @@
 !((e, t) => {
-  if ("object" == typeof exports && "object" == typeof module)
+  if ("object" === typeof exports && "object" === typeof module)
     module.exports = t();
-  else if ("function" == typeof define && define.amd) define([], t);
+  else if ("function" === typeof define && define.amd) define([], t);
   else {
     var n = t();
-    for (var o in n) ("object" == typeof exports ? exports : e)[o] = n[o];
+    for (var o in n) ("object" === typeof exports ? exports : e)[o] = n[o];
   }
 })(self, () =>
   (() => {
     var e = {
-        765: (e, t, n) => {
+        765: (_e, t, n) => {
           function o(e, t) {
             for (var n = 0; n < t.length; n++) {
               var o = t[n];
@@ -120,7 +120,7 @@
     }),
       (n.o = (e, t) => Object.hasOwn(e, t)),
       (n.r = (e) => {
-        "undefined" != typeof Symbol &&
+        "undefined" !== typeof Symbol &&
           Symbol.toStringTag &&
           Object.defineProperty(e, Symbol.toStringTag, { value: "Module" }),
           Object.defineProperty(e, "__esModule", { value: !0 });
@@ -131,11 +131,12 @@
         function e(t) {
           return (
             (e =
-              "function" == typeof Symbol && "symbol" == typeof Symbol.iterator
+              "function" === typeof Symbol &&
+              "symbol" === typeof Symbol.iterator
                 ? (e) => typeof e
                 : (e) =>
                     e &&
-                    "function" == typeof Symbol &&
+                    "function" === typeof Symbol &&
                     e.constructor === Symbol &&
                     e !== Symbol.prototype
                       ? "symbol"
@@ -159,7 +160,7 @@
           );
         }
         function i(t, n) {
-          if (n && ("object" === e(n) || "function" == typeof n)) return n;
+          if (n && ("object" === e(n) || "function" === typeof n)) return n;
           if (void 0 !== n)
             throw new TypeError(
               "Derived constructors may only return object or undefined",
@@ -183,11 +184,11 @@
         n.r(o);
         var a = ((e) => {
           !((e, t) => {
-            if ("function" != typeof t && null !== t)
+            if ("function" !== typeof t && null !== t)
               throw new TypeError(
                 "Super expression must either be null or a function",
               );
-            (e.prototype = Object.create(t && t.prototype, {
+            (e.prototype = Object.create(t?.prototype, {
               constructor: { value: e, writable: !0, configurable: !0 },
             })),
               Object.defineProperty(e, "prototype", { writable: !1 }),
@@ -200,10 +201,10 @@
             l =
               ((a = u),
               (s = (() => {
-                if ("undefined" == typeof Reflect || !Reflect.construct)
+                if ("undefined" === typeof Reflect || !Reflect.construct)
                   return !1;
                 if (Reflect.construct.sham) return !1;
-                if ("function" == typeof Proxy) return !0;
+                if ("function" === typeof Proxy) return !0;
                 try {
                   return (
                     Boolean.prototype.valueOf.call(
@@ -211,7 +212,7 @@
                     ),
                     !0
                   );
-                } catch (e) {
+                } catch (_e) {
                   return !1;
                 }
               })()),

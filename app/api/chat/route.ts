@@ -1,4 +1,5 @@
 import type { NextRequest } from "next/server";
+
 import { chatbotPrompt } from "@/app/lib/chatbot/chatbot-prompt";
 import {
   type ChatGPTMessage,

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+
 import { author } from "@/app/config/meta";
+
 import Games from "./components/Games";
 
 export const metadata: Metadata = {

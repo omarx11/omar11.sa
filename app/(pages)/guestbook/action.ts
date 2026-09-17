@@ -1,6 +1,7 @@
 "use server";
 
 import { nanoid } from "nanoid";
+
 import { createClient } from "@/app/lib/supabase/server";
 
 export async function getAllComments() {
@@ -30,11 +31,11 @@ export async function saveComment(comment: string) {
   }
 
   const newComment = {
-    user_id: user!.id,
+    user_id: user?.id,
     cid: nanoid(),
-    name: user!.user_metadata.name,
+    name: user?.user_metadata.name,
     comment,
-    avatar: user!.user_metadata.avatar_url,
+    avatar: user?.user_metadata.avatar_url,
   };
 
   const { data, error } = await supabase
@@ -62,7 +63,7 @@ export async function deleteComment(cid: string) {
   }
 
   const { error } = await supabase.from("gbook_omar11").delete().match({
-    user_id: user!.id,
+    user_id: user?.id,
     cid: cid,
   });
 

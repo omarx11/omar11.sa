@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+
 import { author } from "@/app/config/meta";
 
 const getYearsAgo = (date: Date): number => {
-  let timestamp = new Date().getTime() - date.getTime();
+  let timestamp = Date.now() - date.getTime();
   timestamp /= 1000 * 60 * 60 * 24 * 365.25;
   return timestamp;
 };

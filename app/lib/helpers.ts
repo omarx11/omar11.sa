@@ -45,7 +45,7 @@ export const relativeTime = (time: Date | number): string => {
   };
 
   const date = typeof time === "number" ? new Date(time * 1000) : time;
-  const seconds = (new Date().getTime() - date.getTime()) / 1000;
+  const seconds = (Date.now() - date.getTime()) / 1000;
 
   return getRelativeTime(seconds);
 };

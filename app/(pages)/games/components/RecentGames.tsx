@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useContext } from "react";
+
 import { Loading } from "@/app/components/icons/Loading";
 import { Skeleton } from "@/app/components/ui/Skeleton";
 import { StatementContext } from "@/app/context/statement";
@@ -20,7 +21,7 @@ export default function RecentGames({
 
   return (
     <>
-      <p className="mb-4 text-xl font-bold text-neutral-300">
+      <p className="mb-4 font-bold text-neutral-300 text-xl">
         <span className="text-emerald-500">#</span> Recently Played Games{" "}
         {recentGames ? "🕹️" : <Loading className="inline animate-spin" />}
       </p>
@@ -29,7 +30,7 @@ export default function RecentGames({
           ? recentGames.games.slice(0, 5).map((game) => (
               <div key={game.appid}>
                 <p
-                  className={cn("select-none text-sm text-emerald-500", {
+                  className={cn("select-none text-emerald-500 text-sm", {
                     "select-none text-opacity-50": isLoadingGame,
                   })}
                 >
@@ -48,26 +49,26 @@ export default function RecentGames({
                 >
                   <div className="mt-1 max-w-[110px] group-hover:underline sm:max-w-[160px]">
                     <Image
-                      key={game.appid}
-                      src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/library_600x900.jpg`}
-                      width={256}
-                      height={384}
-                      placeholder="blur"
+                      alt={game.name}
                       blurDataURL="/static/icons/blur.svg"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.srcset = "/static/images/steam_error.jpg";
-                      }}
                       className={cn(
                         "drag-none w-40 select-none rounded-md bg-neutral-900 ring-4 ring-transparent duration-100 group-hover:scale-105",
                         {
-                          "opacity-150 scale-95 ring-emerald-400":
+                          "scale-95 opacity-150 ring-emerald-400":
                             game.appid === gameAppId,
                           "group-hover:ring-yellow-500":
                             game.appid !== gameAppId,
                         },
                       )}
-                      alt={game.name}
+                      height={384}
+                      key={game.appid}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.srcset = "/static/images/steam_error.jpg";
+                      }}
+                      placeholder="blur"
+                      src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/library_600x900.jpg`}
+                      width={256}
                     />
                     <p
                       className={cn(
@@ -86,8 +87,8 @@ export default function RecentGames({
             ))
           : [...Array(4)].map((_, i) => (
               <Skeleton
-                key={i}
                 className="mt-5 h-[165px] w-[110px] rounded-md sm:h-60 sm:w-40"
+                key={i}
               />
             ))}
       </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import { getAllGames } from "../actions";
 import GameStats from "./GameStats";
 import GamesCollection from "./GamesCollection";

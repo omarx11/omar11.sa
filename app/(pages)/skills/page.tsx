@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+
 import { Heading } from "@/app/components/ui/Heading";
 import { author } from "@/app/config/meta";
 import {
@@ -10,6 +11,7 @@ import {
   styles,
   systems,
 } from "@/app/config/skills";
+
 import Accordion from "./components/Accordion";
 import { SkillsArray } from "./components/SkillsArray";
 
@@ -34,8 +36,8 @@ export default function SkillsPage() {
   return (
     <>
       <Heading
-        name="Skills"
         emoji="🛠️"
+        name="Skills"
         sId="#skills"
         title="Skills and technologies that I use to build things. 😊"
       />

@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+
 import { cn } from "@/app/lib/utils";
 
 const Pagination = ({
@@ -29,12 +30,12 @@ const Pagination = ({
     for (let i = maxLeft; i <= maxRight; i++) {
       buttonsArray.push(
         <button
-          key={i}
           aria-label={`Page ${i}`}
           className={cn("rounded-sm px-2 py-0.5 underline hover:no-underline", {
             "cursor-default bg-emerald-700 no-underline": page === i,
             "hover:bg-neutral-800": page !== i,
           })}
+          key={i}
           onClick={() => page !== i && onPageChange(i)}
         >
           {i}
@@ -45,15 +46,15 @@ const Pagination = ({
     // Add Previous and Next buttons
     buttonsArray.unshift(
       <button
-        key="prev"
         aria-label="Previous page"
-        disabled={page === 1}
         className={cn(
           "rounded-md px-2",
           page === 1
             ? "pointer-events-none text-neutral-600"
             : "bg-neutral-900 hover:bg-neutral-800",
         )}
+        disabled={page === 1}
+        key="prev"
         onClick={() => onPageChange(page - 1)}
       >
         Previous
@@ -62,15 +63,15 @@ const Pagination = ({
 
     buttonsArray.push(
       <button
-        key="next"
         aria-label="Next page"
-        disabled={page === pages}
         className={cn(
           "rounded-md px-2",
           page === pages
             ? "pointer-events-none text-neutral-600"
             : "bg-neutral-900 hover:bg-neutral-800",
         )}
+        disabled={page === pages}
+        key="next"
         onClick={() => onPageChange(page + 1)}
       >
         Next
@@ -88,7 +89,7 @@ const Pagination = ({
       )}
     >
       {note && (
-        <p className="text-xs text-neutral-400">
+        <p className="text-neutral-400 text-xs">
           All data comes from {`Steam's`} API. If any of those services are
           down, data will not be shown.
         </p>

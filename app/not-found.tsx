@@ -5,9 +5,9 @@ export default function NotFound() {
     <>
       <h2>Not Found</h2>
       <div
-        title="404"
-        className="page404 ml-2 py-4 text-7xl"
         aria-label="404 error"
+        className="page404 ml-2 py-4 text-7xl"
+        title="404"
       >
         404
       </div>

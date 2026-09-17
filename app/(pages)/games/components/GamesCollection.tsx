@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useCallback, useContext, useMemo, useState } from "react";
+
 import { Loading } from "@/app/components/icons/Loading";
 import { Skeleton } from "@/app/components/ui/Skeleton";
 import {
@@ -11,6 +12,7 @@ import {
 import { nonSteamGames, playtimeToAdd } from "@/app/config/games";
 import { StatementContext } from "@/app/context/statement";
 import { cn } from "@/app/lib/utils";
+
 import Pagination from "./Pagination";
 
 export default function GamesCollection({
@@ -77,7 +79,7 @@ export default function GamesCollection({
       (currentPage - 1) * itemsPerPage,
       currentPage * itemsPerPage,
     );
-  }, [allGamesArray, currentPage, itemsPerPage]);
+  }, [allGamesArray, currentPage]);
 
   // Calculate total playtime once
   const totalPlayTime = useMemo(() => {
@@ -102,13 +104,13 @@ export default function GamesCollection({
       ...currentItems,
       ...Array(itemsPerPage - currentItems.length).fill(null),
     ],
-    [currentItems, itemsPerPage],
+    [currentItems],
   );
 
   return (
     <>
-      <div className="mb-4 mt-8 flex items-center justify-between text-opacity-50">
-        <h2 className="text-xl font-bold text-neutral-300">
+      <div className="mt-8 mb-4 flex items-center justify-between text-opacity-50">
+        <h2 className="font-bold text-neutral-300 text-xl">
           <span className="text-emerald-500">#</span> Full Games Collection{" "}
           {!isLoadingGame ? (
             ownedGames && "🎮"
@@ -120,26 +122,26 @@ export default function GamesCollection({
           <TooltipProvider delayDuration={0}>
             <Tooltip defaultOpen>
               <TooltipTrigger asChild>
-                <p className="cursor-default text-xs text-neutral-400 sm:text-sm">
+                <p className="cursor-default text-neutral-400 text-xs sm:text-sm">
                   <span className="text-neutral-300">{totalItems}</span> games
                   found
                   <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
+                    className="ml-1.5 hidden sm:inline"
                     height="16"
                     viewBox="0 0 16 16"
-                    className="ml-1.5 hidden sm:inline"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      fill="currentColor"
                       d="M1 5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v5a2 2 0 0 1-1.164 1.818a1.5 1.5 0 0 0-.275-.379l-4-4A1.5 1.5 0 0 0 7 8.5V12H3a2 2 0 0 1-2-2V5Zm7.854 3.146A.5.5 0 0 0 8 8.5v6a.5.5 0 0 0 .9.3l1.35-1.8h2.25a.5.5 0 0 0 .354-.854l-4-4Z"
+                      fill="currentColor"
                     />
                   </svg>
                 </p>
               </TooltipTrigger>
               <TooltipContent
+                className="origin-[var(--radix-tooltip-content-transform-origin)] scale-in rounded-sm bg-neutral-900 ring-2 ring-neutral-700"
                 sideOffset={6}
-                className="scale-in origin-[var(--radix-tooltip-content-transform-origin)] rounded-sm bg-neutral-900 ring-2 ring-neutral-700"
               >
                 <p>
                   Total playtime {"> "}
@@ -186,19 +188,19 @@ export default function GamesCollection({
                   >
                     <div className="relative">
                       <Image
+                        alt={game.name}
+                        blurDataURL="/static/icons/blur.svg"
+                        className="drag-none h-[75.27px] w-[160.6px] select-none rounded-sm bg-neutral-900"
+                        height={120}
+                        placeholder="blur"
                         src={
                           game.image ||
                           `https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/header.jpg`
                         }
                         width={256}
-                        height={120}
-                        placeholder="blur"
-                        blurDataURL="/static/icons/blur.svg"
-                        className="drag-none h-[75.27px] w-[160.6px] select-none rounded-sm bg-neutral-900"
-                        alt={game.name}
                       />
                       {game.appid !== gameAppId && (
-                        <p className="absolute left-0 top-0 ml-0.5 text-xs text-yellow-600">
+                        <p className="absolute top-0 left-0 ml-0.5 text-xs text-yellow-600">
                           #
                           <span className="font-bold text-yellow-500">
                             {index + 1}
@@ -209,14 +211,14 @@ export default function GamesCollection({
                   </TooltipTrigger>
                   <TooltipContent
                     align="start"
-                    sideOffset={6}
                     alignOffset={-4}
                     className="rounded-sm border border-neutral-400 bg-neutral-900"
+                    sideOffset={6}
                   >
                     <p className="underline decoration-neutral-300">
                       {game.name}
                     </p>
-                    <span className="block text-xs text-emerald-400">
+                    <span className="block text-emerald-400 text-xs">
                       {Math.floor((game.playtime_forever / 60) * 10) / 10} hours
                       total
                     </span>
@@ -224,24 +226,24 @@ export default function GamesCollection({
                 </Tooltip>
               ) : (
                 <Skeleton
-                  key={index}
                   className="rounded-sm sm:h-[75.27px] sm:w-40"
+                  key={index}
                 />
               ),
             )}
           </TooltipProvider>
         ) : (
           Array.from({ length: itemsPerPage }).map((_, i) => (
-            <Skeleton key={i} className="rounded-sm sm:h-[75px] sm:w-40" />
+            <Skeleton className="rounded-sm sm:h-[75px] sm:w-40" key={i} />
           ))
         )}
         {ownedGames && (
           <Pagination
-            pages={totalPages}
-            state={{ page: currentPage, window: 5 }}
-            onPageChange={handlePageChange}
             className="fade-in mt-3"
             note={true}
+            onPageChange={handlePageChange}
+            pages={totalPages}
+            state={{ page: currentPage, window: 5 }}
           />
         )}
       </div>

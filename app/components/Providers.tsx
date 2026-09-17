@@ -2,6 +2,7 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { FC, ReactNode } from "react";
+
 import { StatementProvider } from "@/app/context/statement";
 
 interface LayoutProps {

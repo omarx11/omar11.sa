@@ -3,9 +3,11 @@
 import Image from "next/image";
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { CountUp } from "use-count-up";
+
 import { LoadingDots } from "@/app/components/icons/LoadingDots";
 import { StatementContext } from "@/app/context/statement";
 import { cn } from "@/app/lib/utils";
+
 import { getStatsPerGame } from "../actions";
 import Pagination from "./Pagination";
 
@@ -72,7 +74,7 @@ export default function GameStats() {
       (achievementPage - 1) * achievementPerPage,
       achievementPage * achievementPerPage,
     );
-  }, [achievements, achievementPage, achievementPerPage]);
+  }, [achievements, achievementPage]);
 
   const handlePageChange = useCallback(
     (page: number) => setAchievementPage(page),
@@ -83,7 +85,7 @@ export default function GameStats() {
 
   return (
     <>
-      <div className="mb-6 mt-10 h-5 border-b-8 border-neutral-900 text-center sm:mb-2 sm:mt-6">
+      <div className="mt-10 mb-6 h-5 border-neutral-900 border-b-8 text-center sm:mt-6 sm:mb-2">
         <span className="inline-block bg-black px-3 text-neutral-400 sm:px-5">
           {!isLoadingGame ? (
             <span className="line-clamp-1 text-sm sm:text-xl">
@@ -103,7 +105,7 @@ export default function GameStats() {
           className={cn(
             "w-full overflow-y-auto overflow-x-hidden text-center",
             {
-              "border-x-2 border-neutral-800":
+              "border-neutral-800 border-x-2":
                 !gameDetails.length && !achievementsLength,
               "sm:w-[76.3%]": gameDetails.length > 0,
             },
@@ -121,15 +123,15 @@ export default function GameStats() {
               </thead>
               <tbody>
                 {gameDetails.map((stat) => (
-                  <tr key={stat.name} className="group hover:bg-neutral-900">
+                  <tr className="group hover:bg-neutral-900" key={stat.name}>
                     <td className="line-clamp-1 py-0.5 text-start text-neutral-300 group-hover:text-amber-500">
                       {stat.name.replace(/_/g, " ")}
                     </td>
                     <td className="w-auto pl-1 font-bold text-emerald-500 sm:min-w-[112px] sm:max-w-[112px]">
                       <CountUp
-                        isCounting
-                        end={Math.round(stat.value * 100000) / 100000}
                         duration={3.2}
+                        end={Math.round(stat.value * 100000) / 100000}
+                        isCounting
                       />
                     </td>
                   </tr>
@@ -137,7 +139,7 @@ export default function GameStats() {
               </tbody>
             </table>
           ) : (
-            <span className="w-full text-sm text-red-300 sm:text-base">
+            <span className="w-full text-red-300 text-sm sm:text-base">
               No stats available for this game.
             </span>
           )}
@@ -148,7 +150,7 @@ export default function GameStats() {
           className={cn(
             "flex w-full flex-col justify-between gap-4 text-center",
             {
-              "border-x-2 border-neutral-800":
+              "border-neutral-800 border-x-2":
                 !gameDetails.length && !achievementsLength,
             },
           )}
@@ -158,23 +160,23 @@ export default function GameStats() {
               <div className="fade-in-left flex flex-col gap-2">
                 {currentAchievementPage.map((achievement) => (
                   <div
-                    key={achievement.name}
                     className="group flex gap-3 rounded-md bg-neutral-900 p-1 duration-300 hover:bg-neutral-800"
+                    key={achievement.name}
                   >
                     <Image
-                      src={achievement.icon}
-                      width={48}
-                      height={48}
-                      placeholder="blur"
+                      alt={`${achievement.displayName} icon`}
                       blurDataURL="/static/icons/blur.svg"
                       className="drag-none h-10 w-10 select-none rounded-sm bg-neutral-800 duration-75 group-hover:scale-125 sm:h-12 sm:w-12"
-                      alt={`${achievement.displayName} icon`}
+                      height={48}
+                      placeholder="blur"
+                      src={achievement.icon}
+                      width={48}
                     />
                     <div className="flex flex-col justify-between text-start text-sm">
                       <p className="mt-1 text-neutral-100">
                         {achievement.displayName}
                       </p>
-                      <p className="line-clamp-1 text-xs text-neutral-400 sm:text-sm">
+                      <p className="line-clamp-1 text-neutral-400 text-xs sm:text-sm">
                         {achievement.description}
                       </p>
                     </div>
@@ -182,15 +184,15 @@ export default function GameStats() {
                 ))}
               </div>
               <Pagination
-                pages={totalAchievementPages}
-                state={{ page: achievementPage, window: 4 }}
-                onPageChange={handlePageChange}
                 className="mt-2 justify-end"
                 note={false}
+                onPageChange={handlePageChange}
+                pages={totalAchievementPages}
+                state={{ page: achievementPage, window: 4 }}
               />
             </>
           ) : (
-            <span className="text-sm text-red-300 sm:text-base">
+            <span className="text-red-300 text-sm sm:text-base">
               No achievements are unlocked for this game.
             </span>
           )}

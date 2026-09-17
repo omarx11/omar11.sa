@@ -3,12 +3,14 @@
 import type { User } from "@supabase/supabase-js";
 import Image from "next/image";
 import { useCallback, useContext, useEffect, useState } from "react";
+
 import { LoadingDots } from "@/app/components/icons/LoadingDots";
 import { Skeleton } from "@/app/components/ui/Skeleton";
 import { StatementContext } from "@/app/context/statement";
 import { dateStyle } from "@/app/lib/helpers";
 import type { Guestbook } from "@/app/lib/supabase/types/custom";
 import { cn } from "@/app/lib/utils";
+
 import { deleteComment, getAllComments } from "../action";
 
 export function GuestbookMessages({ userData }: { userData: User | null }) {
@@ -59,24 +61,24 @@ export function GuestbookMessages({ userData }: { userData: User | null }) {
 
   return (
     <>
-      <div className="-mt-2 flex w-full flex-row-reverse items-end justify-between rounded-sm border-b-8 border-neutral-900/50 pb-2 text-neutral-200 sm:flex-row">
-        <div className="border-r-8 border-double border-neutral-800 pr-2 sm:border-l-8 sm:border-r-0 sm:pl-2">
+      <div className="-mt-2 flex w-full flex-row-reverse items-end justify-between rounded-sm border-neutral-900/50 border-b-8 pb-2 text-neutral-200 sm:flex-row">
+        <div className="border-neutral-800 border-r-8 border-double pr-2 sm:border-r-0 sm:border-l-8 sm:pl-2">
           <p className="text-neutral-300">
             {comments && !isCommentLoading ? (
               <span className="text-emerald-400">{comments.length}</span>
             ) : (
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="22"
+                className="-ml-1 inline animate-spin"
                 height="22"
                 viewBox="0 0 24 24"
-                className="-ml-1 inline animate-spin"
+                width="22"
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <g fill="rgb(16, 185, 129)">
                   <path
-                    fillRule="evenodd"
-                    d="M12 19a7 7 0 1 0 0-14a7 7 0 0 0 0 14Zm0 3c5.523 0 10-4.477 10-10S17.523 2 12 2S2 6.477 2 12s4.477 10 10 10Z"
                     clipRule="evenodd"
+                    d="M12 19a7 7 0 1 0 0-14a7 7 0 0 0 0 14Zm0 3c5.523 0 10-4.477 10-10S17.523 2 12 2S2 6.477 2 12s4.477 10 10 10Z"
+                    fillRule="evenodd"
                     opacity=".2"
                   />
                   <path d="M2 12C2 6.477 6.477 2 12 2v3a7 7 0 0 0-7 7H2Z" />
@@ -121,22 +123,22 @@ export function GuestbookMessages({ userData }: { userData: User | null }) {
         {comments ? (
           comments.map((user) => (
             <li
-              key={user.cid}
               className="flex flex-row items-start gap-3 rounded-md bg-neutral-950 px-1 py-4 duration-100 hover:bg-neutral-900 md:px-2"
+              key={user.cid}
             >
               <Image
+                alt=""
+                className="drag-none max-h-[42px] min-h-[42px] min-w-[42px] max-w-[42px] select-none rounded-full bg-neutral-800 ring-4 ring-cyan-950"
+                height={48}
                 src={user.avatar ?? ""}
                 width={48}
-                height={48}
-                className="drag-none max-h-[42px] min-h-[42px] min-w-[42px] max-w-[42px] select-none rounded-full bg-neutral-800 ring-4 ring-cyan-950"
-                alt=""
               />
               <div className="w-full overflow-hidden">
                 <p className="whitespace-break-spaces break-all text-neutral-200 sm:break-normal">
                   {user.comment}
                 </p>
                 <div className="flex items-center justify-between">
-                  <div className="flex select-none flex-wrap items-center text-sm text-neutral-500 md:text-base">
+                  <div className="flex select-none flex-wrap items-center text-neutral-500 text-sm md:text-base">
                     <p>{user.name ? user.name : "anon"}</p>
                     <span className="mx-0.5 text-neutral-600">/</span>
                     <p className="flex text-xs">
@@ -147,7 +149,7 @@ export function GuestbookMessages({ userData }: { userData: User | null }) {
                     <div className="mr-0 min-w-max select-none sm:-mt-5 sm:mr-4">
                       {deletingCommentId !== user.cid ? (
                         <button
-                          className="text-xs text-red-500/80 hover:text-red-400 sm:text-sm"
+                          className="text-red-500/80 text-xs hover:text-red-400 sm:text-sm"
                           onClick={() =>
                             user.cid && handleDeleteComment(user.cid)
                           }

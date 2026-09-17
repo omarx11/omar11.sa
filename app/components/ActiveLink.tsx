@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useContext } from "react";
+
 import { links } from "@/app/config/navigation";
 import { StatementContext } from "@/app/context/statement";
 import { cn } from "@/app/lib/utils";
@@ -35,11 +36,11 @@ function ActiveLink({ href, title, className, label }: ActiveLinkProps) {
   return (
     <Link
       aria-label={label || ""}
-      href={href}
       className={cn(
         "text-neutral-400 underline-offset-2 hover:underline",
         className,
       )}
+      href={href}
       onClick={handleClick}
     >
       {title}

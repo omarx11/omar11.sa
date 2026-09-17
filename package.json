@@ -12,7 +12,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "biome lint .",
-    "format": "biome format --write"
+    "format": "biome format --write .",
+    "check": "biome check --write --unsafe ."
   },
   "dependencies": {
     "@radix-ui/react-hover-card": "^1.1.23",
