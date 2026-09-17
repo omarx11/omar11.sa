@@ -6,7 +6,7 @@ import { Provider } from "@supabase/supabase-js";
 import { getURL } from "@/app/lib/helpers";
 
 export async function signOut() {
-  const supabase = createClient();
+  const supabase = await createClient();
   await supabase.auth.signOut();
   redirect("/guestbook");
 }
@@ -16,7 +16,7 @@ export async function oAuthSignIn(provider: Provider) {
     return redirect("/error");
   }
 
-  const supabase = createClient();
+  const supabase = await createClient();
   const redirectUrl = getURL("/auth/callback");
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,

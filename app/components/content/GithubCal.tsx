@@ -1,6 +1,6 @@
 "use client";
 
-import GitHubCalendar from "react-github-calendar";
+import { GitHubCalendar } from "react-github-calendar";
 
 // Documentation: https://grubersjoe.github.io/react-activity-calendar/?path=/docs/react-activity-calendar--docs
 const GithubCal = () => {

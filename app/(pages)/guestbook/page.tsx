@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 };
 
 export default async function GuestbookPage() {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const {
     data: { user },

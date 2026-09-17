@@ -1,3 +1,4 @@
+@use "sass:math";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -92,7 +93,7 @@
     .fade-in > :nth-child(#{$i}),
     .fade-in-up > :nth-child(#{$i}),
     .fade-in-left > :nth-child(#{$i}) {
-      animation-delay: #{$i / 20}s;
+      animation-delay: #{math.div($i, 20)}s;
     }
   }
 

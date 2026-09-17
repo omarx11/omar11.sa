@@ -11,7 +11,7 @@ import { cn } from "@/app/lib/utils";
 type OAuthProvider = {
   name: Provider;
   displayName: string;
-  icon?: JSX.Element;
+  icon?: React.JSX.Element;
 };
 
 const OAuthButtons = () => {

@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { Heading } from "@/app/components/ui/Heading";
 import { anime } from "@/app/config/anime";
 import { author } from "@/app/config/meta";
-import { Skeleton } from "@/app/components/ui/Skeleton";
 
 export const metadata: Metadata = {
   title: "Anime Page",
@@ -66,19 +64,4 @@ function AnimePage() {
   );
 }
 
-const AnimePageSkeleton = () => {
-  return (
-    <ul className="fade-in-left mt-[7.4rem] max-w-[896px]">
-      {Array.from({ length: anime.length }).map((_, i) => (
-        <li key={i}>
-          <Skeleton className="mb-4 flex h-36 items-center justify-items-start overflow-hidden rounded-lg px-4 sm:px-8" />
-        </li>
-      ))}
-    </ul>
-  );
-};
-
-export default dynamic(() => Promise.resolve(AnimePage), {
-  loading: () => <AnimePageSkeleton />,
-  ssr: false,
-});
+export default AnimePage;

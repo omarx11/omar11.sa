@@ -11,7 +11,7 @@ const Pagination = ({
   const { page, window } = state;
 
   const paginateButtons = useMemo(() => {
-    const buttonsArray: JSX.Element[] = [];
+    const buttonsArray: React.JSX.Element[] = [];
     let maxLeft = page - Math.floor(window / 2);
     let maxRight = page + Math.floor(window / 2);
 

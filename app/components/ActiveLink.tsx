@@ -9,7 +9,7 @@ import { cn } from "@/app/lib/utils";
 
 interface ActiveLinkProps {
   href: string;
-  title?: string | JSX.Element;
+  title?: string | React.JSX.Element;
   className?: string;
   label?: string;
 }

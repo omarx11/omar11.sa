@@ -16,13 +16,14 @@ Upgrade this portfolio from Next.js 14 to the latest stable Next.js version, mig
 - guestbook_demo exists in generated types but may not be used.
 - The chatbot currently performs Supabase database operations from browser code.
 - Steam game requests have inconsistent caching and some pages fetch their initial data from the browser.
+- nextjs-16.3.5-reference is a separate read-only folder in the Portfolio workspace.
 
 Treat PROJECT_AUDIT.md as the starting reference, but verify affected code before editing it.
 
 ## Rules
 
 - Complete phases in order.
-- Read the version-matched Next.js documentation referenced by AGENTS.md before changing Next.js code.
+- Use the official upgrade guides until Next.js creates AGENTS.md; then use its version-matched documentation.
 - Use first-party workflow skills only where this plan requests them.
 - Keep the existing UI, routes, features, and behavior unless a required migration changes them.
 - Do not expose DATABASE_URL, auth secrets, service credentials, or other server secrets to client components.
@@ -31,38 +32,32 @@ Treat PROJECT_AUDIT.md as the starting reference, but verify affected code befor
 - Preserve unrelated user changes.
 - Fix failures before continuing to the next phase.
 
-## AI Agent Setup
+## Modernization Authority
 
-Next.js 16.3 provides version-matched documentation through a managed block in AGENTS.md.
+- The agent may create, rename, move, edit, or remove project files and folders when it produces a clearer conventional Next.js App Router structure.
+- The agent may add, remove, upgrade, or replace packages when the replacement is compatible, maintained, and provides a clear benefit.
+- The agent may optimize code and remove verified dead code, unused assets, obsolete configuration, and empty folders.
+- Search for references before moving or deleting anything, update affected imports, and verify behavior afterward.
+- Preserve the site's intended design, content, routes, and features unless this plan explicitly changes them.
+- Run every command inside the omar11.sa project folder.
+- Do not edit or run commands inside nextjs-16.3.5-reference.
 
-Before the framework upgrade:
+## AI Agent Guidance
 
-1. Run:
+Use this source order for Next.js decisions:
 
-       npx @next/codemod@canary agents-md
+1. The official Next.js upgrade guides.
+2. The documentation referenced by AGENTS.md after Next.js creates it.
+3. nextjs-16.3.5-reference for current default examples.
 
-2. Read AGENTS.md and the Next.js documentation it references before editing framework code.
-3. Preserve the managed block exactly. Keep project-specific instructions outside its markers.
+If the reference project conflicts with the official version-matched documentation, follow the documentation.
 
-After upgrading to Next.js 16.3 or later:
-
-1. Run next dev once so Next.js updates the managed AGENTS.md block to use the bundled documentation in node_modules/next/dist/docs/.
-2. Read AGENTS.md again and confirm it matches the installed Next.js version.
-3. Install the first-party runtime verification skill if the local agent supports Agent Skills:
-
-       npm install -g agent-browser@^0.27
-       npx skills add vercel/next.js --skill next-dev-loop
-
-4. After each meaningful edit, use next-dev-loop to reload the affected route and inspect:
-   - Compilation issues
-   - Server logs
-   - Browser console
-   - Failed network requests
-   - Rendered DOM
-   - React component tree or re-renders when relevant
-5. Use the running Next.js development diagnostics for fast checks while editing. Still run the full validation commands at phase boundaries.
-
-Install the optional Phase 8 skills only if Phase 8 is approved.
+- Work only on the phase requested by the user.
+- If the same command fails twice, stop and report the blocker.
+- Do not search npm caches, create repository temporary files, or repeatedly automate an interactive command.
+- Do not run the agents-md codemod. After upgrading to Next.js 16.3, run next dev once and read AGENTS.md if Next.js creates it.
+- Use next-dev-loop only if it is already available. Otherwise use normal terminal and browser checks.
+- Install the optional Phase 8 skills only if Phase 8 is approved.
 
 ## Existing Local Environment
 
@@ -101,6 +96,8 @@ Run these at the start and after every implementation phase:
 
 There is currently no test script. Do not claim automated tests passed unless a real test command exists and was run. Also perform the phase-specific smoke checks listed below.
 
+If a validation command fails only because the sandbox blocks child processes with spawn EPERM, request permission for that exact command. If permission is unavailable, ask the user to run it. Do not report a sandbox restriction as an application build failure.
+
 ---
 
 ## Phase 1 — Baseline and Upgrade Preparation
@@ -108,11 +105,11 @@ There is currently no test script. Do not claim automated tests passed unless a 
 1. Confirm the audit still matches package.json, the lockfile, next.config.mjs, and the affected source files.
 2. Confirm the installed Node.js version satisfies the target Next.js requirement. Next.js 16 requires Node.js 20.9.0 or newer.
 3. Run all validation commands and record pre-existing errors separately from errors introduced later.
-4. Check current peer compatibility for React, TypeScript, ESLint, Framer Motion, Swiper, TanStack Query, and their type packages.
+4. Check current peer compatibility for React, TypeScript, Biome, Framer Motion, Swiper, TanStack Query, and their type packages.
 5. Read the official upgrade guides for every major version crossed:
    - https://nextjs.org/docs/app/guides/upgrading/version-15
    - https://nextjs.org/docs/app/guides/upgrading/version-16
-6. Use AGENTS.md and the official upgrade guides as the source of truth. Do not install a Next.js knowledge skill.
+6. Use the official upgrade guides as the source of truth. Use nextjs-16.3.5-reference only for current default examples.
 
 Do not change application features in this phase.
 
@@ -131,28 +128,41 @@ Upgrade one major version at a time so failures are easy to identify.
 ### 2.1 Upgrade Next.js 14 to 15
 
 1. Use the official upgrade codemod or equivalent documented npm commands.
-2. Upgrade Next.js, React, ReactDOM, eslint-config-next, @types/react, and @types/react-dom to compatible versions.
-3. Convert synchronous request APIs to their asynchronous forms. In particular, update cookies() usage in app/lib/supabase/server.ts.
-4. Search for other uses of cookies(), headers(), draftMode(), params, and searchParams; update only affected code.
-5. Resolve real peer-dependency problems. Do not use --force or --legacy-peer-deps to hide incompatibilities.
-6. Run all validation commands and smoke-test the main pages.
+2. Upgrade Next.js, React, ReactDOM, @types/react, and @types/react-dom to compatible versions.
+3. Upgrade Framer Motion to a React 19-compatible v12 release and verify existing animations.
+4. Convert synchronous request APIs to their asynchronous forms. In particular, update cookies() usage in app/lib/supabase/server.ts.
+5. Search for other uses of cookies(), headers(), draftMode(), params, and searchParams; update only affected code.
+6. Resolve real peer-dependency problems. Do not use --force or --legacy-peer-deps to hide incompatibilities.
+7. Run all validation commands and smoke-test the main pages.
 
-### 2.2 Upgrade Next.js 15 to the latest stable Next.js 16
+### 2.2 Replace ESLint and Prettier with Biome
 
-1. Follow the official Next.js 16 upgrade guide and run the recommended codemods.
-2. Migrate the removed next lint command to the ESLint CLI.
-3. Replace the legacy .eslintrc.json setup with the supported ESLint configuration when required.
-4. Remove the unsupported eslint option, including ignoreDuringBuilds, from next.config.mjs.
-5. Verify all request-time APIs are fully asynchronous; Next.js 16 no longer supports synchronous access.
-6. Check Turbopack compatibility because Next.js 16 uses it by default for development and production builds.
-7. Keep Webpack only if a verified incompatibility requires it, and document the reason.
-8. Do not enable optional features such as React Compiler or Cache Components unless they solve a measured problem and pass validation.
-9. Evaluate the official TypeScript 7 upgrade for faster Next.js build type checking. Upgrade only if the project and its type dependencies remain compatible.
-10. Keep Next.js 16.3's default development-memory eviction, filesystem build cache, SSR improvements, and bundled prefetch behavior. These gains are automatic; do not add custom code or configuration for them.
-10. Keep the default Turbopack development memory eviction and filesystem caches enabled. Do not add custom cache configuration unless a measured problem requires it.
-11. Run next dev so Next.js 16.3 updates the managed AGENTS.md block to the bundled version-matched documentation.
-12. Install and use next-dev-loop when the agent supports it.
-13. Run all validation commands and use next-dev-loop to smoke-test:
+1. Inspect the existing ESLint and Prettier packages, scripts, configuration, ignore files, and editor settings.
+2. Install the current stable @biomejs/biome as a development dependency.
+3. Use the official migration commands when their source configurations exist:
+
+       npx @biomejs/biome migrate eslint --write
+       npx @biomejs/biome migrate prettier --write
+
+4. Review biome.json instead of trusting the generated configuration blindly. Preserve useful React, TypeScript, accessibility, import, and formatting checks that Biome supports.
+5. Exclude node_modules, .next, generated output, and database dumps from Biome.
+6. Change npm scripts so npm run lint uses Biome. Add a format script if useful.
+7. Run Biome across the project, review its changes, and fix real diagnostics.
+8. After Biome passes, remove ESLint, eslint-config-next, Prettier, their obsolete plugins, and their old configuration files.
+9. Run Biome, TypeScript, the production build, and smoke tests again.
+
+### 2.3 Upgrade Next.js 15 to the latest stable Next.js 16
+
+1. Follow the official Next.js 16 upgrade guide. Use documented npm commands and manual edits; do not run interactive codemods.
+2. Remove the unsupported eslint option, including ignoreDuringBuilds, from next.config.mjs.
+3. Verify all request-time APIs are fully asynchronous; Next.js 16 no longer supports synchronous access.
+4. Check Turbopack compatibility because Next.js 16 uses it by default for development and production builds.
+5. Keep Webpack only if a verified incompatibility requires it, and document the reason.
+6. Do not enable optional features such as React Compiler or Cache Components unless they solve a measured problem and pass validation.
+7. Evaluate the official TypeScript 7 upgrade for faster Next.js build type checking. Upgrade only if the project and its type dependencies remain compatible.
+8. Keep Next.js 16.3's automatic memory, filesystem cache, SSR, and bundled-prefetch improvements. Do not add custom configuration for them.
+9. Run next dev once. If Next.js creates or updates AGENTS.md, read its managed documentation. Do not run the agents-md codemod.
+10. Run all validation commands and smoke-test:
    - Home and navigation
    - About, skills, specs, anime, and games pages
    - Guestbook display
@@ -161,7 +171,7 @@ Upgrade one major version at a time so failures are easy to identify.
 ### Phase 2 completion
 
 - The project uses the latest stable Next.js 16 release and compatible React packages.
-- ESLint runs directly and is not skipped by production configuration.
+- Biome handles linting and formatting; obsolete ESLint and Prettier tooling is removed.
 - TypeScript 7 is either validated and adopted or its compatibility blocker is documented.
 - Development and production builds start without framework migration errors.
 - Existing pages still render and function.
@@ -366,7 +376,7 @@ Only begin after Neon database access and Neon Auth pass verification.
 
 ## Phase 7 — Performance Optimization
 
-Use the managed Next.js documentation referenced by AGENTS.md. Use next-dev-loop after each meaningful change. A separate Next.js knowledge skill is not required.
+Use the managed Next.js documentation referenced by AGENTS.md. Use next-dev-loop only if it is already available.
 
 Measure or confirm each issue before changing it. When Next.js reports an actionable performance error, read the exact linked error documentation, choose the appropriate fix, and verify the rendered result instead of applying a generic caching pattern.
 
@@ -422,6 +432,16 @@ Tasks:
 
 Keep the current next/font and next/image setup unless measurement reveals a problem. Do not rewrite already-correct code.
 
+### 7.7 Structure, dependencies, and cleanup
+
+1. Review the final folder structure against current App Router conventions and nextjs-16.3.5-reference.
+2. Consolidate duplicated utilities and place server-only, client-only, feature, and shared code in clear locations.
+3. Rename or move files when names or ownership are unclear. Update every import and route reference.
+4. Audit production and development dependencies. Remove unused packages and replace a package only when the replacement is measurably smaller, faster, safer, or simpler.
+5. Remove verified dead code, unused exports, abandoned assets, obsolete configuration, temporary files, and empty folders.
+6. Optimize expensive rendering, repeated work, network waterfalls, and oversized client bundles when supported by measurements.
+7. Do not perform broad rewrites that provide no measurable or maintainability benefit.
+
 ### Phase 7 verification
 
 - Compare relevant request counts and build output before and after.
@@ -429,8 +449,9 @@ Keep the current next/font and next/image setup unless measurement reveals a pro
 - Confirm repeated game selection uses the intended cache.
 - Test chatbot streaming and persistence again.
 - Test navigation, animations, Swiper content, and responsive behavior.
-- Use next-dev-loop to inspect the DOM, console, network requests, server logs, and React re-renders on affected routes.
+- Inspect the DOM, console, network requests, server logs, and React re-renders on affected routes.
 - Check that Suspense boundaries show useful visible shells and do not produce empty pages.
+- Confirm no deleted file, moved module, or removed dependency is still referenced.
 - Run all validation commands.
 
 ---
@@ -441,7 +462,7 @@ Next.js 16.3 offers Cache Components and Partial Prefetching as opt-in features.
 
 ### 8.1 Measure first
 
-1. Use next-dev-loop, Instant Insights, and the Navigation Inspector to test navigation between the main portfolio routes.
+1. Use available Next.js diagnostics and the browser to test navigation between the main portfolio routes.
 2. Record which navigations block without immediately displaying useful UI.
 3. Do not enable new flags when existing navigation is already fast enough.
 4. Present the findings and request user approval before adopting Cache Components or Partial Prefetching.
@@ -464,7 +485,7 @@ If adoption is approved:
 8. Use Link prefetch=true only for high-value URL-specific destinations where the extra request is justified.
 9. Do not prefetch private data or large payloads without a clear benefit.
 10. Add focused Playwright instant-navigation tests if the required test tooling is installed. Do not introduce a large test setup only for trivial assertions.
-11. Verify every adopted route with next-dev-loop, the Navigation Inspector, browser logs, network requests, and a production build.
+11. Verify every adopted route with available Next.js diagnostics, browser logs, network requests, and a production build.
 12. If a migrated route is still measurably slow, install and use next-cache-components-optimizer for that route only:
 
        npx skills add vercel/next.js --skill next-cache-components-optimizer
@@ -479,7 +500,43 @@ If adoption is approved:
 
 ---
 
-## Phase 9 — Final Verification and Report
+## Phase 9 — Homepage SEO
+
+Focus SEO work on https://omar11.sa/. Do not promise a specific ranking: Google ranking also depends on content quality, competition, links, reputation, indexing, and time outside this codebase.
+
+Use:
+
+- https://nextjs.org/docs/app/getting-started/metadata-and-og-images
+- https://developers.google.com/search/docs/essentials
+- https://developers.google.com/search/docs/fundamentals/seo-starter-guide
+
+1. Read the current Next.js metadata documentation and Google Search Essentials before editing.
+2. Inspect the rendered homepage, current metadata, heading structure, crawlability, canonical URL, robots rules, sitemap, structured data, social previews, and Core Web Vitals.
+3. Make the homepage's visible content clearly identify Omar Abdulaziz, his professional role, skills, projects, and relevant public profiles. Keep it natural and useful; do not keyword-stuff or invent facts.
+4. Implement complete homepage metadata using the Next.js Metadata API:
+   - metadataBase set to https://omar11.sa
+   - Accurate title and description
+   - Canonical URL
+   - Open Graph and Twitter metadata
+   - Index/follow robots directives
+   - Appropriate icons and share image with useful alternative text
+5. Add valid Person JSON-LD containing only verified public information, such as name, URL, image, job title, skills, and sameAs profile links. Do not add fake ratings, reviews, credentials, or claims.
+6. Add or correct app/robots.ts and app/sitemap.ts. Ensure the homepage is crawlable and uses the canonical HTTPS URL.
+7. Keep one clear visible homepage h1 centered on the person's identity. Use semantic headings, meaningful link text, image alt text, and crawlable server-rendered content.
+8. Protect homepage performance: optimize the LCP element, prevent layout shifts, avoid unnecessary client JavaScript, and keep important identity text available without client hydration.
+9. Do not automatically noindex or remove other pages merely because the homepage is the priority.
+10. Verify the production output for metadata, canonical URL, JSON-LD validity, robots.txt, sitemap.xml, social preview images, mobile rendering, and Lighthouse SEO/performance findings.
+11. Report the manual post-deployment steps: verify the domain in Google Search Console, submit sitemap.xml, request homepage indexing, and monitor queries and indexing over time.
+
+### Phase 9 completion
+
+- The homepage has accurate visible content, metadata, canonicalization, crawl controls, social cards, and valid Person structured data.
+- The homepage remains fast, accessible, and functional.
+- Remaining off-site SEO and Search Console work is clearly listed.
+
+---
+
+## Phase 10 — Final Verification and Report
 
 ### Functional checks
 
@@ -490,7 +547,7 @@ If adoption is approved:
 - Guestbook list, insert, and authorized delete work.
 - Chatbot streaming, loading, saving, and restoring work.
 - Games list, selection, statistics, caching, loading, and error states work.
-- next-dev-loop reports no unresolved compilation, console, network, or rendering problems on tested routes.
+- Runtime checks show no unresolved compilation, console, network, or rendering problems on tested routes.
 
 ### Security checks
 
@@ -519,6 +576,7 @@ Provide:
 6. Commands and manual checks performed, with pass/fail results.
 7. Performance changes and measured results.
 8. Instant Navigations measurements and the final adopt-or-skip decision.
-9. Remaining manual steps, risks, or blockers.
+9. Homepage SEO changes, validation results, and Search Console steps.
+10. Remaining manual steps, risks, or blockers.
 
 Do not claim success for checks that were not run.

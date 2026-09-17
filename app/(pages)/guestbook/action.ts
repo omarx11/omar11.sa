@@ -4,7 +4,7 @@ import { createClient } from "@/app/lib/supabase/server";
 import { nanoid } from "nanoid";
 
 export async function getAllComments() {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const { data: data, error } = await supabase
     .from("gbook_omar11")
@@ -19,7 +19,7 @@ export async function getAllComments() {
 }
 
 export async function saveComment(comment: string) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const {
     data: { user },
     error: authError,
@@ -51,7 +51,7 @@ export async function saveComment(comment: string) {
 }
 
 export async function deleteComment(cid: string) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const {
     data: { user },
     error: authError,

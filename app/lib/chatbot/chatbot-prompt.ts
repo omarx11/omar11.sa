@@ -5,7 +5,7 @@ import { websiteData } from "./website-data";
 import { author } from "@/app/config/meta";
 
 export const chatbotPrompt = async () => {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
 
   const onlineStatus = cookieStore.get("onlineState");
 
