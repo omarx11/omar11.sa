@@ -30,7 +30,7 @@ export const getBotMessage = async ({
  */
 export const saveBotMessage = async (
   { botMessages }: { botMessages: BotMessage[] },
-  chatbot_id: string
+  chatbot_id: string,
 ): Promise<void> => {
   const supabase = createClient();
 

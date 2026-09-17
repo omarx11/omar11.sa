@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { author } from "@/app/config/meta";
 import { Heading } from "@/app/components/ui/Heading";
+import { author } from "@/app/config/meta";
 
 export const metadata: Metadata = {
   title: "License Page",

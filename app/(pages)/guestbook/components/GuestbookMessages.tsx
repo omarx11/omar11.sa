@@ -1,20 +1,20 @@
 "use client";
 
+import type { User } from "@supabase/supabase-js";
 import Image from "next/image";
-import { useEffect, useContext, useState, useCallback } from "react";
-import { StatementContext } from "@/app/context/statement";
-import { deleteComment, getAllComments } from "../action";
-import { dateStyle } from "@/app/lib/helpers";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { LoadingDots } from "@/app/components/icons/LoadingDots";
-import { User } from "@supabase/supabase-js";
-import { Guestbook } from "@/app/lib/supabase/types/custom";
-import { cn } from "@/app/lib/utils";
 import { Skeleton } from "@/app/components/ui/Skeleton";
+import { StatementContext } from "@/app/context/statement";
+import { dateStyle } from "@/app/lib/helpers";
+import type { Guestbook } from "@/app/lib/supabase/types/custom";
+import { cn } from "@/app/lib/utils";
+import { deleteComment, getAllComments } from "../action";
 
 export function GuestbookMessages({ userData }: { userData: User | null }) {
   const [isNewest, setIsNewest] = useState<boolean>(true);
   const [deletingCommentId, setDeletingCommentId] = useState<string | null>(
-    null
+    null,
   );
   const {
     comments,
@@ -54,7 +54,7 @@ export function GuestbookMessages({ userData }: { userData: User | null }) {
         setDeletingCommentId(null);
       }
     },
-    [removeComment, setIsCommentLoading]
+    [removeComment, setIsCommentLoading],
   );
 
   return (
@@ -91,7 +91,7 @@ export function GuestbookMessages({ userData }: { userData: User | null }) {
             "flex select-none gap-2 rounded-md border border-neutral-700/80 bg-neutral-900 p-1 text-sm",
             {
               "pointer-events-none opacity-70": !comments,
-            }
+            },
           )}
         >
           <button
@@ -115,7 +115,7 @@ export function GuestbookMessages({ userData }: { userData: User | null }) {
           "fade-in mt-4 flex min-h-max flex-col gap-1 sm:min-h-[480px]",
           {
             "fade-in-up flex-col-reverse justify-end": !isNewest,
-          }
+          },
         )}
       >
         {comments ? (

@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { StatementContext } from "@/app/context/statement";
-import { getStatsPerGame } from "../actions";
-import Pagination from "./Pagination";
 import { CountUp } from "use-count-up";
 import { LoadingDots } from "@/app/components/icons/LoadingDots";
+import { StatementContext } from "@/app/context/statement";
 import { cn } from "@/app/lib/utils";
+import { getStatsPerGame } from "../actions";
+import Pagination from "./Pagination";
 
 export default function GameStats() {
   const { gameAppId, gameAppName, isLoadingGame, setIsLoadingGame } =
@@ -43,12 +43,12 @@ export default function GameStats() {
       gameStats?.[1]?.game?.availableGameStats?.achievements
         ?.filter((app1) =>
           gameStats?.[0]?.playerstats?.achievements?.some(
-            (app2) => app2.achieved !== 0 && app1.name === app2.apiname
-          )
+            (app2) => app2.achieved !== 0 && app1.name === app2.apiname,
+          ),
         )
         .map((achievement) => {
           const match = gameStats?.[0]?.playerstats?.achievements?.find(
-            (stat) => stat.apiname === achievement.name
+            (stat) => stat.apiname === achievement.name,
           );
           if (match) achievement.unlocktime = match.unlocktime;
           return achievement;
@@ -58,25 +58,25 @@ export default function GameStats() {
 
   const gameDetails = useMemo(
     () => gameStats?.[2]?.playerstats?.stats || [],
-    [gameStats]
+    [gameStats],
   );
 
   const achievementsLength = achievements.length;
   const totalAchievementPages = useMemo(
     () => Math.ceil(achievementsLength / achievementPerPage),
-    [achievementsLength]
+    [achievementsLength],
   );
 
   const currentAchievementPage = useMemo(() => {
     return achievements.slice(
       (achievementPage - 1) * achievementPerPage,
-      achievementPage * achievementPerPage
+      achievementPage * achievementPerPage,
     );
   }, [achievements, achievementPage, achievementPerPage]);
 
   const handlePageChange = useCallback(
     (page: number) => setAchievementPage(page),
-    []
+    [],
   );
 
   if (!gameStats) return null;
@@ -106,7 +106,7 @@ export default function GameStats() {
               "border-x-2 border-neutral-800":
                 !gameDetails.length && !achievementsLength,
               "sm:w-[76.3%]": gameDetails.length > 0,
-            }
+            },
           )}
         >
           {gameDetails.length > 0 ? (
@@ -150,7 +150,7 @@ export default function GameStats() {
             {
               "border-x-2 border-neutral-800":
                 !gameDetails.length && !achievementsLength,
-            }
+            },
           )}
         >
           {achievementsLength > 0 ? (

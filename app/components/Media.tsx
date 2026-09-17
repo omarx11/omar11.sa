@@ -1,12 +1,12 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import { media } from '@/app/config/media'
+import Image from "next/image";
+import Link from "next/link";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/app/components/ui/Tooltip'
+} from "@/app/components/ui/Tooltip";
+import { media } from "@/app/config/media";
 
 export default function Media() {
   return (
@@ -36,5 +36,5 @@ export default function Media() {
         ))}
       </TooltipProvider>
     </div>
-  )
+  );
 }

@@ -1,13 +1,13 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import dynamic from "next/dynamic";
-import PlayAudio from "./content/PlayAudio";
-import ActiveLink from "./ActiveLink";
-import Discord from "./Discord";
-import { useYearsAgo } from "@/app/hooks/useYearsAgo";
 import { author } from "@/app/config/meta";
+import { useYearsAgo } from "@/app/hooks/useYearsAgo";
+import ActiveLink from "./ActiveLink";
+import PlayAudio from "./content/PlayAudio";
+import Discord from "./Discord";
 import Media from "./Media";
 
 const AIBotAssistant = dynamic(() => import("./chatbot/AIBotAssistant"), {

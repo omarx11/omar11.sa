@@ -1,9 +1,9 @@
 "use client";
 
-import { ReactNode } from "react";
 import dynamic from "next/dynamic";
-import { Skeleton } from "@/app/components/ui/Skeleton";
 import Script from "next/script";
+import type { ReactNode } from "react";
+import { Skeleton } from "@/app/components/ui/Skeleton";
 
 type AccordionProps = {
   children: ReactNode;

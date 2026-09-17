@@ -1,17 +1,17 @@
 import Image from "next/image";
-import { useState, useContext, useMemo, useCallback } from "react";
-import { StatementContext } from "@/app/context/statement";
-import Pagination from "./Pagination";
-import { Skeleton } from "@/app/components/ui/Skeleton";
+import { useCallback, useContext, useMemo, useState } from "react";
 import { Loading } from "@/app/components/icons/Loading";
-import { nonSteamGames, playtimeToAdd } from "@/app/config/games";
-import { cn } from "@/app/lib/utils";
+import { Skeleton } from "@/app/components/ui/Skeleton";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/app/components/ui/Tooltip";
+import { nonSteamGames, playtimeToAdd } from "@/app/config/games";
+import { StatementContext } from "@/app/context/statement";
+import { cn } from "@/app/lib/utils";
+import Pagination from "./Pagination";
 
 export default function GamesCollection({
   ownedGames,
@@ -33,7 +33,7 @@ export default function GamesCollection({
       12120, 12250, 407530, 596350, 747350, 755790, 700580, 878760, 640590,
       1449560, 34330, 371140, 342230, 431960,
     ],
-    []
+    [],
   );
 
   // Filter and sort games outside the render cycle
@@ -47,12 +47,12 @@ export default function GamesCollection({
   const totalItems = steamGamesArray.length + nonSteamGames.length;
   const totalPages = useMemo(
     () => Math.ceil(totalItems / itemsPerPage),
-    [totalItems]
+    [totalItems],
   );
 
   const handlePageChange = useCallback(
     (page: number) => setCurrentPage(page),
-    []
+    [],
   );
 
   // Combine Steam and Non-Steam games
@@ -65,7 +65,7 @@ export default function GamesCollection({
               playtime_forever:
                 game.playtime_forever + playtimeToAdd[game.name],
             }
-          : game
+          : game,
       )
       .sort((a, b) => b.playtime_forever - a.playtime_forever);
     return allGames;
@@ -75,7 +75,7 @@ export default function GamesCollection({
   const currentItems = useMemo(() => {
     return allGamesArray.slice(
       (currentPage - 1) * itemsPerPage,
-      currentPage * itemsPerPage
+      currentPage * itemsPerPage,
     );
   }, [allGamesArray, currentPage, itemsPerPage]);
 
@@ -90,7 +90,7 @@ export default function GamesCollection({
 
     const nonSteamPlaytime = nonSteamGames.reduce(
       (total, game) => total + game.playtime_forever,
-      0
+      0,
     );
 
     return steamPlaytime + nonSteamPlaytime;
@@ -102,7 +102,7 @@ export default function GamesCollection({
       ...currentItems,
       ...Array(itemsPerPage - currentItems.length).fill(null),
     ],
-    [currentItems, itemsPerPage]
+    [currentItems, itemsPerPage],
   );
 
   return (
@@ -157,7 +157,7 @@ export default function GamesCollection({
       <div
         className={cn(
           "flex min-h-[337px] flex-row flex-wrap content-start items-start gap-3",
-          { "fade-in-up": !ownedGames }
+          { "fade-in-up": !ownedGames },
         )}
       >
         {ownedGames ? (
@@ -175,7 +175,7 @@ export default function GamesCollection({
                           game.appid === gameAppId,
                         "hover:ring-yellow-500": game.appid !== gameAppId,
                         "cursor-default hover:ring-red-500": game.is_non_steam,
-                      }
+                      },
                     )}
                     onClick={() => {
                       if (game.is_non_steam) return;
@@ -227,7 +227,7 @@ export default function GamesCollection({
                   key={index}
                   className="rounded-sm sm:h-[75.27px] sm:w-40"
                 />
-              )
+              ),
             )}
           </TooltipProvider>
         ) : (

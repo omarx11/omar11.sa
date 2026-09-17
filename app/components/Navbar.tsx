@@ -1,15 +1,15 @@
 "use client";
 
+import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useContext, useEffect } from "react";
 import { StatementContext } from "@/app/context/statement";
-import { usePathname } from "next/navigation";
-import { Skeleton } from "./ui/Skeleton";
-import { motion } from "framer-motion";
 import { links } from "../config/navigation";
 import { cn } from "../lib/utils";
+import { Skeleton } from "./ui/Skeleton";
 
 const NavPages = () => {
   const pathname = usePathname();
@@ -40,7 +40,7 @@ const NavPages = () => {
               {
                 "pointer-events-none": link.id === pageNo,
                 "hover:bg-neutral-800": link.id !== pageNo,
-              }
+              },
             )}
             aria-label={`Go to ${link.name}`}
           >

@@ -1,11 +1,13 @@
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { Recursive } from "next/font/google";
-import { Analytics } from "@vercel/analytics/react";
-import Navbar from "./components/Navbar";
+
+import { author } from "@/app/config/meta";
+
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import Navbar from "./components/Navbar";
 import Providers from "./components/Providers";
-import { author } from "@/app/config/meta";
 import "./globals.scss";
 
 const recursive = Recursive({ subsets: ["latin"], display: "swap" });
@@ -56,7 +58,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html className="scroll-smooth" lang="en">
       <body
         className={`${recursive.className} flex min-h-screen justify-center overflow-x-hidden bg-black antialiased`}
       >

@@ -1,5 +1,5 @@
-import { Fragment } from "react";
 import Link from "next/link";
+import { Fragment } from "react";
 
 const MarkdownLite = ({ text }: { text: string }) => {
   const linkRegex = /\[(.+?)\]\((.+?)\)/g;
@@ -26,7 +26,7 @@ const MarkdownLite = ({ text }: { text: string }) => {
         href={linkUrl}
       >
         {linkText}
-      </Link>
+      </Link>,
     );
 
     lastIndex = matchEnd;

@@ -1,12 +1,12 @@
 "use server";
 
-import { createClient } from "@/app/lib/supabase/server";
 import { nanoid } from "nanoid";
+import { createClient } from "@/app/lib/supabase/server";
 
 export async function getAllComments() {
   const supabase = await createClient();
 
-  const { data: data, error } = await supabase
+  const { data, error } = await supabase
     .from("gbook_omar11")
     .select("*")
     .order("inserted_at", { ascending: false });

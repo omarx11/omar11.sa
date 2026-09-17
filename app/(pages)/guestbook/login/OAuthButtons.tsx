@@ -1,12 +1,12 @@
 "use client";
 
+import type { Provider } from "@supabase/supabase-js";
 import { useState } from "react";
-import { Provider } from "@supabase/supabase-js";
-import { oAuthSignIn } from "./actions";
 import { Github } from "@/app/components/icons/Github";
 import { Google } from "@/app/components/icons/Google";
 import { Loading } from "@/app/components/icons/Loading";
 import { cn } from "@/app/lib/utils";
+import { oAuthSignIn } from "./actions";
 
 type OAuthProvider = {
   name: Provider;
@@ -48,7 +48,7 @@ const OAuthButtons = () => {
                 "bg-[#2f3338] hover:bg-[#2f3338]/80":
                   provider.name === "github",
                 "bg-blue-600 hover:bg-blue-700": provider.name === "google",
-              }
+              },
             )}
           >
             {provider.icon}

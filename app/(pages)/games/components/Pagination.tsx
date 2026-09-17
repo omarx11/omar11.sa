@@ -38,7 +38,7 @@ const Pagination = ({
           onClick={() => page !== i && onPageChange(i)}
         >
           {i}
-        </button>
+        </button>,
       );
     }
 
@@ -52,12 +52,12 @@ const Pagination = ({
           "rounded-md px-2",
           page === 1
             ? "pointer-events-none text-neutral-600"
-            : "bg-neutral-900 hover:bg-neutral-800"
+            : "bg-neutral-900 hover:bg-neutral-800",
         )}
         onClick={() => onPageChange(page - 1)}
       >
         Previous
-      </button>
+      </button>,
     );
 
     buttonsArray.push(
@@ -69,12 +69,12 @@ const Pagination = ({
           "rounded-md px-2",
           page === pages
             ? "pointer-events-none text-neutral-600"
-            : "bg-neutral-900 hover:bg-neutral-800"
+            : "bg-neutral-900 hover:bg-neutral-800",
         )}
         onClick={() => onPageChange(page + 1)}
       >
         Next
-      </button>
+      </button>,
     );
 
     return buttonsArray;
@@ -84,7 +84,7 @@ const Pagination = ({
     <div
       className={cn(
         "flex w-full flex-wrap-reverse items-center justify-between gap-4 text-neutral-100 sm:flex-nowrap md:gap-0",
-        className
+        className,
       )}
     >
       {note && (

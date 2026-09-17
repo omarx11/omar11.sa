@@ -1,7 +1,7 @@
 import {
   createParser,
-  ParsedEvent,
-  ReconnectInterval,
+  type ParsedEvent,
+  type ReconnectInterval,
 } from "eventsource-parser";
 
 export type ChatGPTAgent = "user" | "system";
@@ -42,7 +42,7 @@ export async function OpenAIStream(payload: OpenAIStreamPayload) {
   if (!res.ok) {
     const errorBody = await res.text();
     throw new Error(
-      `OpenAI API returned an error: ${res.status} - ${errorBody}`
+      `OpenAI API returned an error: ${res.status} - ${errorBody}`,
     );
   }
 

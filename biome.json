@@ -1,84 +1,64 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.5.14/schema.json",
-	"vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
-	"files": { "ignoreUnknown": false },
-	"formatter": {
-		"enabled": true,
-		"formatWithErrors": false,
-		"indentStyle": "space",
-		"indentWidth": 2,
-		"lineEnding": "crlf",
-		"lineWidth": 80,
-		"attributePosition": "auto",
-		"bracketSameLine": false,
-		"bracketSpacing": true,
-		"expand": "auto",
-		"useEditorconfig": true
-	},
-	"linter": {
-		"enabled": true,
-		"rules": {
-			"preset": "none",
-			"complexity": {
-				"noBannedTypes": "error",
-				"noUselessTypeConstraint": "error"
-			},
-			"correctness": {
-				"noBeforeInteractiveScriptOutsideDocument": "warn",
-				"noNextAsyncClientComponent": "warn",
-				"noPrecisionLoss": "error",
-				"noUnusedVariables": "warn",
-				"useInlineScriptId": "error"
-			},
-			"performance": {
-				"noImgElement": "warn",
-				"noSyncScripts": "error",
-				"noUnwantedPolyfillio": "warn",
-				"useGoogleFontPreconnect": "warn"
-			},
-			"style": {
-				"noHeadElement": "warn",
-				"noNamespace": "error",
-				"useArrayLiterals": "error",
-				"useAsConstAssertion": "error"
-			},
-			"suspicious": {
-				"noDocumentImportInPage": "error",
-				"noDuplicateEnumValues": "error",
-				"noExplicitAny": "error",
-				"noExtraNonNullAssertion": "error",
-				"noHeadImportInDocument": "error",
-				"noMisleadingInstantiator": "error",
-				"noNonNullAssertedOptionalChain": "error",
-				"noUnsafeDeclarationMerging": "error",
-				"useGoogleFontDisplay": "warn"
-			}
-		}
-	},
-	"javascript": {
-		"formatter": {
-			"jsxQuoteStyle": "double",
-			"quoteProperties": "asNeeded",
-			"trailingCommas": "none",
-			"semicolons": "asNeeded",
-			"arrowParentheses": "always",
-			"bracketSameLine": false,
-			"quoteStyle": "double",
-			"attributePosition": "auto",
-			"bracketSpacing": true
-		}
-	},
-	"html": {
-		"formatter": {
-			"indentScriptAndStyle": false,
-			"selfCloseVoidElements": "always"
-		}
-	},
-	"assist": { "enabled": false },
-	"overrides": [
-		{
-			"includes": ["public/static/scripts/preline/accordion.js"],
-			"linter": { "rules": { "correctness": { "noUnusedVariables": "off" } } }
-		}
-	]
+  "$schema": "https://biomejs.dev/schemas/2.5.14/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": true,
+    "includes": ["**", "!node_modules", "!.next", "!dist", "!build"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    },
+    "formatter": {
+      "enabled": true
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended",
+      "nursery": {
+        "useSortedClasses": {
+          "level": "warn",
+          "fix": "safe",
+          "options": {
+            "functions": ["cn", "clsx", "cva"]
+          }
+        }
+      }
+    },
+    "domains": {
+      "next": "recommended",
+      "react": "recommended"
+    }
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "groups": [
+              [":NODE:", ":PACKAGE:"],
+              ":BLANK_LINE:",
+              ":ALIAS:",
+              ":BLANK_LINE:",
+              ":PATH:"
+            ]
+          }
+        },
+        "noDuplicateClasses": "on",
+        "useSortedAttributes": "on"
+      }
+    }
+  }
 }

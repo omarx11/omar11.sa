@@ -1,7 +1,7 @@
 {
   "name": "omar11.sa",
-  "private": false,
   "version": "3.1.2",
+  "private": true,
   "description": "Online portfolio to share code and experiences",
   "repository": "https://github.com/omarx11/omar11.sa.git",
   "homepage": "https://omar11.sa",
@@ -12,8 +12,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "biome lint .",
-    "format": "biome format --write .",
-    "check": "biome check ."
+    "format": "biome format --write"
   },
   "dependencies": {
     "@radix-ui/react-hover-card": "^1.1.23",
@@ -50,6 +49,6 @@
     "postcss": "^8.4.47",
     "sass": "^1.79.2",
     "tailwindcss": "^3.4.12",
-    "typescript": "5.4.5"
+    "typescript": "^7.0.2"
   }
 }

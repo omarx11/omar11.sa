@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { createClient } from "@/app/lib/supabase/server";
-import FormData from "./components/FormData";
-import OAuthButtons from "./login/OAuthButtons";
-import { GuestbookMessages } from "./components/GuestbookMessages";
 import { Heading } from "@/app/components/ui/Heading";
 import { author } from "@/app/config/meta";
+import { createClient } from "@/app/lib/supabase/server";
+import FormData from "./components/FormData";
+import { GuestbookMessages } from "./components/GuestbookMessages";
+import OAuthButtons from "./login/OAuthButtons";
 
 export const metadata: Metadata = {
   title: "Guestbook Page",

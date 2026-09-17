@@ -16,10 +16,10 @@ export const getAllGames = async (): Promise<{
   const data = await Promise.all([
     fetch(
       `https://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v1/?key=${steamAPIKey}&steamid=${author.steamId}`,
-      { next: { revalidate: cacheTime } }
+      { next: { revalidate: cacheTime } },
     ).then((res) => res.json()),
     fetch(
-      `https://api.steampowered.com/IPlayerService/GetOwnedGames/v1?key=${steamAPIKey}&include_played_free_games=true&include_appinfo=true&format=json&steamid=${author.steamId}`
+      `https://api.steampowered.com/IPlayerService/GetOwnedGames/v1?key=${steamAPIKey}&include_played_free_games=true&include_appinfo=true&format=json&steamid=${author.steamId}`,
     ).then((res) => res.json()),
   ]);
 
@@ -37,13 +37,13 @@ export const getAllGames = async (): Promise<{
 export const getStatsPerGame = async (appId: number) => {
   const data = await Promise.all([
     fetch(
-      `https://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v1?key=${steamAPIKey}&steamid=${author.steamId}&appid=${appId}`
+      `https://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v1?key=${steamAPIKey}&steamid=${author.steamId}&appid=${appId}`,
     ).then((res) => res.json()),
     fetch(
-      `https://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2?key=${steamAPIKey}&appid=${appId}`
+      `https://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2?key=${steamAPIKey}&appid=${appId}`,
     ).then((res) => res.json()),
     fetch(
-      `https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2?key=${steamAPIKey}&steamid=${author.steamId}&appid=${appId}`
+      `https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2?key=${steamAPIKey}&steamid=${author.steamId}&appid=${appId}`,
     ).then((res) => res.json()),
   ]);
 

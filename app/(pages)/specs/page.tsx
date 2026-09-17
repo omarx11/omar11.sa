@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Heading } from "@/app/components/ui/Heading";
-import * as s from "@/app/config/specs";
 import { author } from "@/app/config/meta";
+import * as s from "@/app/config/specs";
 
 export const metadata: Metadata = {
   title: "Specs Page",

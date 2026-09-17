@@ -1,22 +1,22 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
-import { getGithubRepos } from "@/app/lib/server-actions";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import {
   manualRepository,
-  reposInfo,
   type Repository,
+  reposInfo,
 } from "@/app/config/repos";
+import { getGithubRepos } from "@/app/lib/server-actions";
 import { cn } from "@/app/lib/utils";
+import { Skeleton } from "../ui/Skeleton";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/Tooltip";
-import { Skeleton } from "../ui/Skeleton";
 
 export default function Projects() {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
@@ -83,7 +83,7 @@ export default function Projects() {
                               !reposInfo[repo.name]?.isUnderDev,
                             "group-hover:ring-orange-950":
                               reposInfo[repo.name]?.isUnderDev,
-                          }
+                          },
                         )}
                       >
                         state
@@ -96,7 +96,7 @@ export default function Projects() {
                         {
                           "bg-emerald-800": !reposInfo[repo.name]?.isUnderDev,
                           "bg-orange-800": reposInfo[repo.name]?.isUnderDev,
-                        }
+                        },
                       )}
                     >
                       {!reposInfo[repo.name].isUnderDev

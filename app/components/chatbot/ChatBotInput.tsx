@@ -1,18 +1,17 @@
-import type { BotMessage } from "@/app/lib/validators/bot-message";
-import { StatementContext } from "@/app/context/statement";
+import { useMutation } from "@tanstack/react-query";
+import { nanoid } from "nanoid";
 import {
-  KeyboardEvent,
-  MouseEvent,
+  type KeyboardEvent,
+  type MouseEvent,
   useContext,
   useEffect,
   useRef,
   useState,
 } from "react";
-import { useMutation } from "@tanstack/react-query";
-import { getBotMessage } from "@/app/lib/chatbot/actions";
-import { saveBotMessage } from "@/app/lib/chatbot/actions";
 import TextareaAutosize from "react-textarea-autosize";
-import { nanoid } from "nanoid";
+import { StatementContext } from "@/app/context/statement";
+import { getBotMessage, saveBotMessage } from "@/app/lib/chatbot/actions";
+import type { BotMessage } from "@/app/lib/validators/bot-message";
 import { Loading } from "../icons/Loading";
 
 const ChatBotInput = () => {
@@ -81,7 +80,7 @@ const ChatBotInput = () => {
   }, [botMessages, chatbot_id, isPending]);
 
   const handleSubmit = (
-    e: KeyboardEvent<HTMLTextAreaElement> | MouseEvent<HTMLButtonElement>
+    e: KeyboardEvent<HTMLTextAreaElement> | MouseEvent<HTMLButtonElement>,
   ) => {
     if (input.trim() !== "") {
       if (

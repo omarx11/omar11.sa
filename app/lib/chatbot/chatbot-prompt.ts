@@ -1,8 +1,8 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { websiteData } from "./website-data";
 import { author } from "@/app/config/meta";
+import { websiteData } from "./website-data";
 
 export const chatbotPrompt = async () => {
   const cookieStore = await cookies();

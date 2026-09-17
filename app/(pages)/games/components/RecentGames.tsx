@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { useContext } from "react";
-import { StatementContext } from "@/app/context/statement";
-import { Skeleton } from "@/app/components/ui/Skeleton";
 import { Loading } from "@/app/components/icons/Loading";
+import { Skeleton } from "@/app/components/ui/Skeleton";
+import { StatementContext } from "@/app/context/statement";
 import { cn } from "@/app/lib/utils";
 
 export default function RecentGames({
@@ -65,7 +65,7 @@ export default function RecentGames({
                             game.appid === gameAppId,
                           "group-hover:ring-yellow-500":
                             game.appid !== gameAppId,
-                        }
+                        },
                       )}
                       alt={game.name}
                     />
@@ -75,7 +75,7 @@ export default function RecentGames({
                         {
                           "line-clamp-2 text-opacity-0":
                             game.appid === gameAppId,
-                        }
+                        },
                       )}
                     >
                       {game.name}

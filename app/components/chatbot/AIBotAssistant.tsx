@@ -1,11 +1,11 @@
 "use client";
 
+import * as Popover from "@radix-ui/react-popover";
 import { useContext, useEffect, useState } from "react";
 import { StatementContext } from "@/app/context/statement";
+import { cn } from "@/app/lib/utils";
 import ChatBotInput from "./ChatBotInput";
 import MarkdownLite from "./MarkdownLite";
-import * as Popover from "@radix-ui/react-popover";
-import { cn } from "@/app/lib/utils";
 
 export default function AIBotAssistant() {
   const [hovored, setHovored] = useState<boolean>(false);
@@ -69,7 +69,7 @@ export default function AIBotAssistant() {
                   {
                     "order-1 items-end": message.isUserMessage,
                     "order-2 items-start": !message.isUserMessage,
-                  }
+                  },
                 )}
               >
                 <p

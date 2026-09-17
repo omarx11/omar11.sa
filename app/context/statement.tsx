@@ -1,8 +1,8 @@
+import { nanoid } from "nanoid";
 import { createContext, useState } from "react";
 import { links } from "@/app/config/navigation";
-import { nanoid } from "nanoid";
-import type { BotMessage } from "@/app/lib/validators/bot-message";
 import type { Guestbook } from "@/app/lib/supabase/types/custom";
+import type { BotMessage } from "@/app/lib/validators/bot-message";
 
 const ChatBotDefaultValue: BotMessage[] = [
   {
@@ -33,7 +33,7 @@ export const StatementContext = createContext<{
   addComment: (newComment: Guestbook) => void;
   updateBotMessage: (
     id: string,
-    updateFn: (prevText: string) => string
+    updateFn: (prevText: string) => string,
   ) => void;
   setIsCommentLoading: (isUpdating: boolean) => void;
   setIsLoadingGame: (isUpdating: boolean) => void;
@@ -78,7 +78,7 @@ export function StatementProvider({ children }: { children: React.ReactNode }) {
 
   const removeComment = (cid: string) => {
     setComments((prev) =>
-      prev ? prev.filter((comment: Guestbook) => comment.cid !== cid) : null
+      prev ? prev.filter((comment: Guestbook) => comment.cid !== cid) : null,
     );
   };
 
@@ -92,7 +92,7 @@ export function StatementProvider({ children }: { children: React.ReactNode }) {
 
   const updateBotMessage = (
     id: string,
-    updateFn: (prevText: string) => string
+    updateFn: (prevText: string) => string,
   ) => {
     setBotMessages((prev) =>
       prev.map((message) => {
@@ -100,7 +100,7 @@ export function StatementProvider({ children }: { children: React.ReactNode }) {
           return { ...message, text: updateFn(message.text) };
         }
         return message;
-      })
+      }),
     );
   };
 

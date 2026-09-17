@@ -1,15 +1,15 @@
 "use client";
 
-import { useLanyard } from "use-lanyard";
-import { relativeTime } from "@/app/lib/helpers";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "@radix-ui/react-hover-card";
-import { Skeleton } from "./ui/Skeleton";
+import { useLanyard } from "use-lanyard";
+import { relativeTime } from "@/app/lib/helpers";
 import { author } from "../config/meta";
 import { cn } from "../lib/utils";
+import { Skeleton } from "./ui/Skeleton";
 
 const discordId = author.discordId as `${bigint}`;
 
@@ -43,7 +43,7 @@ export default function Discord() {
     const onlineState =
       `${author.name} is currently ${statusText} and ${playing} ${playingFor}`.replace(
         /[.:]/g,
-        ""
+        "",
       );
 
     // Save online state to browser cookie

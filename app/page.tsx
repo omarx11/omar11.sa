@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Projects from "./components/content/Projects";
 import GithubCal from "./components/content/GithubCal";
+import Projects from "./components/content/Projects";
 import { Heading } from "./components/ui/Heading";
 
 export default function HomePage() {

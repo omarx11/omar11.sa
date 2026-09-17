@@ -1,16 +1,16 @@
 "use client";
 
+import type { User } from "@supabase/supabase-js";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useState, useEffect, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Loading } from "@/app/components/icons/Loading";
+import { Skeleton } from "@/app/components/ui/Skeleton";
 import { StatementContext } from "@/app/context/statement";
+import type { Guestbook } from "@/app/lib/supabase/types/custom";
+import { cn } from "@/app/lib/utils";
 import { saveComment } from "../action";
 import { signOut } from "../login/actions";
-import { Skeleton } from "@/app/components/ui/Skeleton";
-import { Loading } from "@/app/components/icons/Loading";
-import { Guestbook } from "@/app/lib/supabase/types/custom";
-import { User } from "@supabase/supabase-js";
-import { cn } from "@/app/lib/utils";
 
 const FormData = ({ userData }: { userData: User }) => {
   const [textComment, setTextComment] = useState<string>("");
@@ -67,14 +67,14 @@ const FormData = ({ userData }: { userData: User }) => {
           "h-40 w-full rounded-md border-[6px] border-neutral-800 bg-neutral-900 p-2 text-lg text-neutral-50 shadow-sm outline-0 ring-4 ring-neutral-700 duration-300 placeholder:text-sm placeholder:italic focus:bg-neutral-950",
           wordLimit
             ? "caret-rose-500 focus:ring-rose-800"
-            : "caret-emerald-500 focus:ring-neutral-600"
+            : "caret-emerald-500 focus:ring-neutral-600",
         )}
       />
       <div className="flex flex-wrap justify-between">
         <span
           className={cn(
             "select-none text-sm",
-            wordLimit ? "font-bold text-rose-600" : "text-neutral-500"
+            wordLimit ? "font-bold text-rose-600" : "text-neutral-500",
           )}
         >
           {textComment.length} / 2000

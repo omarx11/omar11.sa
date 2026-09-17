@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { getAllGames } from "../actions";
-import RecentGames from "./RecentGames";
-import GamesCollection from "./GamesCollection";
 import GameStats from "./GameStats";
+import GamesCollection from "./GamesCollection";
+import RecentGames from "./RecentGames";
 
 export default function Games() {
   const [recentlyPlayedArr, setRecentlyPlayedArr] =

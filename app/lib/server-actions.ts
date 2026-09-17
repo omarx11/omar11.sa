@@ -12,7 +12,7 @@ export const getGithubRepos = async () => {
         Accept: "application/vnd.github+json",
         Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
       },
-    }
+    },
   );
   if (!response.ok) throw new Error("Failed to fetch data");
   const data = await response.json();

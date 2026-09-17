@@ -1,4 +1,4 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
 import { getURL } from "@/app/lib/helpers";
 
 export default function sitemap(): MetadataRoute.Sitemap {

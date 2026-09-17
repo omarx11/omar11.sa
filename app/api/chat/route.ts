@@ -1,11 +1,11 @@
 import type { NextRequest } from "next/server";
-import { BotMessageArraySchema } from "@/app/lib/validators/bot-message";
 import { chatbotPrompt } from "@/app/lib/chatbot/chatbot-prompt";
 import {
-  OpenAIStream,
   type ChatGPTMessage,
+  OpenAIStream,
   type OpenAIStreamPayload,
 } from "@/app/lib/openai-stream";
+import { BotMessageArraySchema } from "@/app/lib/validators/bot-message";
 
 export async function POST(req: NextRequest) {
   const { botMessages } = await req.json();

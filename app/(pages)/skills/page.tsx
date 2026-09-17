@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import Accordion from "./components/Accordion";
 import { Heading } from "@/app/components/ui/Heading";
-import { SkillsArray } from "./components/SkillsArray";
 import { author } from "@/app/config/meta";
 import {
-  langs,
-  frameworks,
-  styles,
   databases,
-  services,
-  systems,
   editors,
+  frameworks,
+  langs,
+  services,
+  styles,
+  systems,
 } from "@/app/config/skills";
+import Accordion from "./components/Accordion";
+import { SkillsArray } from "./components/SkillsArray";
 
 export const metadata: Metadata = {
   title: "Skills Page",
