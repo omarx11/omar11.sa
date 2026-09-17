@@ -46,6 +46,7 @@ export default function RecentGames({
                     setGameAppId(game.appid);
                     setGameAppName(game.name);
                   }}
+                  type="button"
                 >
                   <div className="mt-1 max-w-[110px] group-hover:underline sm:max-w-[160px]">
                     <Image
@@ -85,10 +86,10 @@ export default function RecentGames({
                 </button>
               </div>
             ))
-          : [...Array(4)].map((_, i) => (
+          : ["first", "second", "third", "fourth"].map((skeleton) => (
               <Skeleton
                 className="mt-5 h-[165px] w-[110px] rounded-md sm:h-60 sm:w-40"
-                key={i}
+                key={`skeleton-${skeleton}`}
               />
             ))}
       </div>

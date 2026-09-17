@@ -52,6 +52,7 @@ const OAuthButtons = () => {
               setIsPending(provider.name);
               await oAuthSignIn(provider.name);
             }}
+            type="button"
           >
             {provider.icon}
             {provider.displayName}
@@ -63,6 +64,7 @@ const OAuthButtons = () => {
       </div>
       <p className="flex items-center gap-1 text-neutral-500 text-xs sm:text-sm">
         <svg
+          aria-label="Info icon"
           className="hidden md:block"
           height="16"
           viewBox="0 0 20 20"

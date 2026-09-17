@@ -49,8 +49,8 @@ export default function SpecsPage() {
                 <span className="text-emerald-500">#</span> PC Parts
               </h2>
               <ul className="list-disc space-y-0.5 pl-5 text-sm tracking-wide">
-                {s.pc_parts.map(({ name, link }, i) => (
-                  <li key={i}>
+                {s.pc_parts.map(({ name, link }) => (
+                  <li key={name}>
                     <Link
                       className="decoration-emerald-600 decoration-wavy hover:underline"
                       href={link || "#"}
@@ -67,8 +67,8 @@ export default function SpecsPage() {
                 <span className="text-emerald-500">#</span> Virtual Machines
               </h2>
               <ul className="list-disc space-y-0.5 pl-5 text-sm tracking-wide">
-                {s.virtual_machines.map(({ name, link }, i) => (
-                  <li key={i}>
+                {s.virtual_machines.map(({ name, link }) => (
+                  <li key={name}>
                     <Link
                       className="decoration-emerald-600 decoration-wavy hover:underline"
                       href={link || "#"}
@@ -87,8 +87,8 @@ export default function SpecsPage() {
                 <span className="text-emerald-500">#</span> Network Informetions
               </h2>
               <ul className="list-disc space-y-0.5 pl-5 text-sm tracking-wide">
-                {s.network_info.map(({ name, link }, i) => (
-                  <li key={i}>
+                {s.network_info.map(({ name, link }) => (
+                  <li key={name}>
                     <Link
                       className="decoration-emerald-600 decoration-wavy hover:underline"
                       href={link || "#"}
@@ -105,8 +105,8 @@ export default function SpecsPage() {
                 <span className="text-emerald-500">#</span> Other Devices
               </h2>
               <ul className="list-disc space-y-0.5 pl-5 text-sm tracking-wide">
-                {s.other_devices.map(({ name, link }, i) => (
-                  <li key={i}>
+                {s.other_devices.map(({ name, link }) => (
+                  <li key={name}>
                     <Link
                       className="decoration-emerald-600 decoration-wavy hover:underline"
                       href={link || "#"}

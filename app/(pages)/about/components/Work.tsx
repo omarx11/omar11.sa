@@ -43,10 +43,7 @@ export default function Work() {
             <dt className="sr-only">Role</dt>
             <dd className="text-neutral-400 text-xs">IT Salesman</dd>
             <dt className="sr-only">Date</dt>
-            <dd
-              aria-label="March 31 2024 until now"
-              className="ml-auto text-neutral-500 text-xs"
-            >
+            <dd className="ml-auto text-neutral-500 text-xs">
               <time dateTime="2024">Mar 2024</time>{" "}
               <span aria-hidden="true">—</span>{" "}
               <time dateTime="2024">Jun 2024</time>
@@ -56,6 +53,7 @@ export default function Work() {
         <li className="flex items-center gap-4">
           <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center overflow-hidden rounded-full bg-neutral-950 shadow-md shadow-neutral-800/5 ring-0 ring-neutral-900/5">
             <svg
+              aria-label="Work icon"
               className="text-white"
               height="24"
               viewBox="0 0 24 24"
@@ -76,10 +74,7 @@ export default function Work() {
             <dt className="sr-only">Role</dt>
             <dd className="text-neutral-400 text-xs">Freelancer</dd>
             <dt className="sr-only">Date</dt>
-            <dd
-              aria-label="2023 until 2024"
-              className="ml-auto text-neutral-500 text-xs"
-            >
+            <dd className="ml-auto text-neutral-500 text-xs">
               <time dateTime="2023">2023</time>{" "}
               <span aria-hidden="true">—</span> <time dateTime="2024">now</time>
             </dd>

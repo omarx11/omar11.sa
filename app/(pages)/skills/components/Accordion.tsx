@@ -22,12 +22,14 @@ const Accordion = ({ children, name }: AccordionProps) => {
         <button
           aria-controls={`hs-basic-collapse-${id}`}
           className="hs-accordion-toggle group inline-flex w-full items-center gap-x-2 py-3 text-neutral-300 transition-transform hover:text-neutral-400"
+          type="button"
         >
           <span className="text-lg text-neutral-400 group-hover:opacity-70">
             #
           </span>
           <h2 className="relative inline-block text-lg md:text-xl">{name}</h2>
           <svg
+            aria-label="Expand icon"
             className="block hs-accordion-active:hidden h-3 w-3 text-neutral-400 group-hover:opacity-70"
             fill="none"
             height="16"
@@ -49,6 +51,7 @@ const Accordion = ({ children, name }: AccordionProps) => {
             />
           </svg>
           <svg
+            aria-label="Collapse icon"
             className="hs-accordion-active:block hidden h-3 w-3 text-emerald-400 group-hover:opacity-70"
             fill="none"
             height="16"
@@ -65,7 +68,6 @@ const Accordion = ({ children, name }: AccordionProps) => {
           </svg>
         </button>
         <div
-          aria-labelledby={`hs-basic-heading-${id}`}
           className="fade-in hs-accordion-content hidden w-full space-y-1 overflow-hidden transition-[height] duration-300"
           id={`hs-basic-collapse-${id}`}
         >

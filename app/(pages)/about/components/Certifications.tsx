@@ -28,6 +28,7 @@ export default function Certifications() {
           Certifications <span className="text-base">\</span>
         </p>
         <svg
+          aria-label="Certifications icon"
           className="fill-amber-600/90"
           height="26"
           viewBox="0 0 256 256"
@@ -49,7 +50,7 @@ export default function Certifications() {
         modules={[EffectCards]}
       >
         {images.map((image, i) => (
-          <SwiperSlide className="rounded-lg" key={i}>
+          <SwiperSlide className="rounded-lg" key={image}>
             <Image
               alt={`Certificate ${i + 1}`}
               blurDataURL="/static/icons/blur.svg"

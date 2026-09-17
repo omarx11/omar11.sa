@@ -37,6 +37,7 @@ const Pagination = ({
           })}
           key={i}
           onClick={() => page !== i && onPageChange(i)}
+          type="button"
         >
           {i}
         </button>,
@@ -56,6 +57,7 @@ const Pagination = ({
         disabled={page === 1}
         key="prev"
         onClick={() => onPageChange(page - 1)}
+        type="button"
       >
         Previous
       </button>,
@@ -73,6 +75,7 @@ const Pagination = ({
         disabled={page === pages}
         key="next"
         onClick={() => onPageChange(page + 1)}
+        type="button"
       >
         Next
       </button>,

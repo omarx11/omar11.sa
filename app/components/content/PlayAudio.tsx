@@ -41,9 +41,11 @@ export default function PlayAudio() {
           e.preventDefault();
           setIsAudioStart((prev) => !prev);
         }}
+        type="button"
       >
         {isAudioStart ? (
           <svg
+            aria-label="Pause icon"
             height="14"
             viewBox="0 0 24 24"
             width="14"
@@ -53,6 +55,7 @@ export default function PlayAudio() {
           </svg>
         ) : (
           <svg
+            aria-label="Play icon"
             fill="currentColor"
             height="14"
             viewBox="0 0 20 20"
@@ -64,11 +67,20 @@ export default function PlayAudio() {
         )}
       </button>
       <audio
+        aria-label="Giovanni audio track"
         className="hidden"
         preload="none"
         ref={audioRef}
         src="/static/audio/Giovanni_pre_s75_sb100_se0_b_m2.mp3"
-      ></audio>
+      >
+        <track
+          default
+          kind="captions"
+          label="English"
+          src="/static/audio/Giovanni_pre_s75_sb100_se0_b_m2.vtt"
+          srcLang="en"
+        />
+      </audio>
     </div>
   );
 }

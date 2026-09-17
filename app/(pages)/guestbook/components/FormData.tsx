@@ -87,6 +87,7 @@ const FormData = ({ userData }: { userData: User }) => {
             className="flex items-center gap-1 rounded-md bg-sky-800 px-2 py-1 text-base duration-100 hover:bg-sky-900 disabled:cursor-not-allowed disabled:select-none disabled:bg-sky-800 disabled:opacity-60"
             disabled={!textComment.trim() || !userData}
             onClick={handleSubmit}
+            type="button"
           >
             SEND
             {isLoading === "send" && <Loading className="animate-spin" />}
@@ -96,6 +97,7 @@ const FormData = ({ userData }: { userData: User }) => {
               aria-label="Sign Out"
               className="flex items-center gap-1 rounded-md bg-rose-800 px-2 py-1 text-base duration-100 hover:bg-rose-900"
               onClick={() => setIsLoading("signout")}
+              type="submit"
             >
               Sign Out
               {isLoading === "signout" && <Loading className="animate-spin" />}

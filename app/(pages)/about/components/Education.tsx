@@ -3,6 +3,7 @@ export default function Education() {
     <div className="w-full rounded-lg border-2 border-neutral-700/40 bg-neutral-900/50 p-4">
       <h2 className="flex items-center font-semibold text-neutral-100 text-sm">
         <svg
+          aria-label="Education icon"
           fill="none"
           height="24"
           stroke="currentColor"
@@ -28,6 +29,7 @@ export default function Education() {
         <li className="flex items-center gap-4">
           <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-neutral-800/5 ring-0 ring-neutral-900/5">
             <svg
+              aria-label="Education icon"
               height="30"
               id="color__icon"
               viewBox="0 0 33.382 39.181"
@@ -176,10 +178,7 @@ export default function Education() {
             <dt className="sr-only">Degree</dt>
             <dd className="text-neutral-400 text-xs">Diploma</dd>
             <dt className="sr-only">Date</dt>
-            <dd
-              aria-label="2019 until 2023"
-              className="ml-auto text-neutral-500 text-xs"
-            >
+            <dd className="ml-auto text-neutral-500 text-xs">
               <time dateTime="2019">2019</time>{" "}
               <span aria-hidden="true">—</span>{" "}
               <time dateTime="2023">2023</time>

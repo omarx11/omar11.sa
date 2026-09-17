@@ -13,6 +13,15 @@ import { cn } from "@/app/lib/utils";
 
 import { deleteComment, getAllComments } from "../action";
 
+const SKELETON_KEYS = [
+  "skeleton-1",
+  "skeleton-2",
+  "skeleton-3",
+  "skeleton-4",
+  "skeleton-5",
+  "skeleton-6",
+] as const;
+
 export function GuestbookMessages({ userData }: { userData: User | null }) {
   const [isNewest, setIsNewest] = useState<boolean>(true);
   const [deletingCommentId, setDeletingCommentId] = useState<string | null>(
@@ -68,6 +77,7 @@ export function GuestbookMessages({ userData }: { userData: User | null }) {
               <span className="text-emerald-400">{comments.length}</span>
             ) : (
               <svg
+                aria-label="Loading comments"
                 className="-ml-1 inline animate-spin"
                 height="22"
                 viewBox="0 0 24 24"
@@ -100,6 +110,7 @@ export function GuestbookMessages({ userData }: { userData: User | null }) {
             className="rounded-md px-1.5 py-0.5 hover:bg-neutral-800 disabled:bg-neutral-700 disabled:text-emerald-300"
             disabled={isNewest}
             onClick={() => setIsNewest(true)}
+            type="button"
           >
             Newest
           </button>
@@ -107,6 +118,7 @@ export function GuestbookMessages({ userData }: { userData: User | null }) {
             className="rounded-md px-1.5 py-0.5 hover:bg-neutral-800 disabled:bg-neutral-700 disabled:text-emerald-300"
             disabled={!isNewest}
             onClick={() => setIsNewest(false)}
+            type="button"
           >
             Oldest
           </button>
@@ -153,6 +165,7 @@ export function GuestbookMessages({ userData }: { userData: User | null }) {
                           onClick={() =>
                             user.cid && handleDeleteComment(user.cid)
                           }
+                          type="button"
                         >{`< DELETE >`}</button>
                       ) : (
                         <LoadingDots className="mr-4 scale-[1.6] text-red-500 sm:mr-5 sm:scale-[2]" />
@@ -165,8 +178,8 @@ export function GuestbookMessages({ userData }: { userData: User | null }) {
           ))
         ) : (
           <ul className="my-4 w-full list-none space-y-0.5">
-            {[...Array(6)].map((_, i) => (
-              <li key={i}>
+            {SKELETON_KEYS.map((skeletonKey) => (
+              <li key={skeletonKey}>
                 <Skeleton className="inline-block w-full rounded-md py-8" />
               </li>
             ))}
