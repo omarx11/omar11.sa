@@ -14,12 +14,11 @@ import { Skeleton } from "./ui/Skeleton";
 const discordId = author.discordId as `${bigint}`;
 
 export default function Discord() {
-  const { data, error, isLoading } = useLanyard(discordId);
+  const data = useLanyard(discordId);
 
-  if (error) console.error("Error loading discord status");
-
+  // v2: the hook returns the presence directly (undefined until it arrives).
   // Fallback for loading state
-  if (!data || isLoading) {
+  if (!data) {
     return (
       <Skeleton className="my-0.5 h-5 w-40 rounded-sm bg-neutral-800/75" />
     );
