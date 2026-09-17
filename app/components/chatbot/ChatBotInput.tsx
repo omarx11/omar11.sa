@@ -122,10 +122,13 @@ const ChatBotInput = () => {
             <Loading className="mx-3 animate-spin" />
           ) : (
             <button
+              aria-label="Send message"
               className="w-full border-0 px-3 outline-0"
               onClick={handleSubmit}
+              type="button"
             >
               <svg
+                aria-label="Send icon"
                 height="22"
                 viewBox="0 0 24 24"
                 width="22"

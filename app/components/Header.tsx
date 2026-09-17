@@ -38,6 +38,7 @@ export default function Header() {
             Hey, {`I'm`}{" "}
             <span className="text-emerald-400">{author.fullName}</span>
             <svg
+              aria-label="Wave icon"
               className="wave -mt-2 ml-3 inline-block origin-[70%_70%]"
               height="24"
               viewBox="0 0 36 36"
@@ -92,6 +93,7 @@ export default function Header() {
             <Discord />
             <div className="flex">
               <svg
+                aria-label="Location icon"
                 className="mr-2"
                 height="18"
                 viewBox="0 0 48 48"
@@ -121,6 +123,7 @@ export default function Header() {
             target="_blank"
           >
             <svg
+              aria-label="Status icon"
               className="-mr-2.5 inline stroke-emerald-500 group-hover:stroke-emerald-500/80"
               viewBox="0 0 100 50"
               width="36"

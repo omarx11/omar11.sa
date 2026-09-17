@@ -2,6 +2,7 @@ import type { SVGProps } from "react";
 
 export const Github = (props: SVGProps<SVGSVGElement>) => (
   <svg
+    aria-label="GitHub icon"
     fill="currentColor"
     height="1em"
     stroke="currentColor"

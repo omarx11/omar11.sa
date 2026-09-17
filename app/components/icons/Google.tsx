@@ -2,6 +2,7 @@ import type { SVGProps } from "react";
 
 export const Google = (props: SVGProps<SVGSVGElement>) => (
   <svg
+    aria-label="Google icon"
     fill="currentColor"
     height="1em"
     stroke="currentColor"

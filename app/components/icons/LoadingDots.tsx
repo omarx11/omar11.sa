@@ -3,6 +3,7 @@ import type { SVGProps } from "react";
 export function LoadingDots(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
+      aria-label="Loading dots icon"
       height="1.2rem"
       viewBox="0 0 24 24"
       width="1.2rem"

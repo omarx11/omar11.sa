@@ -43,7 +43,7 @@ export default function Projects() {
     <div className="md:fade-in mt-10 grid gap-5 md:grid-cols-3" id="projects">
       {reposArray
         ? reposArray.map((repo) => (
-            <div
+            <article
               className="group flex flex-col gap-3 rounded-md border-4 border-neutral-800 bg-gradient-to-b from-neutral-900 px-3 py-2 hover:z-10 hover:border-neutral-700 hover:bg-gradient-to-t"
               key={repo.id}
               onMouseEnter={() => setHoveredId(repo.id)}
@@ -110,12 +110,12 @@ export default function Projects() {
               </div>
               <div className="flex flex-row justify-between text-neutral-400">
                 <div className="flex items-center gap-[6px] text-sm">
-                  {reposInfo[repo.name]?.lang.map((icon, i) => (
+                  {reposInfo[repo.name]?.lang.map((icon) => (
                     <Image
                       alt="tech"
                       className="drag-none opacity-60 hover:opacity-100"
                       height={16}
-                      key={i}
+                      key={`lang-${repo.id}-${icon}`}
                       src={icon}
                       width={16}
                     />
@@ -124,6 +124,7 @@ export default function Projects() {
                 <div className="pointer-events-none flex select-none flex-row items-center gap-1 text-center text-xs">
                   <span>
                     <svg
+                      aria-label="Forks icon"
                       height="14"
                       viewBox="0 0 256 256"
                       width="14"
@@ -138,6 +139,7 @@ export default function Projects() {
                   </span>
                   <span>
                     <svg
+                      aria-label="Stars icon"
                       fill="#a9a9a9"
                       height="14"
                       viewBox="0 0 14 16"
@@ -153,6 +155,7 @@ export default function Projects() {
                   </span>
                   <span>
                     <svg
+                      aria-label="Watchers icon"
                       height="14"
                       viewBox="0 0 24 24"
                       width="14"
@@ -170,12 +173,13 @@ export default function Projects() {
               <p className="line-clamp-2 border-neutral-800 border-t-2 pt-3 text-neutral-500 text-sm group-hover:text-neutral-400">
                 {repo.description}
               </p>
-            </div>
+            </article>
           ))
         : [...Array(6)].map((_, i) => (
             <Skeleton
               className="h-[268px] w-full max-w-full rounded-md md:max-w-[328px]"
-              key={i}
+              // biome-ignore lint/suspicious/noArrayIndexKey: placeholder skeleton has no stable identity
+              key={`skeleton-${i}`}
             />
           ))}
     </div>

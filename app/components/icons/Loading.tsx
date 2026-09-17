@@ -2,6 +2,7 @@ import type { SVGProps } from "react";
 
 export const Loading = (props: SVGProps<SVGSVGElement>) => (
   <svg
+    aria-label="Loading icon"
     height="24"
     viewBox="0 0 24 24"
     width="24"

@@ -37,8 +37,10 @@ export default function AIBotAssistant() {
           className="border-0"
           onClick={() => setHovored(true)}
           onMouseEnter={() => setHovored(true)}
+          type="button"
         >
           <svg
+            aria-label="AI Assistant icon"
             className="fill-neutral-600 hover:fill-neutral-500 data-[state=open]:fill-emerald-600"
             height="40"
             viewBox="0 0 2048 2048"
@@ -90,6 +92,7 @@ export default function AIBotAssistant() {
           </p>
           <Popover.Close className="absolute top-1 right-2 inline-flex items-center justify-center rounded-full p-1 outline-none hover:bg-neutral-800">
             <svg
+              aria-label="Close icon"
               height="18"
               viewBox="0 0 256 256"
               width="18"

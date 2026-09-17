@@ -14,7 +14,10 @@ export default function HomePage() {
       </p>
       <Projects />
       <div className="mt-6 flex justify-center">
-        <button className="group rounded-md bg-neutral-800 ring-emerald-800">
+        <button
+          className="group rounded-md bg-neutral-800 ring-emerald-800"
+          type="button"
+        >
           <Link
             className="inline-flex w-full items-center justify-center gap-1 px-6 py-2 text-neutral-200 group-hover:underline"
             href="https://github.com/omarx11?tab=repositories"

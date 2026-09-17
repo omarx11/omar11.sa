@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useCallback, useContext, useMemo, useState } from "react";
+import { Fragment, useCallback, useContext, useMemo, useState } from "react";
 
 import { Loading } from "@/app/components/icons/Loading";
 import { Skeleton } from "@/app/components/ui/Skeleton";
@@ -126,6 +126,7 @@ export default function GamesCollection({
                   <span className="text-neutral-300">{totalItems}</span> games
                   found
                   <svg
+                    aria-label="Total playtime icon"
                     className="ml-1.5 hidden sm:inline"
                     height="16"
                     viewBox="0 0 16 16"
@@ -225,16 +226,19 @@ export default function GamesCollection({
                   </TooltipContent>
                 </Tooltip>
               ) : (
-                <Skeleton
-                  className="rounded-sm sm:h-[75.27px] sm:w-40"
-                  key={index}
-                />
+                // biome-ignore lint/suspicious/noArrayIndexKey: placeholder skeleton has no stable identity
+                <Fragment key={`skeleton-slot-${index}`}>
+                  <Skeleton className="rounded-sm sm:h-[75.27px] sm:w-40" />
+                </Fragment>
               ),
             )}
           </TooltipProvider>
         ) : (
           Array.from({ length: itemsPerPage }).map((_, i) => (
-            <Skeleton className="rounded-sm sm:h-[75px] sm:w-40" key={i} />
+            // biome-ignore lint/suspicious/noArrayIndexKey: placeholder skeleton has no stable identity
+            <Fragment key={`placeholder-slot-${i}`}>
+              <Skeleton className="rounded-sm sm:h-[75px] sm:w-40" />
+            </Fragment>
           ))
         )}
         {ownedGames && (

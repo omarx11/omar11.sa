@@ -32,6 +32,7 @@ export default function Footer() {
           label="Read more about license"
           title={
             <svg
+              aria-label="License icon"
               height="1em"
               viewBox="0 0 24 24"
               width="1em"
