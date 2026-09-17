@@ -5,7 +5,6 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@radix-ui/react-hover-card";
-import { cookies } from "next/headers";
 import { useLanyard } from "use-lanyard";
 
 import { relativeTime } from "@/app/lib/helpers";
@@ -49,7 +48,9 @@ export default function Discord() {
       );
 
     // Save online state to browser cookie
-    cookies().set("onlineState", onlineState);
+    if (typeof window !== "undefined") {
+      void window.cookieStore?.set("onlineState", onlineState);
+    }
 
     return (
       <HoverCard closeDelay={0} openDelay={0}>
