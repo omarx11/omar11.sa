@@ -1,8 +1,4 @@
-import {
-  createParser,
-  type ParsedEvent,
-  type ReconnectInterval,
-} from "eventsource-parser";
+import { createParser, type EventSourceMessage } from "eventsource-parser";
 
 export type ChatGPTAgent = "user" | "system";
 
@@ -49,30 +45,28 @@ export async function OpenAIStream(payload: OpenAIStreamPayload) {
   const stream = new ReadableStream({
     async start(controller) {
       // Callback function to handle parsed SSE events
-      function onParse(event: ParsedEvent | ReconnectInterval) {
-        if (event.type === "event") {
-          const data = event.data;
-          if (data === "[DONE]") {
-            controller.close();
+      function onEvent(event: EventSourceMessage) {
+        const data = event.data;
+        if (data === "[DONE]") {
+          controller.close();
+          return;
+        }
+        try {
+          const json = JSON.parse(data);
+          const text = json.choices[0].delta?.content || "";
+          // Ignore prefix characters like "\n\n"
+          if (counter < 2 && (text.match(/\n/) || []).length) {
             return;
           }
-          try {
-            const json = JSON.parse(data);
-            const text = json.choices[0].delta?.content || "";
-            // Ignore prefix characters like "\n\n"
-            if (counter < 2 && (text.match(/\n/) || []).length) {
-              return;
-            }
-            const queue = encoder.encode(text);
-            controller.enqueue(queue);
-            counter++;
-          } catch (e) {
-            controller.error(e); // Handle JSON parse errors
-          }
+          const queue = encoder.encode(text);
+          controller.enqueue(queue);
+          counter++;
+        } catch (e) {
+          controller.error(e); // Handle JSON parse errors
         }
       }
 
-      const parser = createParser(onParse);
+      const parser = createParser({ onEvent });
 
       // stream response (SSE) from OpenAI may be fragmented into multiple chunks
       // this ensures we properly read chunks and invoke an event for each SSE event stream

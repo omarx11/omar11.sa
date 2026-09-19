@@ -26,16 +26,16 @@ export async function saveComment(comment: string) {
     error: authError,
   } = await supabase.auth.getUser();
 
-  if (authError) {
-    throw new Error(`Authentication error: ${authError}`);
+  if (authError || !user) {
+    throw new Error(`Authentication error: ${authError ?? "user not found"}`);
   }
 
   const newComment = {
-    user_id: user?.id,
+    user_id: user.id,
     cid: nanoid(),
-    name: user?.user_metadata.name,
+    name: user.user_metadata.name,
     comment,
-    avatar: user?.user_metadata.avatar_url,
+    avatar: user.user_metadata.avatar_url,
   };
 
   const { data, error } = await supabase
