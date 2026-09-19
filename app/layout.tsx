@@ -58,7 +58,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className="scroll-smooth" lang="en">
+    <html data-scroll-behavior="smooth" lang="en">
       <body
         className={`${recursive.className} flex min-h-screen justify-center overflow-x-hidden bg-black antialiased`}
       >
