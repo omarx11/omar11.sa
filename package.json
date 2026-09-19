@@ -48,7 +48,6 @@
     "cssnano": "^9.0.5",
     "encoding": "^0.1.13",
     "postcss": "^8.5.28",
-    "sass": "^1.104.1",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2"
   }

@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  sassOptions: {
+    silenceDeprecations: ["import"],
+  },
   images: {
     remotePatterns: [
       {
@@ -20,6 +23,7 @@ const nextConfig: NextConfig = {
         hostname: "steamcdn-a.akamaihd.net",
       },
     ],
+    qualities: [75, 100],
   },
 };
 
