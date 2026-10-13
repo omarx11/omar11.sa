@@ -57,7 +57,7 @@ export default function Projects() {
                 <Image
                   alt="project image"
                   blurDataURL="/static/icons/blur.svg"
-                  className="drag-none h-full w-full rounded-sm object-cover transition-transform group-hover:shadow-emerald-800/20 group-hover:shadow-lg"
+                  className="drag-none h-full w-full rounded-xs object-cover transition-transform group-hover:shadow-emerald-800/20 group-hover:shadow-lg"
                   height={292}
                   placeholder="blur"
                   src={reposInfo[repo.name]?.image}
@@ -79,7 +79,7 @@ export default function Projects() {
                     <TooltipTrigger asChild>
                       <p
                         className={cn(
-                          "cursor-default select-none rounded-sm px-2 py-0.5 text-neutral-300 text-xs ring-4 ring-neutral-800",
+                          "cursor-default select-none rounded-xs px-2 py-0.5 text-neutral-300 text-xs ring-4 ring-neutral-800",
                           {
                             "group-hover:ring-emerald-950":
                               !reposInfo[repo.name]?.isUnderDev,

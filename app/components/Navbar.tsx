@@ -96,7 +96,7 @@ const Navbar = () => {
 
 export default dynamic(() => Promise.resolve(Navbar), {
   loading: () => (
-    <Skeleton className="mt-8 mb-2 min-h-[28px] w-full rounded-sm bg-neutral-800/75" />
+    <Skeleton className="mt-8 mb-2 min-h-[28px] w-full rounded-xs bg-neutral-800/75" />
   ),
   ssr: false,
 });

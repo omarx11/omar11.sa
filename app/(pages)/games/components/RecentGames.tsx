@@ -31,7 +31,7 @@ export default function RecentGames({
               <div key={game.appid}>
                 <p
                   className={cn("select-none text-emerald-500 text-sm", {
-                    "select-none text-opacity-50": isLoadingGame,
+                    "text-emerald-500/50": isLoadingGame,
                   })}
                 >
                   {Math.floor((game.playtime_2weeks / 60) * 10) / 10} hrs
@@ -73,10 +73,9 @@ export default function RecentGames({
                     />
                     <p
                       className={cn(
-                        "line-clamp-2 pt-1 text-start text-neutral-300 text-opacity-100 group-hover:text-opacity-0",
+                        "line-clamp-2 pt-1 text-start text-neutral-300 group-hover:text-transparent",
                         {
-                          "line-clamp-2 text-opacity-0":
-                            game.appid === gameAppId,
+                          "text-transparent": game.appid === gameAppId,
                         },
                       )}
                     >

@@ -104,10 +104,10 @@ const ChatBotInput = () => {
 
   return (
     <div>
-      <div className="relative mt-4 flex-1 overflow-hidden rounded-md border-none outline-none">
+      <div className="relative mt-4 flex-1 overflow-hidden rounded-md border-none outline-hidden">
         <TextareaAutosize
           autoFocus
-          className="block w-full resize-none bg-neutral-800 py-2 pr-12 pl-2 text-lg text-neutral-50 leading-5 caret-neutral-200 outline-none placeholder:text-neutral-500 placeholder:text-sm placeholder:italic disabled:opacity-50"
+          className="block w-full resize-none bg-neutral-800 py-2 pr-12 pl-2 text-lg text-neutral-50 leading-5 caret-neutral-200 outline-hidden placeholder:text-neutral-500 placeholder:text-sm placeholder:italic disabled:opacity-50"
           disabled={isPending}
           maxRows={3}
           onChange={(e) => setInput(e.target.value.replace(/^\s+/, ""))}

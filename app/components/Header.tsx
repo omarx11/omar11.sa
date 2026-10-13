@@ -25,7 +25,7 @@ export default function Header() {
         <Image
           alt="avatar"
           blurDataURL="/static/icons/blur.svg"
-          className="drag-none h-[120px] w-[120px] cursor-pointer rounded-full bg-cover bg-neutral-900 ring ring-emerald-700 ring-offset-4 ring-offset-black transition-shadow hover:ring-yellow-700 hover:ring-offset-8 hover:ring-offset-black md:ml-1"
+          className="drag-none h-[120px] w-[120px] cursor-pointer rounded-full bg-cover bg-neutral-900 ring-3 ring-emerald-700 ring-offset-4 ring-offset-black transition-shadow hover:ring-yellow-700 hover:ring-offset-8 hover:ring-offset-black md:ml-1"
           height={256}
           onClick={() => window.location.reload()}
           placeholder="blur"
@@ -110,7 +110,7 @@ export default function Header() {
           </div>
           <div className="flex flex-row-reverse items-start gap-2">
             <AIBotAssistant />
-            <p className="fade-opacity -z-10 -mt-1 xs:block hidden rotate-6 select-none rounded-sm bg-neutral-900 px-2 py-1 text-[0.6rem] text-neutral-500 sm:text-xs">
+            <p className="fade-opacity -z-10 -mt-1 xs:block hidden rotate-6 select-none rounded-xs bg-neutral-900 px-2 py-1 text-[0.6rem] text-neutral-500 sm:text-xs">
               {"AI Assistant ->"}
             </p>
           </div>
@@ -118,7 +118,7 @@ export default function Header() {
         <div className="flex flex-row flex-wrap items-center justify-between pt-5">
           <Media />
           <Link
-            className="group text-emerald-500 text-sm hover:text-opacity-80"
+            className="group text-emerald-500 text-sm hover:text-emerald-500/80"
             href="https://status.omar11.sa/"
             target="_blank"
           >

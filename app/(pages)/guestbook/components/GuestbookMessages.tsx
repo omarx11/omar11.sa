@@ -70,7 +70,7 @@ export function GuestbookMessages({ userData }: { userData: User | null }) {
 
   return (
     <>
-      <div className="-mt-2 flex w-full flex-row-reverse items-end justify-between rounded-sm border-neutral-900/50 border-b-8 pb-2 text-neutral-200 sm:flex-row">
+      <div className="-mt-2 flex w-full flex-row-reverse items-end justify-between rounded-xs border-neutral-900/50 border-b-8 pb-2 text-neutral-200 sm:flex-row">
         <div className="border-neutral-800 border-r-8 border-double pr-2 sm:border-r-0 sm:border-l-8 sm:pl-2">
           <p className="text-neutral-300">
             {comments && !isCommentLoading ? (

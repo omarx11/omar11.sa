@@ -36,7 +36,7 @@ export default function SpecsPage() {
         <Image
           alt="Specs equipment image"
           blurDataURL="/static/icons/blur.svg"
-          className="drag-none md:!rotate-2 min-w-full rotate-0 select-none rounded-lg border-4 border-neutral-700 border-dashed bg-neutral-900 object-cover md:rounded-3xl md:border-8"
+          className="drag-none min-w-full rotate-0 select-none rounded-lg border-4 border-neutral-700 border-dashed bg-neutral-900 object-cover md:rotate-2! md:rounded-3xl md:border-8"
           height={1080}
           placeholder="blur"
           src="/static/images/042859.png"

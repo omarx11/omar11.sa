@@ -31,7 +31,7 @@ const Pagination = ({
       buttonsArray.push(
         <button
           aria-label={`Page ${i}`}
-          className={cn("rounded-sm px-2 py-0.5 underline hover:no-underline", {
+          className={cn("rounded-xs px-2 py-0.5 underline hover:no-underline", {
             "cursor-default bg-emerald-700 no-underline": page === i,
             "hover:bg-neutral-800": page !== i,
           })}

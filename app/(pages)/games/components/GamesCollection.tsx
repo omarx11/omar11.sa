@@ -109,7 +109,7 @@ export default function GamesCollection({
 
   return (
     <>
-      <div className="mt-8 mb-4 flex items-center justify-between text-opacity-50">
+      <div className="mt-8 mb-4 flex items-center justify-between">
         <h2 className="font-bold text-neutral-300 text-xl">
           <span className="text-emerald-500">#</span> Full Games Collection{" "}
           {!isLoadingGame ? (
@@ -141,7 +141,7 @@ export default function GamesCollection({
                 </p>
               </TooltipTrigger>
               <TooltipContent
-                className="origin-[var(--radix-tooltip-content-transform-origin)] scale-in rounded-sm bg-neutral-900 ring-2 ring-neutral-700"
+                className="origin-[var(--radix-tooltip-content-transform-origin)] scale-in rounded-xs bg-neutral-900 ring-2 ring-neutral-700"
                 sideOffset={6}
               >
                 <p>
@@ -154,7 +154,7 @@ export default function GamesCollection({
             </Tooltip>
           </TooltipProvider>
         ) : (
-          <Skeleton className="h-4 w-[93px] rounded-sm sm:h-5 sm:w-[132px]" />
+          <Skeleton className="h-4 w-[93px] rounded-xs sm:h-5 sm:w-[132px]" />
         )}
       </div>
       <div
@@ -171,7 +171,7 @@ export default function GamesCollection({
                   <TooltipTrigger
                     aria-label={game.name}
                     className={cn(
-                      "rounded-sm ring-2 ring-offset-black transition-transform duration-75 hover:ring-offset-2",
+                      "rounded-xs ring-2 ring-offset-black transition-transform duration-75 hover:ring-offset-2",
                       {
                         "pointer-events-none opacity-50": isLoadingGame,
                         "pointer-events-none scale-95 opacity-100 ring-4 ring-emerald-400":
@@ -191,7 +191,7 @@ export default function GamesCollection({
                       <Image
                         alt={game.name}
                         blurDataURL="/static/icons/blur.svg"
-                        className="drag-none h-[75.27px] w-[160.6px] select-none rounded-sm bg-neutral-900"
+                        className="drag-none h-[75.27px] w-[160.6px] select-none rounded-xs bg-neutral-900"
                         height={120}
                         placeholder="blur"
                         src={
@@ -213,7 +213,7 @@ export default function GamesCollection({
                   <TooltipContent
                     align="start"
                     alignOffset={-4}
-                    className="rounded-sm border border-neutral-400 bg-neutral-900"
+                    className="rounded-xs border border-neutral-400 bg-neutral-900"
                     sideOffset={6}
                   >
                     <p className="underline decoration-neutral-300">
@@ -228,7 +228,7 @@ export default function GamesCollection({
               ) : (
                 // biome-ignore lint/suspicious/noArrayIndexKey: placeholder skeleton has no stable identity
                 <Fragment key={`skeleton-slot-${index}`}>
-                  <Skeleton className="rounded-sm sm:h-[75.27px] sm:w-40" />
+                  <Skeleton className="rounded-xs sm:h-[75.27px] sm:w-40" />
                 </Fragment>
               ),
             )}
@@ -237,7 +237,7 @@ export default function GamesCollection({
           Array.from({ length: itemsPerPage }).map((_, i) => (
             // biome-ignore lint/suspicious/noArrayIndexKey: placeholder skeleton has no stable identity
             <Fragment key={`placeholder-slot-${i}`}>
-              <Skeleton className="rounded-sm sm:h-[75px] sm:w-40" />
+              <Skeleton className="rounded-xs sm:h-[75px] sm:w-40" />
             </Fragment>
           ))
         )}

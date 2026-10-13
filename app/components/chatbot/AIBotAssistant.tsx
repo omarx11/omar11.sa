@@ -53,13 +53,13 @@ export default function AIBotAssistant() {
       </Popover.Trigger>
       <Popover.Content
         align="start"
-        className="mb-4 flex h-[30rem] w-full origin-[var(--radix-popover-content-transform-origin)] scale-in flex-col overflow-y-auto rounded-sm bg-neutral-900 px-1 pt-2 pb-1 outline-0 ring-4 ring-neutral-800 sm:mb-0 sm:w-96"
+        className="mb-4 flex h-[30rem] w-full origin-[var(--radix-popover-content-transform-origin)] scale-in flex-col overflow-y-auto rounded-xs bg-neutral-900 px-1 pt-2 pb-1 outline-0 ring-4 ring-neutral-800 sm:mb-0 sm:w-96"
         id="chatBox"
         side="left"
         sideOffset={8}
       >
         <div className="flex flex-1 flex-col-reverse gap-3">
-          <div className="flex-1 flex-grow" />
+          <div className="flex-1" />
           {inverseMessages.map((message) => (
             <div
               className={cn("flex items-end", {
@@ -90,7 +90,7 @@ export default function AIBotAssistant() {
           <p className="border-neutral-800 border-b-2 pb-1 text-center text-neutral-400 text-sm duration-300">
             Id: {chatbot_id ?? "000110111"}
           </p>
-          <Popover.Close className="absolute top-1 right-2 inline-flex items-center justify-center rounded-full p-1 outline-none hover:bg-neutral-800">
+          <Popover.Close className="absolute top-1 right-2 inline-flex items-center justify-center rounded-full p-1 outline-hidden hover:bg-neutral-800">
             <svg
               aria-label="Close icon"
               height="18"

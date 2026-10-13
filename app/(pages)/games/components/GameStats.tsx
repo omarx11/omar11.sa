@@ -115,8 +115,8 @@ export default function GameStats() {
             <table className="w-full overflow-y-auto">
               <thead className="sticky top-0 bg-neutral-900 text-neutral-200 ring-1 ring-black">
                 <tr>
-                  <th className="rounded-sm border border-neutral-600">Name</th>
-                  <th className="rounded-sm border border-neutral-600">
+                  <th className="rounded-xs border border-neutral-600">Name</th>
+                  <th className="rounded-xs border border-neutral-600">
                     Value
                   </th>
                 </tr>
@@ -166,7 +166,7 @@ export default function GameStats() {
                     <Image
                       alt={`${achievement.displayName} icon`}
                       blurDataURL="/static/icons/blur.svg"
-                      className="drag-none h-10 w-10 select-none rounded-sm bg-neutral-800 duration-75 group-hover:scale-125 sm:h-12 sm:w-12"
+                      className="drag-none h-10 w-10 select-none rounded-xs bg-neutral-800 duration-75 group-hover:scale-125 sm:h-12 sm:w-12"
                       height={48}
                       placeholder="blur"
                       src={achievement.icon}

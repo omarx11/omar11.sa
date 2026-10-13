@@ -8,7 +8,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import Providers from "./components/Providers";
-import "./globals.scss";
+import "./globals.css";
 
 const recursive = Recursive({ subsets: ["latin"], display: "swap" });
 

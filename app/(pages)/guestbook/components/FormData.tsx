@@ -60,7 +60,7 @@ const FormData = ({ userData }: { userData: User }) => {
       </div>
       <textarea
         className={cn(
-          "h-40 w-full rounded-md border-[6px] border-neutral-800 bg-neutral-900 p-2 text-lg text-neutral-50 shadow-sm outline-0 ring-4 ring-neutral-700 duration-300 placeholder:text-sm placeholder:italic focus:bg-neutral-950",
+          "h-40 w-full rounded-md border-[6px] border-neutral-800 bg-neutral-900 p-2 text-lg text-neutral-50 shadow-xs outline-0 ring-4 ring-neutral-700 duration-300 placeholder:text-sm placeholder:italic focus:bg-neutral-950",
           wordLimit
             ? "caret-rose-500 focus:ring-rose-800"
             : "caret-emerald-500 focus:ring-neutral-600",
