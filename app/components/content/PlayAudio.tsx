@@ -66,21 +66,14 @@ export default function PlayAudio() {
           </svg>
         )}
       </button>
+      {/* biome-ignore lint/a11y/useMediaCaption: decorative background music, nothing to caption */}
       <audio
         aria-label="Giovanni audio track"
         className="hidden"
         preload="none"
         ref={audioRef}
         src="/static/audio/Giovanni_pre_s75_sb100_se0_b_m2.mp3"
-      >
-        <track
-          default
-          kind="captions"
-          label="English"
-          src="/static/audio/Giovanni_pre_s75_sb100_se0_b_m2.vtt"
-          srcLang="en"
-        />
-      </audio>
+      />
     </div>
   );
 }

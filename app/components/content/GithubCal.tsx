@@ -13,20 +13,20 @@ const GithubCal = () => {
 
   if (!mounted) return null;
 
+  // The calendar forces `width: max-content` inline; containing its inline size
+  // stops it from widening the page on small screens (it scrolls instead).
   return (
-    <GitHubCalendar
-      blockMargin={6}
-      blockSize={14}
-      colorScheme="dark"
-      fontSize={14}
-      loading={false}
-      style={{
-        marginTop: "3rem",
-        color: "rgb(163,163,163)",
-        width: "100%",
-      }}
-      username="omarx11"
-    />
+    <div className="mt-12 w-full contain-inline-size">
+      <GitHubCalendar
+        blockMargin={6}
+        blockSize={14}
+        colorScheme="dark"
+        fontSize={14}
+        loading={false}
+        style={{ color: "rgb(163,163,163)" }}
+        username="omarx11"
+      />
+    </div>
   );
 };
 
