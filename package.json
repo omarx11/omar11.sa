@@ -5,6 +5,9 @@
   "description": "Online portfolio to share code and experiences",
   "repository": "https://github.com/omarx11/omar11.sa.git",
   "homepage": "https://omar11.sa",
+  "engines": {
+    "node": "24.x"
+  },
   "license": "MIT",
   "author": "Omar Abdulaziz <mail@omar11.sa>",
   "scripts": {
