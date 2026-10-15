@@ -190,23 +190,25 @@ details[open]::details-content {
     }
   }
 
-  /* Waits ~1s, then pops in and settles softly (ease-out with a slight
-     overshoot), so it doesn't snap at the end. Uses `scale` so it composes
-     with the element's own `rotate`. */
+  /* The original (Tailwind v3) animation. The 6deg tilt lives in `transform`,
+     as v3's rotate-6 did, so the keyframes' transform takes it over while
+     animating: the label twists from 0 to 6deg as it scales in and lands
+     exactly on its resting tilt. (Mixing in v4's separate `rotate` property
+     double-rotated it and made it snap at the end.) */
   .fade-opacity {
-    /* `backwards`, not `both`: no transform lingers after it settles, so the
-       small rotated text isn't left on its own (blurrier) GPU layer. */
-    animation: fade-opacity 1.6s backwards;
+    transform: rotate(6deg);
+    animation: fade-opacity 1.6s ease-in;
   }
   @keyframes fade-opacity {
-    0%,
-    60% {
-      scale: 0.6;
+    0% {
+      transform: scale(0);
       opacity: 0;
-      animation-timing-function: cubic-bezier(0.34, 1.4, 0.64, 1);
+    }
+    80% {
+      opacity: 0;
     }
     100% {
-      scale: 1;
+      transform: scale(1) rotate(6deg);
       opacity: 1;
     }
   }

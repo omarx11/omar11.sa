@@ -10,8 +10,6 @@ import PlayAudio from "./content/PlayAudio";
 import Discord from "./Discord";
 import Media from "./Media";
 import { ReloadButton, ReloadLink } from "./ui/Reload";
-import { Reveal } from "./ui/Reveal";
-import { Skeleton } from "./ui/Skeleton";
 
 export default async function Header() {
   return (
@@ -32,11 +30,7 @@ export default async function Header() {
             width={240}
           />
         </ReloadButton>
-        <Reveal
-          className="mt-6 ml-0 flex flex-col md:mt-0 md:ml-7"
-          delay={300}
-          skeleton={<HeaderTextSkeleton />}
-        >
+        <div className="mt-6 ml-0 flex flex-col md:mt-0 md:ml-7">
           <h1 className="items-center font-bold text-2xl text-neutral-50">
             Hey, {`I'm`}{" "}
             <span className="text-emerald-400">{author.fullName}</span>
@@ -90,7 +84,7 @@ export default async function Header() {
             </ReloadLink>{" "}
             ✒️
           </div>
-        </Reveal>
+        </div>
       </header>
       <div className="z-20">
         <div className="flex flex-row items-center justify-between pt-5 pl-0 text-neutral-300 md:pl-1">
@@ -115,7 +109,7 @@ export default async function Header() {
           </div>
           <div className="flex flex-row-reverse items-start gap-2">
             <AIBotAssistant />
-            <p className="fade-opacity -z-10 -mt-1 xs:block hidden rotate-6 select-none rounded-xs bg-neutral-900 px-2 py-1 text-[0.6rem] text-neutral-500 sm:text-xs">
+            <p className="fade-opacity -z-10 -mt-1 xs:block hidden select-none rounded-xs bg-neutral-900 px-2 py-1 text-[0.6rem] text-neutral-500 sm:text-xs">
               {"AI Assistant ->"}
             </p>
           </div>
@@ -159,20 +153,5 @@ export default async function Header() {
         </div>
       </div>
     </>
-  );
-}
-
-/** Placeholder lines shaped like the greeting and intro paragraph. */
-function HeaderTextSkeleton() {
-  return (
-    <div className="flex flex-col gap-2">
-      <Skeleton className="h-7 w-3/4 max-w-sm rounded-xs bg-neutral-800/75" />
-      <div className="mt-2 space-y-2 border-neutral-900 border-t-4 pt-2">
-        <Skeleton className="h-4 w-full rounded-xs bg-neutral-800/75" />
-        <Skeleton className="h-4 w-full rounded-xs bg-neutral-800/75" />
-        <Skeleton className="h-4 w-full rounded-xs bg-neutral-800/75" />
-        <Skeleton className="h-4 w-2/3 rounded-xs bg-neutral-800/75" />
-      </div>
-    </div>
   );
 }

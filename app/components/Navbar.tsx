@@ -27,8 +27,7 @@ export default function Navbar() {
   }
   const activeHref = pending ?? pathname;
   // On a fresh page load the bar shows a skeleton first, then the tabs fade in.
-  // Cascades after the header text (300ms).
-  const revealed = useReveal(500);
+  const revealed = useReveal(400);
 
   const navRef = useRef<HTMLElement>(null);
   const [indicator, setIndicator] = useState<Indicator | null>(null);
@@ -70,7 +69,7 @@ export default function Navbar() {
   return (
     <div
       className={cn(
-        "relative mt-4 flex min-h-[28px] select-none items-center justify-between border-t-8 pt-4 transition-colors duration-300",
+        "relative mt-4 flex min-h-[28px] select-none items-center justify-between border-t-8 pt-4",
         // The separator line stays hidden while the skeleton shows.
         revealed ? "border-neutral-900" : "border-black",
       )}
