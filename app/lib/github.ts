@@ -49,3 +49,31 @@ export async function getProjects(): Promise<Project[]> {
     ...(reposInfo[repo.name] ?? { image: "", isUnderDev: false, lang: [] }),
   }));
 }
+
+export type Contribution = {
+  date: string;
+  count: number;
+  level: 0 | 1 | 2 | 3 | 4;
+};
+
+/**
+ * The last year of GitHub contributions, from the same public API that
+ * react-github-calendar uses, fetched on the server so the calendar is in the
+ * HTML. Returns null when the API is unavailable.
+ */
+export async function getContributions(
+  username: string,
+): Promise<Contribution[] | null> {
+  "use cache";
+  cacheLife("hours");
+  try {
+    const res = await fetch(
+      `https://github-contributions-api.jogruber.de/v4/${username}?y=last`,
+    );
+    if (!res.ok) return null;
+    const data: { contributions: Contribution[] } = await res.json();
+    return data.contributions;
+  } catch {
+    return null;
+  }
+}
