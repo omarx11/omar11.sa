@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { Heading } from "@/app/components/ui/Heading";
 import { Skeleton } from "@/app/components/ui/Skeleton";
 import { getSessionUser, toSessionUser } from "@/app/lib/auth/server";
+import { simulateFirstVisit } from "@/app/lib/dev/first-visit";
 import { pageMetadata } from "@/app/lib/metadata";
 
 import { Guestbook } from "./components/Guestbook";
@@ -32,6 +33,7 @@ export default function GuestbookPage() {
 }
 
 async function GuestbookData() {
+  await simulateFirstVisit();
   const [sessionUser, entries] = await Promise.all([
     getSessionUser(),
     getEntries(),

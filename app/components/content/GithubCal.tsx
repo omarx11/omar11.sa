@@ -1,5 +1,6 @@
 import { ActivityCalendar } from "react-activity-calendar";
 
+import { simulateFirstVisit } from "@/app/lib/dev/first-visit";
 import { getContributions } from "@/app/lib/github";
 
 // GitHub's own contribution colors (as used by react-github-calendar).
@@ -22,6 +23,7 @@ const calendarProps = {
  * part of the page from the first paint (no client fetch, no pop-in).
  */
 export default async function GithubCal() {
+  await simulateFirstVisit();
   const contributions = await getContributions("omarx11");
 
   // The calendar forces `width: max-content` inline; containing its inline size

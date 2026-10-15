@@ -9,6 +9,12 @@ import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import "./globals.css";
 
+// Dev-only toolbar; the static condition lets production builds drop it entirely.
+const FirstVisitToolbar =
+  process.env.NODE_ENV === "development"
+    ? (await import("./components/dev/FirstVisitToolbar")).default
+    : null;
+
 const recursive = Recursive({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
@@ -63,6 +69,7 @@ export default function RootLayout({
           <Footer />
         </main>
         <Analytics />
+        {FirstVisitToolbar && <FirstVisitToolbar />}
       </body>
     </html>
   );

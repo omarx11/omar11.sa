@@ -1,12 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { simulateFirstVisit } from "@/app/lib/dev/first-visit";
 import { getProjects } from "@/app/lib/github";
 import { cn } from "@/app/lib/utils";
 
 import { Skeleton } from "../ui/Skeleton";
 
 export default async function Projects() {
+  await simulateFirstVisit();
   const projects = await getProjects();
 
   return (
