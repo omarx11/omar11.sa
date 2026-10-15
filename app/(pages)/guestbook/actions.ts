@@ -1,13 +1,14 @@
 "use server";
 
 import { nanoid } from "nanoid";
+import { updateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
 import { auth, getSessionUser } from "@/app/lib/auth/server";
 import { sql } from "@/app/lib/db";
 
-import { toEntry } from "./data";
+import { GUESTBOOK_TAG, toEntry } from "./data";
 import type { GuestbookEntry } from "./types";
 
 const CommentSchema = z.string().trim().min(1).max(2000);
@@ -28,6 +29,7 @@ export async function saveComment(comment: string): Promise<GuestbookEntry> {
     values (${nanoid()}, ${user.id}, ${user.name}, ${user.image ?? null}, ${text})
     returning cid, user_id, name, avatar, comment, created_at
   `;
+  updateTag(GUESTBOOK_TAG);
   return toEntry(row);
 }
 
@@ -43,6 +45,7 @@ export async function deleteComment(cid: string): Promise<void> {
   if (deleted.length === 0) {
     throw new Error("Entry not found, or it belongs to someone else.");
   }
+  updateTag(GUESTBOOK_TAG);
 }
 
 export async function signOut() {

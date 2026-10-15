@@ -1,12 +1,13 @@
 import Link from "next/link";
 
 import { author } from "@/app/config/meta";
+import { getCurrentYear } from "@/app/lib/time";
 
-export default function Footer() {
+export default async function Footer() {
   return (
     <footer className="flex flex-row flex-wrap items-center justify-between border-neutral-800 border-t-[1px] pt-4 pb-6 text-sm sm:pb-12">
       <p className="text-neutral-500 text-xs sm:text-[0.8rem]">
-        {new Date().getFullYear()} © {author.fullName} • Made with..{" "}
+        {await getCurrentYear()} © {author.fullName} • Made with..{" "}
         <Link
           className="font-bold underline-offset-2 hover:text-emerald-700 hover:underline"
           href="https://nextjs.org/"

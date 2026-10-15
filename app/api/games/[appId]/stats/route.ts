@@ -1,13 +1,12 @@
 import { getGameStats, getGamesOverview } from "@/app/(pages)/games/data";
 
-// Cached responses regenerate in the background hourly (with the owned-games
-// list); the underlying Steam stats are cached for 12 hours.
-export const revalidate = 3600;
-
-// Prebuild the games most likely to be opened; others are cached on first visit.
+// Data is cached in getGameStats (`use cache`). Prebuild the games most likely
+// to be opened; others render on first request and are cached from then on.
 export async function generateStaticParams() {
   const { recent } = await getGamesOverview();
-  return (recent ?? []).map((game) => ({ appId: String(game.appid) }));
+  const ids = (recent ?? []).map((game) => ({ appId: String(game.appid) }));
+  // Cache Components requires at least one prebuilt param (Steam may be down).
+  return ids.length > 0 ? ids : [{ appId: "252490" }];
 }
 
 export async function GET(

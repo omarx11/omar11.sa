@@ -7,49 +7,41 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: `${pathname}`,
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,
     },
     {
       url: `${pathname}/about`,
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
       url: `${pathname}/skills`,
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.5,
     },
     {
       url: `${pathname}/specs`,
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.5,
     },
     {
       url: `${pathname}/games`,
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.5,
     },
     {
       url: `${pathname}/anime`,
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.5,
     },
     {
       url: `${pathname}/guestbook`,
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.5,
     },
     {
       url: `${pathname}/license`,
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.4,
     },

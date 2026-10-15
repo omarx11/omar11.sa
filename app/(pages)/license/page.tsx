@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { Heading } from "@/app/components/ui/Heading";
 import { author } from "@/app/config/meta";
+import { getCurrentYear } from "@/app/lib/time";
 
 export const metadata: Metadata = {
   title: "License Page",
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function LicensePage() {
+export default async function LicensePage() {
   return (
     <>
       <Heading emoji="📜" name="License" sId="#license" />
@@ -36,7 +37,7 @@ export default function LicensePage() {
       >
         <p className="text-justify text-stone-400">
           MIT License <br />
-          <br /> Copyright (c) {new Date().getFullYear()} {author.fullName}
+          <br /> Copyright (c) {await getCurrentYear()} {author.fullName}
           <br />
           <br /> Permission is hereby granted, free of charge, to any person
           obtaining a copy of this software and associated documentation files

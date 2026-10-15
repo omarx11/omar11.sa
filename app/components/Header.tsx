@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { author } from "@/app/config/meta";
-import { ageInYears } from "@/app/lib/helpers";
+import { getInitialAge } from "@/app/lib/time";
 
 import AIBotAssistant from "./chatbot/AIBotAssistant";
 import Age from "./content/Age";
@@ -11,7 +11,7 @@ import Discord from "./Discord";
 import Media from "./Media";
 import { SectionLink } from "./ui/SectionLink";
 
-export default function Header() {
+export default async function Header() {
   return (
     <>
       <header className="mt-12 mb-6 flex flex-col items-center md:mt-16 md:mb-0 md:flex-row xl:mt-24">
@@ -57,7 +57,10 @@ export default function Header() {
           <div className="group relative mt-1 w-full border-neutral-900 border-t-4 pt-1 text-[1rem] text-neutral-200 leading-[1.4rem] sm:text-justify">
             <PlayAudio />
             I’m a self-taught web developer {`who's `}
-            <Age birthDate={author.age} initial={ageInYears(author.age)} />{" "}
+            <Age
+              birthDate={author.age}
+              initial={await getInitialAge(author.age)}
+            />{" "}
             years-old with a passion for website programming. I gained extensive
             knowledge independently while in{" "}
             <Link

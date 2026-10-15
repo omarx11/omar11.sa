@@ -5,9 +5,6 @@ import { author } from "@/app/config/meta";
 import Games from "./components/Games";
 import { getGamesOverview } from "./data";
 
-// Prerendered, then regenerated in the background at most once an hour.
-export const revalidate = 3600;
-
 export const metadata: Metadata = {
   title: "Games Page",
   description: `${author.name}'s Games Collections`,

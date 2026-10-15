@@ -1,3 +1,5 @@
+import { cacheLife } from "next/cache";
+
 import { nonSteamGames, playtimeToAdd } from "@/app/config/games";
 import { author } from "@/app/config/meta";
 
@@ -118,6 +120,8 @@ const getOwnedGames = () =>
   ).then((data) => data?.response?.games ?? null);
 
 export async function getGamesOverview(): Promise<GamesOverview> {
+  "use cache";
+  cacheLife("hours");
   const [recentData, owned] = await Promise.all([
     steam<RecentResponse>(
       "/IPlayerService/GetRecentlyPlayedGames/v1",
@@ -198,6 +202,9 @@ type UserStatsResponse = {
 
 /** Returns null when the game isn't in the owner's library. */
 export async function getGameStats(appid: number): Promise<GameStats | null> {
+  "use cache";
+  // Stats only change while playing; refresh twice a day.
+  cacheLife({ stale: 3600, revalidate: 43200, expire: 86400 * 7 });
   const owned = await getOwnedGames();
   const game = owned?.find((g) => g.appid === appid);
   if (!game) return null;
