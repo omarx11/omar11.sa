@@ -1,9 +1,7 @@
 import { createParser, type EventSourceMessage } from "eventsource-parser";
 
-export type ChatGPTAgent = "system" | "user" | "assistant";
-
 export interface ChatGPTMessage {
-  role: ChatGPTAgent;
+  role: "system" | "user" | "assistant";
   content: string;
 }
 

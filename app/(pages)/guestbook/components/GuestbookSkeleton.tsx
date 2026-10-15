@@ -1,16 +1,32 @@
 import { Skeleton } from "@/app/components/ui/Skeleton";
 
-const ROWS = ["a", "b", "c", "d", "e", "f"];
+import OAuthButtons from "./OAuthButtons";
+
+// Holds the sign-in card or the comment form. Its minimum height is the
+// form's, so the skeleton, the card and the form all take the same space and
+// nothing below moves when the page loads or the visitor signs in.
+export const GUESTBOOK_SLOT =
+  "flex min-h-[299px] w-full items-center justify-center";
+
+// Enough rows to reach past the bottom of the screen, so extra loaded entries
+// only grow the page out of view.
+const ROWS = ["a", "b", "c", "d", "e", "f", "g", "h"];
 
 /**
  * Shown while the guestbook loads: the real header with a spinner in place
- * of the comment count, dimmed sort buttons, and pulsing rows.
+ * of the comment count, dimmed sort buttons, and pulsing rows. Each part has
+ * the loaded part's exact size, so nothing moves when the content arrives.
  */
 export default function GuestbookSkeleton() {
   return (
-    <div aria-busy="true" aria-label="Loading guestbook" role="status">
-      <div className="flex w-full justify-center">
-        <Skeleton className="my-14 h-[136px] w-full max-w-xl rounded-md" />
+    <div
+      aria-busy="true"
+      aria-label="Loading guestbook"
+      data-page-loading
+      role="status"
+    >
+      <div className={GUESTBOOK_SLOT}>
+        <OAuthButtons placeholder />
       </div>
       <div className="-mt-2 flex w-full flex-row-reverse items-end justify-between rounded-xs border-neutral-900/50 border-b-8 pb-2 text-neutral-200 sm:flex-row">
         <div className="border-neutral-800 border-r-8 border-double pr-2 sm:border-r-0 sm:border-l-8 sm:pl-2">
@@ -43,10 +59,17 @@ export default function GuestbookSkeleton() {
           <span className="rounded-md px-1.5 py-0.5">Oldest</span>
         </div>
       </div>
-      <ul className="my-4 w-full list-none space-y-0.5">
+      {/* Same list and row layout as GuestbookEntries, with one-line comments. */}
+      <ul className="mt-4 flex min-h-max flex-col gap-1 sm:min-h-[480px]">
         {ROWS.map((key) => (
           <li key={key}>
-            <Skeleton className="inline-block w-full rounded-md py-8" />
+            <Skeleton className="flex flex-row items-start gap-3 px-1 py-4 *:invisible md:px-2">
+              <div className="h-[42px] min-w-[42px]" />
+              <div>
+                <p>&nbsp;</p>
+                <p className="text-sm md:text-base">&nbsp;</p>
+              </div>
+            </Skeleton>
           </li>
         ))}
       </ul>

@@ -27,7 +27,7 @@ export default async function Footer() {
         <Link
           aria-label="View the source code on GitHub"
           className="hover:underline"
-          href={`${author.github}/omar11.sa`}
+          href={author.sourceRepo}
           target="_blank"
         >
           source

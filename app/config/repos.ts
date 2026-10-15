@@ -54,9 +54,9 @@ export const reposInfo: ReposInfo = {
     image: "/static/images/projects/portfolio.png",
     lang: [
       "/static/icons/tech/nextjs.svg",
+      "/static/icons/tech/typescript.svg",
       "/static/icons/tech/tailwindcss.svg",
-      "/static/icons/tech/sass.svg",
-      "/static/icons/tech/supabase.svg",
+      "/static/icons/tech/neon.svg",
       "/static/icons/tech/auth.svg",
     ],
     isUnderDev: true,

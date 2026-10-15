@@ -2,14 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Heading } from "@/app/components/ui/Heading";
+import { author } from "@/app/config/meta";
 import type { SpecsProps } from "@/app/config/specs";
 import * as s from "@/app/config/specs";
 import { pageMetadata } from "@/app/lib/metadata";
 
 export const metadata = pageMetadata({
   title: "Specs",
-  description:
-    "The hardware and setup Omar Abdulaziz uses for development and gaming.",
+  description: `The hardware and setup ${author.fullName} uses for development and gaming.`,
   path: "/specs",
 });
 

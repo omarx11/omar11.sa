@@ -29,7 +29,6 @@ export const metadata: Metadata = {
   creator: author.fullName,
   robots: { index: true, follow: true },
   icons: { icon: "/favicon.ico", apple: "/icon-192x192.png" },
-  manifest: "/manifest.json",
   openGraph: {
     type: "website",
     siteName: author.siteName,

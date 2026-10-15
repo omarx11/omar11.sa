@@ -3,12 +3,13 @@
 import { nanoid } from "nanoid";
 import { createContext, useState } from "react";
 
+import { author } from "@/app/config/meta";
 import type { BotMessage } from "@/app/lib/validators/bot-message";
 
 const ChatBotDefaultValue: BotMessage[] = [
   {
     id: nanoid(),
-    text: "Omar's AI assistant. How can I help?",
+    text: `${author.name}'s AI assistant. How can I help?`,
     isUserMessage: false,
   },
 ];

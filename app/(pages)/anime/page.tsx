@@ -3,11 +3,12 @@ import Link from "next/link";
 
 import { Heading } from "@/app/components/ui/Heading";
 import { anime } from "@/app/config/anime";
+import { author } from "@/app/config/meta";
 import { pageMetadata } from "@/app/lib/metadata";
 
 export const metadata = pageMetadata({
   title: "Anime",
-  description: "Omar Abdulaziz's favorite anime series.",
+  description: `${author.fullName}'s favorite anime series.`,
   path: "/anime",
 });
 
@@ -18,7 +19,9 @@ function AnimePage() {
       <p className="mt-4 text-neutral-400">
         Top <span className="underline underline-offset-2">10</span> favorite
         anime {`I've`} watched. 😄{" "}
-        <span className="text-neutral-500">I {`don't`} watch movies..</span>
+        <span className="text-neutral-500" lang="ja" title="No movies here!">
+          映画はなし..
+        </span>
       </p>
       <div className="fade-in-left mt-10 max-w-[896px]" id="anime">
         {anime.map(({ rank, name, description, image, url }) => (

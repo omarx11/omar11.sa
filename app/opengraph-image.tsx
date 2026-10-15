@@ -9,6 +9,9 @@ export const alt = `${author.fullName}, ${author.jobTitle} from ${author.city}, 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+// The first name is drawn white, the rest of the name green.
+const [firstName, ...lastNames] = author.fullName.split(" ");
+
 // Read once at module load, so the card is prerendered at build time.
 const avatar = await readFile(
   join(process.cwd(), "public", author.avatar),
@@ -45,14 +48,14 @@ export default function OpenGraphImage() {
         />
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           <div style={{ display: "flex", fontSize: 76, fontWeight: 700 }}>
-            <span style={{ color: "#fafafa" }}>Omar&nbsp;</span>
-            <span style={{ color: "#34d399" }}>Abdulaziz</span>
+            <span style={{ color: "#fafafa" }}>{firstName}&nbsp;</span>
+            <span style={{ color: "#34d399" }}>{lastNames.join(" ")}</span>
           </div>
           <div style={{ fontSize: 40, color: "#d4d4d4" }}>
             {`${author.jobTitle} · ${author.city}, ${author.country}`}
           </div>
           <div style={{ fontSize: 30, color: "#a3a3a3" }}>
-            Next.js · React · TypeScript
+            {author.stack.join(" · ")}
           </div>
         </div>
       </div>

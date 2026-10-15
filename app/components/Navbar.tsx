@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useLayoutEffect, useRef, useState } from "react";
 
 import { links } from "../config/navigation";
-import { useReveal } from "../hooks/useReveal";
+import { usePageLoaded } from "../hooks/usePageLoaded";
 import { cn } from "../lib/utils";
 import { Skeleton } from "./ui/Skeleton";
 
@@ -26,8 +26,9 @@ export default function Navbar() {
     setPending(null);
   }
   const activeHref = pending ?? pathname;
-  // On a fresh page load the bar shows a skeleton first, then the tabs fade in.
-  const revealed = useReveal(400);
+  // On a fresh page load the bar shows a skeleton until the page's content has
+  // loaded, then the tabs fade in together with it.
+  const revealed = usePageLoaded();
 
   const navRef = useRef<HTMLElement>(null);
   const [indicator, setIndicator] = useState<Indicator | null>(null);

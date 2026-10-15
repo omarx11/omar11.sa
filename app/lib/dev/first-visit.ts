@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 
 /** Cookie set by the dev toolbar: the delay in milliseconds, or absent. */
-export const FIRST_VISIT_COOKIE = "dev-first-visit";
+const FIRST_VISIT_COOKIE = "dev-first-visit";
 
 /**
  * Development only: when the toolbar's "First-visit mode" is on, delays a data

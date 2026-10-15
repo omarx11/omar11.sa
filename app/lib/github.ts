@@ -1,5 +1,6 @@
 import { cacheLife } from "next/cache";
 
+import { author } from "@/app/config/meta";
 import {
   manualRepository,
   type RepoInfo,
@@ -20,7 +21,7 @@ export async function getProjects(): Promise<Project[]> {
   let repos: Repository[] = [];
   try {
     const res = await fetch(
-      "https://api.github.com/users/omarx11/repos?per_page=100&sort=full_name&direction=desc",
+      `https://api.github.com/users/${author.githubUsername}/repos?per_page=100&sort=full_name&direction=desc`,
       {
         headers: {
           Accept: "application/vnd.github+json",

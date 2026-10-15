@@ -79,7 +79,7 @@ export default function Discord() {
         className="w-60 space-y-1 rounded-md border-4 border-emerald-600/40 border-dashed bg-zinc-800 p-2 text-sm"
         sideOffset={0}
       >
-        <h4 className="font-semibold">Id: omarx11</h4>
+        <h4 className="font-semibold">Id: {author.discordUsername}</h4>
         {data.discord_status !== "offline" ? (
           <>
             <p>{playing}</p>

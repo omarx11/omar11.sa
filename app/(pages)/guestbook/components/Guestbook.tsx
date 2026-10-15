@@ -8,6 +8,7 @@ import { deleteComment, saveComment } from "../actions";
 import type { GuestbookEntry } from "../types";
 import { GuestbookEntries } from "./GuestbookEntries";
 import { GuestbookForm } from "./GuestbookForm";
+import { GUESTBOOK_SLOT } from "./GuestbookSkeleton";
 import OAuthButtons from "./OAuthButtons";
 
 // `key` keeps a posted entry's React identity stable from its optimistic
@@ -85,7 +86,7 @@ export function Guestbook({
 
   return (
     <>
-      <div className="flex w-full items-center justify-center">
+      <div className={GUESTBOOK_SLOT}>
         {user ? (
           <GuestbookForm onSubmit={addEntry} user={user} />
         ) : (

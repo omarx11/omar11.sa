@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { author } from "@/app/config/meta";
-import { getInitialAge } from "@/app/lib/time";
 
 import AIBotAssistant from "./chatbot/AIBotAssistant";
 import Age from "./content/Age";
@@ -11,7 +10,7 @@ import Discord from "./Discord";
 import Media from "./Media";
 import { ReloadButton, ReloadLink } from "./ui/Reload";
 
-export default async function Header() {
+export default function Header() {
   return (
     <>
       <header className="mt-12 mb-6 flex flex-col items-center md:mt-16 md:mb-0 md:flex-row xl:mt-24">
@@ -60,12 +59,8 @@ export default async function Header() {
           <div className="group relative mt-1 w-full border-neutral-900 border-t-4 pt-1 text-[1rem] text-neutral-200 leading-[1.4rem] sm:text-justify">
             <PlayAudio />
             I’m a self-taught web developer {`who's `}
-            <Age
-              birthDate={author.age}
-              initial={await getInitialAge(author.age)}
-            />{" "}
-            years-old with a passion for website programming. I gained extensive
-            knowledge independently while in{" "}
+            <Age birthDate={author.age} /> years-old with a passion for website
+            programming. I gained extensive knowledge independently while in{" "}
             <Link
               className="underline-offset-2 hover:underline"
               href="https://tvtc.gov.sa/en/Pages/default.aspx"
@@ -118,7 +113,7 @@ export default async function Header() {
           <Media />
           <Link
             className="group text-emerald-500 text-sm hover:text-emerald-500/80"
-            href="https://status.omar11.sa/"
+            href={author.statusPage}
             target="_blank"
           >
             <svg
@@ -129,24 +124,12 @@ export default async function Header() {
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
+                className="status-line"
                 d="M8,25 H13 L23,10 L33,40 L43,25 H50"
                 fill="none"
                 strokeDasharray="110"
-                strokeDashoffset="110"
                 strokeWidth="4"
-              >
-                <animate
-                  attributeName="stroke-dashoffset"
-                  calcMode="spline"
-                  dur="3s"
-                  from="220"
-                  keySplines="0.42 0 0.58 1; 0 0 1 1"
-                  keyTimes="0; 0.33; 1"
-                  repeatCount="indefinite"
-                  to="0"
-                  values="220; 0; 0"
-                />
-              </path>
+              />
             </svg>
             Status
           </Link>

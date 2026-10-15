@@ -546,6 +546,21 @@ details[open]::details-content {
   }
 }
 
+/* The status link's heartbeat line: draws in, then holds, every 3s. */
+.status-line {
+  animation: status-line 3s infinite;
+}
+@keyframes status-line {
+  0% {
+    stroke-dashoffset: 220;
+    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+  }
+  33%,
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
 /* Opacity-only fade, for elements positioned by an inline transform (an
    animated transform would override it). */
 @keyframes fade-opacity-only {

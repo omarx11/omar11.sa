@@ -15,7 +15,11 @@ type OAuthProvider = {
   icon?: React.JSX.Element;
 };
 
-const OAuthButtons = () => {
+/**
+ * With `placeholder`, renders the same card as a pulsing, empty skeleton, so
+ * the loading state has exactly the loaded card's size at every width.
+ */
+const OAuthButtons = ({ placeholder = false }: { placeholder?: boolean }) => {
   const [isPending, setIsPending] = useState<string>("");
 
   const signIn = async (provider: Provider) => {
@@ -47,7 +51,15 @@ const OAuthButtons = () => {
   ];
 
   return (
-    <div className="my-14 flex max-w-xl flex-row flex-wrap items-center justify-center gap-4 rounded-md bg-neutral-900 py-8 text-center text-neutral-50">
+    <div
+      aria-hidden={placeholder || undefined}
+      className={cn(
+        "my-14 flex max-w-xl flex-row flex-wrap items-center justify-center gap-4 rounded-md py-8 text-center text-neutral-50",
+        placeholder
+          ? "w-full animate-pulse bg-[hsl(240,3.7%,7%)] *:invisible"
+          : "bg-neutral-900",
+      )}
+    >
       <p>Sign In with:</p>
       <div className="flex gap-3">
         {oAuthProviders.map((provider) => (

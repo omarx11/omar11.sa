@@ -5,6 +5,7 @@ import { cn } from "@/app/lib/utils";
 
 import type { RecentGame } from "../types";
 import type { GameActions } from "./Games";
+import { RECENT_GAME_NAME } from "./GamesSkeleton";
 
 export default function RecentGames({
   games,
@@ -49,7 +50,8 @@ export default function RecentGames({
                     />
                     <p
                       className={cn(
-                        "line-clamp-2 pt-1 text-start text-neutral-300 group-hover:text-transparent",
+                        RECENT_GAME_NAME,
+                        "line-clamp-2 text-start text-neutral-300 group-hover:text-transparent",
                         { "text-transparent": selected },
                       )}
                     >

@@ -10,8 +10,7 @@ import Work from "./components/Work";
 
 export const metadata = pageMetadata({
   title: "About",
-  description:
-    "Omar Abdulaziz's story: how he got into programming, his education at TVTC, work experience and certifications.",
+  description: `${author.fullName}'s story: how he got into programming, his education at TVTC, work experience and certifications.`,
   path: "/about",
 });
 

@@ -1,4 +1,5 @@
 import { Heading } from "@/app/components/ui/Heading";
+import { author } from "@/app/config/meta";
 import {
   databases,
   editors,
@@ -15,8 +16,7 @@ import { SkillsArray } from "./components/SkillsArray";
 
 export const metadata = pageMetadata({
   title: "Skills",
-  description:
-    "The languages, frameworks, databases, services and tools Omar Abdulaziz uses to build web apps.",
+  description: `The languages, frameworks, databases, services and tools ${author.fullName} uses to build web apps.`,
   path: "/skills",
 });
 

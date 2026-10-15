@@ -117,7 +117,7 @@ function CollectionGrid({
                 aria-label={game.name}
                 aria-pressed={appid === null ? undefined : selected}
                 className={cn(
-                  "rounded-xs ring-2 ring-neutral-700 ring-offset-black transition-[transform,box-shadow] duration-75 hover:ring-offset-2",
+                  "rounded-xs ring-2 ring-neutral-700 ring-offset-black transition-transform duration-75 hover:ring-offset-2",
                   appid === null
                     ? "cursor-default hover:ring-red-500"
                     : selected

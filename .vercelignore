@@ -1,0 +1,19 @@
+# Files Vercel doesn't need to build or run the site.
+
+# Editor, agent and GitHub settings (including the README screenshots)
+/.agents
+/.github
+/.vscode
+/AGENTS.md
+/CLAUDE.md
+/skills-lock.json
+
+# Docs
+/docs
+/README.md
+
+# Run locally only (`npm run db:migrate`, `npm run lint`)
+/migrations
+/scripts
+/biome.json
+/.env.example

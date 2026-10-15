@@ -9,7 +9,7 @@ const LAST_UPDATED = "October 15, 2026";
 
 export const metadata = pageMetadata({
   title: "Privacy Policy",
-  description: "What omar11.sa collects, why, and how to have it deleted.",
+  description: `What ${author.siteName} collects, why, and how to have it deleted.`,
   path: "/privacy-policy",
 });
 

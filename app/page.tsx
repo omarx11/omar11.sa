@@ -84,7 +84,7 @@ export default function HomePage() {
       <div className="mt-6 flex justify-center">
         <Link
           className="group inline-flex items-center justify-center gap-1 rounded-md bg-neutral-800 px-6 py-2 text-neutral-200 hover:underline"
-          href="https://github.com/omarx11?tab=repositories"
+          href={`${author.github}?tab=repositories`}
           target="_blank"
         >
           view all projects{" "}

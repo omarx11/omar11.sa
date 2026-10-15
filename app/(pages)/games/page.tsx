@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 
+import { author } from "@/app/config/meta";
 import { simulateFirstVisit } from "@/app/lib/dev/first-visit";
 import { pageMetadata } from "@/app/lib/metadata";
 
@@ -9,8 +10,7 @@ import { getGamesOverview } from "./data";
 
 export const metadata = pageMetadata({
   title: "Games",
-  description:
-    "Omar Abdulaziz's Steam library: recently played games, his full collection, playtime, stats and achievements.",
+  description: `${author.fullName}'s Steam library: recently played games, his full collection, playtime, stats and achievements.`,
   path: "/games",
 });
 

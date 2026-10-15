@@ -1,40 +1,47 @@
+import { author } from "@/app/config/meta";
+
 // Prompt used for training AI assistant
 export const websiteData = async (onlineStatus: string | undefined) => {
   // Here is everything the AI assistant needs to know about the website
   const allTheContent = {
     authorInfo: {
-      name: "Omar",
-      fullName: "Omar Abdulaziz",
+      name: author.name,
+      fullName: author.fullName,
       liveStatus: onlineStatus || "No information available",
-      age: "Born on 10/12/1999",
-      location: "Saudi Arabia / Qassim City",
-      siteUrl: "https://omar11.sa/",
-      github: "https://github.com/omarx11",
-      twitter: "https://twitter.com/@dis_x0",
-      linkedin: "https://www.linkedin.com/in/omar-abdulaziz-sa/",
-      email: "mail@omar11.sa",
-      discordUsername: "omarx11",
+      age: `Born on ${author.age}`,
+      location: author.location,
+      siteUrl: author.siteUrl,
+      github: author.github,
+      twitter: author.twitter,
+      linkedin: author.linkedIn,
+      email: author.email,
+      discordUsername: author.discordUsername,
       description:
         "A self-taught web developer with a passion for website programming. I gained extensive knowledge independently during college and have completed several exciting projects. Having recently graduated, I am eager to begin my professional journey.",
-      cvLink: "/static/files/omar_abdulaziz_cv_en.pdf",
+      cvLink: author.cv,
       education: "Technical and Vocational Training Corporation",
       goal: "Seeking a full-time position at a reputable company.",
     },
     sections: {
-      description: "omar11.sa section details",
+      description: `${author.siteName} section details`,
       projects_page_no_1: {
-        description: "Some of Omar's personal projects:",
+        description: `Some of ${author.name}'s personal projects:`,
         list: {
           project1: {
             title: "Online Portfolio",
-            description:
-              "Omar's personal website built with Next.js, featuring 7 pages highlighting his projects, skills, favorite anime, games, and more.",
-            usedTech: ["Next.js 14", "TailwindCSS", "Sass", "Supabase"],
-            link: "https://omar11.sa/",
-            githubRepo: "https://github.com/omarx11/omar11.sa",
+            description: `${author.name}'s personal website built with Next.js, featuring 7 pages highlighting his projects, skills, favorite anime, games, and more.`,
+            usedTech: [
+              "Next.js 16",
+              "TypeScript",
+              "TailwindCSS",
+              "Neon Postgres",
+              "Neon Auth",
+            ],
+            link: author.siteUrl,
+            githubRepo: author.sourceRepo,
             license: "MIT License",
             licenseNote:
-              "You are free to use this site's code, but please give credit to Omar Abdulaziz by linking back to the website.",
+              "The code is open source under the MIT License, free to use and learn from.",
           },
           project2: {
             title: "Chatin AI",
@@ -67,7 +74,7 @@ export const websiteData = async (onlineStatus: string | undefined) => {
             link: "https://github.com/omarx11/steam-screenshots-api",
           },
         },
-        fullList: "https://github.com/omarx11?tab=repositories",
+        fullList: `${author.github}?tab=repositories`,
       },
       skills_page_no_2: {
         description: "Skills and technologies used to build various projects.",
@@ -253,7 +260,7 @@ export const websiteData = async (onlineStatus: string | undefined) => {
         ],
       },
       anime_page_no_5: {
-        description: "Omar's top 10 favorite anime:",
+        description: `${author.name}'s top 10 favorite anime:`,
         list: [
           {
             name: "Berserk",

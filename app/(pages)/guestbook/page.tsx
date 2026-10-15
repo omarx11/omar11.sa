@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 
 import { Heading } from "@/app/components/ui/Heading";
+import { author } from "@/app/config/meta";
 import { getSessionUser, toSessionUser } from "@/app/lib/auth/server";
 import { simulateFirstVisit } from "@/app/lib/dev/first-visit";
 import { pageMetadata } from "@/app/lib/metadata";
@@ -11,8 +12,7 @@ import { getEntries } from "./data";
 
 export const metadata = pageMetadata({
   title: "Guestbook",
-  description:
-    "Sign Omar Abdulaziz's guestbook with Google or GitHub and leave a message.",
+  description: `Sign ${author.fullName}'s guestbook with Google or GitHub and leave a message.`,
   path: "/guestbook",
 });
 

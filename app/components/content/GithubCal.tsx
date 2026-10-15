@@ -1,22 +1,8 @@
-import { ActivityCalendar } from "react-activity-calendar";
-
+import { author } from "@/app/config/meta";
 import { simulateFirstVisit } from "@/app/lib/dev/first-visit";
 import { getContributions } from "@/app/lib/github";
 
-// GitHub's own contribution colors (as used by react-github-calendar).
-const gitHubTheme = {
-  light: ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"],
-  dark: ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"],
-};
-
-const calendarProps = {
-  blockMargin: 6,
-  blockSize: 14,
-  colorScheme: "dark",
-  fontSize: 14,
-  style: { color: "rgb(163,163,163)" },
-  theme: gitHubTheme,
-} as const;
+import ContributionsCalendar from "./ContributionsCalendar";
 
 /**
  * GitHub contributions, rendered from server-fetched data so the calendar is
@@ -24,24 +10,14 @@ const calendarProps = {
  */
 export default async function GithubCal() {
   await simulateFirstVisit();
-  const contributions = await getContributions("omarx11");
+  const contributions = await getContributions(author.githubUsername);
 
   // The calendar forces `width: max-content` inline; containing its inline size
   // stops it from widening the page on small screens (it scrolls instead).
   return (
     <div className="mt-11 w-full contain-inline-size">
-      {contributions ? (
-        <ActivityCalendar
-          {...calendarProps}
-          data={contributions}
-          labels={{
-            totalCount: "{{count}} contributions in the last year",
-          }}
-        />
-      ) : (
-        // API unavailable: keep the calendar's built-in placeholder.
-        <ActivityCalendar {...calendarProps} data={[]} loading />
-      )}
+      {/* If the API is unavailable, the calendar keeps its placeholder. */}
+      <ContributionsCalendar data={contributions ?? undefined} />
     </div>
   );
 }
@@ -50,8 +26,11 @@ export default async function GithubCal() {
 export function GithubCalSkeleton() {
   // On phones the loaded footer wraps to two lines; reserve that height.
   return (
-    <div className="mt-11 w-full contain-inline-size max-sm:min-h-[212px]">
-      <ActivityCalendar {...calendarProps} data={[]} loading />
+    <div
+      className="mt-11 w-full contain-inline-size max-sm:min-h-[212px]"
+      data-page-loading
+    >
+      <ContributionsCalendar />
     </div>
   );
 }

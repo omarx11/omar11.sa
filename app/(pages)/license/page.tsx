@@ -5,7 +5,7 @@ import { getCurrentYear } from "@/app/lib/time";
 
 export const metadata = pageMetadata({
   title: "License",
-  description: "The MIT license for the source code of omar11.sa.",
+  description: `The MIT license for the source code of ${author.siteName}.`,
   path: "/license",
 });
 

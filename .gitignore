@@ -12,6 +12,7 @@
 
 # testing
 /coverage
+/docs/personal_promots.txt
 
 # next.js
 /.next/
@@ -42,8 +43,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# files
-/backup
-/test
-/docs/promot.txt
