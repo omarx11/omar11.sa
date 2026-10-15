@@ -18,7 +18,12 @@ export default async function Projects() {
           className="group flex flex-col gap-3 rounded-md border-4 border-neutral-800 bg-gradient-to-b from-neutral-900 px-3 py-2 hover:z-10 hover:border-neutral-700 hover:bg-gradient-to-t"
           key={repo.id}
         >
-          <Link className="h-24" href={repo.homepage ?? "#"} target="_blank">
+          <Link
+            className="h-24"
+            href={repo.homepage ?? repo.html_url}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             <Image
               alt={`${repo.name} preview`}
               blurDataURL="/static/icons/blur.svg"
@@ -32,7 +37,8 @@ export default async function Projects() {
           <div className="-mb-2 flex flex-row items-start justify-between pt-2">
             <Link
               className="w-full"
-              href={repo.homepage || "#"}
+              href={repo.homepage ?? repo.html_url}
+              rel="noopener noreferrer"
               target="_blank"
             >
               <p className="line-clamp-1 text-lg text-neutral-300 underline-offset-2 group-hover:underline">

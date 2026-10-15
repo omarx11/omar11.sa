@@ -29,6 +29,7 @@ export async function saveComment(comment: string): Promise<GuestbookEntry> {
     values (${nanoid()}, ${user.id}, ${user.name}, ${user.image ?? null}, ${text})
     returning cid, user_id, name, avatar, comment, created_at
   `;
+  if (!row) throw new Error("The comment could not be saved.");
   updateTag(GUESTBOOK_TAG);
   return toEntry(row);
 }

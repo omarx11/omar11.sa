@@ -1,6 +1,6 @@
 import { createParser, type EventSourceMessage } from "eventsource-parser";
 
-export type ChatGPTAgent = "user" | "system";
+export type ChatGPTAgent = "system" | "user" | "assistant";
 
 export interface ChatGPTMessage {
   role: ChatGPTAgent;
@@ -19,12 +19,12 @@ export interface OpenAIStreamPayload {
   n: number;
 }
 
-export async function OpenAIStream(payload: OpenAIStreamPayload) {
-  const encoder = new TextEncoder();
-  const decoder = new TextDecoder();
+type CompletionChunk = { choices?: { delta?: { content?: string } }[] };
 
-  let counter = 0;
-
+/** Streams an OpenAI chat completion as plain UTF-8 text. */
+export async function OpenAIStream(
+  payload: OpenAIStreamPayload,
+): Promise<ReadableStream<Uint8Array>> {
   const res = await fetch("https://api.openai.com/v1/chat/completions", {
     headers: {
       "Content-Type": "application/json",
@@ -34,58 +34,56 @@ export async function OpenAIStream(payload: OpenAIStreamPayload) {
     body: JSON.stringify(payload),
   });
 
-  // Check if the response status is not OK (e.g., 4xx or 5xx errors)
-  if (!res.ok) {
-    const errorBody = await res.text();
+  if (!res.ok || !res.body) {
     throw new Error(
-      `OpenAI API returned an error: ${res.status} - ${errorBody}`,
+      `OpenAI API returned an error: ${res.status} - ${await res.text()}`,
     );
   }
 
-  const stream = new ReadableStream({
+  const body = res.body;
+  const encoder = new TextEncoder();
+  const decoder = new TextDecoder();
+
+  return new ReadableStream({
     async start(controller) {
-      // Callback function to handle parsed SSE events
-      function onEvent(event: EventSourceMessage) {
-        const data = event.data;
-        if (data === "[DONE]") {
+      let closed = false;
+      let chunks = 0;
+      const close = () => {
+        if (!closed) {
+          closed = true;
           controller.close();
-          return;
         }
-        try {
-          const json = JSON.parse(data);
-          const text = json.choices[0].delta?.content || "";
-          // Ignore prefix characters like "\n\n"
-          if (counter < 2 && (text.match(/\n/) || []).length) {
-            return;
-          }
-          const queue = encoder.encode(text);
-          controller.enqueue(queue);
-          counter++;
-        } catch (e) {
-          controller.error(e); // Handle JSON parse errors
-        }
-      }
+      };
 
-      const parser = createParser({ onEvent });
-
-      // stream response (SSE) from OpenAI may be fragmented into multiple chunks
-      // this ensures we properly read chunks and invoke an event for each SSE event stream
-      // https://web.dev/streams/#asynchronous-iteration
-      if (res.body) {
-        const reader = res.body.getReader();
-        let done = false;
-        while (!done) {
-          const { done: readDone, value } = await reader.read();
-          done = readDone;
-          if (!done) {
-            parser.feed(decoder.decode(value));
+      const parser = createParser({
+        onEvent(event: EventSourceMessage) {
+          if (closed) return;
+          if (event.data === "[DONE]") return close();
+          try {
+            const json = JSON.parse(event.data) as CompletionChunk;
+            const text = json.choices?.[0]?.delta?.content ?? "";
+            // Skip the leading newlines some completions start with.
+            if (chunks < 2 && text.includes("\n")) return;
+            controller.enqueue(encoder.encode(text));
+            chunks++;
+          } catch (error) {
+            closed = true;
+            controller.error(error);
           }
-        }
-      } else {
-        controller.error(new Error("Response body is null"));
+        },
+      });
+
+      // OpenAI's SSE events can be split across network chunks; the parser
+      // reassembles them. `stream: true` keeps multi-byte characters (e.g.
+      // Arabic, emoji) that straddle chunks intact.
+      const reader = body.getReader();
+      for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        parser.feed(decoder.decode(value, { stream: true }));
       }
+      // Ends the response even if OpenAI never sent "[DONE]".
+      close();
     },
   });
-
-  return stream;
 }

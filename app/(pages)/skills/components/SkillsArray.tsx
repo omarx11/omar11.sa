@@ -9,7 +9,12 @@ export function SkillsArray({ data }: { data: SkillsArrayProps[] }) {
       className="group flex min-h-[64px] w-full flex-row items-center gap-2 rounded-lg bg-neutral-900 px-0 py-1 duration-300 hover:bg-neutral-800 md:px-2"
       key={name}
     >
-      <Link className="relative p-1" href={url || "#"} target="_blank">
+      <Link
+        className="relative p-1"
+        href={url}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
         <Image
           alt={name}
           blurDataURL="/static/icons/blur.svg"

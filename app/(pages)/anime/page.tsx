@@ -24,8 +24,9 @@ function AnimePage() {
         {anime.map(({ rank, name, description, image, url }) => (
           <Link
             className="group relative mb-4 flex h-36 items-center justify-items-start overflow-hidden rounded-lg px-4 duration-300 before:absolute before:inset-0 before:z-10 before:bg-black before:opacity-0 before:transition before:duration-150 hover:h-48 hover:before:opacity-50 sm:px-8"
-            href={url || "#"}
+            href={url}
             key={rank}
+            rel="noopener noreferrer"
             target="_blank"
           >
             <Image

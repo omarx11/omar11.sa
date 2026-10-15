@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import type { FC } from "react";
+import type { FC, MouseEvent } from "react";
 
 type HeadingProps = {
   name: string;
@@ -10,7 +10,7 @@ type HeadingProps = {
   title?: string;
 };
 
-const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+const handleScroll = (e: MouseEvent<HTMLAnchorElement>) => {
   // prevent the default behavior
   e.preventDefault();
   // get the href and remove everything before the hash (#)

@@ -2,7 +2,6 @@ import { useMutation } from "@tanstack/react-query";
 import { nanoid } from "nanoid";
 import {
   type KeyboardEvent,
-  type MouseEvent,
   useContext,
   useEffect,
   useRef,
@@ -10,7 +9,7 @@ import {
 } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 
-import { getBotMessage } from "@/app/lib/chatbot/actions";
+import { getBotReply } from "@/app/lib/chatbot/actions";
 import { saveConversation } from "@/app/lib/chatbot/save-conversation";
 import type { BotMessage } from "@/app/lib/validators/bot-message";
 
@@ -30,16 +29,13 @@ const ChatBotInput = () => {
 
   const { mutate: sendMessage, isPending } = useMutation({
     mutationKey: ["sendMessage"],
-    mutationFn: async () => {
-      const response = await getBotMessage({ botMessages });
-      return response.body;
-    },
+    // The user's new message isn't in `botMessages` yet (state updates on the
+    // next render), so it's appended here.
+    mutationFn: (message: BotMessage) => getBotReply([...botMessages, message]),
     onMutate(message: BotMessage) {
       addBotMessage(message);
     },
     onSuccess: async (stream) => {
-      if (!stream) throw new Error("Error no stream");
-
       // construct new message to add
       const id = nanoid();
       const responseMessage = {
@@ -53,13 +49,12 @@ const ChatBotInput = () => {
 
       const reader = stream.getReader();
       const decoder = new TextDecoder();
-      let done = false;
-
-      while (!done) {
-        const { value, done: doneReading } = await reader.read();
-        done = doneReading;
-        const chunkValue = decoder.decode(value);
-        updateBotMessage(id, (prev) => prev + chunkValue);
+      for (;;) {
+        const { value, done } = await reader.read();
+        // `stream: true` keeps multi-byte characters split across chunks intact.
+        const chunk = decoder.decode(value, { stream: !done });
+        if (chunk) updateBotMessage(id, (prev) => prev + chunk);
+        if (done) break;
       }
 
       setInput("");
@@ -82,24 +77,17 @@ const ChatBotInput = () => {
     }
   }, [botMessages, chatbot_id, isPending]);
 
-  const handleSubmit = (
-    e: KeyboardEvent<HTMLTextAreaElement> | MouseEvent<HTMLButtonElement>,
-  ) => {
-    if (input.trim() !== "") {
-      if (
-        e.type === "click" ||
-        (e.type === "keydown" &&
-          (e as KeyboardEvent).key === "Enter" &&
-          !(e as KeyboardEvent).shiftKey)
-      ) {
-        e.preventDefault();
-        const message = {
-          id: nanoid(),
-          isUserMessage: true,
-          text: input.trim(),
-        };
-        sendMessage(message);
-      }
+  const send = () => {
+    const text = input.trim();
+    if (!text || isPending) return;
+    sendMessage({ id: nanoid(), isUserMessage: true, text });
+  };
+
+  // Enter sends; Shift+Enter adds a new line.
+  const onKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      send();
     }
   };
 
@@ -112,7 +100,7 @@ const ChatBotInput = () => {
           disabled={isPending}
           maxRows={3}
           onChange={(e) => setInput(e.target.value.replace(/^\s+/, ""))}
-          onKeyDown={handleSubmit}
+          onKeyDown={onKeyDown}
           placeholder="Write a message..."
           ref={textareaRef}
           rows={1}
@@ -125,7 +113,7 @@ const ChatBotInput = () => {
             <button
               aria-label="Send message"
               className="w-full border-0 px-3 outline-0"
-              onClick={handleSubmit}
+              onClick={send}
               type="button"
             >
               <svg

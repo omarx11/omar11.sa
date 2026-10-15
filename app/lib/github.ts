@@ -42,7 +42,9 @@ export async function getProjects(): Promise<Project[]> {
     id: repo.id,
     name: repo.name,
     description: repo.description,
-    homepage: repo.homepage || undefined,
+    html_url: repo.html_url,
+    // GitHub returns "" or null when a repo has no website: link the repo.
+    homepage: repo.homepage || repo.html_url,
     forks_count: repo.forks_count,
     stargazers_count: repo.stargazers_count,
     watchers_count: repo.watchers_count,

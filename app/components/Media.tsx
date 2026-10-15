@@ -15,14 +15,16 @@ export default function Media() {
       <TooltipProvider delayDuration={0}>
         {media.map(({ url, icon, name }) => (
           <Tooltip key={name}>
-            <TooltipTrigger className="inline-flex">
+            <TooltipTrigger asChild>
               <Link
-                className="rounded-full bg-neutral-900 p-[6px] hover:bg-neutral-800"
+                aria-label={name}
+                className="inline-flex rounded-full bg-neutral-900 p-[6px] hover:bg-neutral-800"
                 href={url}
+                rel="noopener noreferrer"
                 target="_blank"
               >
                 <Image
-                  alt={name}
+                  alt=""
                   className="drag-none select-none"
                   height={18}
                   src={icon}

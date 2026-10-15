@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Heading } from "@/app/components/ui/Heading";
+import type { SpecsProps } from "@/app/config/specs";
 import * as s from "@/app/config/specs";
 import { pageMetadata } from "@/app/lib/metadata";
 
@@ -33,83 +34,43 @@ export default function SpecsPage() {
         />
         <div className="flex w-full flex-col justify-center gap-4 md:flex-row">
           <div className="space-y-4">
-            <div className="w-full rounded-md bg-neutral-800/50 p-2">
-              <h2 className="mb-2 font-bold text-2xl">
-                <span className="text-emerald-500">#</span> PC Parts
-              </h2>
-              <ul className="list-disc space-y-0.5 pl-5 text-sm tracking-wide">
-                {s.pc_parts.map(({ name, link }) => (
-                  <li key={name}>
-                    <Link
-                      className="decoration-emerald-600 decoration-wavy hover:underline"
-                      href={link || "#"}
-                      target={link ? "_blank" : "_self"}
-                    >
-                      {name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="w-full rounded-md bg-neutral-800/50 p-2">
-              <h2 className="mb-2 font-bold text-2xl">
-                <span className="text-emerald-500">#</span> Virtual Machines
-              </h2>
-              <ul className="list-disc space-y-0.5 pl-5 text-sm tracking-wide">
-                {s.virtual_machines.map(({ name, link }) => (
-                  <li key={name}>
-                    <Link
-                      className="decoration-emerald-600 decoration-wavy hover:underline"
-                      href={link || "#"}
-                      target={link ? "_blank" : "_self"}
-                    >
-                      {name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <SpecList items={s.pc_parts} title="PC Parts" />
+            <SpecList items={s.virtual_machines} title="Virtual Machines" />
           </div>
           <div className="space-y-4">
-            <div className="w-full rounded-md bg-neutral-800/50 p-2">
-              <h2 className="mb-2 font-bold text-2xl">
-                <span className="text-emerald-500">#</span> Network Informetions
-              </h2>
-              <ul className="list-disc space-y-0.5 pl-5 text-sm tracking-wide">
-                {s.network_info.map(({ name, link }) => (
-                  <li key={name}>
-                    <Link
-                      className="decoration-emerald-600 decoration-wavy hover:underline"
-                      href={link || "#"}
-                      target={link ? "_blank" : "_self"}
-                    >
-                      {name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="w-full rounded-md bg-neutral-800/50 p-2">
-              <h2 className="mb-2 font-bold text-2xl">
-                <span className="text-emerald-500">#</span> Other Devices
-              </h2>
-              <ul className="list-disc space-y-0.5 pl-5 text-sm tracking-wide">
-                {s.other_devices.map(({ name, link }) => (
-                  <li key={name}>
-                    <Link
-                      className="decoration-emerald-600 decoration-wavy hover:underline"
-                      href={link || "#"}
-                      target={link ? "_blank" : "_self"}
-                    >
-                      {name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <SpecList items={s.network_info} title="Network Information" />
+            <SpecList items={s.other_devices} title="Other Devices" />
           </div>
         </div>
       </div>
     </>
+  );
+}
+
+function SpecList({ title, items }: { title: string; items: SpecsProps[] }) {
+  return (
+    <div className="w-full rounded-md bg-neutral-800/50 p-2">
+      <h2 className="mb-2 font-bold text-2xl">
+        <span className="text-emerald-500">#</span> {title}
+      </h2>
+      <ul className="list-disc space-y-0.5 pl-5 text-sm tracking-wide">
+        {items.map(({ name, link }) => (
+          <li key={name}>
+            {link ? (
+              <Link
+                className="decoration-emerald-600 decoration-wavy hover:underline"
+                href={link}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                {name}
+              </Link>
+            ) : (
+              name
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

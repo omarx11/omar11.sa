@@ -1,27 +1,30 @@
 import { cacheLife, cacheTag } from "next/cache";
+import { z } from "zod";
 
 import { sql } from "@/app/lib/db";
 
 import type { GuestbookEntry } from "./types";
 
-type GuestbookRow = {
-  cid: string;
-  user_id: string | null;
-  name: string;
-  avatar: string | null;
-  comment: string;
-  created_at: string | Date;
-};
+// Validates rows at the database boundary, so a schema change fails loudly
+// here instead of leaking `undefined` into the UI.
+const GuestbookRow = z.object({
+  cid: z.string(),
+  user_id: z.string().nullable(),
+  name: z.string(),
+  avatar: z.string().nullable(),
+  comment: z.string(),
+  created_at: z.coerce.date(),
+});
 
-export function toEntry(row: Record<string, unknown>): GuestbookEntry {
-  const r = row as GuestbookRow;
+export function toEntry(row: unknown): GuestbookEntry {
+  const r = GuestbookRow.parse(row);
   return {
     cid: r.cid,
     userId: r.user_id,
     name: r.name,
     avatar: r.avatar,
     comment: r.comment,
-    createdAt: new Date(r.created_at).toISOString(),
+    createdAt: r.created_at.toISOString(),
   };
 }
 

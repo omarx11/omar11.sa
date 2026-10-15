@@ -1,7 +1,7 @@
 export type SkillsArrayProps = {
   name: string;
   icon: string;
-  url?: string | null;
+  url: string;
   description: string;
 };
 

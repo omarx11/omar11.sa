@@ -1,5 +1,6 @@
-type SpecsProps = {
+export type SpecsProps = {
   name: string;
+  /** Omitted for plain facts (e.g. DNS addresses). */
   link?: string;
 };
 

@@ -1,8 +1,9 @@
 export type Repository = {
   id: number;
   name: string;
-  description: string;
-  homepage?: string;
+  description: string | null;
+  html_url: string;
+  homepage?: string | null;
   forks_count: number;
   stargazers_count: number;
   watchers_count: number;
@@ -22,6 +23,7 @@ export const manualRepository: Repository[] = [
   {
     id: 1,
     homepage: "https://old.omar11.sa/",
+    html_url: "https://old.omar11.sa/",
     name: "my-old-website",
     stargazers_count: 0,
     forks_count: 0,

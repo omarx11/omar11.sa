@@ -1,23 +1,16 @@
 import type { BotMessage } from "../validators/bot-message";
 
-/**
- * POST Bot Message
- * @param botMessages Array of messages.
- * @returns An object of the bot message.
- */
-export const getBotMessage = async ({
-  botMessages,
-}: {
-  botMessages: BotMessage[];
-}): Promise<Response> => {
-  const data = await fetch("/api/chat", {
+/** Sends the conversation to the assistant; resolves to its streamed reply. */
+export async function getBotReply(
+  botMessages: BotMessage[],
+): Promise<ReadableStream<Uint8Array>> {
+  const res = await fetch("/api/chat", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ botMessages }),
   });
-  if (!data.ok) throw new Error("Failed to fetch data");
-
-  return data;
-};
+  if (!res.ok || !res.body) {
+    throw new Error(`The assistant failed to respond (${res.status}).`);
+  }
+  return res.body;
+}

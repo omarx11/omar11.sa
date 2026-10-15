@@ -6,7 +6,4 @@ export const MessageSchema = z.object({
   isUserMessage: z.boolean(),
 });
 
-// array validator
-export const BotMessageArraySchema = z.array(MessageSchema);
-
 export type BotMessage = z.infer<typeof MessageSchema>;
