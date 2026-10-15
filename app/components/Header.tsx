@@ -9,13 +9,16 @@ import Age from "./content/Age";
 import PlayAudio from "./content/PlayAudio";
 import Discord from "./Discord";
 import Media from "./Media";
-import { SectionLink } from "./ui/SectionLink";
+import { ReloadButton, ReloadLink } from "./ui/Reload";
 
 export default async function Header() {
   return (
     <>
       <header className="mt-12 mb-6 flex flex-col items-center md:mt-16 md:mb-0 md:flex-row xl:mt-24">
-        <Link aria-label="Home" className="shrink-0 md:ml-1" href="/">
+        <ReloadButton
+          className="shrink-0 cursor-pointer md:ml-1"
+          label="Reload page"
+        >
           <Image
             alt={`${author.fullName}'s avatar`}
             blurDataURL="/static/icons/blur.svg"
@@ -26,7 +29,7 @@ export default async function Header() {
             src="/static/images/avatar.png"
             width={240}
           />
-        </Link>
+        </ReloadButton>
         <div className="mt-6 ml-0 flex flex-col md:mt-0 md:ml-7">
           <h1 className="items-center font-bold text-2xl text-neutral-50">
             Hey, {`I'm`}{" "}
@@ -73,12 +76,12 @@ export default async function Header() {
             and have completed several exciting projects. Having recently
             graduated, I’m excited to start my professional journey. Curious to
             learn more? Feel free to explore my{" "}
-            <SectionLink
+            <ReloadLink
               className="text-neutral-400 underline underline-offset-4 hover:no-underline"
-              href="/#projects"
+              href="/"
             >
               works..
-            </SectionLink>{" "}
+            </ReloadLink>{" "}
             ✒️
           </div>
         </div>

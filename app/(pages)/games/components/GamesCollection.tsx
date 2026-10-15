@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { useState } from "react";
 
+import { Loading } from "@/app/components/icons/Loading";
+import { Skeleton } from "@/app/components/ui/Skeleton";
 import {
   Tooltip,
   TooltipContent,
@@ -31,7 +33,12 @@ export default function GamesCollection({
     <>
       <div className="mt-8 mb-4 flex items-center justify-between">
         <h2 className="font-bold text-neutral-300 text-xl">
-          <span className="text-emerald-500">#</span> Full Games Collection 🎮
+          <span className="text-emerald-500">#</span> Full Games Collection{" "}
+          {actions.loadingStats ? (
+            <Loading className="inline animate-spin" />
+          ) : (
+            "🎮"
+          )}
         </h2>
         {games && (
           <TooltipProvider delayDuration={0}>
@@ -166,6 +173,14 @@ function CollectionGrid({
           );
         })}
       </TooltipProvider>
+      {/* The last page keeps the full grid, with pulsing placeholders. */}
+      {Array.from({ length: PER_PAGE - pageGames.length }, (_, i) => (
+        <Skeleton
+          className="h-[75.27px] w-[160.6px] rounded-xs"
+          // biome-ignore lint/suspicious/noArrayIndexKey: interchangeable placeholders
+          key={`empty-${i}`}
+        />
+      ))}
       <Pagination
         className="fade-in mt-3"
         note

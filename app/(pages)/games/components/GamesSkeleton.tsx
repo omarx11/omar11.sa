@@ -22,8 +22,8 @@ export default function GamesSkeleton() {
       </div>
       <div className="mt-8 mb-4 flex items-center justify-between">
         <h2 className="font-bold text-neutral-300 text-xl">
-          <span className="text-emerald-500">#</span> Full Games Collection{" "}
-          <Loading className="inline animate-spin" />
+          {/* Only "Recently Played" shows the spinner; this icon waits for data. */}
+          <span className="text-emerald-500">#</span> Full Games Collection
         </h2>
         <Skeleton className="h-4 w-[93px] rounded-xs sm:h-5 sm:w-[132px]" />
       </div>

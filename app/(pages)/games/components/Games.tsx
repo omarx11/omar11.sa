@@ -31,6 +31,8 @@ export type GameActions = {
   select: (appid: number) => void;
   /** Warms the stats cache, e.g. on hover, so selecting feels instant. */
   preload: (appid: number) => void;
+  /** True while a newly selected game's stats are loading. */
+  loadingStats: boolean;
 };
 
 export default function Games({ overview }: { overview: GamesOverview }) {
@@ -75,7 +77,8 @@ function GamesView({ overview }: { overview: GamesOverview }) {
     }
   }, [loadedAppId, selectedAppId]);
 
-  const actions: GameActions = { selectedAppId, select, preload };
+  const loadingStats = isFetching && data?.appid !== selectedAppId;
+  const actions: GameActions = { selectedAppId, select, preload, loadingStats };
 
   return (
     <>
@@ -88,7 +91,7 @@ function GamesView({ overview }: { overview: GamesOverview }) {
       {selectedAppId !== null && (
         <GameStats
           error={isError && !isFetching}
-          loading={isFetching && data?.appid !== selectedAppId}
+          loading={loadingStats}
           onRetry={() => refetch()}
           stats={data ?? null}
         />
