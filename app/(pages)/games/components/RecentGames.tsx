@@ -1,82 +1,56 @@
 import Image from "next/image";
-import { useContext } from "react";
+import { useState } from "react";
 
-import { Loading } from "@/app/components/icons/Loading";
-import { Skeleton } from "@/app/components/ui/Skeleton";
-import { StatementContext } from "@/app/context/statement";
 import { cn } from "@/app/lib/utils";
 
-export default function RecentGames({
-  recentGames,
-}: {
-  recentGames: RecentlyPlayedGames | null;
-}) {
-  const {
-    gameAppId,
-    isLoadingGame,
-    setGameAppId,
-    setGameAppName,
-    setIsLoadingGame,
-  } = useContext(StatementContext);
+import type { RecentGame } from "../types";
+import type { GameActions } from "./Games";
 
+export default function RecentGames({
+  games,
+  actions,
+}: {
+  games: RecentGame[] | null;
+  actions: GameActions;
+}) {
   return (
     <>
-      <p className="mb-4 font-bold text-neutral-300 text-xl">
-        <span className="text-emerald-500">#</span> Recently Played Games{" "}
-        {recentGames ? "🕹️" : <Loading className="inline animate-spin" />}
-      </p>
-      <div className="fade-in-up line-clamp-1 flex min-h-[225px] flex-row flex-wrap gap-4 overflow-visible sm:min-h-[308px]">
-        {recentGames
-          ? recentGames.games.slice(0, 5).map((game) => (
+      <h2 className="mb-4 font-bold text-neutral-300 text-xl">
+        <span className="text-emerald-500">#</span> Recently Played Games 🕹️
+      </h2>
+      {!games ? (
+        <SteamUnavailable />
+      ) : games.length === 0 ? (
+        <p className="text-neutral-500 text-sm">
+          No games played in the last two weeks.
+        </p>
+      ) : (
+        <div className="fade-in-up flex min-h-[225px] flex-row flex-wrap gap-4 sm:min-h-[308px]">
+          {games.map((game) => {
+            const selected = game.appid === actions.selectedAppId;
+            return (
               <div key={game.appid}>
-                <p
-                  className={cn("select-none text-emerald-500 text-sm", {
-                    "text-emerald-500/50": isLoadingGame,
-                  })}
-                >
-                  {Math.floor((game.playtime_2weeks / 60) * 10) / 10} hrs
+                <p className="select-none text-emerald-500 text-sm">
+                  {game.hours} hrs
                 </p>
                 <button
-                  className={cn("group flex flex-col text-xs sm:text-sm", {
-                    "pointer-events-none opacity-50": isLoadingGame,
-                    "pointer-events-none select-none": game.appid === gameAppId,
-                  })}
-                  onClick={() => {
-                    setIsLoadingGame(true);
-                    setGameAppId(game.appid);
-                    setGameAppName(game.name);
-                  }}
+                  aria-pressed={selected}
+                  className="group flex flex-col text-xs sm:text-sm"
+                  onClick={() => actions.select(game.appid)}
+                  onFocus={() => actions.preload(game.appid)}
+                  onPointerEnter={() => actions.preload(game.appid)}
                   type="button"
                 >
                   <div className="mt-1 max-w-[110px] group-hover:underline sm:max-w-[160px]">
-                    <Image
-                      alt={game.name}
-                      blurDataURL="/static/icons/blur.svg"
-                      className={cn(
-                        "drag-none w-40 select-none rounded-md bg-neutral-900 ring-4 ring-transparent duration-100 group-hover:scale-105",
-                        {
-                          "scale-95 opacity-150 ring-emerald-400":
-                            game.appid === gameAppId,
-                          "group-hover:ring-yellow-500":
-                            game.appid !== gameAppId,
-                        },
-                      )}
-                      height={384}
-                      key={game.appid}
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.srcset = "/static/images/steam_error.jpg";
-                      }}
-                      placeholder="blur"
-                      src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/library_600x900.jpg`}
-                      width={256}
+                    <Cover
+                      appid={game.appid}
+                      name={game.name}
+                      selected={selected}
                     />
                     <p
                       className={cn(
                         "line-clamp-2 pt-1 text-start text-neutral-300 group-hover:text-transparent",
-                        {
-                          "text-transparent": game.appid === gameAppId,
-                        },
+                        { "text-transparent": selected },
                       )}
                     >
                       {game.name}
@@ -84,14 +58,50 @@ export default function RecentGames({
                   </div>
                 </button>
               </div>
-            ))
-          : ["first", "second", "third", "fourth"].map((skeleton) => (
-              <Skeleton
-                className="mt-5 h-[165px] w-[110px] rounded-md sm:h-60 sm:w-40"
-                key={`skeleton-${skeleton}`}
-              />
-            ))}
-      </div>
+            );
+          })}
+        </div>
+      )}
     </>
+  );
+}
+
+function Cover({
+  appid,
+  name,
+  selected,
+}: {
+  appid: number;
+  name: string;
+  selected: boolean;
+}) {
+  // Some games have no portrait artwork on Steam's CDN.
+  const [failed, setFailed] = useState(false);
+  return (
+    <Image
+      alt={name}
+      blurDataURL="/static/icons/blur.svg"
+      className={cn(
+        "drag-none aspect-[2/3] w-40 select-none rounded-md bg-neutral-900 object-cover ring-4 ring-transparent duration-100 group-hover:scale-105",
+        selected ? "scale-95 ring-emerald-400" : "group-hover:ring-yellow-500",
+      )}
+      height={384}
+      onError={() => setFailed(true)}
+      placeholder="blur"
+      src={
+        failed
+          ? "/static/images/steam_error.jpg"
+          : `https://cdn.cloudflare.steamstatic.com/steam/apps/${appid}/library_600x900.jpg`
+      }
+      width={256}
+    />
+  );
+}
+
+export function SteamUnavailable() {
+  return (
+    <p className="rounded-md border border-neutral-800 bg-neutral-950 p-4 text-neutral-400 text-sm">
+      Steam data is unavailable right now. Please check back later.
+    </p>
   );
 }

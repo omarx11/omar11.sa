@@ -14,39 +14,27 @@ const ChatBotDefaultValue: BotMessage[] = [
 
 export const StatementContext = createContext<{
   pageNo: number;
-  gameAppId: number | null;
-  gameAppName: string | null;
   pageColor: string;
   botMessages: BotMessage[];
   chatbot_id: string;
-  isLoadingGame: boolean;
   setPageColor: (color: string) => void;
   setPageNo: (pageNo: number) => void;
-  setGameAppId: (appId: number | null) => void;
-  setGameAppName: (appId: string | null) => void;
   addBotMessage: (message: BotMessage) => void;
   removeBotMessage: (id: string) => void;
   updateBotMessage: (
     id: string,
     updateFn: (prevText: string) => string,
   ) => void;
-  setIsLoadingGame: (isUpdating: boolean) => void;
 }>({
   pageNo: 0,
-  gameAppId: null,
-  gameAppName: null,
   pageColor: "",
   botMessages: [],
   chatbot_id: nanoid(),
-  isLoadingGame: false,
   setPageColor: () => {},
   setPageNo: () => {},
-  setGameAppId: () => {},
-  setGameAppName: () => {},
   addBotMessage: () => {},
   removeBotMessage: () => {},
   updateBotMessage: () => {},
-  setIsLoadingGame: () => {},
 });
 
 export function StatementProvider({ children }: { children: React.ReactNode }) {
@@ -54,9 +42,6 @@ export function StatementProvider({ children }: { children: React.ReactNode }) {
   const [pageColor, setPageColor] = useState(links[pageNo]?.color || "");
   const [botMessages, setBotMessages] = useState(ChatBotDefaultValue);
   const [chatbot_id] = useState<string>(nanoid());
-  const [gameAppId, setGameAppId] = useState<number | null>(null);
-  const [gameAppName, setGameAppName] = useState<string | null>(null);
-  const [isLoadingGame, setIsLoadingGame] = useState<boolean>(false);
 
   const addBotMessage = (message: BotMessage) => {
     setBotMessages((prev) => [...prev, message]);
@@ -87,17 +72,11 @@ export function StatementProvider({ children }: { children: React.ReactNode }) {
         pageColor,
         botMessages,
         chatbot_id,
-        gameAppId,
-        gameAppName,
-        isLoadingGame,
         setPageNo,
         setPageColor,
         addBotMessage,
         removeBotMessage,
         updateBotMessage,
-        setGameAppId,
-        setGameAppName,
-        setIsLoadingGame,
       }}
     >
       {children}

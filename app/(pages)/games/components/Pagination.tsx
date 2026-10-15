@@ -2,6 +2,14 @@ import { useMemo } from "react";
 
 import { cn } from "@/app/lib/utils";
 
+type PaginationProps = {
+  pages: number;
+  state: { page: number; window: number };
+  onPageChange: (page: number) => void;
+  className?: string;
+  note?: boolean;
+};
+
 const Pagination = ({
   pages,
   state,

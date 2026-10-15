@@ -1,132 +1,47 @@
 import Image from "next/image";
-import { Fragment, useCallback, useContext, useMemo, useState } from "react";
+import { useState } from "react";
 
-import { Loading } from "@/app/components/icons/Loading";
-import { Skeleton } from "@/app/components/ui/Skeleton";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/app/components/ui/Tooltip";
-import { nonSteamGames, playtimeToAdd } from "@/app/config/games";
-import { StatementContext } from "@/app/context/statement";
 import { cn } from "@/app/lib/utils";
 
+import type { CollectionGame } from "../types";
+import type { GameActions } from "./Games";
 import Pagination from "./Pagination";
+import { SteamUnavailable } from "./RecentGames";
+
+const PER_PAGE = 22;
 
 export default function GamesCollection({
-  ownedGames,
+  games,
+  totalHours,
+  actions,
 }: {
-  ownedGames: OwnedGames | null;
+  games: CollectionGame[] | null;
+  totalHours: number;
+  actions: GameActions;
 }) {
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const {
-    isLoadingGame,
-    gameAppId,
-    setIsLoadingGame,
-    setGameAppId,
-    setGameAppName,
-  } = useContext(StatementContext);
-
-  const itemsPerPage = 22;
-  const excludedGameIds = useMemo(
-    () => [
-      12120, 12250, 407530, 596350, 747350, 755790, 700580, 878760, 640590,
-      1449560, 34330, 371140, 342230, 431960,
-    ],
-    [],
-  );
-
-  // Filter and sort games outside the render cycle
-  const steamGamesArray = useMemo(() => {
-    if (!ownedGames) return [];
-    return ownedGames.games
-      .filter((game) => !excludedGameIds.includes(game.appid))
-      .sort((a, b) => b.playtime_forever - a.playtime_forever);
-  }, [ownedGames, excludedGameIds]);
-
-  const totalItems = steamGamesArray.length + nonSteamGames.length;
-  const totalPages = useMemo(
-    () => Math.ceil(totalItems / itemsPerPage),
-    [totalItems],
-  );
-
-  const handlePageChange = useCallback(
-    (page: number) => setCurrentPage(page),
-    [],
-  );
-
-  // Combine Steam and Non-Steam games
-  const allGamesArray = useMemo(() => {
-    const allGames = [...steamGamesArray, ...nonSteamGames]
-      .map((game) =>
-        playtimeToAdd[game.name]
-          ? {
-              ...game,
-              playtime_forever:
-                game.playtime_forever + playtimeToAdd[game.name],
-            }
-          : game,
-      )
-      .sort((a, b) => b.playtime_forever - a.playtime_forever);
-    return allGames;
-  }, [steamGamesArray]);
-
-  // Get the current items based on pagination
-  const currentItems = useMemo(() => {
-    return allGamesArray.slice(
-      (currentPage - 1) * itemsPerPage,
-      currentPage * itemsPerPage,
-    );
-  }, [allGamesArray, currentPage]);
-
-  // Calculate total playtime once
-  const totalPlayTime = useMemo(() => {
-    const steamPlaytime = steamGamesArray.reduce((total, game) => {
-      const playtime = playtimeToAdd[game.name]
-        ? game.playtime_forever + playtimeToAdd[game.name]
-        : game.playtime_forever;
-      return total + playtime;
-    }, 0);
-
-    const nonSteamPlaytime = nonSteamGames.reduce(
-      (total, game) => total + game.playtime_forever,
-      0,
-    );
-
-    return steamPlaytime + nonSteamPlaytime;
-  }, [steamGamesArray]);
-
-  // Add playtime modifications
-  const displayedItems = useMemo(
-    () => [
-      ...currentItems,
-      ...Array(itemsPerPage - currentItems.length).fill(null),
-    ],
-    [currentItems],
-  );
+  const [page, setPage] = useState(1);
 
   return (
     <>
       <div className="mt-8 mb-4 flex items-center justify-between">
         <h2 className="font-bold text-neutral-300 text-xl">
-          <span className="text-emerald-500">#</span> Full Games Collection{" "}
-          {!isLoadingGame ? (
-            ownedGames && "🎮"
-          ) : (
-            <Loading className="inline animate-spin" />
-          )}
+          <span className="text-emerald-500">#</span> Full Games Collection 🎮
         </h2>
-        {ownedGames ? (
+        {games && (
           <TooltipProvider delayDuration={0}>
             <Tooltip defaultOpen>
               <TooltipTrigger asChild>
                 <p className="cursor-default text-neutral-400 text-xs sm:text-sm">
-                  <span className="text-neutral-300">{totalItems}</span> games
+                  <span className="text-neutral-300">{games.length}</span> games
                   found
                   <svg
-                    aria-label="Total playtime icon"
+                    aria-hidden="true"
                     className="ml-1.5 hidden sm:inline"
                     height="16"
                     viewBox="0 0 16 16"
@@ -146,111 +61,107 @@ export default function GamesCollection({
               >
                 <p>
                   Total playtime {"> "}
-                  <span className="text-emerald-400">
-                    {Math.floor(totalPlayTime / 60)} / hrs
-                  </span>
+                  <span className="text-emerald-400">{totalHours} / hrs</span>
                 </p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
-        ) : (
-          <Skeleton className="h-4 w-[93px] rounded-xs sm:h-5 sm:w-[132px]" />
         )}
       </div>
-      <div
-        className={cn(
-          "flex min-h-[337px] flex-row flex-wrap content-start items-start gap-3",
-          { "fade-in-up": !ownedGames },
-        )}
-      >
-        {ownedGames ? (
-          <TooltipProvider delayDuration={0} disableHoverableContent>
-            {displayedItems.map((game, index) =>
-              game ? (
-                <Tooltip key={game.name}>
-                  <TooltipTrigger
-                    aria-label={game.name}
-                    className={cn(
-                      "rounded-xs ring-2 ring-offset-black transition-transform duration-75 hover:ring-offset-2",
-                      {
-                        "pointer-events-none opacity-50": isLoadingGame,
-                        "pointer-events-none scale-95 opacity-100 ring-4 ring-emerald-400":
-                          game.appid === gameAppId,
-                        "hover:ring-yellow-500": game.appid !== gameAppId,
-                        "cursor-default hover:ring-red-500": game.is_non_steam,
-                      },
-                    )}
-                    onClick={() => {
-                      if (game.is_non_steam) return;
-                      setIsLoadingGame(true);
-                      setGameAppId(game.appid);
-                      setGameAppName(game.name);
-                    }}
-                  >
-                    <div className="relative">
-                      <Image
-                        alt={game.name}
-                        blurDataURL="/static/icons/blur.svg"
-                        className="drag-none h-[75.27px] w-[160.6px] select-none rounded-xs bg-neutral-900"
-                        height={120}
-                        placeholder="blur"
-                        src={
-                          game.image ||
-                          `https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/header.jpg`
-                        }
-                        width={256}
-                      />
-                      {game.appid !== gameAppId && (
-                        <p className="absolute top-0 left-0 ml-0.5 text-xs text-yellow-600">
-                          #
-                          <span className="font-bold text-yellow-500">
-                            {index + 1}
-                          </span>
-                        </p>
-                      )}
-                    </div>
-                  </TooltipTrigger>
-                  <TooltipContent
-                    align="start"
-                    alignOffset={-4}
-                    className="rounded-xs border border-neutral-400 bg-neutral-900"
-                    sideOffset={6}
-                  >
-                    <p className="underline decoration-neutral-300">
-                      {game.name}
-                    </p>
-                    <span className="block text-emerald-400 text-xs">
-                      {Math.floor((game.playtime_forever / 60) * 10) / 10} hours
-                      total
-                    </span>
-                  </TooltipContent>
-                </Tooltip>
-              ) : (
-                // biome-ignore lint/suspicious/noArrayIndexKey: placeholder skeleton has no stable identity
-                <Fragment key={`skeleton-slot-${index}`}>
-                  <Skeleton className="rounded-xs sm:h-[75.27px] sm:w-40" />
-                </Fragment>
-              ),
-            )}
-          </TooltipProvider>
-        ) : (
-          Array.from({ length: itemsPerPage }).map((_, i) => (
-            // biome-ignore lint/suspicious/noArrayIndexKey: placeholder skeleton has no stable identity
-            <Fragment key={`placeholder-slot-${i}`}>
-              <Skeleton className="rounded-xs sm:h-[75px] sm:w-40" />
-            </Fragment>
-          ))
-        )}
-        {ownedGames && (
-          <Pagination
-            className="fade-in mt-3"
-            note={true}
-            onPageChange={handlePageChange}
-            pages={totalPages}
-            state={{ page: currentPage, window: 5 }}
-          />
-        )}
-      </div>
+      {games ? (
+        <CollectionGrid
+          actions={actions}
+          games={games}
+          onPageChange={setPage}
+          page={page}
+        />
+      ) : (
+        <SteamUnavailable />
+      )}
     </>
+  );
+}
+
+function CollectionGrid({
+  games,
+  page,
+  onPageChange,
+  actions,
+}: {
+  games: CollectionGame[];
+  page: number;
+  onPageChange: (page: number) => void;
+  actions: GameActions;
+}) {
+  const offset = (page - 1) * PER_PAGE;
+  const pageGames = games.slice(offset, offset + PER_PAGE);
+
+  return (
+    <div className="flex min-h-[337px] flex-row flex-wrap content-start items-start gap-3">
+      <TooltipProvider delayDuration={0} disableHoverableContent>
+        {pageGames.map((game, index) => {
+          const { appid } = game;
+          const selected = appid !== null && appid === actions.selectedAppId;
+          return (
+            <Tooltip key={game.id}>
+              <TooltipTrigger
+                aria-label={game.name}
+                aria-pressed={appid === null ? undefined : selected}
+                className={cn(
+                  "rounded-xs ring-2 ring-offset-black transition-transform duration-75 hover:ring-offset-2",
+                  appid === null
+                    ? "cursor-default hover:ring-red-500"
+                    : selected
+                      ? "pointer-events-none scale-95 ring-4 ring-emerald-400"
+                      : "hover:ring-yellow-500",
+                )}
+                onClick={() => appid !== null && actions.select(appid)}
+                onFocus={() => appid !== null && actions.preload(appid)}
+                onPointerEnter={() => appid !== null && actions.preload(appid)}
+              >
+                <div className="relative">
+                  <Image
+                    alt=""
+                    blurDataURL="/static/icons/blur.svg"
+                    className="drag-none h-[75.27px] w-[160.6px] select-none rounded-xs bg-neutral-900 object-cover"
+                    height={120}
+                    placeholder="blur"
+                    src={game.image}
+                    width={256}
+                  />
+                  {!selected && (
+                    <p className="absolute top-0 left-0 ml-0.5 text-xs text-yellow-600">
+                      #
+                      <span className="font-bold text-yellow-500">
+                        {offset + index + 1}
+                      </span>
+                    </p>
+                  )}
+                </div>
+              </TooltipTrigger>
+              <TooltipContent
+                align="start"
+                alignOffset={-4}
+                className="rounded-xs border border-neutral-400 bg-neutral-900"
+                sideOffset={6}
+              >
+                <p className="underline decoration-neutral-300">{game.name}</p>
+                <span className="block text-emerald-400 text-xs">
+                  {Math.floor((game.minutes / 60) * 10) / 10} hours total
+                  {appid === null && " · not on Steam"}
+                </span>
+              </TooltipContent>
+            </Tooltip>
+          );
+        })}
+      </TooltipProvider>
+      <Pagination
+        className="mt-3"
+        note
+        onPageChange={onPageChange}
+        pages={Math.ceil(games.length / PER_PAGE)}
+        state={{ page, window: 5 }}
+      />
+    </div>
   );
 }
