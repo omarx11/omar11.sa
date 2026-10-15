@@ -43,9 +43,9 @@ export default function RecentGames({
                 >
                   <div className="mt-1 max-w-[110px] group-hover:underline sm:max-w-[160px]">
                     <Cover
-                      appid={game.appid}
                       name={game.name}
                       selected={selected}
+                      src={game.cover}
                     />
                     <p
                       className={cn(
@@ -67,15 +67,14 @@ export default function RecentGames({
 }
 
 function Cover({
-  appid,
+  src,
   name,
   selected,
 }: {
-  appid: number;
+  src: string | null;
   name: string;
   selected: boolean;
 }) {
-  // Some games have no portrait artwork on Steam's CDN.
   const [failed, setFailed] = useState(false);
   return (
     <Image
@@ -88,11 +87,7 @@ function Cover({
       height={384}
       onError={() => setFailed(true)}
       placeholder="blur"
-      src={
-        failed
-          ? "/static/images/steam_error.jpg"
-          : `https://cdn.cloudflare.steamstatic.com/steam/apps/${appid}/library_600x900.jpg`
-      }
+      src={!src || failed ? "/static/images/steam_error.jpg" : src}
       width={256}
     />
   );

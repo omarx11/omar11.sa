@@ -19,8 +19,22 @@ const HIDDEN_GAME_IDS = new Set([
   34330, 371140, 342230, 431960,
 ]);
 
-export const steamHeaderImage = (appid: number) =>
-  `https://cdn.cloudflare.steamstatic.com/steam/apps/${appid}/header.jpg`;
+const STORE_ASSETS = "https://shared.steamstatic.com/store_item_assets/";
+const ART_TTL = 86400; // 1 day
+
+type StoreArt = { header: string; cover: string };
+type StoreItemsResponse = {
+  response?: {
+    store_items?: {
+      appid?: number;
+      assets?: {
+        asset_url_format?: string;
+        header?: string;
+        library_capsule?: string;
+      };
+    }[];
+  };
+};
 
 /** Cached Steam Web API GET. Returns null when Steam fails or has no data. */
 async function steam<T>(
@@ -43,6 +57,47 @@ async function steam<T>(
   } catch {
     return null;
   }
+}
+
+/**
+ * Real artwork URLs from Steam's store. Newer games keep their images under
+ * hashed paths, so the old fixed `/steam/apps/{id}/header.jpg` URLs 404.
+ */
+async function getStoreArt(appids: number[]): Promise<Map<number, StoreArt>> {
+  const art = new Map<number, StoreArt>();
+  const batches: number[][] = [];
+  for (let i = 0; i < appids.length; i += 100) {
+    batches.push(appids.slice(i, i + 100));
+  }
+
+  const results = await Promise.all(
+    batches.map((ids) =>
+      steam<StoreItemsResponse>(
+        "/IStoreBrowseService/GetItems/v1",
+        {
+          input_json: JSON.stringify({
+            ids: ids.map((appid) => ({ appid })),
+            context: { language: "english", country_code: "US" },
+            data_request: { include_assets: true },
+          }),
+        },
+        ART_TTL,
+      ),
+    ),
+  );
+
+  for (const item of results.flatMap((r) => r?.response?.store_items ?? [])) {
+    const assets = item.assets;
+    if (!item.appid || !assets?.asset_url_format || !assets.header) continue;
+    const url = (file: string) =>
+      // biome-ignore lint/suspicious/noTemplateCurlyInString: Steam's literal placeholder
+      STORE_ASSETS + assets.asset_url_format?.replace("${FILENAME}", file);
+    art.set(item.appid, {
+      header: url(assets.header),
+      cover: url(assets.library_capsule ?? "library_600x900.jpg"),
+    });
+  }
+  return art;
 }
 
 type SteamGame = { appid: number; name: string; playtime_forever: number };
@@ -72,13 +127,23 @@ export async function getGamesOverview(): Promise<GamesOverview> {
     getOwnedGames(),
   ]);
 
-  const recent: RecentGame[] | null = recentData?.response
-    ? (recentData.response.games ?? []).slice(0, 5).map((game) => ({
-        appid: game.appid,
-        name: game.name,
-        hours: Math.floor((game.playtime_2weeks / 60) * 10) / 10,
-      }))
+  const recentGames = recentData?.response
+    ? (recentData.response.games ?? []).slice(0, 5)
     : null;
+  const art = await getStoreArt([
+    ...new Set([
+      ...(recentGames ?? []).map((game) => game.appid),
+      ...(owned ?? []).map((game) => game.appid),
+    ]),
+  ]);
+
+  const recent: RecentGame[] | null =
+    recentGames?.map((game) => ({
+      appid: game.appid,
+      name: game.name,
+      hours: Math.floor((game.playtime_2weeks / 60) * 10) / 10,
+      cover: art.get(game.appid)?.cover ?? null,
+    })) ?? null;
 
   if (!owned) return { recent, collection: null, totalHours: 0 };
 
@@ -89,7 +154,7 @@ export async function getGamesOverview(): Promise<GamesOverview> {
         id: `steam-${game.appid}`,
         appid: game.appid,
         name: game.name,
-        image: steamHeaderImage(game.appid),
+        image: art.get(game.appid)?.header ?? null,
         minutes: game.playtime_forever,
       })),
     ...nonSteamGames.map((game) => ({

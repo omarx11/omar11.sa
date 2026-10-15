@@ -9,6 +9,7 @@ import Age from "./content/Age";
 import PlayAudio from "./content/PlayAudio";
 import Discord from "./Discord";
 import Media from "./Media";
+import { SectionLink } from "./ui/SectionLink";
 
 export default function Header() {
   return (
@@ -69,12 +70,12 @@ export default function Header() {
             and have completed several exciting projects. Having recently
             graduated, I’m excited to start my professional journey. Curious to
             learn more? Feel free to explore my{" "}
-            <Link
+            <SectionLink
               className="text-neutral-400 underline underline-offset-4 hover:no-underline"
-              href="/"
+              href="/#projects"
             >
               works..
-            </Link>{" "}
+            </SectionLink>{" "}
             ✒️
           </div>
         </div>

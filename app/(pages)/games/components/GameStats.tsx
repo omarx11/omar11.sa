@@ -146,6 +146,7 @@ function StatsBody({
                       height={48}
                       placeholder="blur"
                       src={achievement.icon}
+                      unoptimized
                       width={48}
                     />
                     <div className="flex min-w-0 flex-1 flex-col justify-between text-start text-sm">

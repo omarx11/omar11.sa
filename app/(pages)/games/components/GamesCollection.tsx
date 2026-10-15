@@ -97,7 +97,11 @@ function CollectionGrid({
   const pageGames = games.slice(offset, offset + PER_PAGE);
 
   return (
-    <div className="flex min-h-[337px] flex-row flex-wrap content-start items-start gap-3">
+    // Keyed by page so the staggered entrance replays on every page change.
+    <div
+      className="fade-in-up flex min-h-[337px] flex-row flex-wrap content-start items-start gap-3"
+      key={page}
+    >
       <TooltipProvider delayDuration={0} disableHoverableContent>
         {pageGames.map((game, index) => {
           const { appid } = game;
@@ -120,15 +124,24 @@ function CollectionGrid({
                 onPointerEnter={() => appid !== null && actions.preload(appid)}
               >
                 <div className="relative">
-                  <Image
-                    alt=""
-                    blurDataURL="/static/icons/blur.svg"
-                    className="drag-none h-[75.27px] w-[160.6px] select-none rounded-xs bg-neutral-900 object-cover"
-                    height={120}
-                    placeholder="blur"
-                    src={game.image}
-                    width={256}
-                  />
+                  {game.image ? (
+                    <Image
+                      alt=""
+                      blurDataURL="/static/icons/blur.svg"
+                      className="drag-none h-[75.27px] w-[160.6px] select-none rounded-xs bg-neutral-900 object-cover"
+                      height={215}
+                      placeholder="blur"
+                      src={game.image}
+                      // Steam's CDN already serves right-sized JPEGs fast;
+                      // only local artwork goes through the optimizer.
+                      unoptimized={game.image.startsWith("http")}
+                      width={460}
+                    />
+                  ) : (
+                    <span className="flex h-[75.27px] w-[160.6px] items-center justify-center rounded-xs bg-neutral-900 px-2 text-center text-neutral-400 text-xs leading-tight">
+                      {game.name}
+                    </span>
+                  )}
                   {!selected && (
                     <p className="absolute top-0 left-0 ml-0.5 text-xs text-yellow-600">
                       #

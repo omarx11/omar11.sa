@@ -2,25 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "lh3.googleusercontent.com",
-      },
-      {
-        protocol: "https",
-        hostname: "avatars.githubusercontent.com",
-      },
-      {
-        protocol: "https",
-        hostname: "cdn.cloudflare.steamstatic.com",
-      },
-      {
-        protocol: "https",
-        hostname: "steamcdn-a.akamaihd.net",
-      },
-    ],
-    qualities: [75, 100],
+    // Only Steam's portrait covers are resized remotely; other remote images
+    // (avatars, Steam headers, achievement icons) load directly from their CDN.
+    remotePatterns: [{ protocol: "https", hostname: "shared.steamstatic.com" }],
   },
 };
 

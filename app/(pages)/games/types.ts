@@ -3,6 +3,8 @@ export type RecentGame = {
   name: string;
   /** Hours played in the last two weeks. */
   hours: number;
+  /** Portrait artwork, null when Steam has none. */
+  cover: string | null;
 };
 
 export type CollectionGame = {
@@ -10,7 +12,8 @@ export type CollectionGame = {
   /** null for games played outside Steam (no stats available). */
   appid: number | null;
   name: string;
-  image: string;
+  /** null when Steam has no store artwork (e.g. delisted betas). */
+  image: string | null;
   minutes: number;
 };
 

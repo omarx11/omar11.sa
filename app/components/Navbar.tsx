@@ -15,10 +15,15 @@ type Indicator = { x: number; y: number; w: number; h: number; color: string };
 export default function Navbar() {
   const pathname = usePathname();
   // Highlight a clicked tab immediately, before the navigation finishes.
-  const [pending, setPending] = useState<{ from: string; href: string } | null>(
-    null,
-  );
-  const activeHref = pending?.from === pathname ? pending.href : pathname;
+  const [pending, setPending] = useState<string | null>(null);
+  // Any completed navigation (tab, avatar, in-text link, back button) makes
+  // the URL the source of truth again.
+  const [lastPathname, setLastPathname] = useState(pathname);
+  if (lastPathname !== pathname) {
+    setLastPathname(pathname);
+    setPending(null);
+  }
+  const activeHref = pending ?? pathname;
 
   const navRef = useRef<HTMLElement>(null);
   const [indicator, setIndicator] = useState<Indicator | null>(null);
@@ -83,7 +88,7 @@ export default function Navbar() {
                   if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) {
                     return;
                   }
-                  setPending({ from: pathname, href: link.href });
+                  setPending(link.href);
                 }}
                 // Before the indicator is measured, tint the active tab directly
                 // so the server-rendered HTML already shows the right state.
