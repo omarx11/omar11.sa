@@ -1,30 +1,19 @@
-import type { Metadata } from "next";
 import { Suspense } from "react";
 
 import { Heading } from "@/app/components/ui/Heading";
 import { Skeleton } from "@/app/components/ui/Skeleton";
-import { author } from "@/app/config/meta";
 import { getSessionUser, toSessionUser } from "@/app/lib/auth/server";
+import { pageMetadata } from "@/app/lib/metadata";
 
 import { Guestbook } from "./components/Guestbook";
 import { getEntries } from "./data";
 
-export const metadata: Metadata = {
-  title: "Guestbook Page",
-  description: `${author.name}'s Guestbook Comments`,
-  keywords: ["Guestbook", "Comments", "Sign Guestbook", author.fullName],
-  openGraph: {
-    title: "Guestbook Page",
-    description: `${author.name}'s Guestbook Comments`,
-    url: `${author.siteUrl}/guestbook`,
-    images: [
-      {
-        url: author.ogImage,
-      },
-    ],
-    type: "website",
-  },
-};
+export const metadata = pageMetadata({
+  title: "Guestbook",
+  description:
+    "Sign Omar Abdulaziz's guestbook with Google or GitHub and leave a message.",
+  path: "/guestbook",
+});
 
 export default function GuestbookPage() {
   return (

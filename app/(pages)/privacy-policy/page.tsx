@@ -1,24 +1,17 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { Heading } from "@/app/components/ui/Heading";
 import { author } from "@/app/config/meta";
+import { pageMetadata } from "@/app/lib/metadata";
 
 const LAST_UPDATED = "October 15, 2026";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Privacy Policy",
-  description: `What ${author.siteName} collects, why, and how to have it deleted.`,
-  alternates: { canonical: "/privacy-policy" },
-  openGraph: {
-    title: "Privacy Policy",
-    description: `What ${author.siteName} collects, why, and how to have it deleted.`,
-    url: `${author.siteUrl}/privacy-policy`,
-    images: [{ url: author.ogImage }],
-    type: "website",
-  },
-};
+  description: "What omar11.sa collects, why, and how to have it deleted.",
+  path: "/privacy-policy",
+});
 
 export default function PrivacyPolicyPage() {
   return (

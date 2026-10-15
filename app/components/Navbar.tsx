@@ -127,7 +127,7 @@ export default function Navbar() {
           />
         )}
       </nav>
-      <div className="fade-in-up flex items-center text-neutral-500 sm:gap-1.5">
+      <div className="fade-in-up flex items-center text-neutral-400 sm:gap-1.5">
         <svg
           aria-hidden="true"
           height="1.8rem"

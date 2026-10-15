@@ -1,27 +1,16 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
 import { Heading } from "@/app/components/ui/Heading";
-import { author } from "@/app/config/meta";
 import * as s from "@/app/config/specs";
+import { pageMetadata } from "@/app/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Specs Page",
-  description: `${author.name}'s Equipment Specifications`,
-  keywords: [`${author.fullName} Specs`],
-  openGraph: {
-    title: "Specs Page",
-    description: `${author.name}'s Equipment Specifications`,
-    url: `${author.siteUrl}/specs`,
-    images: [
-      {
-        url: author.ogImage,
-      },
-    ],
-    type: "website",
-  },
-};
+export const metadata = pageMetadata({
+  title: "Specs",
+  description:
+    "The hardware and setup Omar Abdulaziz uses for development and gaming.",
+  path: "/specs",
+});
 
 export default function SpecsPage() {
   return (

@@ -1,25 +1,13 @@
-import type { Metadata } from "next";
-
 import { Heading } from "@/app/components/ui/Heading";
 import { author } from "@/app/config/meta";
+import { pageMetadata } from "@/app/lib/metadata";
 import { getCurrentYear } from "@/app/lib/time";
 
-export const metadata: Metadata = {
-  title: "License Page",
-  description: `MIT License for ${author.fullName} website`,
-  keywords: [`${author.fullName} License`],
-  openGraph: {
-    title: "License Page",
-    description: `MIT License for ${author.fullName} website`,
-    url: `${author.siteUrl}/license`,
-    images: [
-      {
-        url: author.ogImage,
-      },
-    ],
-    type: "website",
-  },
-};
+export const metadata = pageMetadata({
+  title: "License",
+  description: "The MIT license for the source code of omar11.sa.",
+  path: "/license",
+});
 
 export default async function LicensePage() {
   return (

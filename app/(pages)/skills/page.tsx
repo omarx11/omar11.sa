@@ -1,7 +1,4 @@
-import type { Metadata } from "next";
-
 import { Heading } from "@/app/components/ui/Heading";
-import { author } from "@/app/config/meta";
 import {
   databases,
   editors,
@@ -11,26 +8,17 @@ import {
   styles,
   systems,
 } from "@/app/config/skills";
+import { pageMetadata } from "@/app/lib/metadata";
 
 import Accordion from "./components/Accordion";
 import { SkillsArray } from "./components/SkillsArray";
 
-export const metadata: Metadata = {
-  title: "Skills Page",
-  description: `Showcase ${author.name}'s skills and techs`,
-  keywords: [`${author.fullName} Tech skills`],
-  openGraph: {
-    title: "Skills Page",
-    description: `Showcase ${author.name}'s skills and techs`,
-    url: `${author.siteUrl}/skills`,
-    images: [
-      {
-        url: author.ogImage,
-      },
-    ],
-    type: "website",
-  },
-};
+export const metadata = pageMetadata({
+  title: "Skills",
+  description:
+    "The languages, frameworks, databases, services and tools Omar Abdulaziz uses to build web apps.",
+  path: "/skills",
+});
 
 export default function SkillsPage() {
   return (

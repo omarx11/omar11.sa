@@ -106,7 +106,7 @@ export default async function Header() {
           </div>
           <div className="flex flex-row-reverse items-start gap-2">
             <AIBotAssistant />
-            <p className="fade-opacity -z-10 -mt-1 xs:block hidden rotate-6 select-none rounded-xs bg-neutral-900 px-2 py-1 text-[0.6rem] text-neutral-500 sm:text-xs">
+            <p className="fade-opacity -z-10 -mt-1 xs:block hidden rotate-6 select-none rounded-xs bg-neutral-900 px-2 py-1 text-[0.6rem] text-neutral-400 sm:text-xs">
               {"AI Assistant ->"}
             </p>
           </div>

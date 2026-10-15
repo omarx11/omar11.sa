@@ -1,27 +1,15 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
 import { Heading } from "@/app/components/ui/Heading";
 import { anime } from "@/app/config/anime";
-import { author } from "@/app/config/meta";
+import { pageMetadata } from "@/app/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Anime Page",
-  description: `${author.name}'s top favorite anime`,
-  keywords: [`${author.fullName} Anime Page`],
-  openGraph: {
-    title: "Anime Page",
-    description: `${author.name}'s top favorite anime`,
-    url: `${author.siteUrl}/anime`,
-    images: [
-      {
-        url: author.ogImage,
-      },
-    ],
-    type: "website",
-  },
-};
+export const metadata = pageMetadata({
+  title: "Anime",
+  description: "Omar Abdulaziz's favorite anime series.",
+  path: "/anime",
+});
 
 function AnimePage() {
   return (

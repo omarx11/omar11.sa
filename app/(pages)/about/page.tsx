@@ -1,29 +1,19 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
 import { author } from "@/app/config/meta";
+import { pageMetadata } from "@/app/lib/metadata";
 
 import Certifications from "./components/Certifications";
 import Education from "./components/Education";
 import Work from "./components/Work";
 
-export const metadata: Metadata = {
-  title: "About Page",
-  description: `${author.fullName} resume`,
-  keywords: [`About ${author.fullName}`, "web developer", "software engineer"],
-  openGraph: {
-    title: "About Page",
-    description: `${author.fullName} resume`,
-    url: `${author.siteUrl}/about`,
-    images: [
-      {
-        url: author.ogImage,
-      },
-    ],
-    type: "website",
-  },
-};
+export const metadata = pageMetadata({
+  title: "About",
+  description:
+    "Omar Abdulaziz's story: how he got into programming, his education at TVTC, work experience and certifications.",
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

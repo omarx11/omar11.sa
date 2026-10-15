@@ -1,12 +1,76 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+import { author, profiles } from "@/app/config/meta";
+import { databases, frameworks, langs, styles } from "@/app/config/skills";
 
 import GithubCal from "./components/content/GithubCal";
 import Projects from "./components/content/Projects";
 import { Heading } from "./components/ui/Heading";
 
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
+
+const SITE = author.siteUrl;
+
+// schema.org structured data: who this site is about (Google's ProfilePage).
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${SITE}/#website`,
+      url: SITE,
+      name: author.siteName,
+      inLanguage: "en",
+      publisher: { "@id": `${SITE}/#person` },
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": `${SITE}/#profile`,
+      url: SITE,
+      name: `${author.fullName} — ${author.jobTitle}`,
+      isPartOf: { "@id": `${SITE}/#website` },
+      mainEntity: { "@id": `${SITE}/#person` },
+    },
+    {
+      "@type": "Person",
+      "@id": `${SITE}/#person`,
+      name: author.fullName,
+      url: SITE,
+      image: `${SITE}${author.avatar}`,
+      jobTitle: author.jobTitle,
+      description: author.description,
+      email: `mailto:${author.email}`,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: author.city,
+        addressCountry: "SA",
+      },
+      alumniOf: {
+        "@type": "EducationalOrganization",
+        name: "Technical and Vocational Training Corporation",
+      },
+      knowsAbout: [...langs, ...frameworks, ...styles, ...databases].map(
+        (skill) => skill.name,
+      ),
+      sameAs: profiles,
+    },
+  ],
+};
+
 export default function HomePage() {
   return (
     <>
+      <script
+        // Escape "<" so the JSON can't close the script tag (per Next.js docs).
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: static, escaped JSON-LD
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
+        type="application/ld+json"
+      />
       <Heading emoji="🖥️" name="Projects" sId="#projects" />
       <p className="group relative mt-4 max-w-max text-neutral-400">
         {`Here's`} all of my personal projects that {`I've`} worked on. You can

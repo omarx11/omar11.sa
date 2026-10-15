@@ -6,7 +6,7 @@ import { getCurrentYear } from "@/app/lib/time";
 export default async function Footer() {
   return (
     <footer className="flex flex-row flex-wrap items-center justify-between border-neutral-800 border-t-[1px] pt-4 pb-6 text-sm sm:pb-12">
-      <p className="text-neutral-500 text-xs sm:text-[0.8rem]">
+      <p className="text-neutral-400 text-xs sm:text-[0.8rem]">
         {await getCurrentYear()} © {author.fullName} • Made with..{" "}
         <Link
           className="font-bold underline-offset-2 hover:text-emerald-700 hover:underline"
@@ -16,7 +16,7 @@ export default async function Footer() {
           NEXT.js
         </Link>
       </p>
-      <div className="flex flex-row items-center gap-1 text-neutral-500">
+      <div className="flex flex-row items-center gap-1 text-neutral-400">
         <Link
           aria-label="View the source code on GitHub"
           className="hover:underline"

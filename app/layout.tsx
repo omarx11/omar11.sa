@@ -1,5 +1,5 @@
 import { Analytics } from "@vercel/analytics/react";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Recursive } from "next/font/google";
 
 import { author } from "@/app/config/meta";
@@ -14,41 +14,36 @@ const recursive = Recursive({ subsets: ["latin"], display: "swap" });
 export const metadata: Metadata = {
   metadataBase: new URL(author.siteUrl),
   title: {
-    default: author.fullName,
-    template: `%s - ${author.fullName}`,
+    default: `${author.fullName} — ${author.jobTitle}`,
+    template: `%s · ${author.fullName}`,
   },
   description: author.description,
-  keywords: [
-    "Omar Abdulaziz",
-    "Omar Website",
-    "Omar Portfolio",
-    "omar11",
-    "omar11.sa",
-  ],
-  authors: { name: author.name },
+  applicationName: author.siteName,
+  authors: [{ name: author.fullName, url: author.siteUrl }],
   creator: author.fullName,
-  icons: {
-    icon: ["/favicon.ico"],
-  },
-  openGraph: {
-    title: "Home Page",
-    description: author.description,
-    url: author.siteUrl,
-    images: [
-      {
-        url: author.ogImage,
-      },
-    ],
-    type: "website",
-  },
+  robots: { index: true, follow: true },
+  icons: { icon: "/favicon.ico", apple: "/icon-192x192.png" },
   manifest: "/manifest.json",
+  openGraph: {
+    type: "website",
+    siteName: author.siteName,
+    locale: "en_US",
+    url: "/",
+    title: `${author.fullName} — ${author.jobTitle}`,
+    description: author.description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    creator: author.twitterHandle,
+    title: `${author.fullName} — ${author.jobTitle}`,
+    description: author.description,
+  },
 };
 
-export const viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "cyan" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
+export const viewport: Viewport = {
+  // The site is dark-only.
+  themeColor: "#000000",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({
