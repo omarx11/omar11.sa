@@ -1,6 +1,5 @@
 "use client";
 
-import type { Provider } from "@supabase/supabase-js";
 import { useState } from "react";
 
 import { Github } from "@/app/components/icons/Github";
@@ -8,7 +7,7 @@ import { Google } from "@/app/components/icons/Google";
 import { Loading } from "@/app/components/icons/Loading";
 import { cn } from "@/app/lib/utils";
 
-import { oAuthSignIn } from "./actions";
+type Provider = "github" | "google";
 
 type OAuthProvider = {
   name: Provider;
@@ -18,6 +17,21 @@ type OAuthProvider = {
 
 const OAuthButtons = () => {
   const [isPending, setIsPending] = useState<string>("");
+
+  const signIn = async (provider: Provider) => {
+    setIsPending(provider);
+    // Loaded on demand so the auth client stays out of the initial bundle.
+    const { authClient } = await import("@/app/lib/auth/client");
+    // On success the browser is redirected to the provider.
+    const { error } = await authClient.signIn.social({
+      provider,
+      callbackURL: `${window.location.origin}/auth/callback`,
+    });
+    if (error) {
+      console.error("Sign-in failed:", error.message);
+      setIsPending("");
+    }
+  };
 
   const oAuthProviders: OAuthProvider[] = [
     {
@@ -38,7 +52,7 @@ const OAuthButtons = () => {
       <div className="flex gap-3">
         {oAuthProviders.map((provider) => (
           <button
-            aria-label="Sign-in Providor"
+            aria-label={`Sign in with ${provider.displayName}`}
             className={cn(
               "flex items-center gap-1 rounded-lg px-2 py-2 font-bold text-lg duration-100",
               {
@@ -48,10 +62,7 @@ const OAuthButtons = () => {
               },
             )}
             key={provider.name}
-            onClick={async () => {
-              setIsPending(provider.name);
-              await oAuthSignIn(provider.name);
-            }}
+            onClick={() => signIn(provider.name)}
             type="button"
           >
             {provider.icon}

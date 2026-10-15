@@ -11,7 +11,8 @@ import {
 import TextareaAutosize from "react-textarea-autosize";
 
 import { StatementContext } from "@/app/context/statement";
-import { getBotMessage, saveBotMessage } from "@/app/lib/chatbot/actions";
+import { getBotMessage } from "@/app/lib/chatbot/actions";
+import { saveConversation } from "@/app/lib/chatbot/save-conversation";
 import type { BotMessage } from "@/app/lib/validators/bot-message";
 
 import { Loading } from "../icons/Loading";
@@ -74,11 +75,11 @@ const ChatBotInput = () => {
   });
 
   useEffect(() => {
-    (async () => {
-      if (!isPending && botMessages.length > 1) {
-        await saveBotMessage({ botMessages }, chatbot_id);
-      }
-    })();
+    if (!isPending && botMessages.length > 1) {
+      saveConversation(chatbot_id, botMessages).catch((error) => {
+        console.error("Error saving chatbot conversation:", error);
+      });
+    }
   }, [botMessages, chatbot_id, isPending]);
 
   const handleSubmit = (
