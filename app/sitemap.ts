@@ -53,5 +53,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.4,
     },
+    {
+      url: `${pathname}/privacy-policy`,
+      lastModified: new Date("2026-10-15"),
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
   ];
 }

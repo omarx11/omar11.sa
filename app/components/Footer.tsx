@@ -27,6 +27,10 @@ export default function Footer() {
           source
         </Link>
         <span className="text-neutral-500">•</span>
+        <Link className="hover:underline" href="/privacy-policy">
+          privacy
+        </Link>
+        <span className="text-neutral-500">•</span>
         <ActiveLink
           href="/license"
           label="Read more about license"
