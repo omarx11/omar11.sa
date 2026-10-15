@@ -190,20 +190,21 @@ details[open]::details-content {
     }
   }
 
+  /* Waits ~1s, then pops in and settles softly (ease-out with a slight
+     overshoot), so it doesn't snap at the end. Uses `scale` so it composes
+     with the element's own `rotate`. */
   .fade-opacity {
-    animation: fade-opacity 1.6s ease-in;
+    animation: fade-opacity 1.6s both;
   }
   @keyframes fade-opacity {
-    0% {
-      transform: scale(0);
+    0%,
+    60% {
+      scale: 0.6;
       opacity: 0;
-    }
-    80% {
-      opacity: 0;
+      animation-timing-function: cubic-bezier(0.34, 1.4, 0.64, 1);
     }
     100% {
-      transform: scale(1);
-      rotate: 6deg;
+      scale: 1;
       opacity: 1;
     }
   }

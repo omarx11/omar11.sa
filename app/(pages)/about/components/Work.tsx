@@ -84,6 +84,8 @@ export default function Work() {
       <Link
         className="group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-md bg-neutral-800/50 px-3 py-2 font-medium text-neutral-300 text-sm outline-offset-2 transition hover:bg-neutral-800 hover:text-neutral-50 active:bg-neutral-100 active:bg-neutral-800/50 active:text-neutral-50/70 active:transition-none"
         href="/static/files/omar_abdulaziz_cv_en.pdf"
+        rel="noopener"
+        target="_blank"
       >
         Download CV
         <svg

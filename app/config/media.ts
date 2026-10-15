@@ -20,7 +20,7 @@ export const media: MediaItemProps = [
   {
     name: "Discord",
     icon: "/static/icons/socials/discord.svg",
-    url: `https://discordredirect.discordsafe.com/users/${author.discordId}`,
+    url: `https://discord.com/users/${author.discordId}`,
   },
   {
     name: "LinkedIn",

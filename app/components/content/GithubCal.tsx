@@ -29,7 +29,7 @@ export default async function GithubCal() {
   // The calendar forces `width: max-content` inline; containing its inline size
   // stops it from widening the page on small screens (it scrolls instead).
   return (
-    <div className="mt-12 w-full contain-inline-size">
+    <div className="mt-11 w-full contain-inline-size">
       {contributions ? (
         <ActivityCalendar
           {...calendarProps}
@@ -50,7 +50,7 @@ export default async function GithubCal() {
 export function GithubCalSkeleton() {
   // On phones the loaded footer wraps to two lines; reserve that height.
   return (
-    <div className="mt-12 w-full contain-inline-size max-sm:min-h-[212px]">
+    <div className="mt-11 w-full contain-inline-size max-sm:min-h-[212px]">
       <ActivityCalendar {...calendarProps} data={[]} loading />
     </div>
   );

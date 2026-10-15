@@ -2,11 +2,12 @@ import Link from "next/link";
 
 import { author } from "@/app/config/meta";
 import { getCurrentYear } from "@/app/lib/time";
+import packageJson from "@/package.json";
 
 export default async function Footer() {
   return (
     <footer className="flex flex-row flex-wrap items-center justify-between border-neutral-800 border-t-[1px] pt-4 pb-6 text-sm sm:pb-12">
-      <p className="text-neutral-400 text-xs sm:text-[0.8rem]">
+      <p className="text-neutral-500 text-xs sm:text-[0.8rem]">
         {await getCurrentYear()} © {author.fullName} • Made with..{" "}
         <Link
           className="font-bold underline-offset-2 hover:text-emerald-700 hover:underline"
@@ -14,9 +15,15 @@ export default async function Footer() {
           target="_blank"
         >
           NEXT.js
-        </Link>
+        </Link>{" "}
+        <span
+          className="ml-1 select-none rounded-xs bg-neutral-900 px-1.5 py-0.5 font-mono text-[0.65rem] text-emerald-600"
+          title="App version"
+        >
+          v{packageJson.version}
+        </span>
       </p>
-      <div className="flex flex-row items-center gap-1 text-neutral-400">
+      <div className="flex flex-row items-center gap-1 text-neutral-500">
         <Link
           aria-label="View the source code on GitHub"
           className="hover:underline"

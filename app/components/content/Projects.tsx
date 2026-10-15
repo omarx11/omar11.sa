@@ -53,7 +53,7 @@ export default async function Projects() {
               </span>
               <span
                 className={cn(
-                  "pointer-events-none absolute right-0 bottom-full mb-2.5 origin-bottom scale-0 whitespace-nowrap rounded-md px-3 py-1.5 text-neutral-50 text-sm opacity-0 transition-[scale,opacity] duration-150 group-hover:scale-100 group-hover:opacity-100",
+                  "pointer-events-none absolute bottom-full left-1/2 mb-2.5 origin-bottom -translate-x-1/2 scale-0 whitespace-nowrap rounded-md px-3 py-1.5 text-neutral-50 text-sm opacity-0 transition-[scale,opacity] duration-150 group-hover:scale-100 group-hover:opacity-100",
                   repo.isUnderDev ? "bg-orange-800" : "bg-emerald-800",
                 )}
               >

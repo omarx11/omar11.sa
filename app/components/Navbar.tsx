@@ -6,7 +6,9 @@ import { usePathname } from "next/navigation";
 import { useLayoutEffect, useRef, useState } from "react";
 
 import { links } from "../config/navigation";
+import { useReveal } from "../hooks/useReveal";
 import { cn } from "../lib/utils";
+import { Skeleton } from "./ui/Skeleton";
 
 const navLinks = links.filter((link) => link.src);
 
@@ -24,6 +26,8 @@ export default function Navbar() {
     setPending(null);
   }
   const activeHref = pending ?? pathname;
+  // On a fresh page load the bar shows a skeleton first, then the tabs fade in.
+  const revealed = useReveal(400);
 
   const navRef = useRef<HTMLElement>(null);
   const [indicator, setIndicator] = useState<Indicator | null>(null);
@@ -63,15 +67,24 @@ export default function Navbar() {
   }, [indicator, animate]);
 
   return (
-    <div className="mt-4 flex min-h-[28px] select-none items-center justify-between border-neutral-900 border-t-8 pt-4">
+    <div className="relative mt-4 flex min-h-[28px] select-none items-center justify-between border-neutral-900 border-t-8 pt-4">
+      {!revealed && (
+        <Skeleton
+          aria-hidden="true"
+          className="absolute inset-x-0 top-4 bottom-0 rounded-xs bg-neutral-800/75"
+        />
+      )}
       <nav
         aria-label="Pages"
-        className="relative font-bold text-neutral-300"
+        className={cn(
+          "relative font-bold text-neutral-300",
+          !revealed && "invisible",
+        )}
         ref={navRef}
       >
         {/* The entrance animation lives on this wrapper: an animated transform
             on the indicator itself would override its inline position. */}
-        <div className="fade-in flex flex-wrap gap-4">
+        <div className={cn("flex flex-wrap gap-4", revealed && "fade-in")}>
           {navLinks.map((link) => {
             const active = link.href === activeHref;
             return (
@@ -127,7 +140,12 @@ export default function Navbar() {
           />
         )}
       </nav>
-      <div className="fade-in-up flex items-center text-neutral-400 sm:gap-1.5">
+      <div
+        className={cn(
+          "flex items-center text-neutral-500 sm:gap-1.5",
+          revealed ? "fade-in-up" : "invisible",
+        )}
+      >
         <svg
           aria-hidden="true"
           height="1.8rem"

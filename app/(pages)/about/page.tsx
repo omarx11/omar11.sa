@@ -162,7 +162,7 @@ export default function AboutPage() {
           </p>
         </div>
       </div>
-      <div className="mt-6 md:m-auto md:mt-0 lg:pl-14 xl:pl-32">
+      <div className="mt-6 md:m-auto md:mt-0 min-[860px]:pl-14 lg:pl-32">
         <div className="flex flex-col items-center gap-4 sm:gap-10 lg:items-start">
           <Work />
           <Education />

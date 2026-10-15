@@ -60,14 +60,19 @@ export default function RootLayout({
   return (
     <html data-scroll-behavior="smooth" lang="en">
       <body
-        className={`${recursive.className} flex min-h-screen justify-center overflow-x-hidden bg-black antialiased`}
+        className={`${recursive.className} min-h-screen bg-black antialiased`}
       >
-        <main className="mx-3 flex max-w-5xl flex-col">
-          <Header />
-          <Navbar />
-          <div className="my-9 flex-1 overflow-visible">{children}</div>
-          <Footer />
-        </main>
+        {/* Clips anything wider than the screen (e.g. the 3D certificate
+            cards) so phones can't pan sideways; content is still visible up
+            to the screen edges. */}
+        <div className="flex min-h-screen w-full justify-center overflow-x-clip">
+          <main className="mx-3 flex max-w-5xl flex-col">
+            <Header />
+            <Navbar />
+            <div className="my-9 flex-1 overflow-visible">{children}</div>
+            <Footer />
+          </main>
+        </div>
         <Analytics />
         {FirstVisitToolbar && <FirstVisitToolbar />}
       </body>

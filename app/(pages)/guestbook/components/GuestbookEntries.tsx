@@ -51,7 +51,7 @@ export function GuestbookEntries({
         {shown.map((entry) => (
           <li
             className={cn(
-              "flex flex-row items-start gap-3 rounded-md bg-neutral-950 px-1 py-4 transition-[opacity,background-color] duration-300 hover:bg-neutral-900 md:px-2",
+              "flex flex-row items-start gap-3 rounded-md bg-neutral-950 px-1 py-4 transition-[opacity,background-color] duration-75 hover:bg-neutral-900 md:px-2",
               { "opacity-60": entry.pending },
             )}
             key={entry.key ?? entry.cid}
