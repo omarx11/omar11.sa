@@ -1,79 +1,130 @@
 "use client";
 
-import { motion } from "framer-motion";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useContext, useEffect } from "react";
-
-import { StatementContext } from "@/app/context/statement";
+import { useLayoutEffect, useRef, useState } from "react";
 
 import { links } from "../config/navigation";
 import { cn } from "../lib/utils";
-import { Skeleton } from "./ui/Skeleton";
 
-const NavPages = () => {
+const navLinks = links.filter((link) => link.src);
+
+type Indicator = { x: number; y: number; w: number; h: number; color: string };
+
+export default function Navbar() {
   const pathname = usePathname();
-  const { pageNo, pageColor, setPageNo } = useContext(StatementContext);
-
-  useEffect(() => {
-    const linkPathname = links.find((a) => a.href === pathname);
-    setPageNo(linkPathname ? linkPathname.id : 0);
-  }, [pathname, setPageNo]);
-
-  return (
-    <nav className="fade-in flex flex-wrap gap-4 font-bold text-neutral-300">
-      {links.slice(0, 7).map((link) => (
-        <motion.div
-          className={cn("relative", {
-            "pointer-events-none relative z-10": link.id === pageNo,
-          })}
-          key={link.name}
-          onTap={() => setPageNo(link.id)}
-        >
-          <Link
-            aria-label={`Go to ${link.name}`}
-            className={cn(
-              "flex flex-row items-center gap-1 rounded-md bg-neutral-900 px-2 py-[2px]",
-              {
-                "pointer-events-none": link.id === pageNo,
-                "hover:bg-neutral-800": link.id !== pageNo,
-              },
-            )}
-            href={link.href}
-          >
-            {link.name}
-            <Image
-              alt={`${link.name} icon`}
-              className="drag-none select-none"
-              height={20}
-              src={link.src || ""}
-              width={20}
-            />
-          </Link>
-          {link.id === pageNo && (
-            <motion.div
-              animate={{ backgroundColor: link.color }}
-              className="absolute top-0 left-0 z-10 h-full w-full rounded-md"
-              initial={{ backgroundColor: pageColor }}
-              layoutId="page"
-              transition={{ type: "spring", duration: 0.4 }}
-            />
-          )}
-        </motion.div>
-      ))}
-    </nav>
+  // Highlight a clicked tab immediately, before the navigation finishes.
+  const [pending, setPending] = useState<{ from: string; href: string } | null>(
+    null,
   );
-};
+  const activeHref = pending?.from === pathname ? pending.href : pathname;
 
-const Navbar = () => {
+  const navRef = useRef<HTMLElement>(null);
+  const [indicator, setIndicator] = useState<Indicator | null>(null);
+  // Skip the slide on first placement; animate only later moves.
+  const [animate, setAnimate] = useState(false);
+
+  useLayoutEffect(() => {
+    const nav = navRef.current;
+    const active = navLinks.find((link) => link.href === activeHref);
+    const el = active
+      ? nav?.querySelector<HTMLElement>(`[data-href="${active.href}"]`)
+      : null;
+    if (!nav || !active || !el) {
+      setIndicator(null);
+      return;
+    }
+    const place = () =>
+      setIndicator({
+        x: el.offsetLeft,
+        y: el.offsetTop,
+        w: el.offsetWidth,
+        h: el.offsetHeight,
+        color: active.color,
+      });
+    place();
+    // Tabs wrap onto new rows as the viewport changes.
+    const observer = new ResizeObserver(place);
+    observer.observe(nav);
+    return () => observer.disconnect();
+  }, [activeHref]);
+
+  useLayoutEffect(() => {
+    if (indicator && !animate) {
+      const frame = requestAnimationFrame(() => setAnimate(true));
+      return () => cancelAnimationFrame(frame);
+    }
+  }, [indicator, animate]);
+
   return (
     <div className="mt-4 flex min-h-[28px] select-none items-center justify-between border-neutral-900 border-t-8 pt-4">
-      <NavPages />
+      <nav
+        aria-label="Pages"
+        className="relative font-bold text-neutral-300"
+        ref={navRef}
+      >
+        {/* The entrance animation lives on this wrapper: an animated transform
+            on the indicator itself would override its inline position. */}
+        <div className="fade-in flex flex-wrap gap-4">
+          {navLinks.map((link) => {
+            const active = link.href === activeHref;
+            return (
+              <Link
+                aria-current={link.href === pathname ? "page" : undefined}
+                className={cn(
+                  "flex flex-row items-center gap-1 rounded-md bg-neutral-900 px-2 py-[2px]",
+                  active ? "pointer-events-none" : "hover:bg-neutral-800",
+                )}
+                data-href={link.href}
+                href={link.href}
+                key={link.href}
+                onClick={(e) => {
+                  if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) {
+                    return;
+                  }
+                  setPending({ from: pathname, href: link.href });
+                }}
+                // Before the indicator is measured, tint the active tab directly
+                // so the server-rendered HTML already shows the right state.
+                style={
+                  active && !indicator
+                    ? { boxShadow: `inset 0 0 0 100px ${link.color}` }
+                    : undefined
+                }
+              >
+                {link.name}
+                <Image
+                  alt=""
+                  className="drag-none select-none"
+                  height={20}
+                  src={link.src ?? ""}
+                  width={20}
+                />
+              </Link>
+            );
+          })}
+        </div>
+        {indicator && (
+          <span
+            aria-hidden="true"
+            className={cn(
+              "pointer-events-none absolute top-0 left-0 rounded-md",
+              animate &&
+                "transition-[transform,width,height,background-color] duration-400 ease-[cubic-bezier(0.3,1.3,0.5,1)]",
+            )}
+            style={{
+              transform: `translate(${indicator.x}px, ${indicator.y}px)`,
+              width: indicator.w,
+              height: indicator.h,
+              backgroundColor: indicator.color,
+            }}
+          />
+        )}
+      </nav>
       <div className="fade-in-up flex items-center text-neutral-500 sm:gap-1.5">
         <svg
-          aria-label="point arrow"
+          aria-hidden="true"
           height="1.8rem"
           viewBox="0 0 24 24"
           width="1.8rem"
@@ -92,11 +143,4 @@ const Navbar = () => {
       </div>
     </div>
   );
-};
-
-export default dynamic(() => Promise.resolve(Navbar), {
-  loading: () => (
-    <Skeleton className="mt-8 mb-2 min-h-[28px] w-full rounded-xs bg-neutral-800/75" />
-  ),
-  ssr: false,
-});
+}

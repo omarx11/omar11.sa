@@ -7,7 +7,6 @@ import { author } from "@/app/config/meta";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
-import Providers from "./components/Providers";
 import "./globals.css";
 
 const recursive = Recursive({ subsets: ["latin"], display: "swap" });
@@ -63,12 +62,10 @@ export default function RootLayout({
         className={`${recursive.className} flex min-h-screen justify-center overflow-x-hidden bg-black antialiased`}
       >
         <main className="mx-3 flex max-w-5xl flex-col">
-          <Providers>
-            <Header />
-            <Navbar />
-            <div className="my-9 flex-1 overflow-visible">{children}</div>
-            <Footer />
-          </Providers>
+          <Header />
+          <Navbar />
+          <div className="my-9 flex-1 overflow-visible">{children}</div>
+          <Footer />
         </main>
         <Analytics />
       </body>

@@ -1,112 +1,43 @@
 "use client";
 
-import * as Popover from "@radix-ui/react-popover";
-import { useContext, useEffect, useState } from "react";
+import { type ComponentType, useState } from "react";
 
-import { StatementContext } from "@/app/context/statement";
-import { cn } from "@/app/lib/utils";
+import { ChatIcon } from "./ChatIcon";
 
-import ChatBotInput from "./ChatBotInput";
-import MarkdownLite from "./MarkdownLite";
+type ChatPopoverProps = { defaultOpen: boolean };
 
+// Starts loading the chat (popover, messages, input) once, on first intent.
+let chatModule: Promise<ComponentType<ChatPopoverProps>> | undefined;
+const loadChat = () => {
+  chatModule ??= import("./ChatPopover").then((m) => m.default);
+  return chatModule;
+};
+
+/**
+ * A lightweight stand-in button. The full chat loads on first hover, focus or
+ * tap and then takes over, so pages don't ship the chat code up front.
+ */
 export default function AIBotAssistant() {
-  const [hovored, setHovored] = useState<boolean>(false);
-  const { botMessages, chatbot_id } = useContext(StatementContext);
-  const inverseMessages = [...botMessages].reverse();
+  const [Chat, setChat] = useState<ComponentType<ChatPopoverProps> | null>(
+    null,
+  );
 
-  useEffect(() => {
-    const chatBoxEl = document.getElementById("chatBox");
-    if (chatBoxEl) {
-      const isScrolledToBottom =
-        chatBoxEl.scrollTop + chatBoxEl.clientHeight >=
-        chatBoxEl.scrollHeight - 50;
-      if (isScrolledToBottom) {
-        chatBoxEl.scrollTop = chatBoxEl.scrollHeight;
-      }
-    }
-  }, []);
+  if (Chat) return <Chat defaultOpen />;
+
+  const open = () => {
+    loadChat().then((component) => setChat(() => component));
+  };
 
   return (
-    <Popover.Root
-      onOpenChange={(open) => !open && setHovored(false)}
-      open={!!hovored}
+    <button
+      aria-label="AI Assistant"
+      className="border-0"
+      onClick={open}
+      onFocus={() => loadChat()}
+      onMouseEnter={open}
+      type="button"
     >
-      <Popover.Trigger asChild>
-        <button
-          aria-label="AI Assistant"
-          className="border-0"
-          onClick={() => setHovored(true)}
-          onMouseEnter={() => setHovored(true)}
-          type="button"
-        >
-          <svg
-            aria-label="AI Assistant icon"
-            className="fill-neutral-600 hover:fill-neutral-500 data-[state=open]:fill-emerald-600"
-            height="40"
-            viewBox="0 0 2048 2048"
-            width="40"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M768 1024H640V896h128zm512 0h-128V896h128zm512-128v256h-128v320q0 40-15 75t-41 61t-61 41t-75 15h-264l-440 376v-376H448q-40 0-75-15t-61-41t-41-61t-15-75v-320H128V896h128V704q0-40 15-75t41-61t61-41t75-15h448V303q-29-17-46-47t-18-64q0-27 10-50t27-40t41-28t50-10q27 0 50 10t40 27t28 41t10 50q0 34-17 64t-47 47v209h448q40 0 75 15t61 41t41 61t15 75v192zm-256-192q0-26-19-45t-45-19H448q-26 0-45 19t-19 45v768q0 26 19 45t45 19h448v226l264-226h312q26 0 45-19t19-45zm-851 462q55 55 126 84t149 30q78 0 149-29t126-85l90 91q-73 73-167 112t-198 39q-103 0-197-39t-168-112z" />
-          </svg>
-        </button>
-      </Popover.Trigger>
-      <Popover.Content
-        align="start"
-        className="mb-4 flex h-[30rem] w-full origin-[var(--radix-popover-content-transform-origin)] scale-in flex-col overflow-y-auto rounded-xs bg-neutral-900 px-1 pt-2 pb-1 outline-0 ring-4 ring-neutral-800 sm:mb-0 sm:w-96"
-        id="chatBox"
-        side="left"
-        sideOffset={8}
-      >
-        <div className="flex flex-1 flex-col-reverse gap-3">
-          <div className="flex-1" />
-          {inverseMessages.map((message) => (
-            <div
-              className={cn("flex items-end", {
-                "justify-end": message.isUserMessage,
-              })}
-              key={message.id}
-            >
-              <div
-                className={cn(
-                  "flex max-w-xs flex-col space-y-1 overflow-x-hidden text-sm",
-                  {
-                    "order-1 items-end": message.isUserMessage,
-                    "order-2 items-start": !message.isUserMessage,
-                  },
-                )}
-              >
-                <p
-                  className={cn("rounded-md px-2 py-1.5", {
-                    "bg-sky-600 text-white": message.isUserMessage,
-                    "bg-neutral-100 text-black": !message.isUserMessage,
-                  })}
-                >
-                  <MarkdownLite text={message.text} />
-                </p>
-              </div>
-            </div>
-          ))}
-          <p className="border-neutral-800 border-b-2 pb-1 text-center text-neutral-400 text-sm duration-300">
-            Id: {chatbot_id ?? "000110111"}
-          </p>
-          <Popover.Close className="absolute top-1 right-2 inline-flex items-center justify-center rounded-full p-1 outline-hidden hover:bg-neutral-800">
-            <svg
-              aria-label="Close icon"
-              height="18"
-              viewBox="0 0 256 256"
-              width="18"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M208.49 191.51a12 12 0 0 1-17 17L128 145l-63.51 63.49a12 12 0 0 1-17-17L111 128L47.51 64.49a12 12 0 0 1 17-17L128 111l63.51-63.52a12 12 0 0 1 17 17L145 128Z"
-                fill="#d4d4d4"
-              />
-            </svg>
-          </Popover.Close>
-        </div>
-        <ChatBotInput />
-      </Popover.Content>
-    </Popover.Root>
+      <ChatIcon />
+    </button>
   );
 }

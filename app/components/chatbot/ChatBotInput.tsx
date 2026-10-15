@@ -10,12 +10,12 @@ import {
 } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 
-import { StatementContext } from "@/app/context/statement";
 import { getBotMessage } from "@/app/lib/chatbot/actions";
 import { saveConversation } from "@/app/lib/chatbot/save-conversation";
 import type { BotMessage } from "@/app/lib/validators/bot-message";
 
 import { Loading } from "../icons/Loading";
+import { ChatContext } from "./chat-context";
 
 const ChatBotInput = () => {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -26,7 +26,7 @@ const ChatBotInput = () => {
     addBotMessage,
     removeBotMessage,
     updateBotMessage,
-  } = useContext(StatementContext);
+  } = useContext(ChatContext);
 
   const { mutate: sendMessage, isPending } = useMutation({
     mutationKey: ["sendMessage"],

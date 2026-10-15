@@ -57,3 +57,9 @@ export const dateStyle = (data: Date | number | string): string => {
   });
   return f.format(new Date(data));
 };
+
+const YEAR_MS = 1000 * 60 * 60 * 24 * 365.25;
+
+/** Age in years with nine decimals, e.g. "27.006018707". */
+export const ageInYears = (birthDate: string, now = Date.now()): string =>
+  ((now - new Date(birthDate).getTime()) / YEAR_MS).toFixed(9);

@@ -1,4 +1,4 @@
-import ActiveLink from "@/app/components/ActiveLink";
+import Link from "next/link";
 
 export default function NotFound() {
   return (
@@ -13,7 +13,12 @@ export default function NotFound() {
       </aside>
       <p>
         Could not find the requested resource.{" "}
-        <ActiveLink href="/" title="Go back" />
+        <Link
+          className="text-neutral-400 underline-offset-2 hover:underline"
+          href="/"
+        >
+          Go back
+        </Link>
       </p>
     </>
   );

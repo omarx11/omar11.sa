@@ -4,15 +4,6 @@
   --breakpoint-xs: 375px;
 }
 
-/* Preline accordion state (the runtime script toggles `.active` on `.hs-accordion`). */
-@custom-variant hs-accordion-active (
-  &:is(
-    .hs-accordion.active,
-    .hs-accordion.active > *,
-    .hs-accordion.active > .hs-accordion-toggle *
-  )
-);
-
 /* Tailwind v3 defaults that v4 changed, kept so the design does not shift. */
 @layer base {
   *,
@@ -36,6 +27,26 @@
 
 :root {
   color-scheme: dark;
+  /* Lets height transition to/from `auto` (used by <details> below). */
+  interpolate-size: allow-keywords;
+}
+
+/* Smoothly expand and collapse <details> where supported. */
+details::details-content {
+  height: 0;
+  overflow: clip;
+  transition:
+    height 300ms ease,
+    content-visibility 300ms allow-discrete;
+}
+details[open]::details-content {
+  height: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  details::details-content {
+    transition: none;
+  }
 }
 
 ::selection {

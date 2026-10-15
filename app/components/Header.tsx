@@ -1,38 +1,31 @@
-"use client";
-
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 
 import { author } from "@/app/config/meta";
-import { useYearsAgo } from "@/app/hooks/useYearsAgo";
+import { ageInYears } from "@/app/lib/helpers";
 
-import ActiveLink from "./ActiveLink";
+import AIBotAssistant from "./chatbot/AIBotAssistant";
+import Age from "./content/Age";
 import PlayAudio from "./content/PlayAudio";
 import Discord from "./Discord";
 import Media from "./Media";
 
-const AIBotAssistant = dynamic(() => import("./chatbot/AIBotAssistant"), {
-  ssr: false,
-});
-
 export default function Header() {
-  const years = useYearsAgo();
-
   return (
     <>
       <header className="mt-12 mb-6 flex flex-col items-center md:mt-16 md:mb-0 md:flex-row xl:mt-24">
-        <Image
-          alt="avatar"
-          blurDataURL="/static/icons/blur.svg"
-          className="drag-none h-[120px] w-[120px] cursor-pointer rounded-full bg-cover bg-neutral-900 ring-3 ring-emerald-700 ring-offset-4 ring-offset-black transition-shadow hover:ring-yellow-700 hover:ring-offset-8 hover:ring-offset-black md:ml-1"
-          height={256}
-          onClick={() => window.location.reload()}
-          placeholder="blur"
-          quality={100}
-          src="/static/images/avatar.png"
-          width={256}
-        />
+        <Link aria-label="Home" className="shrink-0 md:ml-1" href="/">
+          <Image
+            alt={`${author.fullName}'s avatar`}
+            blurDataURL="/static/icons/blur.svg"
+            className="drag-none h-[120px] w-[120px] rounded-full bg-cover bg-neutral-900 ring-3 ring-emerald-700 ring-offset-4 ring-offset-black transition-shadow hover:ring-yellow-700 hover:ring-offset-8 hover:ring-offset-black"
+            fetchPriority="high"
+            height={240}
+            placeholder="blur"
+            src="/static/images/avatar.png"
+            width={240}
+          />
+        </Link>
         <div className="mt-6 ml-0 flex flex-col md:mt-0 md:ml-7">
           <h1 className="items-center font-bold text-2xl text-neutral-50">
             Hey, {`I'm`}{" "}
@@ -63,9 +56,7 @@ export default function Header() {
           <div className="group relative mt-1 w-full border-neutral-900 border-t-4 pt-1 text-[1rem] text-neutral-200 leading-[1.4rem] sm:text-justify">
             <PlayAudio />
             I’m a self-taught web developer {`who's `}
-            <span className="inline-block w-[98px] font-bold text-emerald-400 text-sm">
-              {years}
-            </span>{" "}
+            <Age birthDate={author.age} initial={ageInYears(author.age)} />{" "}
             years-old with a passion for website programming. I gained extensive
             knowledge independently while in{" "}
             <Link
@@ -78,11 +69,12 @@ export default function Header() {
             and have completed several exciting projects. Having recently
             graduated, I’m excited to start my professional journey. Curious to
             learn more? Feel free to explore my{" "}
-            <ActiveLink
-              className="underline underline-offset-4 hover:no-underline"
+            <Link
+              className="text-neutral-400 underline underline-offset-4 hover:no-underline"
               href="/"
-              title="works.."
-            />{" "}
+            >
+              works..
+            </Link>{" "}
             ✒️
           </div>
         </div>

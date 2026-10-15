@@ -2,10 +2,13 @@
 
 import {
   keepPreviousData,
+  QueryClientProvider,
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
 import { useCallback, useEffect, useRef, useState } from "react";
+
+import { getQueryClient } from "@/app/lib/query-client";
 
 import type { GameStats as GameStatsData, GamesOverview } from "../types";
 import GameStats from "./GameStats";
@@ -31,6 +34,14 @@ export type GameActions = {
 };
 
 export default function Games({ overview }: { overview: GamesOverview }) {
+  return (
+    <QueryClientProvider client={getQueryClient()}>
+      <GamesView overview={overview} />
+    </QueryClientProvider>
+  );
+}
+
+function GamesView({ overview }: { overview: GamesOverview }) {
   const queryClient = useQueryClient();
   const [selectedAppId, setSelectedAppId] = useState<number | null>(null);
   const scrollOnLoad = useRef(false);
