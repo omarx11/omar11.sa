@@ -37,9 +37,19 @@ export default async function GithubCal() {
           }}
         />
       ) : (
-        // API unavailable: the calendar's built-in placeholder state.
+        // API unavailable: keep the calendar's built-in placeholder.
         <ActivityCalendar {...calendarProps} data={[]} loading />
       )}
+    </div>
+  );
+}
+
+/** Same size as the calendar, using its built-in animated loading state. */
+export function GithubCalSkeleton() {
+  // On phones the loaded footer wraps to two lines; reserve that height.
+  return (
+    <div className="mt-12 w-full contain-inline-size max-sm:min-h-[212px]">
+      <ActivityCalendar {...calendarProps} data={[]} loading />
     </div>
   );
 }

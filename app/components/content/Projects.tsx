@@ -4,6 +4,8 @@ import Link from "next/link";
 import { getProjects } from "@/app/lib/github";
 import { cn } from "@/app/lib/utils";
 
+import { Skeleton } from "../ui/Skeleton";
+
 export default async function Projects() {
   const projects = await getProjects();
 
@@ -123,6 +125,19 @@ export default async function Projects() {
             {repo.description}
           </p>
         </article>
+      ))}
+    </div>
+  );
+}
+
+const SKELETON_CARDS = ["a", "b", "c", "d", "e", "f"];
+
+/** Card-sized placeholders shown while the repositories load. */
+export function ProjectsSkeleton() {
+  return (
+    <div className="mt-10 grid gap-5 md:grid-cols-3">
+      {SKELETON_CARDS.map((key) => (
+        <Skeleton className="h-[268px] w-full rounded-md" key={key} />
       ))}
     </div>
   );

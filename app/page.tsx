@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 
 import { author, profiles } from "@/app/config/meta";
 import { databases, frameworks, langs, styles } from "@/app/config/skills";
 
-import GithubCal from "./components/content/GithubCal";
-import Projects from "./components/content/Projects";
+import GithubCal, { GithubCalSkeleton } from "./components/content/GithubCal";
+import Projects, { ProjectsSkeleton } from "./components/content/Projects";
 import { Heading } from "./components/ui/Heading";
 
 export const metadata: Metadata = {
@@ -76,7 +77,10 @@ export default function HomePage() {
         {`Here's`} all of my personal projects that {`I've`} worked on. You can
         support me by starring! ⭐
       </p>
-      <Projects />
+      {/* Each GitHub section streams in on its own; the page never waits. */}
+      <Suspense fallback={<ProjectsSkeleton />}>
+        <Projects />
+      </Suspense>
       <div className="mt-6 flex justify-center">
         <Link
           className="group inline-flex items-center justify-center gap-1 rounded-md bg-neutral-800 px-6 py-2 text-neutral-200 hover:underline"
@@ -103,7 +107,9 @@ export default function HomePage() {
           </svg>
         </Link>
       </div>
-      <GithubCal />
+      <Suspense fallback={<GithubCalSkeleton />}>
+        <GithubCal />
+      </Suspense>
     </>
   );
 }
