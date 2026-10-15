@@ -14,10 +14,10 @@ export default function GamesSkeleton() {
       </h2>
       <div className="fade-in-up flex min-h-[225px] flex-row flex-wrap gap-4 sm:min-h-[308px]">
         {COVERS.map((key) => (
-          <Skeleton
-            className="mt-5 aspect-[2/3] w-[110px] rounded-md sm:w-40"
-            key={key}
-          />
+          // The wrapper takes the staggered entrance; the skeleton keeps pulsing.
+          <div key={key}>
+            <Skeleton className="mt-5 aspect-[2/3] w-[110px] rounded-md sm:w-40" />
+          </div>
         ))}
       </div>
       <div className="mt-8 mb-4 flex items-center justify-between">
@@ -29,7 +29,9 @@ export default function GamesSkeleton() {
       </div>
       <div className="fade-in-up flex min-h-[337px] flex-row flex-wrap content-start items-start gap-3">
         {TILES.map((key) => (
-          <Skeleton className="h-[75.27px] w-[160.6px] rounded-xs" key={key} />
+          <div key={key}>
+            <Skeleton className="h-[75.27px] w-[160.6px] rounded-xs" />
+          </div>
         ))}
       </div>
     </div>

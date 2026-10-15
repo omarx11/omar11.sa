@@ -97,11 +97,9 @@ function CollectionGrid({
   const pageGames = games.slice(offset, offset + PER_PAGE);
 
   return (
-    // Keyed by page so the staggered entrance replays on every page change.
-    <div
-      className="fade-in-up flex min-h-[337px] flex-row flex-wrap content-start items-start gap-3"
-      key={page}
-    >
+    // Loaded cards appear without an entrance animation (only the skeletons
+    // animate); the pagination row rises in from below.
+    <div className="flex min-h-[337px] flex-row flex-wrap content-start items-start gap-3">
       <TooltipProvider delayDuration={0} disableHoverableContent>
         {pageGames.map((game, index) => {
           const { appid } = game;
@@ -169,7 +167,7 @@ function CollectionGrid({
         })}
       </TooltipProvider>
       <Pagination
-        className="mt-3"
+        className="fade-in mt-3"
         note
         onPageChange={onPageChange}
         pages={Math.ceil(games.length / PER_PAGE)}

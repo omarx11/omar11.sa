@@ -137,9 +137,12 @@ const SKELETON_CARDS = ["a", "b", "c", "d", "e", "f"];
 /** Card-sized placeholders shown while the repositories load. */
 export function ProjectsSkeleton() {
   return (
-    <div className="mt-10 grid gap-5 md:grid-cols-3">
+    <div className="md:fade-in mt-10 grid gap-5 md:grid-cols-3">
       {SKELETON_CARDS.map((key) => (
-        <Skeleton className="h-[268px] w-full rounded-md" key={key} />
+        // The wrapper takes the staggered entrance; the skeleton keeps pulsing.
+        <div key={key}>
+          <Skeleton className="h-[268px] w-full max-w-full rounded-md md:max-w-[328px]" />
+        </div>
       ))}
     </div>
   );
