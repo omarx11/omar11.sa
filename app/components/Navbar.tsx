@@ -27,7 +27,8 @@ export default function Navbar() {
   }
   const activeHref = pending ?? pathname;
   // On a fresh page load the bar shows a skeleton first, then the tabs fade in.
-  const revealed = useReveal(400);
+  // Cascades after the header text (300ms).
+  const revealed = useReveal(500);
 
   const navRef = useRef<HTMLElement>(null);
   const [indicator, setIndicator] = useState<Indicator | null>(null);
@@ -67,7 +68,13 @@ export default function Navbar() {
   }, [indicator, animate]);
 
   return (
-    <div className="relative mt-4 flex min-h-[28px] select-none items-center justify-between border-neutral-900 border-t-8 pt-4">
+    <div
+      className={cn(
+        "relative mt-4 flex min-h-[28px] select-none items-center justify-between border-t-8 pt-4 transition-colors duration-300",
+        // The separator line stays hidden while the skeleton shows.
+        revealed ? "border-neutral-900" : "border-black",
+      )}
+    >
       {!revealed && (
         <Skeleton
           aria-hidden="true"
@@ -136,6 +143,13 @@ export default function Navbar() {
               width: indicator.w,
               height: indicator.h,
               backgroundColor: indicator.color,
+              // On reveal, fade in on the same beat as its tab (the tabs are
+              // staggered 50ms apart by `fade-in`).
+              ...(revealed && {
+                animation: `fade-opacity-only 0.3s ${
+                  (navLinks.findIndex((l) => l.href === activeHref) + 1) * 0.05
+                }s both`,
+              }),
             }}
           />
         )}

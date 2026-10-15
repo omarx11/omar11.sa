@@ -10,6 +10,8 @@ import PlayAudio from "./content/PlayAudio";
 import Discord from "./Discord";
 import Media from "./Media";
 import { ReloadButton, ReloadLink } from "./ui/Reload";
+import { Reveal } from "./ui/Reveal";
+import { Skeleton } from "./ui/Skeleton";
 
 export default async function Header() {
   return (
@@ -30,7 +32,11 @@ export default async function Header() {
             width={240}
           />
         </ReloadButton>
-        <div className="mt-6 ml-0 flex flex-col md:mt-0 md:ml-7">
+        <Reveal
+          className="mt-6 ml-0 flex flex-col md:mt-0 md:ml-7"
+          delay={300}
+          skeleton={<HeaderTextSkeleton />}
+        >
           <h1 className="items-center font-bold text-2xl text-neutral-50">
             Hey, {`I'm`}{" "}
             <span className="text-emerald-400">{author.fullName}</span>
@@ -84,7 +90,7 @@ export default async function Header() {
             </ReloadLink>{" "}
             ✒️
           </div>
-        </div>
+        </Reveal>
       </header>
       <div className="z-20">
         <div className="flex flex-row items-center justify-between pt-5 pl-0 text-neutral-300 md:pl-1">
@@ -153,5 +159,20 @@ export default async function Header() {
         </div>
       </div>
     </>
+  );
+}
+
+/** Placeholder lines shaped like the greeting and intro paragraph. */
+function HeaderTextSkeleton() {
+  return (
+    <div className="flex flex-col gap-2">
+      <Skeleton className="h-7 w-3/4 max-w-sm rounded-xs bg-neutral-800/75" />
+      <div className="mt-2 space-y-2 border-neutral-900 border-t-4 pt-2">
+        <Skeleton className="h-4 w-full rounded-xs bg-neutral-800/75" />
+        <Skeleton className="h-4 w-full rounded-xs bg-neutral-800/75" />
+        <Skeleton className="h-4 w-full rounded-xs bg-neutral-800/75" />
+        <Skeleton className="h-4 w-2/3 rounded-xs bg-neutral-800/75" />
+      </div>
+    </div>
   );
 }

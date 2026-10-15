@@ -194,7 +194,9 @@ details[open]::details-content {
      overshoot), so it doesn't snap at the end. Uses `scale` so it composes
      with the element's own `rotate`. */
   .fade-opacity {
-    animation: fade-opacity 1.6s both;
+    /* `backwards`, not `both`: no transform lingers after it settles, so the
+       small rotated text isn't left on its own (blurrier) GPU layer. */
+    animation: fade-opacity 1.6s backwards;
   }
   @keyframes fade-opacity {
     0%,
@@ -539,5 +541,13 @@ details[open]::details-content {
   }
   & > :nth-child(24) {
     animation-delay: 1.2s;
+  }
+}
+
+/* Opacity-only fade, for elements positioned by an inline transform (an
+   animated transform would override it). */
+@keyframes fade-opacity-only {
+  from {
+    opacity: 0;
   }
 }
