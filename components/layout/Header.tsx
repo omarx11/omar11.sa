@@ -9,6 +9,9 @@ import WelcomeVoice from "@/components/header/WelcomeVoice";
 import { ReloadButton, ReloadLink } from "@/components/ui/Reload";
 import { author } from "@/config/meta";
 import { assistantEnabled } from "@/lib/chatbot/enabled";
+// Imported (not a /static path) so the URL carries a content hash: a new
+// avatar shows up right away instead of after the image cache's 4 hours.
+import avatar from "@/public/static/images/avatar.png";
 
 export default function Header() {
   return (
@@ -21,11 +24,11 @@ export default function Header() {
           <Image
             alt={`${author.fullName}'s avatar`}
             blurDataURL="/static/icons/blur.svg"
-            className="h-24 w-24 rounded-full bg-neutral-900 bg-cover ring-3 ring-emerald-700 ring-offset-4 ring-offset-black transition-shadow hover:ring-yellow-700 hover:ring-offset-8 hover:ring-offset-black sm:h-[120px] sm:w-[120px]"
+            className="h-24 w-24 rounded-full bg-neutral-900 bg-cover ring-3 ring-emerald-700 ring-offset-4 ring-offset-black transition-shadow hover:ring-yellow-700 hover:ring-offset-8 hover:ring-offset-black sm:h-30 sm:w-30"
             fetchPriority="high"
             height={240}
             placeholder="blur"
-            src="/static/images/avatar.png"
+            src={avatar}
             width={240}
           />
         </ReloadButton>
