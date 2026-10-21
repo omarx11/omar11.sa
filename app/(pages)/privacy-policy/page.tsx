@@ -1,9 +1,9 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-import { Heading } from "@/app/components/ui/Heading";
-import { author } from "@/app/config/meta";
-import { pageMetadata } from "@/app/lib/metadata";
+import { Heading } from "@/components/ui/Heading";
+import { author } from "@/config/meta";
+import { pageMetadata } from "@/lib/metadata";
 
 const LAST_UPDATED = "October 15, 2026";
 
@@ -17,16 +17,16 @@ export default function PrivacyPolicyPage() {
   return (
     <>
       <Heading
+        anchor="privacy"
+        description={`Last updated: ${LAST_UPDATED}`}
         emoji="🔒"
-        name="Privacy Policy"
-        sId="#privacy"
-        title={`Last updated: ${LAST_UPDATED}`}
+        title="Privacy Policy"
       />
       <article
-        className="mt-8 w-full max-w-3xl space-y-8 text-neutral-400 leading-relaxed"
+        className="mt-8 w-full max-w-3xl space-y-8 leading-relaxed text-neutral-400"
         id="privacy"
       >
-        <p className="border-emerald-900 border-l-4 bg-gradient-to-r from-stone-900 py-2 pl-4">
+        <p className="border-l-4 border-emerald-900 bg-gradient-to-r from-stone-900 py-2 pl-4">
           {author.siteName} is the personal website of {author.fullName}. You
           can browse every page without an account. This policy explains the
           small amount of data the site handles, which is only needed for the
@@ -75,16 +75,15 @@ export default function PrivacyPolicyPage() {
 
         <Section title="AI assistant">
           <p>
-            Messages you send to the AI assistant are forwarded to{" "}
-            <ExternalLink href="https://openai.com/policies/api-data-usage-policies">
-              OpenAI
-            </ExternalLink>{" "}
-            to generate a reply. The conversation is also saved with a random ID
-            created for your visit (shown in the assistant window), so{" "}
-            {author.name} can review how the assistant is used and improve it.
-            Conversations are not linked to your guestbook account, your name,
-            or your email. Please don&apos;t share personal or sensitive
-            information in the chat.
+            Messages you send to the AI assistant are answered by an open-source
+            AI model that {author.name} runs on his own hardware. They travel
+            there through an encrypted connection via his own server at Oracle
+            Cloud; no third-party AI service receives them. The conversation is
+            also saved with a random ID created for your visit (shown in the
+            assistant window), so {author.name} can review how the assistant is
+            used and improve it. Conversations are not linked to your guestbook
+            account, your name, or your email. Please don&apos;t share personal
+            or sensitive information in the chat.
           </p>
         </Section>
 
@@ -129,16 +128,18 @@ export default function PrivacyPolicyPage() {
                 sign-in, if you choose to sign in.
               </>,
               <>
-                <strong className="text-neutral-300">OpenAI</strong>: generates
-                the AI assistant&apos;s replies.
+                <strong className="text-neutral-300">Oracle Cloud</strong>:
+                hosts the server that relays AI assistant messages to{" "}
+                {author.name}&apos;s self-hosted model.
               </>,
               <>
                 <strong className="text-neutral-300">
-                  Lanyard, Steam, and GitHub
+                  Lanyard, Discord, Spotify, Steam, and GitHub
                 </strong>
                 : your browser loads {author.name}&apos;s live Discord status,
-                game artwork, and profile pictures directly from these services,
-                which can see your IP address as with any web request.
+                activity and album art, game artwork, and profile pictures
+                directly from these services, which can see your IP address as
+                with any web request.
               </>,
             ]}
           />
@@ -206,7 +207,7 @@ export default function PrivacyPolicyPage() {
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
     <section className="space-y-3">
-      <h2 className="font-bold text-lg text-neutral-200">
+      <h2 className="text-lg font-bold text-neutral-200">
         <span className="text-emerald-500">#</span> {title}
       </h2>
       {children}

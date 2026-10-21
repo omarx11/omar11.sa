@@ -1,13 +1,10 @@
-import { Suspense } from "react";
-
-import { Heading } from "@/app/components/ui/Heading";
-import { author } from "@/app/config/meta";
-import { getSessionUser, toSessionUser } from "@/app/lib/auth/server";
-import { simulateFirstVisit } from "@/app/lib/dev/first-visit";
-import { pageMetadata } from "@/app/lib/metadata";
+import { Heading } from "@/components/ui/Heading";
+import { author } from "@/config/meta";
+import { getSessionUser, toSessionUser } from "@/lib/auth/server";
+import { simulateFirstVisit } from "@/lib/dev/first-visit";
+import { pageMetadata } from "@/lib/metadata";
 
 import { Guestbook } from "./components/Guestbook";
-import GuestbookSkeleton from "./components/GuestbookSkeleton";
 import { getEntries } from "./data";
 
 export const metadata = pageMetadata({
@@ -20,28 +17,30 @@ export default function GuestbookPage() {
   return (
     <>
       <Heading
+        anchor="guestbook"
+        description="Hey there! Please sign in to say hi. Thanks for visiting my website 💚"
         emoji="🖋️"
-        name="Guestbook"
-        sId="#guestbook"
-        title="Hey there! Please sign in to say hi. Thanks for visiting my website 💚"
+        title="Guestbook"
       />
-      <Suspense fallback={<GuestbookSkeleton />}>
+      {/* Entries are cached (`use cache`), so they're part of the static shell
+          and need no loading state of their own. */}
+      <div id="guestbook">
         <GuestbookData />
-      </Suspense>
+      </div>
     </>
   );
 }
 
 async function GuestbookData() {
+  const entries = await getEntries();
+  // Not awaited: the session reads cookies, so it's per request. Passed as a
+  // promise, only the sign-in slot and the delete buttons wait for it, and
+  // the cached entries stay in the static shell.
+  return <Guestbook initialEntries={entries} userPromise={getUser()} />;
+}
+
+async function getUser() {
   await simulateFirstVisit();
-  const [sessionUser, entries] = await Promise.all([
-    getSessionUser(),
-    getEntries(),
-  ]);
-  return (
-    <Guestbook
-      initialEntries={entries}
-      user={sessionUser ? toSessionUser(sessionUser) : null}
-    />
-  );
+  const sessionUser = await getSessionUser();
+  return sessionUser ? toSessionUser(sessionUser) : null;
 }

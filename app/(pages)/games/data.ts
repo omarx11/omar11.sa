@@ -1,12 +1,12 @@
 import { cacheLife } from "next/cache";
 
-import { nonSteamGames, playtimeToAdd } from "@/app/config/games";
-import { author } from "@/app/config/meta";
+import { extraPlaytime, nonSteamGames } from "@/config/games";
+import { author } from "@/config/meta";
 
 import type {
   Achievement,
   CollectionGame,
-  GameStats,
+  GameStatsData,
   GamesOverview,
   RecentGame,
 } from "./types";
@@ -15,11 +15,14 @@ const STEAM_API = "https://api.steampowered.com";
 const OVERVIEW_TTL = 3600; // 1 hour
 const STATS_TTL = 43200; // 12 hours
 
-// Tools, test builds and duplicates that shouldn't appear in the collection.
+// Tools, test builds and duplicates that shouldn't appear on the games page.
 const HIDDEN_GAME_IDS = new Set([
   12120, 12250, 407530, 596350, 747350, 755790, 700580, 878760, 640590, 1449560,
   34330, 371140, 342230, 431960,
+  // Spacewar: Steamworks' test app, used while developing Raml with Unity.
+  480,
 ]);
+const isShown = (game: { appid: number }) => !HIDDEN_GAME_IDS.has(game.appid);
 
 const STORE_ASSETS = "https://shared.steamstatic.com/store_item_assets/";
 const ART_TTL = 86400; // 1 day
@@ -125,14 +128,16 @@ export async function getGamesOverview(): Promise<GamesOverview> {
   const [recentData, owned] = await Promise.all([
     steam<RecentResponse>(
       "/IPlayerService/GetRecentlyPlayedGames/v1",
-      { steamid: author.steamId, count: 5 },
+      // All of the last two weeks, so hidden ones can be dropped before
+      // taking five.
+      { steamid: author.steamId },
       OVERVIEW_TTL,
     ),
     getOwnedGames(),
   ]);
 
   const recentGames = recentData?.response
-    ? (recentData.response.games ?? []).slice(0, 5)
+    ? (recentData.response.games ?? []).filter(isShown).slice(0, 5)
     : null;
   const art = await getStoreArt([
     ...new Set([
@@ -152,26 +157,24 @@ export async function getGamesOverview(): Promise<GamesOverview> {
   if (!owned) return { recent, collection: null, totalHours: 0 };
 
   const collection: CollectionGame[] = [
-    ...owned
-      .filter((game) => !HIDDEN_GAME_IDS.has(game.appid))
-      .map((game) => ({
-        id: `steam-${game.appid}`,
-        appid: game.appid,
-        name: game.name,
-        image: art.get(game.appid)?.header ?? null,
-        minutes: game.playtime_forever,
-      })),
+    ...owned.filter(isShown).map((game) => ({
+      id: `steam-${game.appid}`,
+      appid: game.appid,
+      name: game.name,
+      image: art.get(game.appid)?.header ?? null,
+      minutes: game.playtime_forever,
+    })),
     ...nonSteamGames.map((game) => ({
       id: `other-${game.name}`,
       appid: null,
       name: game.name,
       image: game.image,
-      minutes: game.playtime_forever,
+      minutes: game.minutes,
     })),
   ]
     .map((game) => ({
       ...game,
-      minutes: game.minutes + (playtimeToAdd[game.name] ?? 0),
+      minutes: game.minutes + (extraPlaytime[game.name] ?? 0),
     }))
     .sort((a, b) => b.minutes - a.minutes);
 
@@ -201,13 +204,15 @@ type UserStatsResponse = {
 };
 
 /** Returns null when the game isn't in the owner's library. */
-export async function getGameStats(appid: number): Promise<GameStats | null> {
+export async function getGameStats(
+  appid: number,
+): Promise<GameStatsData | null> {
   "use cache";
   // Stats only change while playing; refresh twice a day.
   cacheLife({ stale: 3600, revalidate: 43200, expire: 86400 * 7 });
   const owned = await getOwnedGames();
   const game = owned?.find((g) => g.appid === appid);
-  if (!game) return null;
+  if (!game || !isShown(game)) return null;
 
   const params = { steamid: author.steamId, appid };
   const [schema, player, userStats] = await Promise.all([

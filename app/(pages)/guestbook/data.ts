@@ -1,8 +1,9 @@
 import { cacheLife, cacheTag } from "next/cache";
 import { z } from "zod";
 
-import { sql } from "@/app/lib/db";
+import { sql } from "@/lib/db";
 
+import { tidyComment } from "./tidy";
 import type { GuestbookEntry } from "./types";
 
 // Validates rows at the database boundary, so a schema change fails loudly
@@ -23,7 +24,8 @@ export function toEntry(row: unknown): GuestbookEntry {
     userId: r.user_id,
     name: r.name,
     avatar: r.avatar,
-    comment: r.comment,
+    // Also tidies entries saved before the rule existed.
+    comment: tidyComment(r.comment),
     createdAt: r.created_at.toISOString(),
   };
 }

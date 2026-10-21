@@ -10,9 +10,9 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
+# testing (test scripts and model results stay local)
 /coverage
-/docs/personal_promots.txt
+/test/
 
 # next.js
 /.next/
@@ -20,6 +20,9 @@
 
 # production
 /build
+
+# private notes (setup guides, measurements): kept locally, not on GitHub
+/docs/
 
 # misc
 .DS_Store
@@ -39,6 +42,10 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# personal files (CV, profile photo): uploaded to Vercel Blob with
+# `npm run upload-private`, never committed. See docs/cv-bot-protection.md.
+/private/
 
 # typescript
 *.tsbuildinfo

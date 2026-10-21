@@ -1,15 +1,19 @@
 "use client";
 
-import { startTransition, useOptimistic, useState } from "react";
+import { Suspense, startTransition, use, useOptimistic, useState } from "react";
 
-import type { SessionUser } from "@/app/lib/auth/server";
+import type { SessionUser } from "@/lib/auth/server";
 
 import { deleteComment, saveComment } from "../actions";
 import type { GuestbookEntry } from "../types";
 import { GuestbookEntries } from "./GuestbookEntries";
 import { GuestbookForm } from "./GuestbookForm";
-import { GUESTBOOK_SLOT } from "./GuestbookSkeleton";
 import OAuthButtons from "./OAuthButtons";
+
+// Holds the sign-in card or the comment form. Its minimum height is the
+// form's, so the placeholder, the card and the form all take the same space
+// and nothing below moves when the session loads or the visitor signs in.
+const GUESTBOOK_SLOT = "flex min-h-[299px] w-full items-center justify-center";
 
 // `key` keeps a posted entry's React identity stable from its optimistic
 // placeholder to the saved row, so it updates in place instead of remounting.
@@ -21,10 +25,10 @@ type OptimisticAction =
 
 export function Guestbook({
   initialEntries,
-  user,
+  userPromise,
 }: {
   initialEntries: GuestbookEntry[];
-  user: SessionUser | null;
+  userPromise: Promise<SessionUser | null>;
 }) {
   const [entries, setEntries] = useState<PendingEntry[]>(initialEntries);
   const [error, setError] = useState<string | null>(null);
@@ -37,9 +41,8 @@ export function Guestbook({
   );
 
   // Returns false when the server rejected the comment.
-  const addEntry = (comment: string) =>
+  const addEntry = (comment: string, user: SessionUser) =>
     new Promise<boolean>((resolve) => {
-      if (!user) return resolve(false);
       setError(null);
       const key = `local-${crypto.randomUUID()}`;
       startTransition(async () => {
@@ -87,22 +90,37 @@ export function Guestbook({
   return (
     <>
       <div className={GUESTBOOK_SLOT}>
-        {user ? (
-          <GuestbookForm onSubmit={addEntry} user={user} />
-        ) : (
-          <OAuthButtons />
-        )}
+        <Suspense fallback={<OAuthButtons placeholder />}>
+          <SignInOrForm onSubmit={addEntry} userPromise={userPromise} />
+        </Suspense>
       </div>
       {error && (
-        <p className="mb-4 text-center text-rose-400 text-sm" role="alert">
+        <p className="mb-4 text-center text-sm text-rose-400" role="alert">
           {error}
         </p>
       )}
       <GuestbookEntries
         entries={optimisticEntries}
         onDelete={removeEntry}
-        userId={user?.id ?? null}
+        userPromise={userPromise}
       />
     </>
+  );
+}
+
+function SignInOrForm({
+  userPromise,
+  onSubmit,
+}: {
+  userPromise: Promise<SessionUser | null>;
+  onSubmit: (comment: string, user: SessionUser) => Promise<boolean>;
+}) {
+  const user = use(userPromise);
+  if (!user) return <OAuthButtons />;
+  return (
+    <GuestbookForm
+      onSubmit={(comment) => onSubmit(comment, user)}
+      user={user}
+    />
   );
 }

@@ -23,6 +23,26 @@
   [role="button"]:not(:disabled) {
     cursor: pointer;
   }
+
+  /* Pictures are never highlighted or dragged out of the page. */
+  img,
+  svg,
+  video,
+  canvas {
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  /* Controls: clicking them quickly (pagers, arrows, toggles) shouldn't
+     highlight their text. Content stays selectable; `select-text` opts back
+     in where needed. */
+  button,
+  [role="button"],
+  summary,
+  label,
+  [role="tooltip"] {
+    user-select: none;
+  }
 }
 
 :root {
@@ -45,6 +65,93 @@ details[open]::details-content {
 
 @media (prefers-reduced-motion: reduce) {
   details::details-content {
+    transition: none;
+  }
+}
+
+/* Scrollable without a visible scrollbar (wheel, touch and keys still work). */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Chat window (components/chatbot). */
+@keyframes chat-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+@keyframes chat-dot {
+  0%,
+  80%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+@keyframes chat-caret {
+  50% {
+    opacity: 0;
+  }
+}
+/* On phones the chat is full screen: the page behind it mustn't scroll. */
+@media (max-width: 639.98px) {
+  html:has(.chat-panel[data-open]) {
+    overflow: hidden;
+  }
+}
+
+/* No page scrolling behind an open modal (e.g. the certificate viewer). The
+   gutter keeps the scrollbar's space, so the page doesn't shift sideways when
+   the modal opens or closes. */
+html:has(dialog:modal) {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+/* Certificate viewer: the dialog, its backdrop and the image fade/scale in and
+   out together. `display` and `overlay` are discrete so the dialog stays in the
+   top layer until the closing fade has finished. */
+.cert-viewer,
+.cert-viewer::backdrop {
+  opacity: 0;
+  transition:
+    opacity 220ms ease,
+    display 220ms allow-discrete,
+    overlay 220ms allow-discrete;
+}
+.cert-viewer > figure {
+  scale: 0.96;
+  transition: scale 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.cert-viewer[open],
+.cert-viewer[open]::backdrop {
+  opacity: 1;
+}
+.cert-viewer[open] > figure {
+  scale: 1;
+}
+@starting-style {
+  .cert-viewer[open],
+  .cert-viewer[open]::backdrop {
+    opacity: 0;
+  }
+  .cert-viewer[open] > figure {
+    scale: 0.96;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cert-viewer,
+  .cert-viewer::backdrop,
+  .cert-viewer > figure {
     transition: none;
   }
 }
@@ -73,10 +180,6 @@ details[open]::details-content {
 }
 
 @layer utilities {
-  .drag-none {
-    -webkit-user-drag: none;
-  }
-
   .wave {
     animation: wave 2.5s ease-in-out infinite;
   }
@@ -566,5 +669,45 @@ details[open]::details-content {
 @keyframes fade-opacity-only {
   from {
     opacity: 0;
+  }
+}
+
+/* Home projects pager: each grid cell is a two-sided tile. Turning the page
+   flips the tiles in a wave that starts at the arrow that was pressed (on
+   phones, from the bottom up). Timing comes from ProjectsPager.tsx, which
+   also plays the dip as each tile turns. Markup: cell (entrance animation) >
+   .project-flip (perspective) > .project-flip-inner (rotates) > two
+   .project-face. */
+.project-flip {
+  --delay: var(--delay-sm);
+  perspective: 1400px;
+  height: 100%;
+}
+@media (min-width: 768px) {
+  [data-dir="next"] > * > .project-flip {
+    --delay: var(--delay-next);
+  }
+  [data-dir="prev"] > * > .project-flip {
+    --delay: var(--delay-prev);
+  }
+}
+.project-flip-inner {
+  display: grid;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform var(--flip-ms) cubic-bezier(0.55, -0.3, 0.2, 1.3)
+    var(--delay);
+}
+.project-face {
+  grid-area: 1 / 1;
+  display: grid;
+  backface-visibility: hidden;
+}
+.project-face + .project-face {
+  transform: rotateY(180deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-flip-inner {
+    transition: none;
   }
 }

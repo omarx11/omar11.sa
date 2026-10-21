@@ -1,7 +1,7 @@
 export default function Education() {
   return (
     <div className="w-full rounded-lg border-2 border-neutral-700/40 bg-neutral-900/50 p-4">
-      <h2 className="flex items-center font-semibold text-neutral-100 text-sm">
+      <h2 className="flex items-center text-sm font-semibold text-neutral-100">
         <svg
           aria-label="Education icon"
           fill="none"
@@ -27,7 +27,7 @@ export default function Education() {
       </h2>
       <ol className="mt-6 space-y-4">
         <li className="flex items-center gap-4">
-          <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-neutral-800/5 ring-0 ring-neutral-900/5">
+          <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md ring-0 shadow-neutral-800/5 ring-neutral-900/5">
             <svg
               aria-label="Education icon"
               height="30"
@@ -172,13 +172,13 @@ export default function Education() {
           </div>
           <dl className="flex flex-auto flex-wrap gap-x-2">
             <dt className="sr-only">University</dt>
-            <dd className="w-full flex-none font-medium text-neutral-100 text-sm">
+            <dd className="w-full flex-none text-sm font-medium text-neutral-100">
               Technical and Vocational Training Corporation
             </dd>
             <dt className="sr-only">Degree</dt>
-            <dd className="text-neutral-400 text-xs">Diploma</dd>
+            <dd className="text-xs text-neutral-400">Diploma</dd>
             <dt className="sr-only">Date</dt>
-            <dd className="ml-auto text-neutral-500 text-xs">
+            <dd className="ml-auto text-xs text-neutral-500">
               <time dateTime="2019">2019</time>{" "}
               <span aria-hidden="true">—</span>{" "}
               <time dateTime="2023">2023</time>

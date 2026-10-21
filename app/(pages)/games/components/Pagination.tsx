@@ -1,96 +1,44 @@
-import { useMemo } from "react";
+import type { ReactNode } from "react";
 
-import { cn } from "@/app/lib/utils";
+import { cn } from "@/lib/utils";
 
-type PaginationProps = {
-  pages: number;
-  state: { page: number; window: number };
-  onPageChange: (page: number) => void;
-  className?: string;
-  note?: boolean;
-};
+/** The page numbers to show: `visiblePages` of them, centred on `page`. */
+function pageRange(page: number, pageCount: number, visiblePages: number) {
+  const count = Math.min(visiblePages, pageCount);
+  const first = Math.min(
+    Math.max(1, page - Math.floor(count / 2)),
+    pageCount - count + 1,
+  );
+  return Array.from({ length: count }, (_, i) => first + i);
+}
 
-const Pagination = ({
-  pages,
-  state,
+/**
+ * Previous / numbered / Next buttons. `children` (e.g. a note about the data)
+ * sits on the other side of the row.
+ */
+export default function Pagination({
+  page,
+  pageCount,
+  visiblePages,
   onPageChange,
   className,
-  note,
-}: PaginationProps) => {
-  const { page, window } = state;
-
-  const paginateButtons = useMemo(() => {
-    const buttonsArray: React.JSX.Element[] = [];
-    let maxLeft = page - Math.floor(window / 2);
-    let maxRight = page + Math.floor(window / 2);
-
-    if (maxLeft < 1) {
-      maxLeft = 1;
-      maxRight = window;
-    }
-
-    if (maxRight > pages) {
-      maxLeft = pages - (window - 1);
-      if (maxLeft < 1) maxLeft = 1;
-      maxRight = pages;
-    }
-
-    for (let i = maxLeft; i <= maxRight; i++) {
-      buttonsArray.push(
-        <button
-          aria-label={`Page ${i}`}
-          className={cn("rounded-xs px-2 py-0.5 underline hover:no-underline", {
-            "cursor-default bg-emerald-700 no-underline": page === i,
-            "hover:bg-neutral-800": page !== i,
-          })}
-          key={i}
-          onClick={() => page !== i && onPageChange(i)}
-          type="button"
-        >
-          {i}
-        </button>,
-      );
-    }
-
-    // Add Previous and Next buttons
-    buttonsArray.unshift(
-      <button
-        aria-label="Previous page"
-        className={cn(
-          "rounded-md px-2",
-          page === 1
-            ? "pointer-events-none text-neutral-600"
-            : "bg-neutral-900 hover:bg-neutral-800",
-        )}
-        disabled={page === 1}
-        key="prev"
-        onClick={() => onPageChange(page - 1)}
-        type="button"
-      >
-        Previous
-      </button>,
+  children,
+}: {
+  page: number;
+  pageCount: number;
+  /** How many numbered buttons to show at once. */
+  visiblePages: number;
+  onPageChange: (page: number) => void;
+  className?: string;
+  children?: ReactNode;
+}) {
+  const edgeButton = (disabled: boolean) =>
+    cn(
+      "rounded-md px-2",
+      disabled
+        ? "pointer-events-none text-neutral-600"
+        : "bg-neutral-900 hover:bg-neutral-800",
     );
-
-    buttonsArray.push(
-      <button
-        aria-label="Next page"
-        className={cn(
-          "rounded-md px-2",
-          page === pages
-            ? "pointer-events-none text-neutral-600"
-            : "bg-neutral-900 hover:bg-neutral-800",
-        )}
-        disabled={page === pages}
-        key="next"
-        onClick={() => onPageChange(page + 1)}
-        type="button"
-      >
-        Next
-      </button>,
-    );
-
-    return buttonsArray;
-  }, [page, window, pages, onPageChange]);
 
   return (
     <div
@@ -99,15 +47,44 @@ const Pagination = ({
         className,
       )}
     >
-      {note && (
-        <p className="text-neutral-400 text-xs">
-          All data comes from {`Steam's`} API. If any of those services are
-          down, data will not be shown.
-        </p>
-      )}
-      <div className="flex select-none gap-1 text-sm">{paginateButtons}</div>
+      {children}
+      <div className="flex gap-1 text-sm select-none">
+        <button
+          aria-label="Previous page"
+          className={edgeButton(page <= 1)}
+          disabled={page <= 1}
+          onClick={() => onPageChange(page - 1)}
+          type="button"
+        >
+          Previous
+        </button>
+        {pageRange(page, pageCount, visiblePages).map((number) => (
+          <button
+            aria-current={number === page ? "page" : undefined}
+            aria-label={`Page ${number}`}
+            className={cn(
+              "rounded-xs px-2 py-0.5 underline hover:no-underline",
+              number === page
+                ? "cursor-default bg-emerald-700 no-underline"
+                : "hover:bg-neutral-800",
+            )}
+            key={number}
+            onClick={() => number !== page && onPageChange(number)}
+            type="button"
+          >
+            {number}
+          </button>
+        ))}
+        <button
+          aria-label="Next page"
+          className={edgeButton(page >= pageCount)}
+          disabled={page >= pageCount}
+          onClick={() => onPageChange(page + 1)}
+          type="button"
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
-};
-
-export default Pagination;
+}

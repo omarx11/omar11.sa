@@ -1,51 +1,42 @@
-import { Heading } from "@/app/components/ui/Heading";
-import { author } from "@/app/config/meta";
-import { pageMetadata } from "@/app/lib/metadata";
-import { getCurrentYear } from "@/app/lib/time";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
+
+import { Heading } from "@/components/ui/Heading";
+import { author } from "@/config/meta";
+import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
   title: "License",
-  description: `The MIT license for the source code of ${author.siteName}.`,
+  description: `The license for the source code of ${author.siteName}.`,
   path: "/license",
 });
 
-export default async function LicensePage() {
+// The repo's LICENSE file is the single source of truth. Read once at module
+// scope, so it is baked into the static shell at build time.
+const license = await readFile(join(process.cwd(), "LICENSE"), "utf-8");
+// Paragraphs are separated by blank lines; lines within one are hard-wrapped.
+const paragraphs = license
+  .trim()
+  .split(/\r?\n\s*\r?\n/)
+  .map((paragraph) => paragraph.split(/\r?\n/).join(" "));
+
+export default function LicensePage() {
   return (
     <>
-      <Heading emoji="📜" name="License" sId="#license" />
-      <p className="my-6 w-full border-emerald-900 border-l-4 bg-gradient-to-r from-stone-900 pl-4 text-neutral-400 opacity-60 md:w-[56%]">
+      <Heading anchor="license" emoji="📜" title="License" />
+      <p className="my-6 w-full border-l-4 border-emerald-900 bg-gradient-to-r from-stone-900 pl-4 text-neutral-400 opacity-60 md:w-[56%]">
         Note: Anyone is free to take inspiration from this site as long as you
-        give credit to the ordinal creator, credits should include my full name
+        give credit to the original creator, credits should include my full name
         ({author.fullName}) and a link to my site ({author.siteName}).{" "}
         <span className="text-rose-600">❤</span>
       </p>
       <div
-        className="w-full border-2 border-neutral-800 bg-neutral-900 p-4 md:w-5/6"
+        className="w-full space-y-4 border-2 border-neutral-800 bg-neutral-900 p-4 text-justify text-stone-400 md:w-5/6"
         id="license"
       >
-        <p className="text-justify text-stone-400">
-          MIT License <br />
-          <br /> Copyright (c) {await getCurrentYear()} {author.fullName}
-          <br />
-          <br /> Permission is hereby granted, free of charge, to any person
-          obtaining a copy of this software and associated documentation files
-          (the {`"Software"`}), to deal in the Software without restriction,
-          including without limitation the rights to use, copy, modify, merge,
-          publish, distribute, sublicense, and/or sell copies of the Software,
-          and to permit persons to whom the Software is furnished to do so,
-          subject to the following conditions:
-          <br />
-          <br /> The above copyright notice and this permission notice shall be
-          included in all copies or substantial portions of the Software.
-          <br />
-          <br /> THE SOFTWARE IS PROVIDED {`"AS IS"`}, WITHOUT WARRANTY OF ANY
-          KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-          OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-          NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-          LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-          OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-          WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-        </p>
+        {paragraphs.map((paragraph) => (
+          <p key={paragraph}>{paragraph}</p>
+        ))}
       </div>
     </>
   );

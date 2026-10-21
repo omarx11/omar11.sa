@@ -2,30 +2,35 @@
 
 import { useState } from "react";
 
-import { Github } from "@/app/components/icons/Github";
-import { Google } from "@/app/components/icons/Google";
-import { Loading } from "@/app/components/icons/Loading";
-import { cn } from "@/app/lib/utils";
+import { Github } from "@/components/icons/Github";
+import { Google } from "@/components/icons/Google";
+import { Loading } from "@/components/icons/Loading";
+import { cn } from "@/lib/utils";
 
 type Provider = "github" | "google";
 
-type OAuthProvider = {
-  name: Provider;
-  displayName: string;
-  icon?: React.JSX.Element;
-};
+const PROVIDERS: { id: Provider; name: string; icon: React.JSX.Element }[] = [
+  { id: "github", name: "GitHub", icon: <Github /> },
+  { id: "google", name: "Google", icon: <Google /> },
+];
 
 /**
  * With `placeholder`, renders the same card as a pulsing, empty skeleton, so
- * the loading state has exactly the loaded card's size at every width.
+ * the loading state has exactly the loaded card's size at every width. It's
+ * marked `data-page-loading`, so the navbar's reveal waits for it.
  */
-const OAuthButtons = ({ placeholder = false }: { placeholder?: boolean }) => {
-  const [isPending, setIsPending] = useState<string>("");
+export default function OAuthButtons({
+  placeholder = false,
+}: {
+  placeholder?: boolean;
+}) {
+  // The provider whose sign-in is starting (its button shows a spinner).
+  const [signingInWith, setSigningInWith] = useState<Provider | null>(null);
 
   const signIn = async (provider: Provider) => {
-    setIsPending(provider);
+    setSigningInWith(provider);
     // Loaded on demand so the auth client stays out of the initial bundle.
-    const { authClient } = await import("@/app/lib/auth/client");
+    const { authClient } = await import("@/lib/auth/client");
     // On success the browser is redirected to the provider.
     const { error } = await authClient.signIn.social({
       provider,
@@ -33,22 +38,9 @@ const OAuthButtons = ({ placeholder = false }: { placeholder?: boolean }) => {
     });
     if (error) {
       console.error("Sign-in failed:", error.message);
-      setIsPending("");
+      setSigningInWith(null);
     }
   };
-
-  const oAuthProviders: OAuthProvider[] = [
-    {
-      name: "github",
-      displayName: "GitHub",
-      icon: <Github />,
-    },
-    {
-      name: "google",
-      displayName: "Google",
-      icon: <Google />,
-    },
-  ];
 
   return (
     <div
@@ -59,35 +51,35 @@ const OAuthButtons = ({ placeholder = false }: { placeholder?: boolean }) => {
           ? "w-full animate-pulse bg-[hsl(240,3.7%,7%)] *:invisible"
           : "bg-neutral-900",
       )}
+      data-page-loading={placeholder || undefined}
     >
       <p>Sign In with:</p>
       <div className="flex gap-3">
-        {oAuthProviders.map((provider) => (
+        {PROVIDERS.map((provider) => (
           <button
-            aria-label={`Sign in with ${provider.displayName}`}
+            aria-label={`Sign in with ${provider.name}`}
             className={cn(
-              "flex items-center gap-1 rounded-lg px-2 py-2 font-bold text-lg duration-100",
+              "flex items-center gap-1 rounded-lg px-2 py-2 text-lg font-bold duration-100",
               {
-                "bg-[#2f3338] hover:bg-[#2f3338]/80":
-                  provider.name === "github",
-                "bg-blue-600 hover:bg-blue-700": provider.name === "google",
+                "bg-[#2f3338] hover:bg-[#2f3338]/80": provider.id === "github",
+                "bg-blue-600 hover:bg-blue-700": provider.id === "google",
               },
             )}
-            key={provider.name}
-            onClick={() => signIn(provider.name)}
+            key={provider.id}
+            onClick={() => signIn(provider.id)}
             type="button"
           >
             {provider.icon}
-            {provider.displayName}
-            {isPending === provider.name && (
+            {provider.name}
+            {signingInWith === provider.id && (
               <Loading className="animate-spin" />
             )}
           </button>
         ))}
       </div>
-      <p className="flex items-center gap-1 text-neutral-500 text-xs sm:text-sm">
+      <p className="flex items-center gap-1 text-xs text-neutral-500 sm:text-sm">
         <svg
-          aria-label="Info icon"
+          aria-hidden="true"
           className="hidden md:block"
           height="16"
           viewBox="0 0 20 20"
@@ -99,10 +91,8 @@ const OAuthButtons = ({ placeholder = false }: { placeholder?: boolean }) => {
             fill="rgb(120,113,108)"
           />
         </svg>
-        your login information only used to display your name, avatar.
+        Your login is only used to show your name and avatar.
       </p>
     </div>
   );
-};
-
-export default OAuthButtons;
+}

@@ -5,13 +5,18 @@ import { updateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
-import { auth, getSessionUser } from "@/app/lib/auth/server";
-import { sql } from "@/app/lib/db";
+import { auth, getSessionUser } from "@/lib/auth/server";
+import { sql } from "@/lib/db";
 
 import { GUESTBOOK_TAG, toEntry } from "./data";
+import { tidyComment } from "./tidy";
 import type { GuestbookEntry } from "./types";
 
-const CommentSchema = z.string().trim().min(1).max(2000);
+// Blank space is tidied first, so a comment can't be padded with empty lines.
+const CommentSchema = z
+  .string()
+  .transform(tidyComment)
+  .pipe(z.string().min(1).max(2000));
 const CidSchema = z.string().min(1).max(64);
 
 async function requireUser() {

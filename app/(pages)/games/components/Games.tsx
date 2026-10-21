@@ -8,9 +8,9 @@ import {
 } from "@tanstack/react-query";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { getQueryClient } from "@/app/lib/query-client";
+import { getQueryClient } from "@/lib/query-client";
 
-import type { GameStats as GameStatsData, GamesOverview } from "../types";
+import type { GameStatsData, GamesOverview } from "../types";
 import GameStats from "./GameStats";
 import GamesCollection from "./GamesCollection";
 import RecentGames from "./RecentGames";

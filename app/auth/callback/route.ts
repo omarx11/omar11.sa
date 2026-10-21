@@ -5,7 +5,7 @@ import {
   claimLegacyEntries,
   GUESTBOOK_TAG,
 } from "@/app/(pages)/guestbook/data";
-import { getSessionUser } from "@/app/lib/auth/server";
+import { getSessionUser } from "@/lib/auth/server";
 
 // OAuth lands here after `proxy.ts` has exchanged the verifier for a session.
 export async function GET(request: NextRequest) {

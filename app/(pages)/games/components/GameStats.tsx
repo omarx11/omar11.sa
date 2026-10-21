@@ -2,10 +2,10 @@ import Image from "next/image";
 import { useState } from "react";
 import { CountUp } from "use-count-up";
 
-import { LoadingDots } from "@/app/components/icons/LoadingDots";
-import { cn } from "@/app/lib/utils";
+import { LoadingDots } from "@/components/icons/LoadingDots";
+import { cn } from "@/lib/utils";
 
-import type { GameStats as GameStatsData } from "../types";
+import type { GameStatsData } from "../types";
 import Pagination from "./Pagination";
 
 const ACHIEVEMENTS_PER_PAGE = 11;
@@ -28,7 +28,7 @@ export default function GameStats({
 }) {
   return (
     <section aria-busy={loading} className="scroll-mt-4" id="game-stats">
-      <div className="mt-10 mb-6 h-5 border-neutral-900 border-b-8 text-center sm:mt-6 sm:mb-2">
+      <div className="mt-10 mb-6 h-5 border-b-8 border-neutral-900 text-center sm:mt-6 sm:mb-2">
         <h2 className="inline-block bg-black px-3 text-neutral-400 sm:px-5">
           {loading || !stats ? (
             <LoadingDots className="h-8 w-8 scale-150" />
@@ -40,7 +40,7 @@ export default function GameStats({
         </h2>
       </div>
       {error ? (
-        <p className="pt-6 text-center text-red-300 text-sm sm:text-base">
+        <p className="pt-6 text-center text-sm text-red-300 sm:text-base">
           Couldn&apos;t load this game&apos;s stats.{" "}
           <button
             className="text-neutral-200 underline hover:no-underline"
@@ -83,8 +83,8 @@ function StatsBody({
       )}
     >
       <div
-        className={cn("w-full overflow-y-auto overflow-x-hidden text-center", {
-          "border-neutral-800 border-x-2": empty,
+        className={cn("w-full overflow-x-hidden overflow-y-auto text-center", {
+          "border-x-2 border-neutral-800": empty,
           "sm:w-[76.3%]": values.length > 0,
         })}
       >
@@ -102,7 +102,7 @@ function StatsBody({
                   <td className="line-clamp-1 py-0.5 text-start text-neutral-300 group-hover:text-amber-500">
                     {stat.name}
                   </td>
-                  <td className="w-auto pl-1 font-bold text-emerald-500 sm:min-w-[112px] sm:max-w-[112px]">
+                  <td className="w-auto pl-1 font-bold text-emerald-500 sm:max-w-[112px] sm:min-w-[112px]">
                     <CountUp duration={3.2} end={stat.value} isCounting />
                   </td>
                 </tr>
@@ -110,7 +110,7 @@ function StatsBody({
             </tbody>
           </table>
         ) : (
-          <span className="w-full text-red-300 text-sm sm:text-base">
+          <span className="w-full text-sm text-red-300 sm:text-base">
             No stats available for this game.
           </span>
         )}
@@ -120,14 +120,14 @@ function StatsBody({
         className={cn(
           "flex w-full flex-col justify-between gap-4 text-center",
           {
-            "border-neutral-800 border-x-2": empty,
+            "border-x-2 border-neutral-800": empty,
           },
         )}
       >
         {achievements.length > 0 ? (
           <>
             <div className="flex flex-col gap-2">
-              <p className="text-start text-neutral-400 text-sm">
+              <p className="text-start text-sm text-neutral-400">
                 <span className="font-bold text-emerald-400">
                   {achievements.length}
                 </span>{" "}
@@ -142,7 +142,7 @@ function StatsBody({
                     <Image
                       alt=""
                       blurDataURL="/static/icons/blur.svg"
-                      className="drag-none h-10 w-10 shrink-0 select-none rounded-xs bg-neutral-800 duration-75 group-hover:scale-125 sm:h-12 sm:w-12"
+                      className="h-10 w-10 shrink-0 rounded-xs bg-neutral-800 duration-75 group-hover:scale-125 sm:h-12 sm:w-12"
                       height={48}
                       placeholder="blur"
                       src={achievement.icon}
@@ -153,12 +153,12 @@ function StatsBody({
                       <p className="mt-1 flex justify-between gap-2 text-neutral-100">
                         <span className="truncate">{achievement.name}</span>
                         {achievement.unlockedAt > 0 && (
-                          <span className="shrink-0 pr-1 text-neutral-500 text-xs">
+                          <span className="shrink-0 pr-1 text-xs text-neutral-500">
                             {unlockDate.format(achievement.unlockedAt * 1000)}
                           </span>
                         )}
                       </p>
-                      <p className="line-clamp-1 text-neutral-400 text-xs sm:text-sm">
+                      <p className="line-clamp-1 text-xs text-neutral-400 sm:text-sm">
                         {achievement.description}
                       </p>
                     </div>
@@ -168,14 +168,14 @@ function StatsBody({
             </div>
             <Pagination
               className="mt-2 justify-end"
-              note={false}
               onPageChange={setPage}
-              pages={Math.ceil(achievements.length / ACHIEVEMENTS_PER_PAGE)}
-              state={{ page, window: 4 }}
+              page={page}
+              pageCount={Math.ceil(achievements.length / ACHIEVEMENTS_PER_PAGE)}
+              visiblePages={4}
             />
           </>
         ) : (
-          <span className="text-red-300 text-sm sm:text-base">
+          <span className="text-sm text-red-300 sm:text-base">
             No achievements are unlocked for this game.
           </span>
         )}

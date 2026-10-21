@@ -33,7 +33,7 @@ export type Achievement = {
   unlockedAt: number;
 };
 
-export type GameStats = {
+export type GameStatsData = {
   appid: number;
   name: string;
   achievements: Achievement[];

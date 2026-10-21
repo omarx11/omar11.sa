@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 
-import { author } from "@/app/config/meta";
-import { simulateFirstVisit } from "@/app/lib/dev/first-visit";
-import { pageMetadata } from "@/app/lib/metadata";
+import { author } from "@/config/meta";
+import { simulateFirstVisit } from "@/lib/dev/first-visit";
+import { pageMetadata } from "@/lib/metadata";
 
 import Games from "./components/Games";
 import GamesSkeleton from "./components/GamesSkeleton";

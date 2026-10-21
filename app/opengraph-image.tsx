@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
-import { author } from "@/app/config/meta";
+import { author } from "@/config/meta";
 
 // The share card for every page (pages can add their own to override it).
 export const alt = `${author.fullName}, ${author.jobTitle} from ${author.city}, ${author.country}`;

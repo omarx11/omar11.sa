@@ -1,3 +1,4 @@
+import { withBotId } from "botid/next/config";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -10,6 +11,18 @@ const nextConfig: NextConfig = {
     // (avatars, Steam headers, achievement icons) load directly from their CDN.
     remotePatterns: [{ protocol: "https", hostname: "shared.steamstatic.com" }],
   },
+  async redirects() {
+    return [
+      // The CV's old public URL (shared links, search results): send people
+      // to the bot-checked "Download CV" button instead.
+      {
+        source: "/static/files/omar_abdulaziz_cv_en.pdf",
+        destination: "/about",
+        permanent: true,
+      },
+    ];
+  },
 };
 
-export default nextConfig;
+// Proxies BotID's challenge script and API through this domain.
+export default withBotId(nextConfig);

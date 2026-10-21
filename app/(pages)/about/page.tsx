@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { author } from "@/app/config/meta";
-import { pageMetadata } from "@/app/lib/metadata";
+import { author } from "@/config/meta";
+import { pageMetadata } from "@/lib/metadata";
 
 import Certifications from "./components/Certifications";
 import Education from "./components/Education";
@@ -21,17 +21,17 @@ export default function AboutPage() {
         <Image
           alt={`${author.fullName}'s profile picture`}
           blurDataURL="/static/icons/blur.svg"
-          className="float-right h-[340px] w-72 rounded-lg border-8 border-neutral-800 border-dashed bg-neutral-900 object-cover md:h-[372px] md:w-80"
+          className="pointer-events-none float-right h-[340px] w-72 rounded-lg border-8 border-dashed border-neutral-800 bg-neutral-900 object-cover select-none md:h-[372px] md:w-80"
           height={896}
           placeholder="blur"
-          src="/static/images/IMG_105838.jpg"
+          src="/api/profile-photo"
           width={640}
         />
       </div>
       <div className="max-w-3xl md:order-first md:row-span-2">
         <div className="fade-in mt-6 space-y-7">
           <p className="text-neutral-400">
-            <strong className="mb-2 block font-bold text-neutral-300 text-xl md:text-2xl">
+            <strong className="mb-2 block text-xl font-bold text-neutral-300 md:text-2xl">
               <span className="text-neutral-400">#</span>{" "}
               <span className="text-emerald-500">A</span> Kid’s Adventure 👨🏻‍🚀
             </strong>
@@ -52,17 +52,17 @@ export default function AboutPage() {
             work.
           </p>
           <p className="text-neutral-400">
-            <strong className="mb-2 block font-bold text-neutral-300 text-xl md:text-2xl">
+            <strong className="mb-2 block text-xl font-bold text-neutral-300 md:text-2xl">
               <span className="text-neutral-400">#</span>{" "}
               <span className="text-emerald-500">The</span> Hacker’s Dream ☠️
             </strong>
             <Image
               alt=""
               blurDataURL="/static/icons/blur.svg"
-              className="drag-none float-right mb-4 ml-4 hidden h-60 w-60 select-none rounded-md border-4 border-emerald-600/50 bg-neutral-800 md:block"
+              className="pointer-events-none float-right mb-4 ml-4 hidden h-60 w-60 rounded-md border-4 border-emerald-600/50 bg-neutral-800 select-none md:block"
               height={277}
               placeholder="blur"
-              src="/static/images/IMG_190924.jpg"
+              src="/static/images/about-hacker.jpg"
               width={240}
             />
             Like many kids fascinated by the web, my first dream was to become a
@@ -75,7 +75,7 @@ export default function AboutPage() {
             school. 😅
           </p>
           <p className="text-neutral-400">
-            <strong className="mb-2 block font-bold text-neutral-300 text-xl md:text-2xl">
+            <strong className="mb-2 block text-xl font-bold text-neutral-300 md:text-2xl">
               <span className="text-neutral-400">#</span>{" "}
               <span className="text-emerald-500">The</span> Programming Journey
               👨🏻‍💻
@@ -95,7 +95,7 @@ export default function AboutPage() {
             passion and have pursued it from 2019 until now.
           </p>
           <p className="text-neutral-400">
-            <strong className="mb-2 block font-bold text-neutral-300 text-xl md:text-2xl">
+            <strong className="mb-2 block text-xl font-bold text-neutral-300 md:text-2xl">
               <span className="text-neutral-400">#</span>{" "}
               <span className="text-emerald-500">The</span> Beginning of Crohn’s
               💉
@@ -103,10 +103,10 @@ export default function AboutPage() {
             <Image
               alt=""
               blurDataURL="/static/icons/blur.svg"
-              className="drag-none float-left mr-4 mb-4 h-48 w-36 select-none rounded-md border-4 border-rose-500/50 bg-neutral-800 md:h-[248px] md:w-60"
+              className="pointer-events-none float-left mr-4 mb-4 h-48 w-36 rounded-md border-4 border-rose-500/50 bg-neutral-800 select-none md:h-[248px] md:w-60"
               height={320}
               placeholder="blur"
-              src="/static/images/IMG_124409.jpg"
+              src="/static/images/about-hospital.jpg"
               width={240}
             />
             In 2019, just as I was about to start my studies at the College of
@@ -125,7 +125,7 @@ export default function AboutPage() {
             happened!
           </p>
           <p className="text-neutral-400">
-            <strong className="mb-2 block font-bold text-neutral-300 text-xl md:text-2xl">
+            <strong className="mb-2 block text-xl font-bold text-neutral-300 md:text-2xl">
               <span className="text-neutral-400">#</span>{" "}
               <span className="text-emerald-500">The</span> Graduation Project
               👨🏻‍🎓
@@ -147,7 +147,7 @@ export default function AboutPage() {
           </p>
         </div>
       </div>
-      <div className="mt-6 md:m-auto md:mt-0 lg:pl-32 min-[860px]:pl-14">
+      <div className="mt-6 min-[860px]:pl-14 md:m-auto md:mt-0 lg:pl-32">
         <div className="flex flex-col items-center gap-4 sm:gap-10 lg:items-start">
           <Work />
           <Education />

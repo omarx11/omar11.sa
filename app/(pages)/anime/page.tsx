@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Heading } from "@/app/components/ui/Heading";
-import { anime } from "@/app/config/anime";
-import { author } from "@/app/config/meta";
-import { pageMetadata } from "@/app/lib/metadata";
+import { Heading } from "@/components/ui/Heading";
+import { anime } from "@/config/anime";
+import { author } from "@/config/meta";
+import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
   title: "Anime",
@@ -12,13 +12,13 @@ export const metadata = pageMetadata({
   path: "/anime",
 });
 
-function AnimePage() {
+export default function AnimePage() {
   return (
     <>
-      <Heading emoji="🌟" name="Anime" sId="#anime" />
+      <Heading anchor="anime" emoji="🌟" title="Anime" />
       <p className="mt-4 text-neutral-400">
-        Top <span className="underline underline-offset-2">10</span> favorite
-        anime {`I've`} watched. 😄{" "}
+        Top <span className="underline underline-offset-2">{anime.length}</span>{" "}
+        favorite anime {`I've`} watched. 😄{" "}
         <span className="text-neutral-500" lang="ja" title="No movies here!">
           映画はなし..
         </span>
@@ -26,7 +26,7 @@ function AnimePage() {
       <div className="fade-in-left mt-10 max-w-[896px]" id="anime">
         {anime.map(({ rank, name, description, image, url }) => (
           <Link
-            className="group relative mb-4 flex h-36 items-center justify-items-start overflow-hidden rounded-lg px-4 duration-300 before:absolute before:inset-0 before:z-10 before:bg-black before:opacity-0 before:transition before:duration-150 hover:h-48 hover:before:opacity-50 sm:px-8"
+            className="group relative mb-4 flex h-36 items-center justify-items-start overflow-hidden rounded-lg px-4 duration-300 select-none before:absolute before:inset-0 before:z-10 before:bg-black before:opacity-0 before:transition before:duration-150 hover:h-48 hover:before:opacity-50 sm:px-8 [@media(hover:none)]:before:opacity-50"
             href={url}
             key={rank}
             rel="noopener noreferrer"
@@ -41,12 +41,12 @@ function AnimePage() {
               src={image}
               width={1080}
             />
-            <div className="z-20 w-full scale-95 space-y-1 opacity-0 duration-300 group-hover:scale-100 group-hover:opacity-100">
-              <p className="font-bold text-3xl text-neutral-50">
+            <div className="z-20 w-full scale-95 space-y-1 opacity-0 duration-300 group-hover:scale-100 group-hover:opacity-100 [@media(hover:none)]:scale-100 [@media(hover:none)]:opacity-100">
+              <p className="text-2xl font-bold text-neutral-50 sm:text-3xl">
                 <span className="text-neutral-300">{rank} </span>
                 {name}
               </p>
-              <p className="text-base text-neutral-300 md:text-lg">
+              <p className="text-sm text-neutral-300 sm:text-base md:text-lg">
                 # {description}
               </p>
             </div>
@@ -56,5 +56,3 @@ function AnimePage() {
     </>
   );
 }
-
-export default AnimePage;

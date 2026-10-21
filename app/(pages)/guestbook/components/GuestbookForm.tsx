@@ -1,14 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { type KeyboardEvent, useState } from "react";
+import { type ChangeEvent, type KeyboardEvent, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
+import TextareaAutosize from "react-textarea-autosize";
 
-import { Loading } from "@/app/components/icons/Loading";
-import type { SessionUser } from "@/app/lib/auth/server";
-import { cn } from "@/app/lib/utils";
+import { Loading } from "@/components/icons/Loading";
+import type { SessionUser } from "@/lib/auth/server";
+import { cn } from "@/lib/utils";
 
 import { signOut } from "../actions";
+import { tidyComment, tidyWhitespace } from "../tidy";
 
 const MAX_LENGTH = 2000;
 
@@ -20,14 +22,39 @@ export function GuestbookForm({
   onSubmit: (comment: string) => Promise<boolean>;
 }) {
   const [text, setText] = useState("");
-  const atLimit = text.length >= MAX_LENGTH;
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const length = text.length;
+  const canSend = tidyComment(text).length > 0;
+
+  // Extra blank lines and spaces are dropped as they're typed or pasted. The
+  // box is corrected in place, in the same keystroke, so the cursor stays
+  // where it was and React finds nothing left to change.
+  const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const box = e.target;
+    const tidied = tidyWhitespace(box.value);
+    if (tidied !== box.value) {
+      // The cursor goes where the text before it ends up. Spaces typed right
+      // before a line break are removed, so it can't go past them.
+      const before = tidyWhitespace(box.value.slice(0, box.selectionStart));
+      let caret = 0;
+      while (caret < before.length && before[caret] === tidied[caret]) caret++;
+      box.value = tidied;
+      box.setSelectionRange(caret, caret);
+    }
+    setText(tidied);
+  };
 
   const submit = async () => {
-    const comment = text.trim();
+    const comment = tidyComment(text);
     if (!comment) return;
     setText("");
-    // Put the text back if the server rejected it, so nothing typed is lost.
-    if (!(await onSubmit(comment))) setText(comment);
+    // Back to the box after clicking Send, ready for the next message.
+    inputRef.current?.focus();
+    // If the server rejected it, put it back so nothing typed is lost (unless
+    // a new message was started in the meantime).
+    if (!(await onSubmit(comment))) {
+      setText((current) => current || comment);
+    }
   };
 
   const onKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -39,11 +66,11 @@ export function GuestbookForm({
 
   return (
     <div className="my-8 w-full max-w-xl">
-      <div className="mb-2 flex select-none items-end gap-2">
+      <div className="mb-2 flex items-center gap-2 select-none">
         {user.image ? (
           <Image
             alt=""
-            className="drag-none h-[26px] w-[26px] rounded-full bg-neutral-800"
+            className="h-[26px] w-[26px] rounded-full bg-neutral-800"
             height={26}
             src={user.image}
             unoptimized
@@ -52,47 +79,79 @@ export function GuestbookForm({
         ) : (
           <div className="h-[26px] w-[26px] rounded-full bg-neutral-800" />
         )}
-        <p className="text-neutral-500 text-sm">
-          Typing as {"->"} {user.name}
+        <p className="min-w-0 flex-1 truncate text-sm text-neutral-500">
+          Typing as {"->"} <span className="text-neutral-300">{user.name}</span>
         </p>
+        {/* Away from Send, so it can't be hit by mistake. */}
+        <form action={signOut}>
+          <SignOutButton />
+        </form>
       </div>
-      <textarea
-        aria-label="Your comment"
+
+      <div
         className={cn(
-          "h-40 w-full rounded-md border-[6px] border-neutral-800 bg-neutral-900 p-2 text-lg text-neutral-50 shadow-xs outline-0 ring-4 ring-neutral-700 duration-300 placeholder:text-sm placeholder:italic focus:bg-neutral-950",
-          atLimit
-            ? "caret-rose-500 focus:ring-rose-800"
-            : "caret-emerald-500 focus:ring-neutral-600",
+          "rounded-lg border-4 bg-neutral-900 ring-4 transition-[color,background-color,border-color,box-shadow] duration-200 focus-within:bg-neutral-950",
+          length >= MAX_LENGTH
+            ? "border-rose-700 ring-rose-900/40 focus-within:border-rose-500 focus-within:ring-rose-800/50"
+            : "border-neutral-800 ring-neutral-800/60 focus-within:border-emerald-700 focus-within:ring-emerald-900/40",
         )}
-        maxLength={MAX_LENGTH}
-        name="comment"
-        onChange={(e) => setText(e.target.value.trimStart())}
-        onKeyDown={onKeyDown}
-        placeholder="Leave a comment.. (Ctrl + Enter to send)"
-        spellCheck={false}
-        value={text}
-      />
-      <div className="flex flex-wrap justify-between">
-        <span
+      >
+        <TextareaAutosize
+          aria-label="Your comment"
           className={cn(
-            "select-none text-sm",
-            atLimit ? "font-bold text-rose-600" : "text-neutral-500",
+            "no-scrollbar block w-full resize-none bg-transparent px-3 pt-3 pb-1 text-base leading-6 text-neutral-50 outline-none placeholder:text-neutral-600",
+            length >= MAX_LENGTH ? "caret-rose-500" : "caret-emerald-500",
           )}
-        >
-          {text.length} / {MAX_LENGTH}
-        </span>
-        <div className="mt-0.5 flex gap-2 text-neutral-50">
+          maxLength={MAX_LENGTH}
+          maxRows={12}
+          minRows={4}
+          name="comment"
+          onChange={onChange}
+          onKeyDown={onKeyDown}
+          placeholder="Leave a comment.."
+          ref={inputRef}
+          spellCheck={false}
+          value={text}
+        />
+        <div className="flex items-center justify-between gap-3 px-3 pt-1 pb-2">
+          <div className="flex min-w-0 items-center gap-3 text-xs">
+            <span
+              className={cn(
+                "font-mono tabular-nums select-none",
+                length >= MAX_LENGTH
+                  ? "font-bold text-rose-500"
+                  : length >= MAX_LENGTH * 0.9
+                    ? "text-amber-500"
+                    : "text-neutral-600",
+              )}
+            >
+              {length} / {MAX_LENGTH}
+            </span>
+            <span className="hidden truncate text-neutral-600 select-none [@media(pointer:fine)]:inline">
+              Ctrl + Enter to send
+            </span>
+          </div>
           <button
-            className="flex items-center gap-1 rounded-md bg-sky-800 px-2 py-1 text-base duration-100 hover:bg-sky-900 disabled:cursor-not-allowed disabled:select-none disabled:bg-sky-800 disabled:opacity-60"
-            disabled={!text.trim()}
+            className="flex shrink-0 items-center gap-1.5 rounded-md bg-emerald-700 px-3 py-1 text-sm font-medium text-neutral-50 transition-colors hover:bg-emerald-600 disabled:cursor-not-allowed disabled:bg-neutral-800 disabled:text-neutral-500"
+            disabled={!canSend}
             onClick={submit}
             type="button"
           >
             SEND
+            <svg
+              aria-hidden="true"
+              fill="none"
+              height="14"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2.5"
+              viewBox="0 0 24 24"
+              width="14"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
           </button>
-          <form action={signOut}>
-            <SignOutButton />
-          </form>
         </div>
       </div>
     </div>
@@ -103,12 +162,12 @@ function SignOutButton() {
   const { pending } = useFormStatus();
   return (
     <button
-      className="flex items-center gap-1 rounded-md bg-rose-800 px-2 py-1 text-base duration-100 hover:bg-rose-900 disabled:opacity-70"
+      className="flex items-center gap-1 rounded-md bg-rose-800 px-2.5 py-1 text-xs font-medium text-neutral-50 transition-colors hover:bg-rose-700 disabled:opacity-70"
       disabled={pending}
       type="submit"
     >
-      Sign Out
-      {pending && <Loading className="animate-spin" />}
+      Sign out
+      {pending && <Loading className="size-3 animate-spin" />}
     </button>
   );
 }

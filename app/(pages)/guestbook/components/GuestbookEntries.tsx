@@ -1,20 +1,22 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { Suspense, use, useEffect, useState } from "react";
 
-import { dateStyle } from "@/app/lib/helpers";
-import { cn } from "@/app/lib/utils";
+import { Switch, SwitchButton, switchIcon } from "@/components/ui/Switch";
+import type { SessionUser } from "@/lib/auth/server";
+import { formatDateTime } from "@/lib/dates";
+import { cn } from "@/lib/utils";
 
 import type { PendingEntry } from "./Guestbook";
 
 export function GuestbookEntries({
   entries,
-  userId,
+  userPromise,
   onDelete,
 }: {
   entries: PendingEntry[];
-  userId: string | null;
+  userPromise: Promise<SessionUser | null>;
   onDelete: (cid: string) => void;
 }) {
   const [newestFirst, setNewestFirst] = useState(true);
@@ -22,24 +24,29 @@ export function GuestbookEntries({
 
   return (
     <>
-      <div className="-mt-2 flex w-full flex-row-reverse items-end justify-between rounded-xs border-neutral-900/50 border-b-8 pb-2 text-neutral-200 sm:flex-row">
-        <div className="border-neutral-800 border-r-8 border-double pr-2 sm:border-r-0 sm:border-l-8 sm:pl-2">
+      <div className="-mt-2 flex w-full flex-row-reverse items-end justify-between rounded-xs border-b-8 border-neutral-900/50 pb-2 text-neutral-200 sm:flex-row">
+        <div className="border-r-8 border-double border-neutral-800 pr-2 sm:border-r-0 sm:border-l-8 sm:pl-2">
           <p className="text-neutral-300">
             <span className="text-emerald-400">{entries.length}</span>{" "}
             <span className="text-neutral-400">-</span> comments
           </p>
         </div>
-        <div className="flex select-none gap-2 rounded-md border border-neutral-700/80 bg-neutral-900 p-1 text-sm">
-          <SortButton active={newestFirst} onClick={() => setNewestFirst(true)}>
+        <Switch label="Sort comments">
+          <SwitchButton
+            active={newestFirst}
+            icon={NEWEST}
+            onClick={() => setNewestFirst(true)}
+          >
             Newest
-          </SortButton>
-          <SortButton
+          </SwitchButton>
+          <SwitchButton
             active={!newestFirst}
+            icon={OLDEST}
             onClick={() => setNewestFirst(false)}
           >
             Oldest
-          </SortButton>
-        </div>
+          </SwitchButton>
+        </Switch>
       </div>
       <ul
         className={cn(
@@ -59,7 +66,7 @@ export function GuestbookEntries({
             {entry.avatar ? (
               <Image
                 alt=""
-                className="drag-none max-h-[42px] min-h-[42px] min-w-[42px] max-w-[42px] select-none rounded-full bg-neutral-800 ring-4 ring-cyan-950"
+                className="max-h-[42px] min-h-[42px] max-w-[42px] min-w-[42px] rounded-full bg-neutral-800 ring-4 ring-cyan-950"
                 height={42}
                 src={entry.avatar}
                 unoptimized
@@ -69,19 +76,29 @@ export function GuestbookEntries({
               <div className="h-[42px] min-w-[42px] rounded-full bg-neutral-800 ring-4 ring-cyan-950" />
             )}
             <div className="w-full overflow-hidden">
-              <p className="whitespace-break-spaces break-all text-neutral-200 sm:break-normal">
+              <p className="wrap-anywhere whitespace-break-spaces text-neutral-200">
                 {entry.comment}
               </p>
               <div className="flex items-center justify-between">
-                <div className="flex select-none flex-wrap items-center text-neutral-500 text-sm md:text-base">
+                <div className="flex flex-wrap items-center text-sm text-neutral-500 select-none md:text-base">
                   <p>{entry.name}</p>
                   <span className="mx-0.5 text-neutral-600">/</span>
                   <p className="flex text-xs">
-                    {entry.pending ? "posting…" : dateStyle(entry.createdAt)}
+                    {entry.pending
+                      ? "posting…"
+                      : formatDateTime(entry.createdAt)}
                   </p>
                 </div>
-                {userId && userId === entry.userId && !entry.pending && (
-                  <DeleteButton onConfirm={() => onDelete(entry.cid)} />
+                {!entry.pending && entry.userId && (
+                  // The entries render without waiting for the session; the
+                  // owner's delete button appears once it's known.
+                  <Suspense fallback={null}>
+                    <OwnerDeleteButton
+                      onConfirm={() => onDelete(entry.cid)}
+                      ownerId={entry.userId}
+                      userPromise={userPromise}
+                    />
+                  </Suspense>
                 )}
               </div>
             </div>
@@ -92,26 +109,21 @@ export function GuestbookEntries({
   );
 }
 
-function SortButton({
-  active,
-  onClick,
-  children,
+// Sort icons: lines from longest to shortest, and the reverse.
+const NEWEST = switchIcon(<path d="M3 6h18M6 12h12M10 18h4" />);
+const OLDEST = switchIcon(<path d="M10 6h4M6 12h12M3 18h18" />);
+
+function OwnerDeleteButton({
+  ownerId,
+  userPromise,
+  onConfirm,
 }: {
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
+  ownerId: string;
+  userPromise: Promise<SessionUser | null>;
+  onConfirm: () => void;
 }) {
-  return (
-    <button
-      aria-pressed={active}
-      className="rounded-md px-1.5 py-0.5 hover:bg-neutral-800 disabled:bg-neutral-700 disabled:text-emerald-300"
-      disabled={active}
-      onClick={onClick}
-      type="button"
-    >
-      {children}
-    </button>
-  );
+  const user = use(userPromise);
+  return user?.id === ownerId ? <DeleteButton onConfirm={onConfirm} /> : null;
 }
 
 // Two-step delete: the first click arms it for a few seconds, the second deletes.

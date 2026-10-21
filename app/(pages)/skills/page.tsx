@@ -1,18 +1,18 @@
-import { Heading } from "@/app/components/ui/Heading";
-import { author } from "@/app/config/meta";
+import { Heading } from "@/components/ui/Heading";
+import { author } from "@/config/meta";
 import {
   databases,
   editors,
   frameworks,
-  langs,
+  languages,
   services,
   styles,
   systems,
-} from "@/app/config/skills";
-import { pageMetadata } from "@/app/lib/metadata";
+} from "@/config/skills";
+import { pageMetadata } from "@/lib/metadata";
 
 import Accordion from "./components/Accordion";
-import { SkillsArray } from "./components/SkillsArray";
+import { SkillList } from "./components/SkillList";
 
 export const metadata = pageMetadata({
   title: "Skills",
@@ -24,32 +24,32 @@ export default function SkillsPage() {
   return (
     <>
       <Heading
+        anchor="skills"
+        description="Skills and technologies that I use to build things. 😊"
         emoji="🛠️"
-        name="Skills"
-        sId="#skills"
-        title="Skills and technologies that I use to build things. 😊"
+        title="Skills"
       />
       <div className="fade-in-left mt-10" id="skills">
-        <Accordion name="Programming Languages">
-          <SkillsArray data={langs} />
+        <Accordion title="Programming Languages">
+          <SkillList skills={languages} />
         </Accordion>
-        <Accordion name="Frameworks">
-          <SkillsArray data={frameworks} />
+        <Accordion title="Frameworks">
+          <SkillList skills={frameworks} />
         </Accordion>
-        <Accordion name="Styling">
-          <SkillsArray data={styles} />
+        <Accordion title="Styling">
+          <SkillList skills={styles} />
         </Accordion>
-        <Accordion name="Databases">
-          <SkillsArray data={databases} />
+        <Accordion title="Databases">
+          <SkillList skills={databases} />
         </Accordion>
-        <Accordion name="Services and Deployments">
-          <SkillsArray data={services} />
+        <Accordion title="Services and Deployments">
+          <SkillList skills={services} />
         </Accordion>
-        <Accordion name="Systems">
-          <SkillsArray data={systems} />
+        <Accordion title="Systems">
+          <SkillList skills={systems} />
         </Accordion>
-        <Accordion name="Code Editor">
-          <SkillsArray data={editors} />
+        <Accordion title="Code Editor">
+          <SkillList skills={editors} />
         </Accordion>
       </div>
     </>

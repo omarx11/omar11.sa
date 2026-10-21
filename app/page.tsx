@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Suspense } from "react";
 
-import { author, profiles } from "@/app/config/meta";
-import { databases, frameworks, langs, styles } from "@/app/config/skills";
-
-import GithubCal, { GithubCalSkeleton } from "./components/content/GithubCal";
-import Projects, { ProjectsSkeleton } from "./components/content/Projects";
-import { Heading } from "./components/ui/Heading";
+import Activity, { ActivitySkeleton } from "@/components/home/Activity";
+import GithubCalendar, {
+  GithubCalendarSkeleton,
+} from "@/components/home/GithubCalendar";
+import Projects, { ProjectsSkeleton } from "@/components/home/Projects";
+import { ProjectsSection } from "@/components/home/ProjectsSection";
+import { Heading } from "@/components/ui/Heading";
+import { author, profiles } from "@/config/meta";
+import { databases, frameworks, languages, styles } from "@/config/skills";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -53,7 +55,7 @@ const jsonLd = {
         "@type": "EducationalOrganization",
         name: "Technical and Vocational Training Corporation",
       },
-      knowsAbout: [...langs, ...frameworks, ...styles, ...databases].map(
+      knowsAbout: [...languages, ...frameworks, ...styles, ...databases].map(
         (skill) => skill.name,
       ),
       sameAs: profiles,
@@ -72,43 +74,30 @@ export default function HomePage() {
         }}
         type="application/ld+json"
       />
-      <Heading emoji="🖥️" name="Projects" sId="#projects" />
-      <p className="group relative mt-4 max-w-max text-neutral-400">
-        {`Here's`} all of my personal projects that {`I've`} worked on. You can
-        support me by starring! ⭐
-      </p>
-      {/* Each GitHub section streams in on its own; the page never waits. */}
-      <Suspense fallback={<ProjectsSkeleton />}>
-        <Projects />
-      </Suspense>
-      <div className="mt-6 flex justify-center">
-        <Link
-          className="group inline-flex items-center justify-center gap-1 rounded-md bg-neutral-800 px-6 py-2 text-neutral-200 hover:underline"
-          href={`${author.github}?tab=repositories`}
-          target="_blank"
-        >
-          view all projects{" "}
-          <svg
-            aria-hidden={true}
-            className="text-neutral-400"
-            height="1.2rem"
-            viewBox="0 0 24 24"
-            width="1.2rem"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M18.365 5.636h-7.071m7.07 0v7.071m0-7.07L5.638 18.363"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-            />
-          </svg>
-        </Link>
-      </div>
-      <Suspense fallback={<GithubCalSkeleton />}>
-        <GithubCal />
+      <Heading anchor="projects" emoji="🖥️" title="Projects" />
+      {/* Each GitHub section streams in on its own; the page never waits.
+          The projects bring their own pager and "view all" link. */}
+      <ProjectsSection
+        activity={
+          <Suspense fallback={<ActivitySkeleton />}>
+            <Activity />
+          </Suspense>
+        }
+        activityIntro="What I've been building lately on GitHub, month by month."
+        intro={
+          <>
+            {`Here's`} all of the projects {`I've`} worked on, my own and for
+            others. You can support me by starring! ⭐
+          </>
+        }
+        projects={
+          <Suspense fallback={<ProjectsSkeleton />}>
+            <Projects />
+          </Suspense>
+        }
+      />
+      <Suspense fallback={<GithubCalendarSkeleton />}>
+        <GithubCalendar />
       </Suspense>
     </>
   );

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-import { cn } from "@/app/lib/utils";
+import { cn } from "@/lib/utils";
 
 import type { RecentGame } from "../types";
 import type { GameActions } from "./Games";
@@ -16,13 +16,13 @@ export default function RecentGames({
 }) {
   return (
     <>
-      <h2 className="mb-4 font-bold text-neutral-300 text-xl">
+      <h2 className="mb-4 text-lg font-bold text-neutral-300 sm:text-xl">
         <span className="text-emerald-500">#</span> Recently Played Games 🕹️
       </h2>
       {!games ? (
         <SteamUnavailable />
       ) : games.length === 0 ? (
-        <p className="text-neutral-500 text-sm">
+        <p className="text-sm text-neutral-500">
           No games played in the last two weeks.
         </p>
       ) : (
@@ -31,7 +31,7 @@ export default function RecentGames({
             const selected = game.appid === actions.selectedAppId;
             return (
               <div key={game.appid}>
-                <p className="select-none text-emerald-500 text-sm">
+                <p className="text-sm text-emerald-500 select-none">
                   {game.hours} hrs
                 </p>
                 <button
@@ -83,13 +83,13 @@ function Cover({
       alt={name}
       blurDataURL="/static/icons/blur.svg"
       className={cn(
-        "drag-none aspect-[2/3] w-40 select-none rounded-md bg-neutral-900 object-cover ring-4 ring-transparent duration-100 group-hover:scale-105",
+        "aspect-[2/3] w-40 rounded-md bg-neutral-900 object-cover ring-4 ring-transparent duration-100 group-hover:scale-105",
         selected ? "scale-95 ring-emerald-400" : "group-hover:ring-yellow-500",
       )}
       height={384}
       onError={() => setFailed(true)}
       placeholder="blur"
-      src={!src || failed ? "/static/images/steam_error.jpg" : src}
+      src={!src || failed ? "/static/images/steam-fallback.jpg" : src}
       width={256}
     />
   );
@@ -97,7 +97,7 @@ function Cover({
 
 export function SteamUnavailable() {
   return (
-    <p className="rounded-md border border-neutral-800 bg-neutral-950 p-4 text-neutral-400 text-sm">
+    <p className="rounded-md border border-neutral-800 bg-neutral-950 p-4 text-sm text-neutral-400">
       Steam data is unavailable right now. Please check back later.
     </p>
   );

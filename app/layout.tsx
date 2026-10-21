@@ -2,17 +2,16 @@ import { Analytics } from "@vercel/analytics/react";
 import type { Metadata, Viewport } from "next";
 import { Recursive } from "next/font/google";
 
-import { author } from "@/app/config/meta";
-
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import Navbar from "./components/Navbar";
+import Footer from "@/components/layout/Footer";
+import Header from "@/components/layout/Header";
+import Navbar from "@/components/layout/Navbar";
+import { author } from "@/config/meta";
 import "./globals.css";
 
 // Dev-only toolbar; the static condition lets production builds drop it entirely.
 const FirstVisitToolbar =
   process.env.NODE_ENV === "development"
-    ? (await import("./components/dev/FirstVisitToolbar")).default
+    ? (await import("@/components/dev/FirstVisitToolbar")).default
     : null;
 
 const recursive = Recursive({ subsets: ["latin"], display: "swap" });
@@ -65,7 +64,7 @@ export default function RootLayout({
             cards) so phones can't pan sideways; content is still visible up
             to the screen edges. */}
         <div className="flex min-h-screen w-full justify-center overflow-x-clip">
-          <main className="mx-3 flex max-w-5xl flex-col">
+          <main className="mx-3 flex max-w-5xl min-w-0 flex-col">
             <Header />
             <Navbar />
             <div className="my-9 flex-1 overflow-visible">{children}</div>

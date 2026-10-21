@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import { author } from "@/app/config/meta";
+import { author } from "@/config/meta";
 
 export default function robots(): MetadataRoute.Robots {
   return {

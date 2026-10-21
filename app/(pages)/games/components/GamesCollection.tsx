@@ -1,22 +1,21 @@
 import Image from "next/image";
 import { useState } from "react";
 
-import { Loading } from "@/app/components/icons/Loading";
-import { Skeleton } from "@/app/components/ui/Skeleton";
+import { Loading } from "@/components/icons/Loading";
+import { Skeleton } from "@/components/ui/Skeleton";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/app/components/ui/Tooltip";
-import { cn } from "@/app/lib/utils";
+} from "@/components/ui/Tooltip";
+import { cn } from "@/lib/utils";
 
+import { GAMES_PER_PAGE } from "../constants";
 import type { CollectionGame } from "../types";
 import type { GameActions } from "./Games";
 import Pagination from "./Pagination";
 import { SteamUnavailable } from "./RecentGames";
-
-const PER_PAGE = 22;
 
 export default function GamesCollection({
   games,
@@ -31,8 +30,8 @@ export default function GamesCollection({
 
   return (
     <>
-      <div className="mt-8 mb-4 flex items-center justify-between">
-        <h2 className="font-bold text-neutral-300 text-xl">
+      <div className="mt-8 mb-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+        <h2 className="text-lg font-bold text-neutral-300 sm:text-xl">
           <span className="text-emerald-500">#</span> Full Games Collection{" "}
           {actions.loadingStats ? (
             <Loading className="inline animate-spin" />
@@ -44,7 +43,7 @@ export default function GamesCollection({
           <TooltipProvider delayDuration={0}>
             <Tooltip defaultOpen>
               <TooltipTrigger asChild>
-                <p className="cursor-default text-neutral-400 text-xs sm:text-sm">
+                <p className="cursor-default text-xs text-neutral-400 select-none sm:text-sm">
                   <span className="text-neutral-300">{games.length}</span> games
                   found
                   <svg
@@ -63,7 +62,7 @@ export default function GamesCollection({
                 </p>
               </TooltipTrigger>
               <TooltipContent
-                className="origin-[var(--radix-tooltip-content-transform-origin)] scale-in rounded-xs bg-neutral-900 ring-2 ring-neutral-700"
+                className="scale-in origin-[var(--radix-tooltip-content-transform-origin)] rounded-xs bg-neutral-900 ring-2 ring-neutral-700"
                 sideOffset={6}
               >
                 <p>
@@ -100,13 +99,13 @@ function CollectionGrid({
   onPageChange: (page: number) => void;
   actions: GameActions;
 }) {
-  const offset = (page - 1) * PER_PAGE;
-  const pageGames = games.slice(offset, offset + PER_PAGE);
+  const offset = (page - 1) * GAMES_PER_PAGE;
+  const pageGames = games.slice(offset, offset + GAMES_PER_PAGE);
 
   return (
     // Loaded cards appear without an entrance animation (only the skeletons
     // animate); the pagination row rises in from below.
-    <div className="flex min-h-[337px] flex-row flex-wrap content-start items-start gap-3">
+    <div className="flex min-h-[337px] flex-row flex-wrap content-start items-start gap-3 max-sm:grid max-sm:grid-cols-2 max-sm:gap-2.5">
       <TooltipProvider delayDuration={0} disableHoverableContent>
         {pageGames.map((game, index) => {
           const { appid } = game;
@@ -117,7 +116,7 @@ function CollectionGrid({
                 aria-label={game.name}
                 aria-pressed={appid === null ? undefined : selected}
                 className={cn(
-                  "rounded-xs ring-2 ring-neutral-700 ring-offset-black transition-transform duration-75 hover:ring-offset-2",
+                  "rounded-xs ring-2 ring-neutral-700 ring-offset-black transition-transform duration-75 hover:ring-offset-2 max-sm:w-full",
                   appid === null
                     ? "cursor-default hover:ring-red-500"
                     : selected
@@ -133,7 +132,7 @@ function CollectionGrid({
                     <Image
                       alt=""
                       blurDataURL="/static/icons/blur.svg"
-                      className="drag-none h-[75.27px] w-[160.6px] select-none rounded-xs bg-neutral-900 object-cover"
+                      className="h-[75.27px] w-[160.6px] rounded-xs bg-neutral-900 object-cover max-sm:aspect-[460/215] max-sm:h-auto max-sm:w-full"
                       height={215}
                       placeholder="blur"
                       src={game.image}
@@ -143,7 +142,7 @@ function CollectionGrid({
                       width={460}
                     />
                   ) : (
-                    <span className="flex h-[75.27px] w-[160.6px] items-center justify-center rounded-xs bg-neutral-900 px-2 text-center text-neutral-400 text-xs leading-tight">
+                    <span className="flex h-[75.27px] w-[160.6px] items-center justify-center rounded-xs bg-neutral-900 px-2 text-center text-xs leading-tight text-neutral-400 max-sm:aspect-[460/215] max-sm:h-auto max-sm:w-full">
                       {game.name}
                     </span>
                   )}
@@ -164,7 +163,7 @@ function CollectionGrid({
                 sideOffset={6}
               >
                 <p className="underline decoration-neutral-300">{game.name}</p>
-                <span className="block text-emerald-400 text-xs">
+                <span className="block text-xs text-emerald-400">
                   {Math.floor((game.minutes / 60) * 10) / 10} hours total
                   {appid === null && " · not on Steam"}
                 </span>
@@ -174,20 +173,25 @@ function CollectionGrid({
         })}
       </TooltipProvider>
       {/* The last page keeps the full grid, with pulsing placeholders. */}
-      {Array.from({ length: PER_PAGE - pageGames.length }, (_, i) => (
+      {Array.from({ length: GAMES_PER_PAGE - pageGames.length }, (_, i) => (
         <Skeleton
-          className="h-[75.27px] w-[160.6px] rounded-xs"
+          className="h-[75.27px] w-[160.6px] rounded-xs max-sm:aspect-[460/215] max-sm:h-auto max-sm:w-full"
           // biome-ignore lint/suspicious/noArrayIndexKey: interchangeable placeholders
           key={`empty-${i}`}
         />
       ))}
       <Pagination
-        className="fade-in mt-3"
-        note
+        className="fade-in mt-3 max-sm:col-span-2"
         onPageChange={onPageChange}
-        pages={Math.ceil(games.length / PER_PAGE)}
-        state={{ page, window: 5 }}
-      />
+        page={page}
+        pageCount={Math.ceil(games.length / GAMES_PER_PAGE)}
+        visiblePages={5}
+      >
+        <p className="text-xs text-neutral-400">
+          All data comes from Steam&apos;s API. If any of those services are
+          down, data will not be shown.
+        </p>
+      </Pagination>
     </div>
   );
 }
