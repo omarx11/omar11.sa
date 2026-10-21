@@ -61,5 +61,8 @@
     "postcss": "^8.5.31",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2"
+  },
+  "allowScripts": {
+    "core-js": false
   }
 }
