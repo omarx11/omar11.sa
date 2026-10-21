@@ -5,9 +5,18 @@
   "description": "Online portfolio to share code and experiences",
   "repository": "https://github.com/omarx11/omar11.sa.git",
   "homepage": "https://omar11.sa",
-  "//": "Keep @types/node on the same major as engines.node (24.x); bump both together only when moving the runtime to a newer Node.",
+  "//": [
+    "Keep @types/node on the same major as engines.node (24.x); bump both together only when moving the runtime to a newer Node.",
+    "overrides: @neondatabase/auth pins better-auth 1.7.6 / better-call 1.4.0, but its (unused) auth-ui pulls @better-auth/api-key 1.7.12 and better-call 2.0.2, which spams ERESOLVE peer warnings on install. Drop the override once @neondatabase/auth ships a consistent tree."
+  ],
   "engines": {
     "node": "24.x"
+  },
+  "overrides": {
+    "@daveyplate/better-auth-ui": {
+      "@better-auth/api-key": "1.7.6",
+      "better-call": "1.4.0"
+    }
   },
   "license": "SEE LICENSE IN LICENSE",
   "author": "Omar Abdulaziz <mail@omar11.sa>",
